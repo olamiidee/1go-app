@@ -20,7 +20,7 @@ const Header = ({ currentPage }) => {
           <div className="flex items-center gap-[0px] ml-[-10px] cursor-pointer">
             <div className="w-10 h-10 border-2 border-blue-500 rounded-full mr-3"></div>
             {/* <img alt="logo" src="/images/vite.svg" className="w-12 h-12" /> */}
-            <p className="font-dyna text-[1.5rem] text-rose-300 tracking-widest">
+            <p className="font-dyna text-[1.5rem] text-white tracking-widest">
               1go
             </p>
           </div>
@@ -60,7 +60,7 @@ const Header = ({ currentPage }) => {
               Prices
             </Link>
             <Link
-              to="/price"
+              to="/login"
               className={`cursor-pointer px-2 py-1 ${
                 currentPage === "/create" && "bg-rose-400"
               } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
@@ -68,7 +68,7 @@ const Header = ({ currentPage }) => {
               Login
             </Link>
             <Link
-              to="/price"
+              to="/register"
               className={`cursor-pointer px-2 py-1 ${
                 currentPage === "/create" && "bg-rose-400"
               } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
