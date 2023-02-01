@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useGlobalContext } from "../contexts/HeaderContext";
 
-const Header = ({ currentPage }) => {
-  const [openMenu, setOpenMenu] = useState(false);
-  function handleClick() {
-    setOpenMenu((prevState) => !prevState);
-  }
+const Header = () => {
+  const { currentPage } = useGlobalContext();
+  //   const [openMenu, setOpenMenu] = useState(false);
+  //   function handleClick() {
+  //     setOpenMenu((prevState) => !prevState);
+  //   }
 
-  //to close the dropdown after clicking a link
-  const hideDropdown = () => {
-    setOpenMenu(false);
-  };
+  //   //to close the dropdown after clicking a link
+  //   const hideDropdown = () => {
+  //     setOpenMenu(false);
+  //   };
 
   return (
     <header>
@@ -18,7 +20,7 @@ const Header = ({ currentPage }) => {
       <div className="w-[80%] bg-[#252525]/50 px-12 py-4 lg:px-10 fixed top-8 left-[50%] translate-x-[-50%] border-b border-slate-600 sm:flex items-center z-[100] hidden rounded-md">
         <Link to="/" className="mr-auto">
           <div className="flex items-center gap-[0px] ml-[-10px] cursor-pointer">
-            <div className="w-10 h-10 border-2 border-blue-500 rounded-full mr-3"></div>
+            <div className="w-10 h-10 border-4 border-blue-500 rounded-full mr-3"></div>
             {/* <img alt="logo" src="/images/vite.svg" className="w-12 h-12" /> */}
             <p className="font-dyna text-[1.5rem] text-white tracking-widest">
               1go
@@ -30,39 +32,39 @@ const Header = ({ currentPage }) => {
             <Link
               to="/"
               className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/" && "bg-rose-400"
-              } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
+                currentPage === "/" && "bg-blue-500"
+              } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
             >
               Home
             </Link>
             <Link
               to="/about"
               className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/notes" && "bg-rose-400"
-              } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
+                currentPage === "/about" && "bg-blue-500"
+              } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
             >
               About
             </Link>
             <Link
               to="/book-ride"
               className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/create" && "bg-rose-400"
-              } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
+                currentPage === "/book-ride" && "bg-blue-500"
+              } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
             >
               Book rides
             </Link>
             <Link
               to="/price"
               className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/create" && "bg-rose-400"
-              } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
+                currentPage === "/price" && "bg-blue-500"
+              } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
             >
               Prices
             </Link>
             <Link
               to="/login"
               className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/create" && "bg-rose-400"
+                currentPage === "/login" && "bg-blue-500"
               } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
             >
               Login
@@ -70,7 +72,7 @@ const Header = ({ currentPage }) => {
             <Link
               to="/register"
               className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/create" && "bg-rose-400"
+                currentPage === "/register" && "bg-blue-500"
               } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
             >
               Register
