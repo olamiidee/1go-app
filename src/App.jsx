@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./output.css";
+import About from "./pages/About";
+import BookRides from "./pages/BookRides";
+import Homepage from "./pages/Homepage";
+import LOgin from "./pages/Login";
+import Prices from "./pages/Prices";
+import Register from "./pages/Register";
 
 function App() {
   return (
-    <div className="w-full min-h-screen">
-      <div className="">Hello</div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/book-ride" element={<BookRides />} />
+      <Route path="/price" element={<Prices />} />
+      <Route path="/login" element={<LOgin />} />
+      <Route path="/Register" element={<Register />} />
+    </Routes>
   );
 }
 
