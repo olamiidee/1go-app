@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const About = () => {
@@ -9,6 +10,7 @@ const About = () => {
           <h1 className="text-[3rem] font-bold text-black">About page</h1>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

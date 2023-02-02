@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <header>
       {/* desktop header */}
-      <div className="w-[80%] bg-[#252525]/50 px-12 py-4 lg:px-10 fixed top-8 left-[50%] translate-x-[-50%] border-b border-slate-600 sm:flex items-center z-[100] hidden rounded-md">
+      <div className="sm:w-[80%] lg:w-[70%] bg-[#252525]/50 px-12 py-4 lg:px-10 fixed top-8 left-[50%] translate-x-[-50%] border-b border-slate-600 sm:flex items-center z-[100] hidden rounded-md">
         <Link to="/" className="mr-auto">
           <div className="flex items-center gap-[0px] ml-[-10px] cursor-pointer">
             <div className="w-10 h-10 border-4 border-blue-500 rounded-full mr-3"></div>
