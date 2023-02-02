@@ -21,6 +21,7 @@ const Register = () => {
             {/* register form */}
             <form>
               <div className="font-light space-y-4 mt-8 py-6 w-full rounded-lg sm:px-8 sm:w-[90%] lg:w-[45%] sm:bg-[#EFF6FF] mx-auto">
+                {/* first name */}
                 <div>
                   <label htmlFor="firstname">First name</label>
                   <input
@@ -32,7 +33,7 @@ const Register = () => {
                     required
                   />
                 </div>
-
+                {/* last name */}
                 <div>
                   <label htmlFor="lastname">Last name</label>
                   <input
@@ -44,7 +45,7 @@ const Register = () => {
                     required
                   />
                 </div>
-
+                {/* email address */}
                 <div>
                   <label htmlFor="email">Email address</label>
                   <input
@@ -56,19 +57,19 @@ const Register = () => {
                     required
                   />
                 </div>
-
+                {/* phone number */}
                 <div>
                   <label htmlFor="firstname">Phone number</label>
                   <input
                     className="reg-input"
                     id="phone-number"
                     placeholder="Enter your phone Number"
-                    type="text"
+                    type="number"
                     onChange={handleRegChange}
                     required
                   />
                 </div>
-
+                {/* password */}
                 <div>
                   <label htmlFor="firstname">Password</label>
                   <input
