@@ -16,7 +16,7 @@ const Homepage = () => {
               <p>From Oke-Odo to school park and vice versa</p>
             </div>
 
-            <button className="bg-blue-500 px-8 py-2 hover:bg-transparent hover:border-blue-500 hover:border-2">
+            <button className="text-sm bg-blue-500 px-8 py-2 uppercase hover:bg-transparent hover:border-blue-500 hover:border-2">
               <Link to="/login">Book Now</Link>
             </button>
           </div>

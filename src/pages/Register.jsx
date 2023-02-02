@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 
-const Register = () => {
   return (
     <>
       <Header />
@@ -29,7 +28,6 @@ const Register = () => {
                     id="firstname"
                     placeholder="Enter your first name"
                     type="text"
-                    onChange={handleRegChange}
                     required
                   />
                 </div>
@@ -40,8 +38,6 @@ const Register = () => {
                     className="reg-input"
                     id="lastname"
                     placeholder="Enter your last name"
-                    type="text"
-                    onChange={handleRegChange}
                     required
                   />
                 </div>
@@ -53,7 +49,6 @@ const Register = () => {
                     id="email"
                     placeholder="Enter your email adress"
                     type="email"
-                    onChange={handleRegChange}
                     required
                   />
                 </div>
@@ -65,7 +60,6 @@ const Register = () => {
                     id="phone-number"
                     placeholder="Enter your phone Number"
                     type="number"
-                    onChange={handleRegChange}
                     required
                   />
                 </div>
@@ -77,7 +71,6 @@ const Register = () => {
                     id="password"
                     placeholder="Enter your password"
                     type="password"
-                    onChange={handleRegChange}
                     required
                   />
                 </div>
