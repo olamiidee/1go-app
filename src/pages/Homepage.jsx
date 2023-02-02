@@ -7,8 +7,8 @@ const Homepage = () => {
     <>
       <Header />
       <main className="w-full bg-slate-200">
-        <section className="w-full h-[800px] sm:min-h-[105vh] bg-home bg-center bg-no-repeat relative">
-          <div className="overlay w-full h-[800px] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] lg:px-[15%] pt-[160px] md:pt-[200px] lg:pt-[15%]">
+        <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-home bg-center bg-no-repeat relative">
+          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] lg:px-[15%] pt-[160px] md:pt-[200px] lg:pt-[15%] pb-40">
             <div className="absolute top-0 md:top-1 left-4 md:left-[15%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
               <img
                 alt=""
@@ -19,7 +19,7 @@ const Homepage = () => {
             </div>
             <div className="first-section-text">
               <p className="text-[0.95rem] tracking-widest">AVOID THE RUSH</p>
-              <h1 className="text-[2rem] font-bold uppercase md:text-[3.5rem]">
+              <h1 className="text-[2rem] font-bold uppercase md:text-[2.5rem] lg:text-[3.5rem]">
                 Beat The Queue!!
               </h1>
               <div className="pb-3 font-medium text-[0.95rem] ms:text-[1.23rem] uppercase">
@@ -30,19 +30,71 @@ const Homepage = () => {
                 <Link to="/login">Book Now</Link>
               </button>
             </div>
-            <div className="w-full md:w-[400px] mt-8 md:mt-0">
+            <div className="w-full md:w-[40%] mt-8 md:mt-0">
               <div className="bg-white/30 px-4 py-3 w-[fit-content] rounded-md">
                 Booking Times Today
               </div>
-              <div className="w-full h-[200px] md:h-[300px] bg-white rounded-md text-black">
-                {/* {" "}
-              Mini slideshow here** 5 SECS APART
-              <br />
-              <br /> **First slide - register illustration with register button
-              at bottom
-              <br /> **second slide - login illustration with login button
-              bottom */}
+              <div className="w-full h-[fit-content] bg-white rounded-md p-3 text-slate-700">
+                <div>
+                  <h2 className="pb-1 border-b border-b-slate-400/80">
+                    From Oke-odo - Morning Rides
+                  </h2>
+                  <div className="my-4 w-full flex gap-2 flex-wrap">
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      6:55AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      7:35AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      8:15AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      8:55AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      9:35AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      10:15AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      10:55AM
+                    </button>
+                  </div>
+                </div>
+
+                {/* afternoon rides */}
+                <div className="mt-8">
+                  <h2 className="pb-1 border-b border-b-slate-400/80">
+                    From School Park - Afternoon Rides
+                  </h2>
+                  <div className="my-4 w-full flex gap-2 flex-wrap">
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      6:55AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      7:35AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      8:15AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      8:55AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      9:35AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      10:15AM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                      10:55AM
+                    </button>
+                  </div>
+                </div>
               </div>
+              <div>Click on an available time to book</div>
             </div>
           </div>
           <svg
