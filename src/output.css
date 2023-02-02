@@ -704,25 +704,13 @@ video {
   height: 100%;
 }
 
-.h-\[800px\] {
-  height: 800px;
-}
-
-.h-4 {
-  height: 1rem;
-}
-
-.h-\[200px\] {
-  height: 200px;
-}
-
 .h-\[fit-content\] {
   height: -moz-fit-content;
   height: fit-content;
 }
 
-.h-\[850px\] {
-  height: 850px;
+.h-4 {
+  height: 1rem;
 }
 
 .min-h-screen {
@@ -951,11 +939,19 @@ video {
 }
 
 .bg-home {
-  background-image: url('/images/wall3.jpeg');
+  background-image: url('/images/home.jpg');
+}
+
+.bg-cover {
+  background-size: cover;
 }
 
 .bg-center {
   background-position: center;
+}
+
+.bg-right {
+  background-position: right;
 }
 
 .bg-no-repeat {
@@ -964,14 +960,6 @@ video {
 
 .p-3 {
   padding: 0.75rem;
-}
-
-.p-1 {
-  padding: 0.25rem;
-}
-
-.p-2 {
-  padding: 0.5rem;
 }
 
 .px-12 {
@@ -1044,11 +1032,6 @@ video {
   padding-bottom: 1.5rem;
 }
 
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 .pt-\[100px\] {
   padding-top: 100px;
 }
@@ -1057,44 +1040,20 @@ video {
   padding-top: 160px;
 }
 
+.pb-40 {
+  padding-bottom: 10rem;
+}
+
 .pb-3 {
   padding-bottom: 0.75rem;
-}
-
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
-
-.pt-3 {
-  padding-top: 0.75rem;
 }
 
 .pb-1 {
   padding-bottom: 0.25rem;
 }
 
-.pb-10 {
-  padding-bottom: 2.5rem;
-}
-
-.pb-20 {
-  padding-bottom: 5rem;
-}
-
-.pb-24 {
-  padding-bottom: 6rem;
-}
-
-.pb-32 {
-  padding-bottom: 8rem;
-}
-
-.pb-36 {
-  padding-bottom: 9rem;
-}
-
-.pb-40 {
-  padding-bottom: 10rem;
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 .text-center {
@@ -1132,10 +1091,6 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.text-\[0\.75rem\] {
-  font-size: 0.75rem;
 }
 
 .text-\[0\.85rem\] {
@@ -1457,20 +1412,8 @@ video {
     display: none;
   }
 
-  .md\:h-\[300px\] {
-    height: 300px;
-  }
-
-  .md\:h-\[40\%\] {
-    height: 40%;
-  }
-
   .md\:w-full {
     width: 100%;
-  }
-
-  .md\:w-\[400px\] {
-    width: 400px;
   }
 
   .md\:w-\[40\%\] {
@@ -1481,8 +1424,8 @@ video {
     padding-top: 200px;
   }
 
-  .md\:text-\[3\.5rem\] {
-    font-size: 3.5rem;
+  .md\:text-\[2\.5rem\] {
+    font-size: 2.5rem;
   }
 
   .md\:text-\[3rem\] {
@@ -1491,10 +1434,6 @@ video {
 
   .md\:text-\[1\.5rem\] {
     font-size: 1.5rem;
-  }
-
-  .md\:text-\[2\.5rem\] {
-    font-size: 2.5rem;
   }
 }
 
@@ -1509,6 +1448,10 @@ video {
 
   .lg\:gap-8 {
     gap: 2rem;
+  }
+
+  .lg\:bg-center {
+    background-position: center;
   }
 
   .lg\:px-\[15\%\] {
