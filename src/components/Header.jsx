@@ -12,7 +12,7 @@ const Header = () => {
         className={`${
           scrollPosition > 224
             ? "sm:w-full md:w-full top-0 bg-[#252525]/80 lg:px-[15%]"
-            : "sm:w-[80%] lg:w-[70%] top-8 rounded-md bg-[#252525]/40 lg:px-10"
+            : "sm:w-[80%] top-8 rounded-md bg-[#252525]/40 lg:px-10"
         } px-12 py-4 fixed left-[50%] translate-x-[-50%] border-b border-slate-600 md:flex items-center z-[100] hidden transition-all duration-500`}
       >
         <Link to="/" className="mr-auto">

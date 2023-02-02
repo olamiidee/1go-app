@@ -8,8 +8,8 @@ const Homepage = () => {
       <Header />
       <main className="w-full bg-slate-200">
         <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-home bg-cover bg-right lg:bg-center bg-no-repeat relative">
-          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] lg:px-[15%] pt-[160px] md:pt-[200px] lg:pt-[15%] pb-40">
-            <div className="absolute top-0 md:top-1 left-4 md:left-[15%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
+          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] pt-[160px] md:pt-[200px] lg:pt-[15%] pb-40">
+            <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
               <img
                 alt=""
                 src="/images/icons8-information-64.png"
