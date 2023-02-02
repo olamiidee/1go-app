@@ -7,23 +7,42 @@ const Homepage = () => {
     <>
       <Header />
       <main className="w-full bg-slate-200">
-        <section className="w-full h-[800px] md:h-[105vh] bg-home bg-center bg-no-repeat relative">
-          <div className="overlay w-full h-[800px] md:h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] lg:px-[15%] pt-[130px] md:pt-[15%]">
+        <section className="w-full h-[800px] sm:min-h-[105vh] bg-home bg-center bg-no-repeat relative">
+          <div className="overlay w-full h-[800px] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] lg:px-[15%] pt-[160px] md:pt-[200px] lg:pt-[15%]">
+            <div className="absolute top-0 md:top-1 left-4 md:left-[15%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
+              <img
+                alt=""
+                src="/images/icons8-information-64.png"
+                className="w-4 h-4"
+              />
+              <p className="underline">Contact us</p>
+            </div>
             <div className="first-section-text">
-              <h1 className="text-[2.5rem] font-bold uppercase md:text-[3.5rem]">
+              <p className="text-[0.95rem] tracking-widest">AVOID THE RUSH</p>
+              <h1 className="text-[2rem] font-bold uppercase md:text-[3.5rem]">
                 Beat The Queue!!
               </h1>
-              <div className="pb-3 font-medium text-[1.23rem]">
-                <p>Get easy rides for as low as ---</p>
+              <div className="pb-3 font-medium text-[0.95rem] ms:text-[1.23rem] uppercase">
+                <p>Get easy rides for as low as -- NGN 200</p>
                 <p>From Oke-Odo to school park and vice versa</p>
               </div>
               <button className="text-sm bg-blue-500 px-10 py-3 uppercase hover:bg-transparent border-blue-500 border-2 rounded-md transition-all duration-300">
                 <Link to="/login">Book Now</Link>
               </button>
             </div>
-            <div className="w-full md:w-[400px] h-[30%] md:h-[300px] bg-white rounded-lg mt-8 md:mt-0 text-black">
-              {" "}
-              Mini slideshow here**
+            <div className="w-full md:w-[400px] mt-8 md:mt-0">
+              <div className="bg-white/30 px-4 py-3 w-[fit-content] rounded-md">
+                Booking Times Today
+              </div>
+              <div className="w-full h-[200px] md:h-[300px] bg-white rounded-md text-black">
+                {/* {" "}
+              Mini slideshow here** 5 SECS APART
+              <br />
+              <br /> **First slide - register illustration with register button
+              at bottom
+              <br /> **second slide - login illustration with login button
+              bottom */}
+              </div>
             </div>
           </div>
           <svg
@@ -52,26 +71,26 @@ const Homepage = () => {
           </svg>
         </section>
         <section className="h-screen border border-b-slate-700">
-          <h1 className="text-[2.5rem] font-bold md:text-[3rem] text-black text-center">
+          <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
             We provide affordable prices
           </h1>
-          <h2 className="text-[1.2rem] md:text-[1.5rem] text-slate-600 text-center">
+          <h2 className="text-[1rem] md:text-[1.5rem] text-slate-600 text-center">
             Catchy text like - Solution to the Unilorin school park rush hour.
           </h2>
         </section>
         <section className="h-screen border border-b-slate-700">
-          <h1 className="text-[2.5rem] font-bold md:text-[3rem] text-black text-center">
+          <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
             Testimonial from our users
           </h1>
-          <h2 className="text-[1.2rem] md:text-[1.5rem] text-slate-600 text-center">
+          <h2 className="text-[1rem] md:text-[1.5rem] text-slate-600 text-center">
             Testimonial slideshow here - Check that template.
           </h2>
         </section>
         <section className="h-screen border border-b-slate-700">
-          <h1 className="text-[2.5rem] font-bold md:text-[3rem] text-black text-center">
+          <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
             Contact form
           </h1>
-          <h2 className="text-[1.2rem] md:text-[1.5rem] text-slate-600 text-center">
+          <h2 className="text-[1rem] md:text-[1.5rem] text-slate-600 text-center">
             contact form here - Check{" "}
             <a
               href="http://lorenzotvmovies.com"

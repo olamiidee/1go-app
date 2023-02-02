@@ -5,6 +5,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         home: "url('/images/wall3.jpeg')",
+        reg1: "url('/images/reg1.jpg')",
+        reg2: "url('/images/log1.jpg')",
       },
     },
   },

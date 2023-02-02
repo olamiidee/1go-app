@@ -28,7 +28,7 @@ export default function Footer() {
             <li>Contact</li>
             <li>Register</li>
           </ul>
-          <p>&copy; 2022 Loopstudios. All rights reserved</p>
+          <p>&copy; 2022 1go. All rights reserved</p>
         </div>
       </div>
       <div className="mob--footer">

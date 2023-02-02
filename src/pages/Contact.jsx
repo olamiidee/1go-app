@@ -1,13 +1,13 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-const Prices = () => {
+const Contact = () => {
   return (
     <>
       <Header />
       <section className="w-full min-h-screen">
         <div className="overlay w-full h-screen bg-sky-100 flex justify-center items-center">
-          <h1 className="text-[3rem] font-bold text-black">Prices page</h1>
+          <h1 className="text-[3rem] font-bold text-black">Contact page</h1>
         </div>
       </section>
       <Footer />
@@ -15,4 +15,4 @@ const Prices = () => {
   );
 };
 
-export default Prices;
+export default Contact;
