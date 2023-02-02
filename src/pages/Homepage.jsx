@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 
 const Homepage = () => {
@@ -16,7 +17,7 @@ const Homepage = () => {
             </div>
 
             <button className="bg-blue-500 px-8 py-2 hover:bg-transparent hover:border-blue-500 hover:border-2">
-              Book Now
+              <Link to="/login">Book Now</Link>
             </button>
           </div>
         </section>
