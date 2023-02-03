@@ -1,5 +1,7 @@
+import ActiveBooking from "../components/ActiveBooking";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import RideHistory from "../components/RideHistory";
 import { useAppContext } from "../contexts/AppContext";
 
 const BookRides = () => {
@@ -58,25 +60,34 @@ const BookRides = () => {
                 </h2>
                 <div className="my-4 w-full flex gap-2 flex-wrap">
                   <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                    6:55AM
+                    1:55PM
                   </button>
                   <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                    7:35AM
+                    2:35PM
                   </button>
                   <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                    8:15AM
+                    3:15PM
                   </button>
                   <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                    8:55AM
+                    3:55PM
                   </button>
                   <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                    9:35AM
+                    4:35PM
                   </button>
                   <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                    10:15AM
+                    5:15PM
                   </button>
                   <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                    10:55AM
+                    5:55PM
+                  </button>
+                  <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    6:35PM
+                  </button>
+                  <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    7:15PM
+                  </button>
+                  <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    7:55PM
                   </button>
                 </div>
               </div>
@@ -84,12 +95,30 @@ const BookRides = () => {
           </div>
         </section>
         <section className="w-full mt-10">
-          <h2 className="text-[1.5rem] font-medium">Active bookings</h2>
-          <div className="w-full min-h-[200px] bg-white rounded-lg p-4 mt-3"></div>
+          <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
+            Active booking
+          </h2>
+          <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 relative">
+            {/* each active booking */}
+            <ActiveBooking />
+            <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
+              PS: You can only have one active booking at a time
+            </p>
+          </div>
         </section>
         <section className="w-full mt-10">
-          <h2 className="text-[1.5rem] font-medium">Ride history</h2>
-          <div className="w-full min-h-[200px] bg-white rounded-lg p-4 mt-3"></div>
+          <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
+            Ride history
+          </h2>
+          <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center">
+            {/* each ride history */}
+            <RideHistory />
+            <RideHistory />
+            <RideHistory />
+            <button className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
+              Load nore
+            </button>
+          </div>
         </section>
       </main>
       <Footer />

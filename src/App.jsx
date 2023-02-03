@@ -7,17 +7,19 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Contact from "./pages/Contact";
 import { useAppContext } from "./contexts/AppContext";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
-  const { user } = useAppContext();
+  const { user, currentUserFromDb } = useAppContext();
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/about" element={<About />} />
-      <Route path="/book-ride" element={user ? <BookRides /> : <Login />} />
+      {user && <Route path="/book-ride" element={<BookRides />} />}
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

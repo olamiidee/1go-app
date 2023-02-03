@@ -12,6 +12,8 @@ const Header = () => {
     toggleLogoutOff,
     showLogout,
     currentUserFromDb,
+    accessDashboard,
+    userNotLoggedIn,
   } = useAppContext();
 
   return (
@@ -24,6 +26,19 @@ const Header = () => {
             : "sm:w-[80%] top-8 rounded-md bg-[#252525]/40 lg:px-10"
         } px-12 py-4 fixed left-[50%] translate-x-[-50%] border-b border-slate-600 md:flex items-center z-[50] hidden transition-all duration-500`}
       >
+        {userNotLoggedIn && (
+          <div className="w-[fit-content] scale flex gap-4 items-center py-4 px-10 bg-blue-400/20 rounded-lg border border-blue-400 absolute top-24 left-0">
+            <img
+              alt=""
+              src="/images/icons8-info-black-64.png"
+              className="w-10 h-10 mr-1"
+            />
+            <p>
+              Login or register to book rides. <br /> It will only take a
+              minute!
+            </p>
+          </div>
+        )}
         <Link to="/" className="mr-auto">
           <div className="flex items-center gap-[0px] ml-[-10px] cursor-pointer">
             <div className="w-10 h-10 border-4 border-blue-500 rounded-full mr-3"></div>
@@ -34,7 +49,7 @@ const Header = () => {
           </div>
         </Link>
         <nav className="flex items-center">
-          <div className="flex items-center gap-5 lg:gap-8 mr-auto text-white">
+          <div className="flex items-center gap-3 lg:gap-8 mr-auto text-white text-[0.9rem] lg:text-[1rem]">
             <Link
               to="/"
               className={`cursor-pointer px-2 py-1 ${
@@ -44,14 +59,14 @@ const Header = () => {
               Home
             </Link>
 
-            <Link
-              to="/book-ride"
+            <div
+              onClick={accessDashboard}
               className={`cursor-pointer px-2 py-1 ${
                 currentPage === "/book-ride" && "bg-blue-500"
               } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
             >
               Bookings
-            </Link>
+            </div>
             <Link
               to="/about"
               className={`cursor-pointer px-2 py-1 ${
@@ -73,7 +88,7 @@ const Header = () => {
                 to="/login"
                 className={`cursor-pointer px-2 py-1 ${
                   currentPage === "/login" && "bg-blue-500"
-                } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
+                } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
               >
                 Login
               </Link>
@@ -83,7 +98,7 @@ const Header = () => {
                 to="/register"
                 className={`cursor-pointer px-2 py-1 ${
                   currentPage === "/register" && "bg-blue-500"
-                } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
+                } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
               >
                 Register
               </Link>
@@ -108,7 +123,11 @@ const Header = () => {
                 {showLogout && (
                   <div
                     onMouseOut={toggleLogoutOff}
-                    className="w-[fit-content] px-2 py-3 bg-[#252525]/40 absolute top-[54px] right-[-44px]"
+                    className={` ${
+                      scrollPosition > 224
+                        ? "bg-[#252525]/70 "
+                        : "bg-[#252525]/40 "
+                    } w-[fit-content] px-2 py-3 absolute top-[54px] right-[-44px] transition-all duration-500`}
                   >
                     <button
                       onClick={logout}

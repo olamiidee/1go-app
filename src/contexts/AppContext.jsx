@@ -170,7 +170,7 @@ const AppContextProvider = ({ children }) => {
   });
 
   //to save current user from auth in state
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ name: "", email: "" });
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -182,25 +182,43 @@ const AppContextProvider = ({ children }) => {
 
   //to get users saved in db
   useEffect(() => {
-    const getUserDetails = async () => {
-      setLoader(true);
-      const userQuery = query(
-        collection(db, "users"),
-        where("email", "==", user?.email)
-      );
-      try {
-        const querySnapshot = await getDocs(userQuery);
-        querySnapshot.forEach((doc) => {
-          setCurrentUserFromDb(doc.data());
-        });
-        setLoader(false);
-      } catch (err) {
-        console.log(err.message);
-        setLoader(false);
-      }
-    };
-    getUserDetails();
+    if (user) {
+      const getUserDetails = async () => {
+        setLoader(true);
+        const userQuery = query(
+          collection(db, "users"),
+          where("email", "==", user?.email)
+        );
+        try {
+          const querySnapshot = await getDocs(userQuery);
+          querySnapshot.forEach((doc) => {
+            setCurrentUserFromDb(doc.data());
+          });
+          setLoader(false);
+        } catch (err) {
+          console.log(err.message);
+          setLoader(false);
+        } finally {
+          setLoader(false);
+        }
+      };
+      getUserDetails();
+    }
   }, [user]);
+
+  //dashboard access
+  const [userNotLoggedIn, setuserNotLoggedIn] = useState(false);
+  function accessDashboard() {
+    if (user) {
+      navigate("/book-ride");
+    } else {
+      navigate("/login");
+      setuserNotLoggedIn(true);
+      setTimeout(() => {
+        setuserNotLoggedIn(false);
+      }, 7000);
+    }
+  }
 
   return (
     <AppContext.Provider
@@ -219,6 +237,8 @@ const AppContextProvider = ({ children }) => {
         toggleLogoutOn,
         toggleLogoutOff,
         currentUserFromDb,
+        userNotLoggedIn,
+        accessDashboard,
       }}
     >
       {children}
