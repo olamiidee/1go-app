@@ -2,14 +2,14 @@ import React from "react";
 
 function ContactUs() {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center w-[95%] mx-auto mt-6">
+    <div className="flex flex-col md:flex-row md:items-center w-[95%] mx-auto mt-6">
       {/* Image */}
       <div>
         <img src="" alt="" />
       </div>
       {/* Form */}
       <div>
-        <form className="space-y-6 font-light">
+        <form className="space-y-6 font-light w-full ">
           <div className="flex space-x-4">
             <input
               type="text"

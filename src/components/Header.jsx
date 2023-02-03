@@ -16,6 +16,16 @@ const Header = () => {
     userNotLoggedIn,
   } = useAppContext();
 
+  const [openMenu, setOpenMenu] = useState(false);
+  function handleClick() {
+    setOpenMenu((prevState) => !prevState);
+  }
+
+  //to close the dropdown after clicking a link
+  const hideDropdown = () => {
+    setOpenMenu(false);
+  };
+
   return (
     <header>
       {/* desktop header */}
@@ -161,73 +171,11 @@ const Header = () => {
         <img
           alt="hamburger"
           src="/images/icons8-menu-rounded-30.png"
+          onClick={handleClick}
           className="w-[30px] h-[30px] cursor-pointer"
         />
 
-        {/* {openMenu && (
-            <div className="w-full h-[100vh] z-[200] bg-black/80 fixed top-0 left-0">
-              <img
-                className="w-[35px] h-[35px] cursor-pointer mr-[25px] absolute top-[30px] right-2"
-                alt=""
-                src={close}
-                onClick={handleClick}
-              />
-              <div
-                onClick={handleClick}
-                className="w-[35%] h-screen float-left"
-              ></div>
-              <ul className="slide float-right w-[65%] h-full bg-[#252525] px-[30px] text-[1rem] text-white pt-[100px] text-center">
-                {user && (
-                  <li className="w-[fit-content] my-6 mx-auto flex items-center justify-center gap-2 border-2 border-rose-400 px-2 py-1 rounded-lg">
-                    <div className="text-rose-400 font-bold text-[1.25rem]">
-                      {currentUserFromDb.displayName}
-                    </div>
-                    <img alt="user" src={userImg} className="w-8 h-8" />
-                  </li>
-                )}
-                <li className="my-4">
-                  <Link to="/" onClick={hideDropdown}>
-                    <div className="w-full">Home</div>
-                  </Link>
-                </li>
-                <li className="my-4">
-                  <Link to="/notes" onClick={hideDropdown}>
-                    <div className="w-full">Notes</div>
-                  </Link>
-                </li>
-                <li className="my-4">
-                  <Link to="/create" onClick={hideDropdown}>
-                    <div className="w-full">Add New</div>
-                  </Link>
-                </li>
-                {!user && (
-                  <li className="my-4">
-                    <Link to="/register" onClick={hideDropdown}>
-                      <div className="w-full">Sign Up</div>
-                    </Link>
-                  </li>
-                )}
-                {!user && (
-                  <li className="my-4">
-                    <Link to="/login" onClick={hideDropdown}>
-                      <div className="w-full">Log In</div>
-                    </Link>
-                  </li>
-                )}
-                {user && (
-                  <li
-                    onClick={() => {
-                      logout();
-                      hideDropdown();
-                    }}
-                    className="my-4"
-                  >
-                    <div className="w-full">Log Out</div>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )} */}
+        {openMenu && <div className="w-full"> </div>}
       </div>
       {/*mobile header */}
     </header>
