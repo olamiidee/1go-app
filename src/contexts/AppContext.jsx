@@ -46,6 +46,23 @@ const AppContextProvider = ({ children }) => {
     });
   }
 
+  //to save login form input
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  //to handle form input change chnage
+  function handleLoginChange(event) {
+    const { id, value } = event.target;
+    setLoginForm((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
@@ -107,11 +124,83 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  //to log in users
+  const login = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        loginForm.email,
+        loginForm.password
+      );
+      setLoader(false);
+      navigate("/book-ride");
+    } catch (error) {
+      setLoader(false);
+      console.log(error.message);
+    }
+  };
+
+  //to log out users
+  const logout = async () => {
+    signOut(auth).then(() => {
+      navigate("/");
+    });
+  };
+
   //to show and hide password
   const [showPassword, setShowPassword] = useState(false);
   function togglePassword() {
     setShowPassword((prev) => !prev);
   }
+
+  //to show logout tray
+  const [showLogout, setShowLogout] = useState(false);
+  function toggleLogoutOn() {
+    setShowLogout(true);
+  }
+  function toggleLogoutOff() {
+    setShowLogout(false);
+  }
+
+  window.addEventListener("click", () => {
+    setShowLogout(false);
+  });
+
+  //to save current user from auth in state
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, []);
+
+  //to save current user from db
+  const [currentUserFromDb, setCurrentUserFromDb] = useState({});
+
+  //to get users saved in db
+  useEffect(() => {
+    const getUserDetails = async () => {
+      setLoader(true);
+      const userQuery = query(
+        collection(db, "users"),
+        where("email", "==", user?.email)
+      );
+      try {
+        const querySnapshot = await getDocs(userQuery);
+        querySnapshot.forEach((doc) => {
+          setCurrentUserFromDb(doc.data());
+        });
+        setLoader(false);
+      } catch (err) {
+        console.log(err.message);
+        setLoader(false);
+      }
+    };
+    getUserDetails();
+  }, [user]);
 
   return (
     <AppContext.Provider
@@ -122,6 +211,14 @@ const AppContextProvider = ({ children }) => {
         register,
         showPassword,
         togglePassword,
+        handleLoginChange,
+        user,
+        login,
+        logout,
+        showLogout,
+        toggleLogoutOn,
+        toggleLogoutOff,
+        currentUserFromDb,
       }}
     >
       {children}

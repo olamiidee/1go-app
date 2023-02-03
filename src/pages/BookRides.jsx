@@ -1,13 +1,17 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useAppContext } from "../contexts/AppContext";
 
 const BookRides = () => {
+  const { currentUserFromDb } = useAppContext();
   return (
     <>
       <Header />
       <main className="w-full min-h-screen bg-slate-100 py-[150px] px-[5%] sm:px-[10.5%] text-slate-700">
         <section className="w-full border-b border-zinc-300 pb-4">
-          <h2 className="text-[1.5rem] font-bold">Hello user</h2>
+          <h2 className="text-[1.5rem] font-bold">
+            Hello {currentUserFromDb.firstname}
+          </h2>
           <p className="text-[1.1rem] text-black font-light">
             Welcome to your dashboard. You can book rides & view ride history!
           </p>

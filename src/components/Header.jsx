@@ -1,9 +1,18 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 import { useHeaderContext } from "../contexts/HeaderContext";
 
 const Header = () => {
   const { currentPage, scrollPosition } = useHeaderContext();
+  const {
+    user,
+    logout,
+    toggleLogoutOn,
+    toggleLogoutOff,
+    showLogout,
+    currentUserFromDb,
+  } = useAppContext();
 
   return (
     <header>
@@ -59,22 +68,58 @@ const Header = () => {
             >
               Contact
             </Link>
-            <Link
-              to="/login"
-              className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/login" && "bg-blue-500"
-              } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/register" && "bg-blue-500"
-              } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
-            >
-              Register
-            </Link>
+            {!user && (
+              <Link
+                to="/login"
+                className={`cursor-pointer px-2 py-1 ${
+                  currentPage === "/login" && "bg-blue-500"
+                } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
+              >
+                Login
+              </Link>
+            )}
+            {!user && (
+              <Link
+                to="/register"
+                className={`cursor-pointer px-2 py-1 ${
+                  currentPage === "/register" && "bg-blue-500"
+                } rounded-md hover:bg-blue-400 hover:translate-y-[6px] transition-all duration-300`}
+              >
+                Register
+              </Link>
+            )}
+
+            {user && (
+              <div
+                onMouseOver={toggleLogoutOn}
+                className={`cursor-pointer px-2 py-1 rounded-md flex items-center gap-2 border-2 border-blue-500 hover:bg-blue-500/50 hover:translate-y-[6px] transition-all duration-300 relative`}
+              >
+                <p>{currentUserFromDb.firstname}</p>
+                <img
+                  alt=""
+                  src="/images/icons8-user-64.png"
+                  className="w-6 h-6"
+                />
+                <img
+                  alt=""
+                  src="/images/icons8-expand-arrow-50.png"
+                  className="w-3 h-3"
+                />
+                {showLogout && (
+                  <div
+                    onMouseOut={toggleLogoutOff}
+                    className="w-[fit-content] px-2 py-3 bg-[#252525]/40 absolute top-[54px] right-[-44px]"
+                  >
+                    <button
+                      onClick={logout}
+                      className="text-white px-10 py-2 hover:bg-blue-500/50 border-y border-white/60"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </nav>
       </div>
