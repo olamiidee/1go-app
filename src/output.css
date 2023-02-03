@@ -1441,13 +1441,12 @@ video {
   font-weight: 300;
 }
 
-<<<<<<< HEAD
+
 .font-medium {
-  font-weight: 500;
-=======
+  font-weight: 500;}
+
 .font-bold {
   font-weight: 700;
->>>>>>> cedf7c4 (ui.)
 }
 
 .font-semibold {
@@ -1889,8 +1888,7 @@ input[type="number"] {
   .md\:w-\[40\%\] {
     width: 40%;
   }
-
-  <<<<<<< HEAD .md\:w-1\/2 {
+ .md\:w-1\/2 {
     width: 50%;
   }
 
@@ -1898,7 +1896,7 @@ input[type="number"] {
     padding: 1rem;
   }
 
-  =======>>>>>>>80a0d04 (testimonials) .md\:py-\[20px\] {
+   .md\:py-\[20px\] {
     padding-top: 20px;
     padding-bottom: 20px;
   }
