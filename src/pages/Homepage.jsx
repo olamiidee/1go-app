@@ -70,26 +70,35 @@ const Homepage = () => {
                     From School Park - Afternoon Rides
                   </h2>
                   <div className="my-4 w-full flex gap-2 flex-wrap">
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                      6:55AM
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      1:55PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                      7:35AM
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      2:35PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                      8:15AM
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      3:15PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                      8:55AM
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      3:55PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                      9:35AM
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      4:35PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                      10:15AM
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      5:15PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                      10:55AM
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      5:55PM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      6:35PM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      7:15PM
+                    </button>
+                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                      7:55PM
                     </button>
                   </div>
                 </div>
