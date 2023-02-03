@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Loader from "../components/Loader";
+import { useAppContext } from "../contexts/AppContext";
 
 const Register = () => {
+  const { handleRegChange, loader, register } = useAppContext();
+
   return (
     <>
+      {loader && <Loader />}
       <Header />
       <section className="w-full min-h-screen">
         <div className="overlay w-full h-screen bg-white flex flex-col justify-center items-center mt-[80px]">
@@ -28,6 +33,7 @@ const Register = () => {
                   <input
                     className="reg-input"
                     id="firstname"
+                    onChange={handleRegChange}
                     placeholder="Enter your first name"
                     type="text"
                     required
@@ -39,6 +45,7 @@ const Register = () => {
                   <input
                     className="reg-input"
                     id="lastname"
+                    onChange={handleRegChange}
                     placeholder="Enter your last name"
                     required
                   />
@@ -49,6 +56,7 @@ const Register = () => {
                   <input
                     className="reg-input"
                     id="email"
+                    onChange={handleRegChange}
                     placeholder="Enter your email adress"
                     type="email"
                     required
@@ -59,7 +67,8 @@ const Register = () => {
                   <label htmlFor="firstname">Phone number</label>
                   <input
                     className="reg-input"
-                    id="phone-number"
+                    id="phone"
+                    onChange={handleRegChange}
                     placeholder="Enter your phone Number"
                     type="number"
                     required
@@ -71,6 +80,7 @@ const Register = () => {
                   <input
                     className="reg-input"
                     id="password"
+                    onChange={handleRegChange}
                     placeholder="Enter your password"
                     type="password"
                     required
@@ -78,7 +88,10 @@ const Register = () => {
                 </div>
 
                 <div>
-                  <button className="text-white bg-blue-500 reg-input border-transparent mt-4 hover:opacity-80">
+                  <button
+                    onClick={register}
+                    className="text-white bg-blue-500 reg-input border-transparent mt-4 hover:opacity-80"
+                  >
                     Submit
                   </button>
                   <p className="text-sm pt-3">

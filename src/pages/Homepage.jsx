@@ -31,7 +31,7 @@ const Homepage = () => {
               </button>
             </div>
             <div className="w-full md:w-[40%] mt-8 md:mt-0">
-              <div className="bg-white/30 px-4 py-3 w-[fit-content] rounded-md">
+              <div className="bg-white/30 px-4 py-3 w-[fit-content] rounded-t-md">
                 Booking Times Today
               </div>
               <div className="w-full h-[fit-content] bg-white rounded-md p-3 text-slate-700">

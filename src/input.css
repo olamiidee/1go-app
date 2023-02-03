@@ -10,6 +10,17 @@
 }
 
 @layer utilities {
+  .rotate {
+    animation: rotation 0.8s infinite linear;
+  }
+  @keyframes rotation {
+    from {
+      transform: rotate(359deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
   .first-section-text {
     text-shadow: 1px 1px #000000;
   }

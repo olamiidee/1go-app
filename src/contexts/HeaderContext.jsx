@@ -25,7 +25,7 @@ const HeaderContextProvider = ({ children }) => {
   );
 };
 
-export const useGlobalContext = () => {
+export const useHeaderContext = () => {
   return useContext(HeaderContext);
 };
 

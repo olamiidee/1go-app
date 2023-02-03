@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "../contexts/HeaderContext";
+import { useHeaderContext } from "../contexts/HeaderContext";
 
 const Header = () => {
-  const { currentPage, scrollPosition } = useGlobalContext();
+  const { currentPage, scrollPosition } = useHeaderContext();
 
   return (
     <header>
