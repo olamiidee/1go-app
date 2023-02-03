@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Testimonials from "../components/Testimonials";
 
 const Homepage = () => {
   return (
@@ -122,6 +123,8 @@ const Homepage = () => {
             ></path>
           </svg>
         </section>
+
+        {/* we provide affordable...... */}
         <section className="h-screen border border-b-slate-700">
           <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
             We provide affordable prices
@@ -130,6 +133,8 @@ const Homepage = () => {
             Catchy text like - Solution to the Unilorin school park rush hour.
           </h2>
         </section>
+
+        {/* Testimonial */}
         <section className="h-screen border border-b-slate-700">
           <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
             Testimonial from our users
@@ -137,7 +142,10 @@ const Homepage = () => {
           <h2 className="text-[1rem] md:text-[1.5rem] text-slate-600 text-center">
             Testimonial slideshow here - Check that template.
           </h2>
+          <div></div>
         </section>
+
+        {/* Contact form */}
         <section className="h-screen border border-b-slate-700">
           <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
             Contact form
