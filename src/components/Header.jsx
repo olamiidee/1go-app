@@ -26,14 +26,19 @@ const Header = () => {
             : "sm:w-[80%] top-8 rounded-md bg-[#252525]/40 lg:px-10"
         } px-12 py-4 fixed left-[50%] translate-x-[-50%] border-b border-slate-600 md:flex items-center z-[50] hidden transition-all duration-500`}
       >
-        <div className="w-[fit-content] flex gap-4 items-center p-4 bg-blue-400/40 rounded-lg border border-blue-400 absolute top-24 left-0">
-          <img
-            alt=""
-            src="/images/icons8-remove-32.png"
-            className="w-6 h-6 mr-1"
-          />
-          <p>Login to book rides.</p>
-        </div>
+        {userNotLoggedIn && (
+          <div className="w-[fit-content] scale flex gap-4 items-center py-4 px-10 bg-blue-400/20 rounded-lg border border-blue-400 absolute top-24 left-0">
+            <img
+              alt=""
+              src="/images/icons8-info-black-64.png"
+              className="w-10 h-10 mr-1"
+            />
+            <p>
+              Login or register to book rides. <br /> It will only take a
+              minute!
+            </p>
+          </div>
+        )}
         <Link to="/" className="mr-auto">
           <div className="flex items-center gap-[0px] ml-[-10px] cursor-pointer">
             <div className="w-10 h-10 border-4 border-blue-500 rounded-full mr-3"></div>

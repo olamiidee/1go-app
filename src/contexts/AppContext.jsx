@@ -209,14 +209,14 @@ const AppContextProvider = ({ children }) => {
   //dashboard access
   const [userNotLoggedIn, setuserNotLoggedIn] = useState(false);
   function accessDashboard() {
-    if (currentUserFromDb) {
+    if (user) {
       navigate("/book-ride");
     } else {
       navigate("/login");
       setuserNotLoggedIn(true);
       setTimeout(() => {
-        setuserNotLoggedIn(true);
-      }, 10000);
+        setuserNotLoggedIn(false);
+      }, 7000);
     }
   }
 
