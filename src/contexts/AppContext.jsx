@@ -107,8 +107,23 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  //to show and hide password
+  const [showPassword, setShowPassword] = useState(false);
+  function togglePassword() {
+    setShowPassword((prev) => !prev);
+  }
+
   return (
-    <AppContext.Provider value={{ regForm, handleRegChange, loader, register }}>
+    <AppContext.Provider
+      value={{
+        regForm,
+        handleRegChange,
+        loader,
+        register,
+        showPassword,
+        togglePassword,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

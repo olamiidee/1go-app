@@ -5,7 +5,8 @@ import Loader from "../components/Loader";
 import { useAppContext } from "../contexts/AppContext";
 
 const Register = () => {
-  const { handleRegChange, loader, register } = useAppContext();
+  const { handleRegChange, loader, register, showPassword, togglePassword } =
+    useAppContext();
 
   return (
     <>
@@ -77,14 +78,22 @@ const Register = () => {
                 {/* password */}
                 <div>
                   <label htmlFor="firstname">Password</label>
-                  <input
-                    className="reg-input"
-                    id="password"
-                    onChange={handleRegChange}
-                    placeholder="Enter your password"
-                    type="password"
-                    required
-                  />
+                  <div className="w-full relative">
+                    <input
+                      className="reg-input"
+                      id="password"
+                      onChange={handleRegChange}
+                      placeholder="Enter your password"
+                      type={showPassword ? "text" : "password"}
+                      required
+                    />
+                    <img
+                      alt="reveal"
+                      src="/images/icons8-eye-30.png"
+                      className="w-5 h-5 absolute top-1/2 right-3 translate-y-[-50%] cursor-pointer"
+                      onClick={togglePassword}
+                    />
+                  </div>
                 </div>
 
                 <div>
