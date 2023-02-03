@@ -34,14 +34,7 @@ const Header = () => {
             >
               Home
             </Link>
-            <Link
-              to="/about"
-              className={`cursor-pointer px-2 py-1 ${
-                currentPage === "/about" && "bg-blue-500"
-              } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
-            >
-              About
-            </Link>
+
             <Link
               to="/book-ride"
               className={`cursor-pointer px-2 py-1 ${
@@ -49,6 +42,14 @@ const Header = () => {
               } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
             >
               Bookings
+            </Link>
+            <Link
+              to="/about"
+              className={`cursor-pointer px-2 py-1 ${
+                currentPage === "/about" && "bg-blue-500"
+              } rounded-md hover:bg-blue-500 hover:translate-y-[6px] transition-all duration-300`}
+            >
+              About
             </Link>
             <Link
               to="/contact"

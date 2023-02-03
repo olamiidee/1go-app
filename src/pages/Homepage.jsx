@@ -40,25 +40,25 @@ const Homepage = () => {
                     From Oke-odo - Morning Rides
                   </h2>
                   <div className="my-4 w-full flex gap-2 flex-wrap">
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       6:55AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       7:35AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       8:15AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       8:55AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       9:35AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       10:15AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       10:55AM
                     </button>
                   </div>
@@ -70,25 +70,25 @@ const Homepage = () => {
                     From School Park - Afternoon Rides
                   </h2>
                   <div className="my-4 w-full flex gap-2 flex-wrap">
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       6:55AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       7:35AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       8:15AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       8:55AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       9:35AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       10:15AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 rounded-sm text-[0.85rem]">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
                       10:55AM
                     </button>
                   </div>
