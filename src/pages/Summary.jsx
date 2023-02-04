@@ -6,7 +6,15 @@ const Summary = () => {
   return (
     <>
       <Header />
-      <section className="w-full min-h-screen py-28 md:py-40 bg-zinc-300 text-slate-700">
+      <section className="w-full min-h-screen py-28 md:py-40 bg-gradient-to-b from-zinc-500/70 to-blue-400/10 text-slate-700">
+        <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
+          <img
+            alt=""
+            src="/images/icons8-information-64.png"
+            className="w-4 h-4"
+          />
+          <p className="underline">Contact us</p>
+        </div>
         <div className="w-full px-[5%] sm:px-[10.5%]">
           <div className="w-[fit-content] text-[0.75rem] text-slate-700 py-1 px-4 mb-16 bg-white rounded-md">
             Back to dashboard
@@ -90,7 +98,7 @@ const Summary = () => {
             <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
               PS: Prices may vary based on demand
             </p>
-            <button className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
+            <button className="w-full md:w-[fit-content] px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
               Proceed to payment
             </button>
           </div>
