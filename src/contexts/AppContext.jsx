@@ -124,6 +124,8 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   //to log in users
   const login = async (e) => {
     e.preventDefault();
@@ -140,6 +142,10 @@ const AppContextProvider = ({ children }) => {
     } catch (error) {
       setLoader(false);
       console.log(error.message);
+      error.message && setErrorMessage("Bad network connection");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 7000);
     }
   };
 
@@ -239,6 +245,7 @@ const AppContextProvider = ({ children }) => {
         currentUserFromDb,
         userNotLoggedIn,
         accessDashboard,
+        errorMessage,
       }}
     >
       {children}

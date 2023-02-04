@@ -193,7 +193,7 @@ const Header = () => {
               {user && (
                 <li
                   onMouseOver={toggleLogoutOn}
-                  className={`cursor-pointer py-2 mb-8 rounded-md flex items-center gap-2 border-t-2 border-blue-500 hover:bg-blue-500/50 transition-all duration-300 relative`}
+                  className={`cursor-pointer py-2 mb-8 flex items-center gap-2 border-t border-white/60 hover:bg-blue-500/50 transition-all duration-300 relative`}
                 >
                   <img
                     alt=""
@@ -243,17 +243,17 @@ const Header = () => {
                 </li>
               )}
               {user && (
-                <div
+                <li
                   onMouseOut={toggleLogoutOff}
-                  className={`w-[60%] py-3 absolute right-2 bottom-10 transition-all duration-500`}
+                  className={`py-3 transition-all duration-500`}
                 >
                   <button
                     onClick={logout}
-                    className="w-full text-white py-2 hover:bg-blue-500/50 border-y border-white/60"
+                    className="w-full text-white py-2 px-2 text-start hover:bg-blue-500/50 border-y border-white/60"
                   >
                     Logout
                   </button>
-                </div>
+                </li>
               )}
             </ul>
           </div>
