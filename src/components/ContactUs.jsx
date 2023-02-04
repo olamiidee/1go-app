@@ -1,5 +1,5 @@
 import React from "react";
-import contact from "../../public/images/matey-man-and-woman-work-in-support-service.png";
+import contact from "/images/matey-man-and-woman-work-in-support-service.png";
 
 function ContactUs() {
   return (

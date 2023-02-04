@@ -136,22 +136,12 @@ const Homepage = () => {
           </svg>
         </section>
 
-        {/* we provide affordable...... */}
-        <section className="h-screen border border-b-slate-700">
-          <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
-            We provide affordable prices
-          </h1>
-          <h2 className="text-[1rem] md:text-[1.5rem] text-slate-600 text-center">
-            Catchy text like - Solution to the Unilorin school park rush hour.
-          </h2>
-        </section>
-
         {/* Testimonial */}
-        <section className="w-full border border-b-slate-700 py-[80px]">
-          <h2 className="text-[1.7rem] md:text-[2.5rem] font-bold text-center">
+        <section className="w-full py-[80px]">
+          <h2 className="text-[1.7rem] md:text-[2rem] font-bold text-center">
             Testimonial from our users
           </h2>
-          <p className="font-light text-center md:pb-12">
+          <p className="font-light text-center text-[1rem] md:pb-12">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
             necessitatibus eligendi voluptates quia, aliquid recusandae
           </p>
@@ -159,7 +149,7 @@ const Homepage = () => {
         </section>
 
         {/* Contact form */}
-        <section className="w-full border border-b-slate-700">
+        <section className="w-full">
           <ContactUs />
         </section>
       </main>
