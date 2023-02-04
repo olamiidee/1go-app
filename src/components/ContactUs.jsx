@@ -3,8 +3,8 @@ import contact from "/images/matey-man-and-woman-work-in-support-service.png";
 
 function ContactUs() {
   return (
-    <div className="overlay h-full w-full block md:flex items-center justify-between text-[1rem] md:px-[50px] py-[80px]">
-      <div className="w-[90%] mx-auto md:w-[40%] text-center">
+    <div className="overlay bg-[#020d18]/70 h-full w-full block md:flex items-center justify-between text-[1rem] md:px-[50px] py-[80px]">
+      <div className="w-[90%] mx-auto md:w-[40%] text-center text-slate-100">
         <h2 className="text-[2.5rem] font-bold">Get in Touch</h2>
         <p className="text-[1.2rem] md:text-[1.4rem]">
           Contact us and we will get back to you soon
