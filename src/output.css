@@ -838,6 +838,10 @@ video {
   height: 1.25rem;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -945,6 +949,14 @@ video {
 
 .w-\[60\%\] {
   width: 60%;
+}
+
+.w-16 {
+  width: 4rem;
+}
+
+.w-2\/3 {
+  width: 66.666667%;
 }
 
 .translate-x-\[-50\%\] {
@@ -1281,6 +1293,10 @@ video {
   background-color: rgb(248 113 113 / 0.2);
 }
 
+.bg-white\/40 {
+  background-color: rgb(255 255 255 / 0.4);
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -1361,6 +1377,14 @@ video {
 
 .p-1 {
   padding: 0.25rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .px-0 {
@@ -1461,6 +1485,11 @@ video {
 .py-28 {
   padding-top: 7rem;
   padding-bottom: 7rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .pt-\[80px\] {
@@ -2061,6 +2090,10 @@ input[type="number"] {
     height: 100vh;
   }
 
+  .md\:h-16 {
+    height: 4rem;
+  }
+
   .md\:min-h-\[200px\] {
     min-height: 200px;
   }
@@ -2096,6 +2129,10 @@ input[type="number"] {
   .md\:w-\[fit-content\] {
     width: -moz-fit-content;
     width: fit-content;
+  }
+
+  .md\:w-16 {
+    width: 4rem;
   }
 
   .md\:flex-nowrap {
@@ -2138,6 +2175,11 @@ input[type="number"] {
   .md\:py-40 {
     padding-top: 10rem;
     padding-bottom: 10rem;
+  }
+
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .md\:pt-\[50px\] {
@@ -2186,6 +2228,10 @@ input[type="number"] {
 
   .md\:text-\[3rem\] {
     font-size: 3rem;
+  }
+
+  .md\:text-\[1\.1rem\] {
+    font-size: 1.1rem;
   }
 }
 

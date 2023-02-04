@@ -21,14 +21,23 @@ const BookRides = () => {
               />
               <p className="underline">Contact us</p>
             </div>
-            <section className="w-full border-b border-zinc-300 pb-4 text-white">
-              <h2 className="text-[1.5rem] font-bold">
-                Hello {currentUserFromDb.firstname}
-              </h2>
-              <p className="text-[1.1rem] font-medium">
-                Welcome to your dashboard. You can book rides & view ride
-                history here!
-              </p>
+            <section className="w-full border-b border-zinc-300 pb-4 text-white flex">
+              <div className="w-2/3 mr-auto">
+                <h2 className="text-[1.5rem] font-bold">
+                  Hello {currentUserFromDb.firstname}
+                </h2>
+                <p className="text-[0.9rem] md:text-[1.1rem] font-medium">
+                  Welcome to your dashboard. You can book rides & view ride
+                  history here!
+                </p>
+              </div>
+              <div className="h-[fit-content] px-4 md:px-8 p-2 rounded-lg bg-white/40">
+                <img
+                  alt=""
+                  src="/images/icons8-user-64.png"
+                  className="md:w-16 w-10 md:h-16 h-10"
+                />
+              </div>
             </section>
             <section className="w-full border-b border-zinc-300 pb-16 pt-12">
               <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-white">
