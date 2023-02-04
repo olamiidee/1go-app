@@ -1140,6 +1140,10 @@ video {
   background-color: rgb(96 165 250 / 0.1);
 }
 
+.bg-\[\#020d18\]\/70 {
+  background-color: rgb(2 13 24 / 0.7);
+}
+
 .bg-transparent {
   background-color: transparent;
 }
@@ -1233,6 +1237,10 @@ video {
 
 .bg-home {
   background-image: url('/images/home.jpg');
+}
+
+.bg-contactBg {
+  background-image: url('/images/cinema.png');
 }
 
 .from-blue-500 {
@@ -1566,6 +1574,11 @@ video {
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-slate-100 {
+  --tw-text-opacity: 1;
+  color: rgb(241 245 249 / var(--tw-text-opacity));
 }
 
 .underline {
