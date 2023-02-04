@@ -142,19 +142,18 @@ const Homepage = () => {
         </section>
 
         {/* Testimonial */}
-        <section className="w-full py-[80px]">
-          <h2 className="text-[2rem] font-bold text-center">
+        <section className="w-full pb-[80px]">
+          <h2 className="text-[1.65rem] md:text-[3rem] font-bold text-center">
             Testimonial from our users
           </h2>
           <p className="font-light text-center text-[1rem] md:pb-24 w-[90%] mx-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
-            necessitatibus
+            We are here to stay, see what our users have to say about our rides.
           </p>
           <Testimonials />
         </section>
 
         {/* Contact form */}
-        <section className="w-full bg-contactBg bg-cover bg-right lg:bg-center bg-no-repeat bg-[#020d18]]">
+        <section className="w-full bg-contactBg bg-right lg:bg-center bg-repeat bg-cover">
           <ContactUs />
         </section>
       </main>

@@ -7,7 +7,7 @@ module.exports = {
         // home: "url('/images/wall3.jpeg')",
         reg1: "url('/images/reg1.jpg')",
         home: "url('/images/home.jpg')",
-        contactBg: "url('/images/cinema.png')",
+        contactBg: "url('/images/repeat2.jpg')",
       },
     },
   },
