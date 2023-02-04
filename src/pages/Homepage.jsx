@@ -149,7 +149,7 @@ const Homepage = () => {
         </section>
 
         {/* Contact form */}
-        <section className="w-full">
+        <section className="w-full bg-contactBg bg-cover bg-right lg:bg-center bg-no-repeat bg-[#020d18]]">
           <ContactUs />
         </section>
       </main>
