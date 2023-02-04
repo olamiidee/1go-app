@@ -174,6 +174,19 @@ const Header = () => {
           className="w-[30px] h-[30px] cursor-pointer"
           onClick={handleClick}
         />
+        {userNotLoggedIn && currentPage === "/login" && (
+          <div className="w-[90%] scale-mob flex gap-4 items-center py-4 px-10 bg-blue-400/20 text-[0.85rem] rounded-lg border border-blue-400 absolute top-24 left-[50%] translate-x-[-50%]">
+            <img
+              alt=""
+              src="/images/icons8-info-black-64.png"
+              className="w-8 h-8 mr-1"
+            />
+            <p>
+              Login or register to book rides. <br /> It will only take a
+              minute!
+            </p>
+          </div>
+        )}
         {openMenu && (
           <div className="w-full h-[100vh] z-[200] bg-black/80 fixed top-0 left-0 lg:hidden">
             <img
@@ -188,10 +201,14 @@ const Header = () => {
                   <div className="w-full">Home</div>
                 </Link>
               </li>
-              <li className="my-4">
-                <Link to="/bookings" onClick={hideDropdown}>
-                  <div className="w-full">Bookings</div>
-                </Link>
+              <li
+                onClick={() => {
+                  hideDropdown();
+                  accessDashboard();
+                }}
+                className="my-4"
+              >
+                <div className="w-full">Bookings</div>
               </li>
               <li className="my-4">
                 <Link to="/about" onClick={hideDropdown}>

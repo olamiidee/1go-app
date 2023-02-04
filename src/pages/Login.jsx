@@ -15,7 +15,7 @@ const Login = () => {
       <Header />
       <section className="w-full min-h-screen">
         <div className="w-[95%] mx-auto h-screen md:h-[100vh] bg-white md:flex justify-between items-center mt-[80px] md:my-[150px]">
-          <div className="w-full px-4 pt-12 md:py-0 md:w-1/2 md:px-28">
+          <div className="w-full px-4 pt-36 md:pt-12 md:py-0 md:w-1/2 md:px-28">
             <div className="text-start">
               <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
                 Welcome back
