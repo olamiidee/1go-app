@@ -30,8 +30,8 @@ function App() {
 
       {/* admin access */}
       <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/booking-times" element={<BookingTimes />} />
-      <Route path="/account" element={<Account />} />
+      <Route path="/admin/booking-times" element={<BookingTimes />} />
+      <Route path="/admin/account" element={<Account />} />
 
       {/* page not found */}
       <Route path="*" element={<PageNotFound />} />

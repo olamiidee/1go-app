@@ -226,6 +226,184 @@ const AppContextProvider = ({ children }) => {
     }
   }
 
+  //to save morning time form input
+  const [morningForm, setMorningForm] = useState({
+    morningHour: "",
+    morningMinute: "",
+    morningAmpm: "AM",
+  });
+
+  //to save morning time form input
+  function handleMorningChange(event) {
+    const { id, value } = event.target;
+    setMorningForm((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  //to save noon time form input
+  const [noonForm, setNoonForm] = useState({
+    noonHour: "",
+    noonMinute: "",
+    noonAmpm: "PM",
+  });
+
+  //to save noon time form input
+  function handlenoonChange(event) {
+    const { id, value } = event.target;
+    setNoonForm((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  let added = false;
+
+  //function to save morning booking time doc on sign up
+  //function to save morning booking time doc on sign up
+  //function to save morning booking time doc on sign up
+  //function to save morning booking time doc on sign up
+
+  const createMorningBookingTimeDocument = async (time, createdAt) => {
+    try {
+      const docRef = await addDoc(collection(db, "morningBookingTimes"), {
+        time: time,
+        id: morningBookingTimesFromDb.length + 1,
+        hover: false,
+        createdAt: createdAt,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      added = true;
+    } catch (err) {
+      console.error("Error adding document: ", err);
+    }
+  };
+
+  //to save booking time from db
+  const [morningBookingTimesFromDb, setMorningBookingTimesFromDb] = useState(
+    JSON.parse(localStorage.getItem("morningTimes")) || []
+  );
+
+  useEffect(() => {
+    getMorningBookingTime();
+  }, [added]);
+
+  //to get users saved in db
+  const getMorningBookingTime = async () => {
+    setLoader(true);
+
+    try {
+      const querySnapshot = await getDocs(
+        collection(db, "morningBookingTimes")
+      );
+      let times = [];
+      querySnapshot.forEach((doc) => {
+        times.push(doc.data());
+      });
+      localStorage.setItem("morningTimes", JSON.stringify(times));
+    } catch (err) {
+      console.log(err.message);
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  //to handle booking time form data submit to firebase
+  const handleMorningBookingTimeSubmit = async (e) => {
+    e.preventDefault();
+    let morningTime = `${morningForm.morningHour}:${morningForm.morningMinute} ${morningForm.morningAmpm}`;
+    setLoader(true);
+
+    try {
+      await createMorningBookingTimeDocument(morningTime, formattedDate);
+      await getMorningBookingTime();
+      added = false;
+      setLoader(false);
+      window.location.reload();
+    } catch (error) {
+      setLoader(false);
+      console.log(error.message);
+    }
+  };
+
+  //function to save noon booking time doc on sign up
+  //function to save noon booking time doc on sign up
+  //function to save noon booking time doc on sign up
+  //function to save noon booking time doc on sign up
+
+  const createNoonBookingTimeDocument = async (time, createdAt) => {
+    try {
+      const docRef = await addDoc(collection(db, "noonBookingTimes"), {
+        time: time,
+        id: noonBookingTimesFromDb.length + 1,
+        hover: false,
+        createdAt: createdAt,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      added = true;
+    } catch (err) {
+      console.error("Error adding document: ", err);
+    }
+  };
+
+  //to save booking time from db
+  const [noonBookingTimesFromDb, setnoonBookingTimesFromDb] = useState(
+    JSON.parse(localStorage.getItem("noonTimes")) || []
+  );
+
+  useEffect(() => {
+    getNoonBookingTime();
+  }, [added]);
+
+  //to get users saved in db
+  const getNoonBookingTime = async () => {
+    setLoader(true);
+
+    try {
+      const querySnapshot = await getDocs(collection(db, "noonBookingTimes"));
+      let times = [];
+      querySnapshot.forEach((doc) => {
+        times.push(doc.data());
+      });
+      localStorage.setItem("noonTimes", JSON.stringify(times));
+    } catch (err) {
+      console.log(err.message);
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  //to handle booking time form data submit to firebase
+  const handleNoonBookingTimeSubmit = async (e) => {
+    e.preventDefault();
+    let noonTime = `${noonForm.noonHour}:${noonForm.noonMinute} ${noonForm.noonAmpm}`;
+    setLoader(true);
+
+    try {
+      await createNoonBookingTimeDocument(noonTime, formattedDate);
+      await getNoonBookingTime();
+      added = false;
+      setLoader(false);
+      window.location.reload();
+    } catch (error) {
+      setLoader(false);
+      console.log(error.message);
+    }
+  };
+
+  //  //to delete  from db
+  //  const deleteDocument = async (userName, id, title) => {
+  //   await deleteDoc(
+  //     doc(db, "notes", `${userName}_${id}_${title.replace(/ /g, "_")}`)
+  //   );
+  //   console.log("note deleted");
+  // };
+
   return (
     <AppContext.Provider
       value={{
@@ -246,6 +424,15 @@ const AppContextProvider = ({ children }) => {
         userNotLoggedIn,
         accessDashboard,
         errorMessage,
+        morningForm,
+        handleMorningChange,
+        noonForm,
+        handlenoonChange,
+        handleMorningBookingTimeSubmit,
+        morningBookingTimesFromDb,
+        noonBookingTimesFromDb,
+        handleNoonBookingTimeSubmit,
+        noonBookingTimesFromDb,
       }}
     >
       {children}
