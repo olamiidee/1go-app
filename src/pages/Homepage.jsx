@@ -141,7 +141,7 @@ const Homepage = () => {
           <h2 className="text-[2rem] font-bold text-center">
             Testimonial from our users
           </h2>
-          <p className="font-light text-center text-[1rem] md:pb-24 w-[80%] mx-auto">
+          <p className="font-light text-center text-[1rem] md:pb-24 w-[90%] mx-auto">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
             necessitatibus
           </p>

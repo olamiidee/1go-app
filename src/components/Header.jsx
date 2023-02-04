@@ -177,7 +177,7 @@ const Header = () => {
         {openMenu && (
           <div className="w-full h-[100vh] z-[200] bg-black/80 fixed top-0 left-0 lg:hidden">
             <img
-              className="w-[30px] h-[30px] cursor-pointer mr-[25px] absolute top-[30px] right-[10px]"
+              className="w-[30px] h-[30px] cursor-pointer mr-[25px] absolute top-[30px] right-[10px] text-white"
               alt=""
               src="/images/icons8-close-30.png"
               onClick={handleClick}
