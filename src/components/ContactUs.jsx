@@ -1,15 +1,21 @@
 import React from "react";
+import contact from "../../public/images/matey-man-and-woman-work-in-support-service.png";
 
 function ContactUs() {
   return (
-    <div className="flex flex-col md:flex-row md:items-center w-[95%] mx-auto mt-6">
-      {/* Image */}
-      <div>
-        <img src="" alt="" />
+    <div className="overlay h-full w-full block md:flex items-center justify-between text-[1rem] md:px-[50px] py-[80px]">
+      <div className="w-[90%] mx-auto md:w-[40%] text-center">
+        <h2 className="text-[2.5rem] font-bold">Get in Touch</h2>
+        <p className="text-[1.4rem]">
+          Contact us and we will get back to you soon
+        </p>
+        <div>
+          <img src={contact} alt="" className="w-[80%] mx-auto" />
+        </div>
       </div>
       {/* Form */}
-      <div>
-        <form className="space-y-6 font-light w-full ">
+      <div className="w-full md:w-1/2 px-4">
+        <form className="space-y-6 font-light">
           <div className="flex space-x-4">
             <input
               type="text"
