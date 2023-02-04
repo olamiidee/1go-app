@@ -9,17 +9,17 @@ const BookRides = () => {
   return (
     <>
       <Header />
-      <section className="w-full min-h-screen bg-slate-100 py-[150px] px-[5%] sm:px-[10.5%] text-slate-700">
-        <section className="w-full border-b border-zinc-300 pb-4">
-          <h2 className="text-[1.5rem] font-bold">
-            Hello {currentUserFromDb.firstname}
-          </h2>
-          <p className="text-[1.1rem] text-black font-light">
-            Welcome to your dashboard. You can book rides & view ride history!
-          </p>
-        </section>
-        <section className="w-full bg-home bg-cover bg-right lg:bg-center bg-no-repeat">
-          <section className="w-full border-b border-zinc-300 bg-white/70 py-16">
+      <section className="w-full min-h-screen bg-slate-100 text-slate-700">
+        <section className="w-full bg-home bg-cover bg-right lg:bg-center bg-no-repeat py-[150px] px-[5%] sm:px-[10.5%]">
+          <section className="w-full border-b border-zinc-300 pb-4">
+            <h2 className="text-[1.5rem] font-bold">
+              Hello {currentUserFromDb.firstname}
+            </h2>
+            <p className="text-[1.1rem] text-black font-light">
+              Welcome to your dashboard. You can book rides & view ride history!
+            </p>
+          </section>
+          <section className="w-full border-b border-zinc-300 py-16">
             <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center">
               Available booking times
             </h1>
