@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import ScrollToTop from "../ScrollToTop";
 // import { useAppContext } from "../contexts/AppContext";
 
 const Summary = () => {
@@ -105,6 +106,7 @@ const Summary = () => {
         </div>
       </section>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };

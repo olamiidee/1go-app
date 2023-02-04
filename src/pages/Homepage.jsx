@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Testimonials from "../components/Testimonials";
 import ContactUS from "../components/ContactUs";
+import ScrollToTop from "../ScrollToTop";
 
 const Homepage = () => {
   return (
@@ -172,6 +173,7 @@ const Homepage = () => {
         </section>
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };

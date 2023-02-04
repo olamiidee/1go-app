@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import RideHistory from "../components/RideHistory";
 import { useAppContext } from "../contexts/AppContext";
+import ScrollToTop from "../ScrollToTop";
 
 const BookRides = () => {
   const { currentUserFromDb } = useAppContext();
@@ -138,6 +139,7 @@ const BookRides = () => {
         </section>
       </section>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };

@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Loader from "../components/Loader";
 import { useAppContext } from "../contexts/AppContext";
+import ScrollToTop from "../ScrollToTop";
 
 const Register = () => {
   const { handleRegChange, loader, register, showPassword, togglePassword } =
@@ -123,6 +124,7 @@ const Register = () => {
         </div>
       </section>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };

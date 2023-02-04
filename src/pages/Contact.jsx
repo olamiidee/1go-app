@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import ScrollToTop from "../ScrollToTop";
 
 const Contact = () => {
   return (
@@ -11,6 +12,7 @@ const Contact = () => {
         </div>
       </section>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };
