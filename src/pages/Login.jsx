@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Loader from "../components/Loader";
 import { useAppContext } from "../contexts/AppContext";
+import ScrollToTop from "../ScrollToTop";
 
 const Login = () => {
   const { handleLoginChange, login, loader } = useAppContext();
@@ -73,6 +74,7 @@ const Login = () => {
         </div>
       </section>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };
