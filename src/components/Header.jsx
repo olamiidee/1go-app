@@ -26,7 +26,7 @@ const Header = () => {
             : "sm:w-[80%] top-8 rounded-md bg-[#252525]/40 lg:px-10"
         } px-12 py-4 fixed left-[50%] translate-x-[-50%] border-b border-slate-600 md:flex items-center z-[50] hidden transition-all duration-500`}
       >
-        {userNotLoggedIn && (
+        {userNotLoggedIn && currentPage === "/login" && (
           <div className="w-[fit-content] scale flex gap-4 items-center py-4 px-10 bg-blue-400/20 rounded-lg border border-blue-400 absolute top-24 left-0">
             <img
               alt=""
