@@ -148,7 +148,7 @@ const Homepage = () => {
 
         {/* Testimonial */}
         <section className="w-full border border-b-slate-700 py-[80px] text-[1rem]">
-          <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-center">
+          <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-center md:pb-10">
             Testimonial from our users
           </h2>
           <Testimonials />

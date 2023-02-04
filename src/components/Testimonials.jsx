@@ -14,7 +14,7 @@ function Testimonials() {
           slidesPerView={2}
           spaceBetween={30}
           autoplay={{
-            delay: 2500,
+            delay: 3500,
             disableOnInteraction: false,
           }}
           pagination={{
@@ -81,10 +81,14 @@ function Testimonials() {
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
           pagination={{
             clickable: true,
           }}
-          modules={[Pagination]}
+          modules={[Autoplay, Pagination]}
           className="mySwiper"
         >
           <SwiperSlide>
@@ -128,9 +132,7 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>
-                <img src="" className="rounded-full" />
-              </div>
+              <div className="h-[fit-content] rounded-full">hh</div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. In

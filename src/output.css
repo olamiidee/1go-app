@@ -1394,6 +1394,11 @@ video {
   padding-bottom: 7rem;
 }
 
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
 .pt-\[80px\] {
   padding-top: 80px;
 }
@@ -2029,6 +2034,10 @@ input[type="number"] {
 
   .md\:pt-\[200px\] {
     padding-top: 200px;
+  }
+
+  .md\:pb-10 {
+    padding-bottom: 2.5rem;
   }
 
   .md\:text-\[1rem\] {
