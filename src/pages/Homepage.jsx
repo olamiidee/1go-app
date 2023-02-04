@@ -26,7 +26,7 @@ const Homepage = () => {
               <h1 className="text-[2rem] font-bold uppercase md:text-[2.5rem] lg:text-[3.5rem]">
                 Beat The Queue!!
               </h1>
-              <div className="pb-3 font-medium text-[0.95rem] ms:text-[1.23rem] uppercase">
+              <div className="pb-3 font-medium text-[0.95rem] md:text-[1.23rem] uppercase">
                 <p>Get easy rides for as low as -- NGN 200</p>
                 <p>From Oke-Odo to school park and vice versa</p>
               </div>
@@ -147,28 +147,15 @@ const Homepage = () => {
         </section>
 
         {/* Testimonial */}
-        <section className="h-screen border border-b-slate-700">
-          <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
+        <section className="w-full border border-b-slate-700 py-[80px] text-[1rem]">
+          <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-center">
             Testimonial from our users
-          </h1>
-          <h2 className="text-[1rem] md:text-[1.5rem] text-slate-600 text-center">
-            Testimonial slideshow here - Check that template.
           </h2>
-          <div>
-            <Testimonials />
-          </div>
+          <Testimonials />
         </section>
 
         {/* Contact form */}
-        <section className="h-screen border border-b-slate-700 mx-auto">
-          <div className="text-center">
-            <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black ">
-              Get in Touch
-            </h1>
-            <h2 className="text-slate-600">
-              Contact us and we will get back to you soon
-            </h2>
-          </div>
+        <section className="w-full border border-b-slate-700">
           <ContactUs />
         </section>
       </main>

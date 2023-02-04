@@ -8,8 +8,8 @@ import TestimonialProfile from "./TestimonialProfile";
 
 function Testimonials() {
   return (
-    <>
-      <div className="hidden lg:block mt-20">
+    <div>
+      <div className="hidden lg:block h-full ">
         <Swiper
           slidesPerView={2}
           spaceBetween={30}
@@ -24,7 +24,7 @@ function Testimonials() {
           className="mySwiper"
         >
           <SwiperSlide>
-            <div className="flex justify-between px-4 py-4 space-x-6">
+            <div className="flex justify-between p-4 space-x-6">
               <div>kk</div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
@@ -37,7 +37,7 @@ function Testimonials() {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex justify-between px-4 py-4 space-x-6">
+            <div className="flex justify-between p-4 space-x-6">
               <div>ll</div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
@@ -50,7 +50,7 @@ function Testimonials() {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex justify-between px-4 py-4 space-x-6">
+            <div className="flex justify-between p-4 space-x-6">
               <div>kk</div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
@@ -63,7 +63,7 @@ function Testimonials() {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex justify-between px-4 py-4 space-x-6">
+            <div className="flex justify-between p-4 space-x-6">
               <div>mm</div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
@@ -88,7 +88,7 @@ function Testimonials() {
           className="mySwiper"
         >
           <SwiperSlide>
-            <div className="flex justify-between px-4 py-4 space-x-6">
+            <div className="flex justify-between p-4 space-x-6">
               <div>kk</div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
@@ -101,7 +101,7 @@ function Testimonials() {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex justify-between px-4 py-4 space-x-6">
+            <div className="flex justify-between p-4 space-x-6">
               <div>kk</div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
@@ -114,7 +114,7 @@ function Testimonials() {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex justify-between px-4 py-4 space-x-6">
+            <div className="flex justify-between p-4 space-x-6">
               <div>ll</div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
@@ -127,8 +127,10 @@ function Testimonials() {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex justify-between px-4 py-4 space-x-6">
-              <div>mm</div>
+            <div className="flex justify-between p-4 space-x-6">
+              <div>
+                <img src="" className="rounded-full" />
+              </div>
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
@@ -141,7 +143,7 @@ function Testimonials() {
           </SwiperSlide>
         </Swiper>
       </div>
-    </>
+    </div>
   );
 }
 
