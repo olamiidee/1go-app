@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Contact from "./pages/Contact";
 import { useAppContext } from "./contexts/AppContext";
 import PageNotFound from "./pages/PageNotFound";
+import Summary from "./pages/Summary";
 
 function App() {
   const { user, currentUserFromDb } = useAppContext();
@@ -15,10 +16,16 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/about" element={<About />} />
+
+      {/* dashboard controlled access */}
       {user && <Route path="/book-ride" element={<BookRides />} />}
+
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/book-ride/summary" element={<Summary />} />
+
+      {/* page not found */}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
