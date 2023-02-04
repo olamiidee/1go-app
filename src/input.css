@@ -75,13 +75,11 @@
   .logo--div > h1 {
     margin-right: auto;
   }
-  .logo--cont {
-    display: inline;
-  }
+
   .logo--cont > img {
     margin: 0 10px;
     padding: 5px 0;
-    border-bottom: 2px solid black;
+    width: 30px;
   }
   .logo--cont > img:hover {
     border-bottom: 2px solid white;
@@ -134,13 +132,9 @@
     .logo--div > h1 {
       margin-right: auto;
     }
-    .logo--cont {
-      display: inline;
-    }
+
     .logo--cont > img {
       margin: 0 10px 20px;
-      padding: 5px 0;
-      border-bottom: 2px solid black;
     }
     .logo--cont > img:hover {
       border-bottom: 2px solid white;

@@ -1,10 +1,14 @@
-// import React from "react";
-// import facebook from "../images/icon-facebook.svg";
-// import twitter from "../images/icon-twitter.svg";
-// import pinterest from "../images/icon-pinterest.svg";
-// import insta from "../images/icon-instagram.svg";
+import React from "react";
+import facebook from "/images/icon-facebook.svg";
+import twitter from "/images/icon-twitter.svg";
+import pinterest from "/images/icon-pinterest.svg";
+import insta from "/images/icon-instagram.svg";
+
+import { Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 
 export default function Footer() {
+  const { accessDashboard } = useAppContext();
   const styles = {
     marginLeft: 0,
   };
@@ -13,20 +17,28 @@ export default function Footer() {
       <div className="footer">
         <div className="logo--div">
           <h1 className="font-bold text-[2rem]">1go </h1>
-          <div className="logo--cont">
-            <img alt="" src="#" />
-            <img alt="" src="#" />
-            <img alt="" src="#" />
-            <img alt="" src="#" />
+          <div className="logo--cont flex">
+            <img alt="" src={facebook} />
+            <img alt="" src={insta} />
+            <img alt="" src={twitter} />
+            <img alt="" src={pinterest} />
           </div>
         </div>
         <div className="copy--div">
           <ul>
-            <li style={styles}>About</li>
-            <li>Prices</li>
-            <li>Book rides</li>
-            <li>Contact</li>
-            <li>Register</li>
+            <li style={styles}>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="#">Prices</Link>
+            </li>
+            <li onClick={accessDashboard}>Book rides</li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
           </ul>
           <p>&copy; 2022 1go. All rights reserved</p>
         </div>
@@ -35,19 +47,29 @@ export default function Footer() {
         <div className="logo--div">
           <h1 className="font-bold text-[2rem]">1go</h1>
           <ul>
-            <li>About</li>
-            <li>Careers</li>
-            <li>Events</li>
-            <li>Products</li>
-            <li>Support</li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="#">Careers</Link>
+            </li>
+            <li>
+              <Link to="#">Events</Link>
+            </li>
+            <li>
+              <Link to="#">Products</Link>
+            </li>
+            <li>
+              <Link to="#">Support</Link>
+            </li>
           </ul>
         </div>
         <div className="copy--div">
-          <div className="logo--cont">
-            <img alt="" src="#" />
-            <img alt="" src="#" />
-            <img alt="" src="#" />
-            <img alt="" src="#" />
+          <div className="logo--cont flex justify-center">
+            <img alt="" src={facebook} />
+            <img alt="" src={insta} />
+            <img alt="" src={twitter} />
+            <img alt="" src={pinterest} />
           </div>
           <p>&copy; 2023 1go. All rights reserved</p>
         </div>

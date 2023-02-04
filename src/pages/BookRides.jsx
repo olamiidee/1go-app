@@ -142,7 +142,7 @@ const BookRides = () => {
             <RideHistory />
             <RideHistory />
             <button className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
-              Load nore
+              Load more
             </button>
           </div>
         </section>
