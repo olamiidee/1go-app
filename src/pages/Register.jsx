@@ -13,8 +13,8 @@ const Register = () => {
     <>
       {loader && <Loader />}
       <Header />
-      <section className="w-full">
-        <div className="overlay w-full h-full bg-white flex flex-col justify-center items-center mt-[80px]">
+      <section className="w-full min-h-screen">
+        <div className="w-full h-full bg-white flex flex-col justify-center items-center mt-[80px]">
           <div className="px-6 py-12 w-full">
             <div className="text-center">
               <h1 className="text-[2rem] font-bold text-black">Register</h1>

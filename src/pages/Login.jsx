@@ -6,15 +6,16 @@ import { useAppContext } from "../contexts/AppContext";
 import ScrollToTop from "../ScrollToTop";
 
 const Login = () => {
-  const { handleLoginChange, login, loader } = useAppContext();
+  const { handleLoginChange, showPassword, login, loader, togglePassword } =
+    useAppContext();
   return (
     <>
       {loader && <Loader />}
 
       <Header />
       <section className="w-full min-h-screen">
-        <div className="overlay w-full h-screen bg-white flex flex-col justify-center items-center mt-[80px]">
-          <div className="px-6 py-44 w-full">
+        <div className="w-full h-screen bg-white flex flex-col justify-center items-center mt-[80px]">
+          <div className="px-6 py-12 w-full">
             <div className="text-center">
               <h1 className="text-[2rem] font-bold text-black">Login</h1>
               <p>
@@ -42,14 +43,22 @@ const Login = () => {
 
                 <div>
                   <label htmlFor="firstname">Password</label>
-                  <input
-                    className="login-input"
-                    id="password"
-                    onChange={handleLoginChange}
-                    placeholder="Enter your password"
-                    type="password"
-                    required
-                  />
+                  <div className="w-full relative">
+                    <input
+                      className="login-input"
+                      id="password"
+                      onChange={handleLoginChange}
+                      placeholder="Enter your password"
+                      type={showPassword ? "text" : "password"}
+                      required
+                    />
+                    <img
+                      alt="reveal"
+                      src="/images/icons8-eye-30.png"
+                      className="w-5 h-5 absolute top-1/2 right-3 translate-y-[-50%] cursor-pointer"
+                      onClick={togglePassword}
+                    />
+                  </div>
                 </div>
 
                 <div className="space-x-2">
