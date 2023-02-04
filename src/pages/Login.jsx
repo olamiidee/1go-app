@@ -14,17 +14,19 @@ const Login = () => {
 
       <Header />
       <section className="w-full min-h-screen">
-        <div className="w-full h-screen bg-white flex flex-col justify-center items-center mt-[80px]">
-          <div className="px-6 py-12 w-full">
-            <div className="text-center">
-              <h1 className="text-[2rem] font-bold text-black">Welcome back</h1>
+        <div className="w-[95%] mx-auto h-screen md:h-[100vh] bg-white md:flex justify-between items-center mt-[80px] md:my-[120px]">
+          <div className="w-full px-4 py-12 md:py-0 md:w-1/2 md:px-28">
+            <div className="text-start">
+              <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
+                Welcome back
+              </h1>
               <p className="text-slate-500 font-light">
-                Welcome back,please enter your details
+                Welcome back! Please enter your details.
               </p>
             </div>
             {/* Login form */}
             <form>
-              <div className="font-light space-y-4 py-10 w-full rounded-lg sm:mt-8 sm:px-8 sm:w-[90%] lg:w-[45%] sm:bg-[#EFF6FF] mx-auto">
+              <div className="font-light space-y-4 py-6 w-full rounded-lg sm:mt-4 mx-auto">
                 <div>
                   <label htmlFor="email">Email</label>
                   <input
@@ -73,11 +75,11 @@ const Login = () => {
                     onClick={login}
                     className="text-white bg-blue-500 login-input mt4 mb-3 border-transparent hover:opacity-80"
                   >
-                    LOG IN
+                    Sign in
                   </button>
 
                   <p>
-                    Don't have an Account?
+                    Don't have an account?
                     <Link
                       to="/register"
                       className="text-blue-500 cursor-pointer"
@@ -90,6 +92,7 @@ const Login = () => {
               </div>
             </form>
           </div>
+          <div className="w-1/2 h-full bg-reg1 bg-cover bg-no-repeat opacity-70 hidden md:block"></div>
         </div>
       </section>
       <Footer />
