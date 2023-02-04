@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
+// import "swiper/css/pagination";
 import "../input.css";
 import { Autoplay, Pagination } from "swiper";
 import TestimonialProfile from "./TestimonialProfile";
@@ -77,7 +77,7 @@ function Testimonials() {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="mt-20 lg:hidden">
+      <div className="mt-10 lg:hidden">
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
