@@ -6,15 +6,21 @@ import { useAppContext } from "../contexts/AppContext";
 import ScrollToTop from "../ScrollToTop";
 
 const Login = () => {
-  const { handleLoginChange, showPassword, login, loader, togglePassword } =
-    useAppContext();
+  const {
+    handleLoginChange,
+    showPassword,
+    login,
+    loader,
+    togglePassword,
+    errorMessage,
+  } = useAppContext();
   return (
     <>
       {loader && <Loader />}
 
       <Header />
       <section className="w-full min-h-screen">
-        <div className="w-[95%] mx-auto h-screen md:h-[100vh] bg-white md:flex justify-between items-center mt-[80px] md:my-[150px]">
+        <div className="w-[95%] mx-auto min-h-screen md:h-[100vh] bg-white md:flex justify-between items-center mt-[80px] md:my-[150px]">
           <div className="w-full px-4 pt-36 md:pt-12 md:py-0 md:w-1/2 md:px-28">
             <div className="text-start">
               <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
@@ -70,6 +76,16 @@ const Login = () => {
                   </a>
                 </div>
 
+                {errorMessage && (
+                  <div className="w-full flex gap-4 items-center py-3 px-10 my-2 bg-red-400/20 text-[0.85rem] rounded-lg border border-red-400">
+                    <img
+                      alt=""
+                      src="/images/icons8-medium-risk-50.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>{errorMessage}</p>
+                  </div>
+                )}
                 <div>
                   <button
                     onClick={login}
