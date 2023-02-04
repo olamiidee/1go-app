@@ -77,7 +77,7 @@ function Testimonials() {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="mt-10 lg:hidden">
+      <div className="mt-14 md:mt-0 lg:hidden">
         <Swiper
           slidesPerView={1}
           spaceBetween={30}

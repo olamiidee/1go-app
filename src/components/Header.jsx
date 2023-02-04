@@ -58,8 +58,8 @@ const Header = () => {
             </p>
           </div>
         </Link>
-        <nav className="flex items-center">
-          <div className="flex items-center gap-3 lg:gap-8 mr-auto text-white text-[0.9rem] lg:text-[1rem]">
+        <nav className="flex items-center uppercase">
+          <div className="flex items-center gap-3 lg:gap-8 mr-auto text-white text-[0.9rem]">
             <Link
               to="/"
               className={`cursor-pointer px-2 py-1 ${
@@ -190,12 +190,12 @@ const Header = () => {
         {openMenu && (
           <div className="w-full h-[100vh] z-[200] bg-black/80 fixed top-0 left-0 lg:hidden">
             <img
-              className="w-[30px] h-[30px] cursor-pointer mr-[25px] absolute top-[30px] right-[10px]"
+              className="w-[30px] h-[30px] cursor-pointer mr-[25px] absolute top-[30px] right-[10px] text-white"
               alt=""
               src="/images/icons8-close-30.png"
               onClick={handleClick}
             />
-            <ul className="slide float-right w-[65%] h-full bg-white px-[30px] text-[1.25rem] text-[#3F3D56] pt-[100px]">
+            <ul className="slide float-right w-[65%] h-full bg-black opacity-80 px-[30px] text-[1rem] text-white pt-[100px] uppercase">
               <li className="my-4">
                 <Link to="/" onClick={hideDropdown}>
                   <div className="w-full">Home</div>
