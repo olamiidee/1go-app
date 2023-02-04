@@ -138,12 +138,12 @@ const Homepage = () => {
 
         {/* Testimonial */}
         <section className="w-full py-[80px]">
-          <h2 className="text-[1.7rem] md:text-[2rem] font-bold text-center">
+          <h2 className="text-[2rem] font-bold text-center">
             Testimonial from our users
           </h2>
-          <p className="font-light text-center text-[1rem] md:pb-12">
+          <p className="font-light text-center text-[1rem] md:pb-24 w-[80%] mx-auto">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
-            necessitatibus eligendi voluptates quia, aliquid recusandae
+            necessitatibus
           </p>
           <Testimonials />
         </section>

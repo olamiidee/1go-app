@@ -6,7 +6,7 @@ function ContactUs() {
     <div className="overlay h-full w-full block md:flex items-center justify-between text-[1rem] md:px-[50px] py-[80px]">
       <div className="w-[90%] mx-auto md:w-[40%] text-center">
         <h2 className="text-[2.5rem] font-bold">Get in Touch</h2>
-        <p className="text-[1.4rem]">
+        <p className="text-[1.2rem] md:text-[1.4rem]">
           Contact us and we will get back to you soon
         </p>
         <div>
