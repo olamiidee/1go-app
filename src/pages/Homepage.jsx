@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import ContactUs from "../components/ContactUs";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Testimonials from "../components/Testimonials";
+import ContactUS from "../components/ContactUs";
 
 const Homepage = () => {
   return (
@@ -131,6 +134,8 @@ const Homepage = () => {
             ></path>
           </svg>
         </section>
+
+        {/* we provide affordable...... */}
         <section className="h-screen border border-b-slate-700">
           <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
             We provide affordable prices
@@ -139,6 +144,8 @@ const Homepage = () => {
             Catchy text like - Solution to the Unilorin school park rush hour.
           </h2>
         </section>
+
+        {/* Testimonial */}
         <section className="h-screen border border-b-slate-700">
           <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
             Testimonial from our users
@@ -146,21 +153,22 @@ const Homepage = () => {
           <h2 className="text-[1rem] md:text-[1.5rem] text-slate-600 text-center">
             Testimonial slideshow here - Check that template.
           </h2>
+          <div>
+            <Testimonials />
+          </div>
         </section>
-        <section className="h-screen border border-b-slate-700">
-          <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black text-center">
-            Contact form
-          </h1>
-          <h2 className="text-[1rem] md:text-[1.5rem] text-slate-600 text-center">
-            contact form here - Check{" "}
-            <a
-              href="http://lorenzotvmovies.com"
-              style={{ textDecoration: "underline" }}
-            >
-              This site's contact section
-            </a>{" "}
-            template.
-          </h2>
+
+        {/* Contact form */}
+        <section className="h-screen border border-b-slate-700 mx-auto">
+          <div className="text-center">
+            <h1 className=" text-[1.5rem] font-bold md:text-[3rem] text-black ">
+              Get in Touch
+            </h1>
+            <h2 className="text-slate-600">
+              Contact us and we will get back to you soon
+            </h2>
+          </div>
+          <ContactUs />
         </section>
       </main>
       <Footer />
