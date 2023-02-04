@@ -5,8 +5,10 @@ import Header from "../components/Header";
 import Testimonials from "../components/Testimonials";
 import ContactUS from "../components/ContactUs";
 import ScrollToTop from "../ScrollToTop";
+import { useAppContext } from "../contexts/AppContext";
 
 const Homepage = () => {
+  const { accessDashboard } = useAppContext();
   return (
     <>
       <Header />
@@ -30,8 +32,11 @@ const Homepage = () => {
                 <p>Get easy rides for as low as -- NGN 200</p>
                 <p>From Oke-Odo to school park and vice versa</p>
               </div>
-              <button className="text-sm bg-blue-500 px-10 py-3 uppercase hover:bg-transparent border-blue-500 border-2 rounded-md transition-all duration-300">
-                <Link to="/login">Book Now</Link>
+              <button
+                onClick={accessDashboard}
+                className="text-sm bg-blue-500 px-10 py-3 uppercase hover:bg-transparent border-blue-500 border-2 rounded-md transition-all duration-300"
+              >
+                Book Now
               </button>
             </div>
             <div className="w-full md:w-[40%] mt-8 md:mt-0">
