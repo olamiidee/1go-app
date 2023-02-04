@@ -29,11 +29,11 @@ const BookRides = () => {
                 history here!
               </p>
             </section>
-            <section className="w-full border-b border-zinc-300 py-16">
+            <section className="w-full border-b border-zinc-300 pb-16 pt-12">
               <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-white">
                 Available booking times
               </h1>
-              <p className="text-[1.1rem] font-medium text-white text-center">
+              <p className="text-[1.1rem] font-medium text-white text-center mb-3">
                 Click on a time to book now.
               </p>
               <div className="w-full block md:flex">
