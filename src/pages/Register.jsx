@@ -13,10 +13,11 @@ const Register = () => {
     <>
       {loader && <Loader />}
       <Header />
-      <section className="block lg:hidden w-full min-h-screen">
-        <div className="w-full h-full bg-white flex flex-col justify-center items-center mt-[80px]">
-          <div className="px-6 py-12 w-full">
-            <div className="text-center">
+      <section className="w-full h-full">
+        <div className="w-[95%] lg:w-[80%] mx-auto lg:h-full bg-white lg:flex justify-between items-center mt-[80px] md:my-[150px] lg:rounded-xl lg:shadow-xl">
+          {/* texts */}
+          <div className="w-full h-full px-4 py-12 border-2 border-yellow-500 lg:w-1/2 lg:px-14">
+            <div className="text-start">
               <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
                 Register
               </h1>
@@ -30,7 +31,7 @@ const Register = () => {
             </div>
             {/* register form */}
             <form>
-              <div className="font-light space-y-4 mt-6 pb-6 w-full h-full rounded-lg sm:mt-4">
+              <div className="font-light space-y-4 mt-8 py-6 w-full h-full rounded-lg sm:mt-4">
                 {/* first name */}
                 <div>
                   <label htmlFor="firstname">First name</label>
@@ -124,10 +125,10 @@ const Register = () => {
             </form>
           </div>
           {/* image */}
-          <div className="h-full rounded-r-xl hidden lg:block">
+          <div className="w-1/2 border-2 border-red-500 rounded-r-xl   hidden lg:block">
             <img
               src="/images/reg1.jpg"
-              className="h-full opacity-70 rounded-r-xl object-fit"
+              className="h- opacity-70 rounded-r-xl"
             />
           </div>
         </div>
