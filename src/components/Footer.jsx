@@ -65,11 +65,35 @@ export default function Footer() {
           </ul>
         </div>
         <div className="copy--div">
-          <div className="logo--cont flex justify-center">
-            <img alt="" src={facebook} />
-            <img alt="" src={insta} />
-            <img alt="" src={twitter} />
-            <img alt="" src={pinterest} />
+          <div className="logo--cont flex space-x-4 justify-center mb-8">
+            <a href="#">
+              <img
+                alt=""
+                src={facebook}
+                className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
+              />
+            </a>
+            <a href="#">
+              <img
+                alt=""
+                src={insta}
+                className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
+              />
+            </a>
+            <a href="#">
+              <img
+                alt=""
+                src={twitter}
+                className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
+              />
+            </a>
+            <a href="#">
+              <img
+                alt=""
+                src={pinterest}
+                className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
+              />
+            </a>
           </div>
           <p>&copy; 2023 1go. All rights reserved</p>
         </div>

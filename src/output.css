@@ -769,6 +769,10 @@ video {
   height: 150px;
 }
 
+.h-\[30px\] {
+  height: 30px;
+}
+
 .h-10 {
   height: 2.5rem;
 }
@@ -783,10 +787,6 @@ video {
 
 .h-\[65px\] {
   height: 65px;
-}
-
-.h-\[30px\] {
-  height: 30px;
 }
 
 .h-1\/2 {
@@ -862,6 +862,10 @@ video {
   width: 80%;
 }
 
+.w-\[30px\] {
+  width: 30px;
+}
+
 .w-\[fit-content\] {
   width: -moz-fit-content;
   width: fit-content;
@@ -873,10 +877,6 @@ video {
 
 .w-3 {
   width: 0.75rem;
-}
-
-.w-\[30px\] {
-  width: 30px;
 }
 
 .w-\[35\%\] {
@@ -1809,7 +1809,7 @@ video {
     margin: 0 auto;
     padding: 10px 0;
     cursor: pointer;
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
   }
 
   .logo--div > ul > li:hover {
