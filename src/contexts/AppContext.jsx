@@ -263,40 +263,48 @@ const AppContextProvider = ({ children }) => {
       };
     });
   }
-
-  let added = false;
-
   //function to save morning booking time doc on sign up
   //function to save morning booking time doc on sign up
   //function to save morning booking time doc on sign up
   //function to save morning booking time doc on sign up
-
-  const createMorningBookingTimeDocument = async (time, createdAt) => {
-    try {
-      const docRef = await addDoc(collection(db, "morningBookingTimes"), {
-        time: time,
-        id: morningBookingTimesFromDb.length + 1,
-        hover: false,
-        createdAt: createdAt,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      added = true;
-    } catch (err) {
-      console.error("Error adding document: ", err);
-    }
-  };
+  const [updatedTime, setUpdatedTime] = useState(false);
 
   //to save booking time from db
   const [morningBookingTimesFromDb, setMorningBookingTimesFromDb] = useState(
     JSON.parse(localStorage.getItem("morningTimes")) || []
   );
 
-  useEffect(() => {
-    getMorningBookingTime();
-  }, [added]);
-
   //to get users saved in db
-  const getMorningBookingTime = async () => {
+  useEffect(() => {
+    const getMorningBookingTime = async () => {
+      setLoader(true);
+
+      try {
+        const querySnapshot = await getDocs(
+          collection(db, "morningBookingTimes")
+        );
+        let times = [];
+        querySnapshot.forEach((doc) => {
+          times.push(doc.data());
+        });
+        let arranged = times?.sort(function (a, b) {
+          return a.id.slice(-2) - b.id.slice(-2);
+        });
+        localStorage.setItem("morningTimes", JSON.stringify(arranged));
+        setMorningBookingTimesFromDb(
+          JSON.parse(localStorage.getItem("morningTimes"))
+        );
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setLoader(false);
+      }
+    };
+    getMorningBookingTime();
+  }, [updatedTime]);
+
+  //to send created notes to db
+  const createMorningBookingTimeDocument = async (time, createdAt) => {
     setLoader(true);
 
     try {
@@ -308,8 +316,27 @@ const AppContextProvider = ({ children }) => {
         times.push(doc.data());
       });
       localStorage.setItem("morningTimes", JSON.stringify(times));
+      await setDoc(
+        doc(
+          db,
+          "morningBookingTimes",
+          `${time.replace(/ /g, "_")}_${createdAt}_0${
+            morningBookingTimesFromDb.length + 1
+          }`
+        ),
+        {
+          time: time,
+          id: `${time.replace(/ /g, "_")}_${createdAt}_0${
+            morningBookingTimesFromDb.length + 1
+          }`,
+          createdAt: createdAt,
+        }
+      );
+      console.log("morning booking time created");
+      setUpdatedTime((prev) => !prev);
+      window.location.reload();
     } catch (err) {
-      console.log(err.message);
+      console.error("Error creating morning time: ", err);
     } finally {
       setLoader(false);
     }
@@ -323,10 +350,7 @@ const AppContextProvider = ({ children }) => {
 
     try {
       await createMorningBookingTimeDocument(morningTime, formattedDate);
-      await getMorningBookingTime();
-      added = false;
       setLoader(false);
-      window.location.reload();
     } catch (error) {
       setLoader(false);
       console.log(error.message);
@@ -338,32 +362,40 @@ const AppContextProvider = ({ children }) => {
   //function to save noon booking time doc on sign up
   //function to save noon booking time doc on sign up
 
-  const createNoonBookingTimeDocument = async (time, createdAt) => {
-    try {
-      const docRef = await addDoc(collection(db, "noonBookingTimes"), {
-        time: time,
-        id: noonBookingTimesFromDb.length + 1,
-        hover: false,
-        createdAt: createdAt,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      added = true;
-    } catch (err) {
-      console.error("Error adding document: ", err);
-    }
-  };
-
   //to save booking time from db
-  const [noonBookingTimesFromDb, setnoonBookingTimesFromDb] = useState(
+  const [noonBookingTimesFromDb, setNoonBookingTimesFromDb] = useState(
     JSON.parse(localStorage.getItem("noonTimes")) || []
   );
 
-  useEffect(() => {
-    getNoonBookingTime();
-  }, [added]);
-
   //to get users saved in db
-  const getNoonBookingTime = async () => {
+  useEffect(() => {
+    const getNoonBookingTime = async () => {
+      setLoader(true);
+
+      try {
+        const querySnapshot = await getDocs(collection(db, "noonBookingTimes"));
+        let times = [];
+        querySnapshot.forEach((doc) => {
+          times.push(doc.data());
+        });
+        let arranged = times?.sort(function (a, b) {
+          return a.id.slice(-2) - b.id.slice(-2);
+        });
+        localStorage.setItem("noonTimes", JSON.stringify(arranged));
+        setNoonBookingTimesFromDb(
+          JSON.parse(localStorage.getItem("noonTimes"))
+        );
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setLoader(false);
+      }
+    };
+    getNoonBookingTime();
+  }, [updatedTime]);
+
+  //to send created notes to db
+  const createNoonBookingTimeDocument = async (time, createdAt) => {
     setLoader(true);
 
     try {
@@ -373,8 +405,27 @@ const AppContextProvider = ({ children }) => {
         times.push(doc.data());
       });
       localStorage.setItem("noonTimes", JSON.stringify(times));
+      await setDoc(
+        doc(
+          db,
+          "noonBookingTimes",
+          `${time.replace(/ /g, "_")}_${createdAt}_0${
+            noonBookingTimesFromDb.length + 1
+          }`
+        ),
+        {
+          time: time,
+          id: `${time.replace(/ /g, "_")}_${createdAt}_0${
+            noonBookingTimesFromDb.length + 1
+          }`,
+          createdAt: createdAt,
+        }
+      );
+      console.log("noon booking time created");
+      setUpdatedTime((prev) => !prev);
+      window.location.reload();
     } catch (err) {
-      console.log(err.message);
+      console.error("Error creating noon time: ", err);
     } finally {
       setLoader(false);
     }
@@ -398,13 +449,37 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
-  //  //to delete  from db
-  //  const deleteDocument = async (userName, id, title) => {
-  //   await deleteDoc(
-  //     doc(db, "notes", `${userName}_${id}_${title.replace(/ /g, "_")}`)
-  //   );
-  //   console.log("note deleted");
-  // };
+  //to delete time from db
+  const deleteMorningTimeDoc = async (id) => {
+    try {
+      await deleteDoc(doc(db, "morningBookingTimes", id));
+      console.log("morning time deleted");
+    } catch (err) {
+      console.log("error deleting morning time: ", err);
+    }
+  };
+
+  //to delete morning time
+  function handleDeleteMorningTime(id) {
+    deleteMorningTimeDoc(id);
+    setUpdatedTime((prev) => !prev);
+  }
+
+  //to delete time from db
+  const deleteNoonTimeDoc = async (id) => {
+    try {
+      await deleteDoc(doc(db, "noonBookingTimes", id));
+      console.log("Noon time deleted");
+    } catch (err) {
+      console.log("error deleting Noon time: ", err);
+    }
+  };
+
+  //to delete time
+  function handleDeleteNoonTime(id) {
+    deleteNoonTimeDoc(id);
+    setUpdatedTime((prev) => !prev);
+  }
 
   return (
     <AppContext.Provider
@@ -435,6 +510,8 @@ const AppContextProvider = ({ children }) => {
         noonBookingTimesFromDb,
         handleNoonBookingTimeSubmit,
         noonBookingTimesFromDb,
+        handleDeleteMorningTime,
+        handleDeleteNoonTime,
       }}
     >
       {children}

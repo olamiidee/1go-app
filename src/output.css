@@ -749,6 +749,10 @@ video {
   margin-top: 80px;
 }
 
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -2271,6 +2275,14 @@ input[type="number"] {
     padding-top: 3rem;
   }
 
+  .md\:pr-3 {
+    padding-right: 0.75rem;
+  }
+
+  .md\:pl-3 {
+    padding-left: 0.75rem;
+  }
+
   .md\:text-\[1rem\] {
     font-size: 1rem;
   }
@@ -2305,6 +2317,10 @@ input[type="number"] {
 
   .md\:text-\[3rem\] {
     font-size: 3rem;
+  }
+
+  .md\:text-\[1\.2rem\] {
+    font-size: 1.2rem;
   }
 }
 

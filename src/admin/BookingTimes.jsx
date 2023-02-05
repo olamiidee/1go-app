@@ -3,7 +3,8 @@ import ScrollToTop from "../ScrollToTop";
 import { useAppContext } from "../contexts/AppContext";
 import { useState } from "react";
 import Loader from "../components/Loader";
-import AdminBookingTimeBtn from "./AdminBookingTimeBtn";
+import AdminMorningBookingTimeBtn from "./AdminMorningBookingTimeBtn";
+import AdminNoonBookingTimeBtn from "./AdminNoonBookingTimeBtn";
 // import { useAdminContext } from "../contexts/AdminContext";
 
 const BookingTimes = () => {
@@ -12,11 +13,13 @@ const BookingTimes = () => {
     morningForm,
     handlenoonChange,
     noonForm,
-    handleMorningBookingTimeSubmit,
     loader,
+    handleMorningBookingTimeSubmit,
     morningBookingTimesFromDb,
     handleNoonBookingTimeSubmit,
     noonBookingTimesFromDb,
+    handleDeleteMorningTime,
+    handleDeleteNoonTime,
   } = useAppContext();
 
   //to open morning edit time modal
@@ -46,7 +49,13 @@ const BookingTimes = () => {
           <div className="my-4 w-full flex gap-4 flex-wrap">
             {morningBookingTimesFromDb &&
               morningBookingTimesFromDb?.map((item, index) => {
-                return <AdminBookingTimeBtn key={index} item={item} />;
+                return (
+                  <AdminMorningBookingTimeBtn
+                    key={index}
+                    item={item}
+                    handleDeleteMorningTime={handleDeleteMorningTime}
+                  />
+                );
               })}
             <button
               onClick={handleMorningEdit}
@@ -120,7 +129,13 @@ const BookingTimes = () => {
           <div className="my-4 w-full flex gap-4 flex-wrap">
             {noonBookingTimesFromDb &&
               noonBookingTimesFromDb?.map((item, index) => {
-                return <AdminBookingTimeBtn key={index} item={item} />;
+                return (
+                  <AdminNoonBookingTimeBtn
+                    key={index}
+                    item={item}
+                    handleDeleteNoonTime={handleDeleteNoonTime}
+                  />
+                );
               })}
             <button
               onClick={handleNoonEdit}

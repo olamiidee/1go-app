@@ -6,15 +6,19 @@ import Testimonials from "../components/Testimonials";
 import ContactUS from "../components/ContactUs";
 import ScrollToTop from "../ScrollToTop";
 import { useAppContext } from "../contexts/AppContext";
+import ClientMorningTimeBtn from "../components/ClientMorningTimeBtn";
+import ClientNoonTimeBtn from "../components/ClientNoonTimeBtn";
+import Loader from "../components/Loader";
 
 const Homepage = () => {
-  const { accessDashboard } = useAppContext();
+  const { accessDashboard, morningBookingTimesFromDb, noonBookingTimesFromDb } =
+    useAppContext();
   return (
     <>
       <Header />
       <main className="w-full bg-slate-200">
         <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-home bg-cover bg-right lg:bg-center bg-no-repeat relative">
-          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] pt-[130px] md:pt-[200px] lg:pt-[15%] pb-40">
+          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex text-white px-[5%] sm:px-[10.5%] pt-[130px] md:pt-[200px] lg:pt-[15%] pb-40">
             <Link to="/contact">
               <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
                 <img
@@ -25,7 +29,7 @@ const Homepage = () => {
                 <p className="underline">Contact us</p>
               </div>
             </Link>
-            <div className="first-section-text">
+            <div className="first-section-text mr-auto">
               <p className="text-[0.95rem] tracking-widest">AVOID THE RUSH</p>
               <h1 className="text-[2rem] font-bold uppercase md:text-[2.5rem] lg:text-[3.5rem]">
                 Beat The Queue!!
@@ -63,27 +67,9 @@ const Homepage = () => {
                     From Oke-odo - Morning Rides
                   </h2>
                   <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      6:55AM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      7:35AM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      8:15AM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      8:55AM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      9:35AM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      10:15AM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      10:55AM
-                    </button>
+                    {morningBookingTimesFromDb.map((item, index) => {
+                      return <ClientMorningTimeBtn key={index} item={item} />;
+                    })}
                   </div>
                 </div>
 
@@ -93,36 +79,9 @@ const Homepage = () => {
                     From School Park - Afternoon Rides
                   </h2>
                   <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      1:55PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      2:35PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      3:15PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      3:55PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      4:35PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      5:15PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      5:55PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      6:35PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      7:15PM
-                    </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
-                      7:55PM
-                    </button>
+                    {noonBookingTimesFromDb.map((item, index) => {
+                      return <ClientNoonTimeBtn key={index} item={item} />;
+                    })}
                   </div>
                 </div>
               </div>
