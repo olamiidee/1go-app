@@ -32,7 +32,7 @@ const Login = () => {
             </div>
             {/* Login form */}
             <form>
-              <div className="font-light space-y-4 py-12 w-full rounded-lg sm:mt-4 mx-auto">
+              <div className="font-light space-y-4 mt-8 py-6 w-full rounded-lg sm:mt-4">
                 <div>
                   <label htmlFor="email">Email</label>
                   <input
@@ -108,7 +108,7 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div className="w-[45%] rounded-r-lg h-full bg-reg1 bg-cover bg-no-repeat opacity-70 hidden lg:block"></div>
+          <div className="w-1/2 rounded-r-xl h-full bg-reg1 bg-cover bg-no-repeat opacity-70 hidden lg:block"></div>
         </div>
       </section>
       <Footer />
