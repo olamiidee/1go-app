@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useAppContext } from "../contexts/AppContext";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = () => {
-  const { currentPage } = useAppContext();
+  const location = useLocation();
+  let currentPage = location.pathname;
   const [openMenu, setOpenMenu] = useState(false);
   function handleClick() {
     setOpenMenu((prevState) => !prevState);
@@ -27,38 +28,38 @@ const Sidebar = () => {
             <li
               className={`w-[90%] mb-6 py-3 px-12 cursor-pointer ${
                 currentPage === "/admin"
-                  ? "bg-white border-slate-600"
+                  ? "bg-sky-50 border-sky-600"
                   : "bg-gray-200 border-gray-200"
-              } hover:bg-white hover:border-slate-600 border rounded-r-2xl`}
+              } hover:bg-sky-50 hover:border-sky-600 border rounded-r-2xl`}
             >
-              Analytics
+              Dashboard
             </li>
           </Link>
-          <Link to="/booking-times">
+          <Link to="/admin/booking-times">
             <li
               className={`w-[90%] mb-6 py-3 px-12 cursor-pointer ${
-                currentPage === "/booking-times"
-                  ? "bg-white border-slate-600"
+                currentPage === "/admin/booking-times"
+                  ? "bg-sky-50 border-sky-600"
                   : "bg-gray-200 border-gray-200"
-              } hover:bg-white hover:border-slate-600 border rounded-r-2xl`}
+              } hover:bg-sky-50 hover:border-sky-600 border rounded-r-2xl`}
             >
               Booking Times
             </li>
           </Link>
-          <Link to="/account">
+          <Link to="/admin/account">
             <li
               className={`w-[90%] mb-6 py-3 px-12 cursor-pointer ${
-                currentPage === "/account"
-                  ? "bg-white border-slate-600"
+                currentPage === "/admin/account"
+                  ? "bg-sky-50 border-sky-600"
                   : "bg-gray-200 border-gray-200"
-              } hover:bg-white hover:border-slate-600 border rounded-r-2xl`}
+              } hover:bg-sky-50 hover:border-sky-600 border rounded-r-2xl`}
             >
               Account
             </li>
           </Link>
 
           <li
-            className={`w-[90%] mb-8 py-3 px-12 cursor-pointer bg-gray-200 border-gray-200 hover:bg-white hover:border-slate-600 border rounded-r-2xl`}
+            className={`w-[90%] mb-8 py-3 px-12 cursor-pointer bg-gray-200 border-gray-200 hover:bg-sky-50 hover:border-sky-600 border rounded-r-2xl`}
           >
             Log out
           </li>
@@ -87,37 +88,37 @@ const Sidebar = () => {
               <li
                 className={`w-[70%] mb-8 py-3 px-12 cursor-pointer ${
                   currentPage === "/admin"
-                    ? "bg-white border-slate-600"
+                    ? "bg-sky-50 border-sky-600"
                     : "bg-gray-200 border-gray-200"
-                } hover:bg-white hover:border-slate-600 border rounded-r-2xl`}
+                } hover:bg-sky-50 hover:border-slate-600 border rounded-r-2xl`}
               >
-                Analytics
+                Dashboard
               </li>
             </Link>
-            <Link to="/booking-times">
+            <Link to="/admin/booking-times">
               <li
                 className={`w-[70%] mb-8 py-3 px-12 cursor-pointer ${
-                  currentPage === "/booking-times"
-                    ? "bg-white border-slate-600"
+                  currentPage === "/admin/booking-times"
+                    ? "bg-sky-50 border-slate-600"
                     : "bg-gray-200 border-gray-200"
-                } hover:bg-white hover:border-slate-600 border rounded-r-2xl`}
+                } hover:bg-sky-50 hover:border-slate-600 border rounded-r-2xl`}
               >
                 Booking times
               </li>
             </Link>
-            <Link to="/account">
+            <Link to="/admin/account">
               <li
                 className={`w-[70%] mb-8 py-3 px-12 cursor-pointer ${
-                  currentPage === "/account"
-                    ? "bg-white border-slate-600"
+                  currentPage === "/admin/account"
+                    ? "bg-sky-50 border-slate-600"
                     : "bg-gray-200 border-gray-200"
-                } hover:bg-white hover:border-slate-600 border rounded-r-2xl`}
+                } hover:bg-sky-50 hover:border-slate-600 border rounded-r-2xl`}
               >
                 Account
               </li>
             </Link>
             <li
-              className={`w-[70%] mb-8 py-3 px-12 cursor-pointer bg-gray-200 border-gray-200" hover:bg-white hover:border-slate-600 border rounded-r-2xl`}
+              className={`w-[70%] mb-8 py-3 px-12 cursor-pointer bg-gray-200 border-gray-200" hover:bg-sky-50 hover:border-slate-600 border rounded-r-2xl`}
             >
               logout
             </li>
