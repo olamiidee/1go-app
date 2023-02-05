@@ -14,7 +14,7 @@ const Homepage = () => {
       <Header />
       <main className="w-full bg-slate-200">
         <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-home bg-cover bg-right lg:bg-center bg-no-repeat relative">
-          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] pt-[160px] md:pt-[200px] lg:pt-[15%] pb-40">
+          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] pt-[130px] md:pt-[200px] lg:pt-[15%] pb-40">
             <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
               <img
                 alt=""
@@ -40,79 +40,90 @@ const Homepage = () => {
               </button>
             </div>
             <div className="w-full md:w-[40%] mt-8 md:mt-0">
-              <div className="bg-white/30 px-4 py-3 w-[fit-content] rounded-t-md">
+              <div className="bg-white/30 px-4 py-1 md:py-3 w-[fit-content] rounded-t-md text-[0.85rem] md:text-[1rem]">
                 Booking Times Today
               </div>
-              <div className="w-full h-[fit-content] bg-white rounded-md p-3 text-slate-700">
+              <div className="w-full h-[fit-content] bg-white rounded-md px-3 py-2 md:py-3 text-slate-700">
+                <div className=" mt-1 flex gap-1 items-center mb-3">
+                  <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-information-64.png"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                  <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
+                    Click on an available time to book a ride
+                  </p>
+                </div>
                 <div>
-                  <h2 className="pb-1 border-b border-b-slate-400/80">
+                  <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
                     From Oke-odo - Morning Rides
                   </h2>
-                  <div className="my-4 w-full flex gap-2 flex-wrap">
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                  <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       6:55AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       7:35AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       8:15AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       8:55AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       9:35AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       10:15AM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       10:55AM
                     </button>
                   </div>
                 </div>
 
                 {/* afternoon rides */}
-                <div className="mt-8">
-                  <h2 className="pb-1 border-b border-b-slate-400/80">
+                <div className="mt-5 md:mt-8">
+                  <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
                     From School Park - Afternoon Rides
                   </h2>
-                  <div className="my-4 w-full flex gap-2 flex-wrap">
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                  <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       1:55PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       2:35PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       3:15PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       3:55PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       4:35PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       5:15PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       5:55PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       6:35PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       7:15PM
                     </button>
-                    <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
+                    <button className="px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300">
                       7:55PM
                     </button>
                   </div>
                 </div>
               </div>
-              <div>Click on an available time to book</div>
             </div>
           </div>
           <svg

@@ -215,8 +215,10 @@ const AppContextProvider = ({ children }) => {
   //dashboard access
   const [userNotLoggedIn, setuserNotLoggedIn] = useState(false);
   function accessDashboard() {
+    setuserNotLoggedIn(true);
     if (user) {
       navigate("/book-ride");
+      setuserNotLoggedIn(false);
     } else {
       navigate("/login");
       setuserNotLoggedIn(true);

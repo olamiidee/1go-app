@@ -13,15 +13,20 @@ const Login = () => {
     loader,
     togglePassword,
     errorMessage,
+    userNotLoggedIn,
   } = useAppContext();
   return (
     <>
       {loader && <Loader />}
 
       <Header />
-      <section className="w-full h-full">
-        <div className="w-[95%] mx-auto lg:h-[100vh] bg-white lg:flex justify-between items-center mt-[80px] md:my-[150px]">
-          <div className="w-full px-4 pt-12 lg:w-1/2 lg:px-28">
+      <section className="w-full min-h-screen">
+        <div
+          className={` ${
+            userNotLoggedIn && "pt-[100px] md:pt-[50px]"
+          } w-[95%] mx-auto min-h-screen md:h-[100vh] bg-white md:flex justify-between items-center mt-[80px] md:my-[150px] transition-all duration-300`}
+        >
+          <div className="w-full px-4 pt-36 md:pt-12 md:py-0 md:w-1/2 md:px-28">
             <div className="text-start">
               <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
                 Welcome back
