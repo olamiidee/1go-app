@@ -13,11 +13,10 @@ const Register = () => {
     <>
       {loader && <Loader />}
       <Header />
-      <section className="w-full h-full">
-        <div className="w-[95%] lg:w-[80%] mx-auto lg:h-full bg-white lg:grid grid-cols-2  mt-[80px] md:my-[150px] lg:rounded-xl lg:shadow-xl">
-          {/* texts */}
-          <div className="w-full h-fit px-4 py-12 lg:px-14">
-            <div className="text-start">
+      <section className="block lg:hidden w-full min-h-screen">
+        <div className="w-full h-full bg-white flex flex-col justify-center items-center mt-[80px]">
+          <div className="px-6 py-12 w-full">
+            <div className="text-center">
               <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
                 Register
               </h1>
