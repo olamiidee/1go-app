@@ -947,6 +947,10 @@ video {
   width: 4rem;
 }
 
+.w-\[75\%\] {
+  width: 75%;
+}
+
 .translate-x-\[-50\%\] {
   --tw-translate-x: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -2271,6 +2275,10 @@ input[type="number"] {
     width: 45%;
   }
 
+  .lg\:w-\[80\%\] {
+    width: 80%;
+  }
+
   .lg\:gap-8 {
     gap: 2rem;
   }
@@ -2297,6 +2305,11 @@ input[type="number"] {
   .lg\:px-28 {
     padding-left: 7rem;
     padding-right: 7rem;
+  }
+
+  .lg\:px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 
   .lg\:pt-\[15\%\] {

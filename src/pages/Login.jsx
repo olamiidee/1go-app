@@ -20,8 +20,8 @@ const Login = () => {
 
       <Header />
       <section className="w-full h-full">
-        <div className="w-[95%] mx-auto lg:h-[100vh] bg-white lg:flex justify-between items-center mt-[80px] md:my-[150px]">
-          <div className="w-full px-4 pt-12 lg:w-1/2 lg:px-28">
+        <div className="w-[95%] lg:w-[80%] mx-auto lg:h-[100vh] bg-white lg:flex justify-between items-center mt-[80px] md:my-[150px]">
+          <div className="w-full px-4 pt-12 lg:w-1/2 lg:px-14">
             <div className="text-start">
               <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
                 Welcome back
