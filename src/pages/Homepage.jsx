@@ -15,14 +15,16 @@ const Homepage = () => {
       <main className="w-full bg-slate-200">
         <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-home bg-cover bg-right lg:bg-center bg-no-repeat relative">
           <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex justify-between text-white px-[5%] sm:px-[10.5%] pt-[130px] md:pt-[200px] lg:pt-[15%] pb-40">
-            <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
-              <img
-                alt=""
-                src="/images/icons8-information-64.png"
-                className="w-4 h-4"
-              />
-              <p className="underline">Contact us</p>
-            </div>
+            <Link to="/contact">
+              <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
+                <img
+                  alt=""
+                  src="/images/icons8-information-64.png"
+                  className="w-4 h-4"
+                />
+                <p className="underline">Contact us</p>
+              </div>
+            </Link>
             <div className="first-section-text">
               <p className="text-[0.95rem] tracking-widest">AVOID THE RUSH</p>
               <h1 className="text-[2rem] font-bold uppercase md:text-[2.5rem] lg:text-[3.5rem]">
