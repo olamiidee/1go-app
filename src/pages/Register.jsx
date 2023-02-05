@@ -13,7 +13,7 @@ const Register = () => {
     <>
       {loader && <Loader />}
       <Header />
-      <section className="w-full min-h-screen">
+      <section className="block lg:hidden w-full min-h-screen">
         <div className="w-full h-full bg-white flex flex-col justify-center items-center mt-[80px]">
           <div className="px-6 py-12 w-full">
             <div className="text-center">

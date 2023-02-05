@@ -20,7 +20,7 @@ const Login = () => {
 
       <Header />
       <section className="w-full h-full">
-        <div className="w-[95%] lg:w-[80%] mx-auto lg:h-[100vh] bg-white lg:flex justify-between items-center mt-[80px] md:my-[150px]">
+        <div className="w-[95%] lg:w-[80%] mx-auto lg:h-[100vh] bg-white lg:flex justify-between items-center mt-[80px] md:my-[150px] lg:rounded-xl lg:shadow-xl">
           <div className="w-full px-4 pt-12 lg:w-1/2 lg:px-14">
             <div className="text-start">
               <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
@@ -108,7 +108,7 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div className="w-[45%] h-full bg-reg1 bg-cover bg-no-repeat opacity-70 hidden lg:block"></div>
+          <div className="w-[45%] rounded-r-lg h-full bg-reg1 bg-cover bg-no-repeat opacity-70 hidden lg:block"></div>
         </div>
       </section>
       <Footer />
