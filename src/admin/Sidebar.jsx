@@ -46,7 +46,7 @@ const Sidebar = () => {
               Booking Times
             </li>
           </Link>
-          <Link to="/admin/account">
+          {/* <Link to="/admin/account">
             <li
               className={`w-[90%] mb-6 py-3 px-12 cursor-pointer ${
                 currentPage === "/admin/account"
@@ -56,7 +56,7 @@ const Sidebar = () => {
             >
               Account
             </li>
-          </Link>
+          </Link> */}
 
           <li
             className={`w-[90%] mb-8 py-3 px-12 cursor-pointer bg-gray-200 border-gray-200 hover:bg-sky-50 hover:border-sky-600 border rounded-r-2xl`}
@@ -106,7 +106,7 @@ const Sidebar = () => {
                 Booking times
               </li>
             </Link>
-            <Link to="/admin/account">
+            {/* <Link to="/admin/account">
               <li
                 className={`w-[70%] mb-8 py-3 px-12 cursor-pointer ${
                   currentPage === "/admin/account"
@@ -116,7 +116,7 @@ const Sidebar = () => {
               >
                 Account
               </li>
-            </Link>
+            </Link> */}
             <li
               className={`w-[70%] mb-8 py-3 px-12 cursor-pointer bg-gray-200 border-gray-200" hover:bg-sky-50 hover:border-slate-600 border rounded-r-2xl`}
             >

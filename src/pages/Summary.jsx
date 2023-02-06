@@ -1,9 +1,17 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ScrollToTop from "../ScrollToTop";
-// import { useAppContext } from "../contexts/AppContext";
+import { Link, useParams } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 
 const Summary = () => {
+  const { morningBookingTimesFromDb, noonBookingTimesFromDb, priceFromDb } =
+    useAppContext();
+  let allTimes = [...morningBookingTimesFromDb, ...noonBookingTimesFromDb];
+
+  const { id } = useParams();
+  const eachTime = allTimes.filter((item) => item.id === id)[0];
+
   return (
     <>
       <Header />
@@ -17,9 +25,11 @@ const Summary = () => {
           <p className="underline">Contact us</p>
         </div>
         <div className="w-full px-[5%] sm:px-[10.5%]">
-          <div className="w-[fit-content] text-[0.75rem] text-slate-700 py-1 px-4 mb-16 bg-white rounded-md">
-            Back to dashboard
-          </div>
+          <Link to="/book-ride">
+            <div className="w-[fit-content] text-[0.75rem] text-slate-700 py-1 px-4 mb-16 bg-white rounded-md">
+              Back to dashboard
+            </div>
+          </Link>
           <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
             Summary
           </h2>
@@ -33,7 +43,7 @@ const Summary = () => {
                   className="w-6 h-6 mr-1"
                 />
                 <p>
-                  Time: <strong>7:55AM</strong>
+                  Time: <strong>{eachTime?.time}</strong>
                 </p>
               </div>
               <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
@@ -53,7 +63,7 @@ const Summary = () => {
                   className="w-6 h-6 mr-1"
                 />
                 <p>
-                  Price: <strong>NGN 100</strong>
+                  Price: <strong>NGN {priceFromDb[0].price}</strong>
                 </p>
               </div>
             </div>
