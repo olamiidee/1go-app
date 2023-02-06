@@ -55,11 +55,15 @@ const AdminDashboard = () => {
           <h3 className="text-[1.1rem] font-medium pb-2 mb-4 border-b border-slate-300">
             Booking history today
           </h3>
+          <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+            <img alt="" src="/images/empty.png" className="w-20 h-20 mb-8" />
+            <p className="text-slate-400">No booking history yet...</p>
+          </div>
+          {/* <RideHistory />
           <RideHistory />
           <RideHistory />
           <RideHistory />
-          <RideHistory />
-          <RideHistory />
+          <RideHistory /> */}
           <div className="w-full text-center">
             <button className="px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
               Load nore

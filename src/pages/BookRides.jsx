@@ -112,7 +112,13 @@ const BookRides = () => {
           </h2>
           <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg p-4 relative">
             {/* each active booking */}
-            <ActiveBooking priceFromDb={priceFromDb} />
+            <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+              <img alt="" src="/images/empty.png" className="w-20 h-20 mb-8" />
+              <p className="text-slate-400">
+                Your active booking will show here...
+              </p>
+            </div>
+            {/* <ActiveBooking /> */}
             <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
               PS: You can only have one active booking at a time
             </p>
@@ -124,9 +130,13 @@ const BookRides = () => {
           </h2>
           <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center">
             {/* each ride history */}
+            <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+              <img alt="" src="/images/empty.png" className="w-20 h-20 mb-8" />
+              <p className="text-slate-400">No booking history yet...</p>
+            </div>
+            {/* <RideHistory priceFromDb={priceFromDb} />
             <RideHistory priceFromDb={priceFromDb} />
-            <RideHistory priceFromDb={priceFromDb} />
-            <RideHistory priceFromDb={priceFromDb} />
+            <RideHistory priceFromDb={priceFromDb} /> */}
             <button className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
               Load more
             </button>
