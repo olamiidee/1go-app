@@ -590,6 +590,7 @@ const AppContextProvider = ({ children }) => {
       console.log(error.message);
     }
   };
+  console.log(priceFromDb);
 
   return (
     <AppContext.Provider
