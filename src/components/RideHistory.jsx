@@ -1,6 +1,7 @@
 import { useAppContext } from "../contexts/AppContext";
 
-const RideHistory = ({ priceFromDb }) => {
+const RideHistory = ({}) => {
+  const { priceFromDb } = useAppContext();
   return (
     <>
       <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.9rem] md:text-[1rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap">
@@ -16,7 +17,8 @@ const RideHistory = ({ priceFromDb }) => {
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md mr-auto">
           <p>
-            Price: <strong>NGN {priceFromDb[0]?.price}</strong>
+            Price:{" "}
+            <strong>NGN {priceFromDb ? priceFromDb[0]?.price : "00"}</strong>
           </p>
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md">
@@ -49,7 +51,7 @@ const RideHistory = ({ priceFromDb }) => {
         </div>
         <div className="px-3 md:p-2 md:mr-4">
           <div>Price:</div>
-          <div>NGN {priceFromDb[0]?.price}</div>
+          <div>NGN {priceFromDb ? priceFromDb[0]?.price : "00"}</div>
         </div>
       </div>
     </>

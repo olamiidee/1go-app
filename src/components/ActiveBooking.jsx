@@ -1,7 +1,7 @@
 import { useAppContext } from "../contexts/AppContext";
 
-const ActiveBooking = ({ priceFromDb }) => {
-  // const { priceFromDb } = useAppContext();
+const ActiveBooking = ({}) => {
+  const { priceFromDb } = useAppContext();
   return (
     <>
       <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap">
