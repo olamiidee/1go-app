@@ -222,7 +222,7 @@ const AppContextProvider = ({ children }) => {
             me = doc.data();
           });
           me && localStorage.setItem("userDetails", JSON.stringify(me));
-          me && setCurrentUserFromDb(me);
+          // me && setCurrentUserFromDb(me);
 
           setLoader(false);
         } catch (err) {
@@ -315,9 +315,9 @@ const AppContextProvider = ({ children }) => {
         let arranged = times?.sort(function (a, b) {
           return a.id.slice(-2) - b.id.slice(-2);
         });
-        arranged &&
+        times.length > 0 &&
           localStorage.setItem("morningTimes", JSON.stringify(arranged));
-        arranged && setMorningBookingTimesFromDb(arranged);
+        times.length > 0 && setMorningBookingTimesFromDb(arranged);
       } catch (err) {
         console.log(err.message);
       } finally {
@@ -339,7 +339,8 @@ const AppContextProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         times.push(doc.data());
       });
-      times && localStorage.setItem("morningTimes", JSON.stringify(times));
+      times.length > 0 &&
+        localStorage.setItem("morningTimes", JSON.stringify(times));
       await setDoc(
         doc(
           db,
@@ -405,8 +406,9 @@ const AppContextProvider = ({ children }) => {
         let arranged = times?.sort(function (a, b) {
           return a.id.slice(-2) - b.id.slice(-2);
         });
-        arranged && localStorage.setItem("noonTimes", JSON.stringify(arranged));
-        arranged && setNoonBookingTimesFromDb(arranged);
+        times.length > 0 &&
+          localStorage.setItem("noonTimes", JSON.stringify(arranged));
+        times.length > 0 && setNoonBookingTimesFromDb(arranged);
       } catch (err) {
         console.log(err.message);
       } finally {
@@ -426,7 +428,8 @@ const AppContextProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         times.push(doc.data());
       });
-      times && localStorage.setItem("noonTimes", JSON.stringify(times));
+      times.length > 0 &&
+        localStorage.setItem("noonTimes", JSON.stringify(times));
       await setDoc(
         doc(
           db,
@@ -558,8 +561,9 @@ const AppContextProvider = ({ children }) => {
           price.push(doc.data());
         });
 
-        price && localStorage.setItem("price", JSON.stringify(price));
-        setpriceFromDb(JSON.parse(localStorage.getItem("price")));
+        price.length > 0 &&
+          localStorage.setItem("price", JSON.stringify(price));
+        price.length > 0 && setpriceFromDb(price);
       } catch (err) {
         console.log(err.message);
       } finally {

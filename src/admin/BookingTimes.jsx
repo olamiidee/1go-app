@@ -215,7 +215,7 @@ const BookingTimes = () => {
           <h2 className="pb-1 border-b border-b-slate-400/80">Edit price</h2>
           <div className="my-4 w-full flex gap-4 flex-wrap">
             <div className="text-[1.5rem] font-bold">
-              NGN {priceFromDb[0].price}.00
+              NGN {priceFromDb[0]?.price}.00
             </div>
             <button
               onClick={handlePriceEdit}
