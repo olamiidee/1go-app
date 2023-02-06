@@ -12,6 +12,7 @@ const BookRides = () => {
     currentUserFromDb,
     morningBookingTimesFromDb,
     noonBookingTimesFromDb,
+    priceFromDb,
   } = useAppContext();
   return (
     <>
@@ -111,7 +112,7 @@ const BookRides = () => {
           </h2>
           <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg p-4 relative">
             {/* each active booking */}
-            <ActiveBooking />
+            <ActiveBooking priceFromDb={priceFromDb} />
             <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
               PS: You can only have one active booking at a time
             </p>
@@ -123,9 +124,9 @@ const BookRides = () => {
           </h2>
           <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center">
             {/* each ride history */}
-            <RideHistory />
-            <RideHistory />
-            <RideHistory />
+            <RideHistory priceFromDb={priceFromDb} />
+            <RideHistory priceFromDb={priceFromDb} />
+            <RideHistory priceFromDb={priceFromDb} />
             <button className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
               Load more
             </button>
