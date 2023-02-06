@@ -663,7 +663,6 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
-  console.log("rendered");
   return (
     <AppContext.Provider
       value={{
