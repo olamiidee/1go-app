@@ -25,11 +25,11 @@ const Summary = () => {
           <p className="underline">Contact us</p>
         </div>
         <div className="w-full px-[5%] sm:px-[10.5%]">
-          <Link to="/book-ride">
+          {/* <Link onClick={() => window.location.reload()} to="/book-ride">
             <div className="w-[fit-content] text-[0.75rem] text-slate-700 py-1 px-4 mb-16 bg-white rounded-md">
               Back to dashboard
             </div>
-          </Link>
+          </Link> */}
           <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
             Summary
           </h2>
@@ -63,7 +63,7 @@ const Summary = () => {
                   className="w-6 h-6 mr-1"
                 />
                 <p>
-                  Price: <strong>NGN {priceFromDb[0].price}</strong>
+                  Price: <strong>NGN {priceFromDb[0]?.price}</strong>
                 </p>
               </div>
             </div>

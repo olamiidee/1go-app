@@ -10,6 +10,7 @@ import {
 import { auth, db } from "../firebase/firebase-config";
 import {
   getDocs,
+  getDoc,
   addDoc,
   collection,
   query,
@@ -161,10 +162,11 @@ const AppContextProvider = ({ children }) => {
   };
 
   //to log out users
-  const logout = async () => {
+  const logout = () => {
     signOut(auth).then(() => {
       navigate("/");
     });
+    localStorage.removeItem("userDetails");
   };
 
   //to show and hide password
@@ -195,28 +197,40 @@ const AppContextProvider = ({ children }) => {
   }, []);
 
   //to save current user from db
-  const [currentUserFromDb, setCurrentUserFromDb] = useState({});
+  const [currentUserFromDb, setCurrentUserFromDb] = useState(
+    JSON.parse(localStorage.getItem("userDetails")) || {}
+  );
+
+  const [takingLong, setTakingLong] = useState(false);
 
   //to get users saved in db
   useEffect(() => {
     if (user) {
       const getUserDetails = async () => {
         setLoader(true);
+        setTimeout(() => {
+          loader ? setTakingLong(true) : setTakingLong(false);
+        }, 5000);
         const userQuery = query(
           collection(db, "users"),
           where("email", "==", user?.email)
         );
         try {
           const querySnapshot = await getDocs(userQuery);
+          let me;
           querySnapshot.forEach((doc) => {
-            setCurrentUserFromDb(doc.data());
+            me = doc.data();
           });
+          me && localStorage.setItem("userDetails", JSON.stringify(me));
+          me && setCurrentUserFromDb(me);
+
           setLoader(false);
         } catch (err) {
           console.log(err.message);
           setLoader(false);
         } finally {
           setLoader(false);
+          setTakingLong(false);
         }
       };
       getUserDetails();
@@ -301,10 +315,9 @@ const AppContextProvider = ({ children }) => {
         let arranged = times?.sort(function (a, b) {
           return a.id.slice(-2) - b.id.slice(-2);
         });
-        localStorage.setItem("morningTimes", JSON.stringify(arranged));
-        setMorningBookingTimesFromDb(
-          JSON.parse(localStorage.getItem("morningTimes"))
-        );
+        arranged &&
+          localStorage.setItem("morningTimes", JSON.stringify(arranged));
+        arranged && setMorningBookingTimesFromDb(arranged);
       } catch (err) {
         console.log(err.message);
       } finally {
@@ -326,7 +339,7 @@ const AppContextProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         times.push(doc.data());
       });
-      localStorage.setItem("morningTimes", JSON.stringify(times));
+      times && localStorage.setItem("morningTimes", JSON.stringify(times));
       await setDoc(
         doc(
           db,
@@ -392,10 +405,8 @@ const AppContextProvider = ({ children }) => {
         let arranged = times?.sort(function (a, b) {
           return a.id.slice(-2) - b.id.slice(-2);
         });
-        localStorage.setItem("noonTimes", JSON.stringify(arranged));
-        setNoonBookingTimesFromDb(
-          JSON.parse(localStorage.getItem("noonTimes"))
-        );
+        arranged && localStorage.setItem("noonTimes", JSON.stringify(arranged));
+        arranged && setNoonBookingTimesFromDb(arranged);
       } catch (err) {
         console.log(err.message);
       } finally {
@@ -415,7 +426,7 @@ const AppContextProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         times.push(doc.data());
       });
-      localStorage.setItem("noonTimes", JSON.stringify(times));
+      times && localStorage.setItem("noonTimes", JSON.stringify(times));
       await setDoc(
         doc(
           db,
@@ -547,7 +558,7 @@ const AppContextProvider = ({ children }) => {
           price.push(doc.data());
         });
 
-        localStorage.setItem("price", JSON.stringify(price));
+        price && localStorage.setItem("price", JSON.stringify(price));
         setpriceFromDb(JSON.parse(localStorage.getItem("price")));
       } catch (err) {
         console.log(err.message);
@@ -590,8 +601,69 @@ const AppContextProvider = ({ children }) => {
       console.log(error.message);
     }
   };
-  console.log(priceFromDb);
 
+  //admin login logic  //admin login logic  //admin login logic
+  //admin login logic  //admin login logic  //admin login logic
+  //admin login logic  //admin login logic  //admin login logic
+  //96C0Zb&6rkh!
+
+  //to save nprice form input
+  const [adminLoginData, setAdminLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  //to save noon time form input
+  function handleAdminChange(event) {
+    const { id, value } = event.target;
+    setAdminLoginData((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  const [admin, setAdmin] = useState(
+    JSON.parse(localStorage.getItem("admin")) || {}
+  );
+  const [trackAdmin, setTrackAdmin] = useState(false);
+  useEffect(() => {
+    setAdmin(JSON.parse(localStorage.getItem("admin")));
+  }, [trackAdmin]);
+
+  const loginAdmin = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    try {
+      const docRef = doc(db, "users", "admin1cx@gmail.com");
+      const docSnap = await getDoc(docRef);
+      let adminData = docSnap.data();
+      if (
+        adminLoginData.email === adminData.email &&
+        adminLoginData.password === adminData.lastname
+      ) {
+        localStorage.setItem("admin", JSON.stringify(adminData));
+        setAdmin(adminData);
+        navigate("/admin");
+        setTrackAdmin((prev) => !prev);
+      } else if (
+        adminLoginData.email === "" ||
+        adminLoginData.password === ""
+      ) {
+        setErrorMessage("email & password required!");
+      } else {
+        setErrorMessage("Invalid admin details");
+      }
+    } catch (err) {
+      err.message === "Failed to get document because the client is offline." &&
+        setErrorMessage("Bad network connection");
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  console.log("rendered");
   return (
     <AppContext.Provider
       value={{
@@ -626,6 +698,9 @@ const AppContextProvider = ({ children }) => {
         handlePriceChange,
         handlePriceSubmit,
         priceFromDb,
+        admin,
+        loginAdmin,
+        handleAdminChange,
       }}
     >
       {children}
