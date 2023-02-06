@@ -19,11 +19,14 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
+  const location = useLocation();
+  let currentPage = location.pathname;
+
   //to save reg form input
   const [regForm, setRegForm] = useState({
     firstname: "",
@@ -54,6 +57,7 @@ const AppContextProvider = ({ children }) => {
 
   //to handle form input change chnage
   function handleLoginChange(event) {
+    setErrorMessage("");
     const { id, value } = event.target;
     setLoginForm((prevState) => {
       return {
@@ -75,13 +79,14 @@ const AppContextProvider = ({ children }) => {
     createdAt
   ) => {
     try {
-      const docRef = await addDoc(collection(db, "users"), {
+      const docRef = await setDoc(doc(db, "users", `${email}`), {
         firstname: firstname,
         lastname: lastname,
         email: email,
         phone: phone,
         createdAt: createdAt,
       });
+
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {
       console.error("Error adding document: ", err);
@@ -125,6 +130,9 @@ const AppContextProvider = ({ children }) => {
   };
 
   const [errorMessage, setErrorMessage] = useState("");
+  useEffect(() => {
+    setErrorMessage("");
+  }, [currentPage]);
 
   //to log in users
   const login = async (e) => {
@@ -142,10 +150,13 @@ const AppContextProvider = ({ children }) => {
     } catch (error) {
       setLoader(false);
       console.log(error.message);
-      error.message && setErrorMessage("Bad network connection");
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 7000);
+      if (error.message === "Firebase: Error (auth/user-not-found).") {
+        setErrorMessage("Invalid login details");
+      } else if (
+        error.message === "Firebase: Error (auth/network-request-failed)."
+      ) {
+        setErrorMessage("Bad network connection");
+      }
     }
   };
 
@@ -367,7 +378,7 @@ const AppContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("noonTimes")) || []
   );
 
-  //to get users saved in db
+  //to get noon booking timesaved in db
   useEffect(() => {
     const getNoonBookingTime = async () => {
       setLoader(true);
@@ -481,6 +492,105 @@ const AppContextProvider = ({ children }) => {
     setUpdatedTime((prev) => !prev);
   }
 
+  //to get number of users
+  const [allUsers, setAllUsers] = useState([]);
+  useEffect(() => {
+    async function getUsers() {
+      setLoader(true);
+
+      try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        let users = [];
+        querySnapshot.forEach((doc) => {
+          users.push(doc.data());
+        });
+        setAllUsers(users);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoader(false);
+      }
+    }
+    getUsers();
+  }, []);
+
+  //to save nprice form input
+  const [priceForm, setPriceForm] = useState({
+    price: "",
+  });
+
+  //to save noon time form input
+  function handlePriceChange(event) {
+    const { id, value } = event.target;
+    setPriceForm((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  //to save price from db
+  const [priceFromDb, setpriceFromDb] = useState(
+    JSON.parse(localStorage.getItem("price")) || []
+  );
+
+  //to get noon booking timesaved in db
+  useEffect(() => {
+    const getPrice = async () => {
+      setLoader(true);
+
+      try {
+        const querySnapshot = await getDocs(collection(db, "pricing"));
+        let price = [];
+        querySnapshot.forEach((doc) => {
+          price.push(doc.data());
+        });
+
+        localStorage.setItem("price", JSON.stringify(price));
+        setpriceFromDb(JSON.parse(localStorage.getItem("price")));
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setLoader(false);
+      }
+    };
+    getPrice();
+  }, [updatedTime]);
+
+  //to send changed time to db
+  const createPriceDocument = async (price) => {
+    setLoader(true);
+
+    try {
+      await setDoc(doc(db, "pricing", "price"), {
+        price: price,
+      });
+      console.log("price changed");
+      setUpdatedTime((prev) => !prev);
+    } catch (err) {
+      console.error("Error changing ", err);
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  //to handle price form data submit to firebase
+  const handlePriceSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+
+    try {
+      await deleteDoc(doc(db, "pricing", "price"));
+      await createPriceDocument(priceForm.price);
+      setLoader(false);
+      window.location.reload();
+    } catch (error) {
+      setLoader(false);
+      console.log(error.message);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -509,9 +619,12 @@ const AppContextProvider = ({ children }) => {
         morningBookingTimesFromDb,
         noonBookingTimesFromDb,
         handleNoonBookingTimeSubmit,
-        noonBookingTimesFromDb,
         handleDeleteMorningTime,
         handleDeleteNoonTime,
+        allUsers,
+        handlePriceChange,
+        handlePriceSubmit,
+        priceFromDb,
       }}
     >
       {children}

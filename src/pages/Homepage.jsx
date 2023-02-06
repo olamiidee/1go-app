@@ -11,8 +11,12 @@ import ClientNoonTimeBtn from "../components/ClientNoonTimeBtn";
 import Loader from "../components/Loader";
 
 const Homepage = () => {
-  const { accessDashboard, morningBookingTimesFromDb, noonBookingTimesFromDb } =
-    useAppContext();
+  const {
+    accessDashboard,
+    morningBookingTimesFromDb,
+    noonBookingTimesFromDb,
+    priceFromDb,
+  } = useAppContext();
   return (
     <>
       <Header />
@@ -35,7 +39,9 @@ const Homepage = () => {
                 Beat The Queue!!
               </h1>
               <div className="pb-3 font-medium text-[0.95rem] md:text-[1.23rem] uppercase">
-                <p>Get easy rides for as low as -- NGN 200</p>
+                <p>
+                  Get easy rides for as low as -- NGN {priceFromDb[0].price}
+                </p>
                 <p>From Oke-Odo to school park and vice versa</p>
               </div>
               <button

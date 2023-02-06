@@ -37,7 +37,7 @@ const Header = () => {
         } px-12 py-4 fixed left-[50%] translate-x-[-50%] border-b border-slate-600 md:flex items-center z-[50] hidden transition-all duration-500`}
       >
         {userNotLoggedIn && currentPage === "/login" && (
-          <div className="w-[fit-content] scale flex gap-4 items-center py-4 px-10 bg-blue-400/20 rounded-lg border border-blue-400 absolute top-24 left-0">
+          <div className="w-[fit-content] scale flex gap-4 items-center py-4 px-10 bg-blue-200 rounded-lg border border-blue-400 absolute top-24 left-0">
             <img
               alt=""
               src="/images/icons8-info-black-64.png"
@@ -165,7 +165,7 @@ const Header = () => {
           onClick={handleClick}
         />
         {userNotLoggedIn && currentPage === "/login" && (
-          <div className="w-[90%] scale-mob flex gap-4 items-center py-4 px-10 bg-blue-400/20 text-[0.85rem] rounded-lg border border-blue-400 absolute top-24 left-[50%] translate-x-[-50%]">
+          <div className="w-[90%] scale-mob flex gap-4 items-center py-4 px-10 bg-blue-200 text-[0.85rem] rounded-lg border border-blue-400 absolute top-24 left-[50%] translate-x-[-50%]">
             <img
               alt=""
               src="/images/icons8-info-black-64.png"

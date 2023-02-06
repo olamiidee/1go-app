@@ -1,8 +1,10 @@
 import Sidebar from "./Sidebar";
 import ScrollToTop from "../ScrollToTop";
 import RideHistory from "../components/RideHistory";
+import { useAppContext } from "../contexts/AppContext";
 
 const AdminDashboard = () => {
+  const { allUsers } = useAppContext();
   return (
     <div className="w-full">
       <Sidebar />
@@ -22,7 +24,7 @@ const AdminDashboard = () => {
               </div>
               <div>
                 <h3 className="text-[0.9rem] md:text-[1.2rem]">Total users</h3>
-                <h3 className="font-bold text-[1.5rem]">20</h3>
+                <h3 className="font-bold text-[1.5rem]">{allUsers.length}</h3>
               </div>
             </div>
           </div>
@@ -40,11 +42,11 @@ const AdminDashboard = () => {
                 <h3 className="text-[0.9rem] md:text-[1.2rem]">
                   Total bookings
                 </h3>
-                <h3 className="font-bold text-[1.5rem]">43</h3>
+                <h3 className="font-bold text-[1.5rem]">0</h3>
               </div>
               <div className="border-l border-sky-500 pl-3">
                 <h3 className="text-[0.9rem] md:text-[1.2rem]">Total today</h3>
-                <h3 className="font-bold text-[1.5rem]">5</h3>
+                <h3 className="font-bold text-[1.5rem]">0</h3>
               </div>
             </div>
           </div>
