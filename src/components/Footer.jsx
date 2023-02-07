@@ -1,8 +1,8 @@
 import React from "react";
-import facebook from "/images/icon-facebook.svg";
-import twitter from "/images/icon-twitter.svg";
-import pinterest from "/images/icon-pinterest.svg";
-import insta from "/images/icon-instagram.svg";
+import whatsapp from "/images/icon-whatsapp.svg";
+import telephone from "/images/icon-telephone.png";
+// import pinterest from "/images/icon-pinterest.svg";
+// import insta from "/images/icon-instagram.svg";
 
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
@@ -17,11 +17,28 @@ export default function Footer() {
       <div className="footer">
         <div className="logo--div">
           <h1 className="font-bold text-[2rem]">1go </h1>
-          <div className="logo--cont flex">
-            <img alt="" src={facebook} />
-            <img alt="" src={insta} />
-            <img alt="" src={twitter} />
-            <img alt="" src={pinterest} />
+          <div className="logo--cont flex space-x-3">
+            {/* telephone */}
+            <div className="cursor-pointer hover:translate-y-[6px] transition-all duration-300">
+              <a
+                href="tel:+2349125921624"
+                className="flex items-center justify-between space-x-2 "
+              >
+                <img alt="" src={telephone} className="w-[25px] h-[25px]" />
+                <p>Telephone</p>
+              </a>
+            </div>
+            {/* whatsapp */}
+            <div className="cursor-pointer hover:translate-y-[6px] transition-all duration-300">
+              <a
+                href="https://wa.me/+2349125921624"
+                target="_blank"
+                className="flex items-center justify-between space-x-2 "
+              >
+                <img alt="" src={whatsapp} className="w-[25px] h-[25px]" />
+                <p>Whatsapp</p>
+              </a>
+            </div>
           </div>
         </div>
         <div className="copy--div">
@@ -66,31 +83,17 @@ export default function Footer() {
         </div>
         <div className="copy--div">
           <div className="logo--cont flex space-x-4 justify-center mb-8">
-            <a href="#">
+            <a href="tel:+2349125921624">
               <img
                 alt=""
-                src={facebook}
+                src={telephone}
                 className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
               />
             </a>
-            <a href="#">
+            <a href="https://wa.me/+2349125921624" target="_blank">
               <img
                 alt=""
-                src={insta}
-                className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
-              />
-            </a>
-            <a href="#">
-              <img
-                alt=""
-                src={twitter}
-                className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
-              />
-            </a>
-            <a href="#">
-              <img
-                alt=""
-                src={pinterest}
+                src={whatsapp}
                 className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
               />
             </a>
