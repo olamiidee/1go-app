@@ -42,7 +42,7 @@ const Login = () => {
             </div>
             {/* Login form */}
             <form>
-              <div className="font-light space-y-4 mt-6 pt-2 pb-12 w-full rounded-lg sm:mt-4">
+              <div className="font-light space-y-4 mt-8 py-6 w-full rounded-lg sm:mt-4">
                 <div>
                   <label htmlFor="email">Email</label>
                   <input
