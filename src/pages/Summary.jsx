@@ -1,13 +1,21 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ScrollToTop from "../ScrollToTop";
-// import { useAppContext } from "../contexts/AppContext";
+import { Link, useParams } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 
 const Summary = () => {
+  const { morningBookingTimesFromDb, noonBookingTimesFromDb, priceFromDb } =
+    useAppContext();
+  let allTimes = [...morningBookingTimesFromDb, ...noonBookingTimesFromDb];
+
+  const { id } = useParams();
+  const eachTime = allTimes.filter((item) => item.id === id)[0];
+
   return (
     <>
       <Header />
-      <section className="w-full min-h-screen py-28 md:py-40 bg-gradient-to-b from-zinc-500/70 to-blue-400/10 text-slate-700">
+      <section className="w-full min-h-screen py-40 bg-gradient-to-b from-zinc-500/70 to-blue-400/10 text-slate-700">
         <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
           <img
             alt=""
@@ -17,9 +25,11 @@ const Summary = () => {
           <p className="underline">Contact us</p>
         </div>
         <div className="w-full px-[5%] sm:px-[10.5%]">
-          <div className="w-[fit-content] text-[0.75rem] text-slate-700 py-1 px-4 mb-16 bg-white rounded-md">
-            Back to dashboard
-          </div>
+          {/* <Link onClick={() => window.location.reload()} to="/book-ride">
+            <div className="w-[fit-content] text-[0.75rem] text-slate-700 py-1 px-4 mb-16 bg-white rounded-md">
+              Back to dashboard
+            </div>
+          </Link> */}
           <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
             Summary
           </h2>
@@ -33,7 +43,7 @@ const Summary = () => {
                   className="w-6 h-6 mr-1"
                 />
                 <p>
-                  Time: <strong>7:55AM</strong>
+                  Time: <strong>{eachTime?.time}</strong>
                 </p>
               </div>
               <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
@@ -53,7 +63,7 @@ const Summary = () => {
                   className="w-6 h-6 mr-1"
                 />
                 <p>
-                  Price: <strong>NGN 100</strong>
+                  Price: <strong>NGN {priceFromDb[0]?.price}</strong>
                 </p>
               </div>
             </div>
@@ -92,7 +102,7 @@ const Summary = () => {
                   />
                   <p>Price: </p>
                 </div>
-                <p className="font-bold">NGN 100</p>
+                <p className="font-bold">NGN {priceFromDb[0]?.price}</p>
               </div>
             </div>
 

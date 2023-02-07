@@ -6,10 +6,12 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, db } from "../firebase/firebase-config";
 import {
   getDocs,
+  getDoc,
   addDoc,
   collection,
   query,
@@ -19,11 +21,14 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
+  const location = useLocation();
+  let currentPage = location.pathname;
+
   //to save reg form input
   const [regForm, setRegForm] = useState({
     firstname: "",
@@ -54,8 +59,26 @@ const AppContextProvider = ({ children }) => {
 
   //to handle form input change chnage
   function handleLoginChange(event) {
+    setErrorMessage("");
     const { id, value } = event.target;
     setLoginForm((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  //to save login form input
+  const [resetpswForm, setResetpswForm] = useState({
+    email: "",
+  });
+
+  //to handle form input change chnage
+  function handleResetpswChange(event) {
+    setErrorMessage("");
+    const { id, value } = event.target;
+    setResetpswForm((prevState) => {
       return {
         ...prevState,
         [id]: value,
@@ -75,13 +98,14 @@ const AppContextProvider = ({ children }) => {
     createdAt
   ) => {
     try {
-      const docRef = await addDoc(collection(db, "users"), {
+      const docRef = await setDoc(doc(db, "users", `${email}`), {
         firstname: firstname,
         lastname: lastname,
         email: email,
         phone: phone,
         createdAt: createdAt,
       });
+
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {
       console.error("Error adding document: ", err);
@@ -118,13 +142,36 @@ const AppContextProvider = ({ children }) => {
         regForm.phone,
         formattedDate
       );
+      window.location.reload();
     } catch (error) {
       setLoader(false);
       console.log(error.message);
     }
   };
 
+  const forgotpswSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+
+    if (resetpswForm.email) {
+      try {
+        await sendPasswordResetEmail(auth, resetpswForm.email);
+        alert("Password reset link sent successfully");
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoader(false);
+      }
+    } else {
+      alert("Type in your email");
+      setLoader(false);
+    }
+  };
+
   const [errorMessage, setErrorMessage] = useState("");
+  useEffect(() => {
+    setErrorMessage("");
+  }, [currentPage]);
 
   //to log in users
   const login = async (e) => {
@@ -139,21 +186,26 @@ const AppContextProvider = ({ children }) => {
       );
       setLoader(false);
       navigate("/book-ride");
+      window.location.reload();
     } catch (error) {
       setLoader(false);
       console.log(error.message);
-      error.message && setErrorMessage("Bad network connection");
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 7000);
+      if (error.message === "Firebase: Error (auth/user-not-found).") {
+        setErrorMessage("Invalid login details");
+      } else if (
+        error.message === "Firebase: Error (auth/network-request-failed)."
+      ) {
+        setErrorMessage("Bad network connection");
+      }
     }
   };
 
   //to log out users
-  const logout = async () => {
+  const logout = () => {
     signOut(auth).then(() => {
       navigate("/");
     });
+    localStorage.removeItem("userDetails");
   };
 
   //to show and hide password
@@ -184,28 +236,40 @@ const AppContextProvider = ({ children }) => {
   }, []);
 
   //to save current user from db
-  const [currentUserFromDb, setCurrentUserFromDb] = useState({});
+  const [currentUserFromDb, setCurrentUserFromDb] = useState(
+    JSON.parse(localStorage.getItem("userDetails")) || {}
+  );
+
+  const [takingLong, setTakingLong] = useState(false);
 
   //to get users saved in db
   useEffect(() => {
     if (user) {
       const getUserDetails = async () => {
         setLoader(true);
+        setTimeout(() => {
+          loader ? setTakingLong(true) : setTakingLong(false);
+        }, 5000);
         const userQuery = query(
           collection(db, "users"),
           where("email", "==", user?.email)
         );
         try {
           const querySnapshot = await getDocs(userQuery);
+          let me;
           querySnapshot.forEach((doc) => {
-            setCurrentUserFromDb(doc.data());
+            me = doc.data();
           });
+          me && localStorage.setItem("userDetails", JSON.stringify(me));
+          // me && setCurrentUserFromDb(me);
+
           setLoader(false);
         } catch (err) {
           console.log(err.message);
           setLoader(false);
         } finally {
           setLoader(false);
+          setTakingLong(false);
         }
       };
       getUserDetails();
@@ -215,8 +279,10 @@ const AppContextProvider = ({ children }) => {
   //dashboard access
   const [userNotLoggedIn, setuserNotLoggedIn] = useState(false);
   function accessDashboard() {
+    setuserNotLoggedIn(true);
     if (user) {
       navigate("/book-ride");
+      setuserNotLoggedIn(false);
     } else {
       navigate("/login");
       setuserNotLoggedIn(true);
@@ -261,40 +327,47 @@ const AppContextProvider = ({ children }) => {
       };
     });
   }
-
-  let added = false;
-
   //function to save morning booking time doc on sign up
   //function to save morning booking time doc on sign up
   //function to save morning booking time doc on sign up
   //function to save morning booking time doc on sign up
-
-  const createMorningBookingTimeDocument = async (time, createdAt) => {
-    try {
-      const docRef = await addDoc(collection(db, "morningBookingTimes"), {
-        time: time,
-        id: morningBookingTimesFromDb.length + 1,
-        hover: false,
-        createdAt: createdAt,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      added = true;
-    } catch (err) {
-      console.error("Error adding document: ", err);
-    }
-  };
+  const [updatedTime, setUpdatedTime] = useState(false);
 
   //to save booking time from db
   const [morningBookingTimesFromDb, setMorningBookingTimesFromDb] = useState(
     JSON.parse(localStorage.getItem("morningTimes")) || []
   );
 
-  useEffect(() => {
-    getMorningBookingTime();
-  }, [added]);
-
   //to get users saved in db
-  const getMorningBookingTime = async () => {
+  useEffect(() => {
+    const getMorningBookingTime = async () => {
+      setLoader(true);
+
+      try {
+        const querySnapshot = await getDocs(
+          collection(db, "morningBookingTimes")
+        );
+        let times = [];
+        querySnapshot.forEach((doc) => {
+          times.push(doc.data());
+        });
+        let arranged = times?.sort(function (a, b) {
+          return a.id.slice(-2) - b.id.slice(-2);
+        });
+        times.length > 0 &&
+          localStorage.setItem("morningTimes", JSON.stringify(arranged));
+        times.length > 0 && setMorningBookingTimesFromDb(arranged);
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setLoader(false);
+      }
+    };
+    getMorningBookingTime();
+  }, [updatedTime]);
+
+  //to send created notes to db
+  const createMorningBookingTimeDocument = async (time, createdAt) => {
     setLoader(true);
 
     try {
@@ -305,9 +378,29 @@ const AppContextProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         times.push(doc.data());
       });
-      localStorage.setItem("morningTimes", JSON.stringify(times));
+      times.length > 0 &&
+        localStorage.setItem("morningTimes", JSON.stringify(times));
+      await setDoc(
+        doc(
+          db,
+          "morningBookingTimes",
+          `${time.replace(/ /g, "_")}_${createdAt}_0${
+            morningBookingTimesFromDb.length + 1
+          }`
+        ),
+        {
+          time: time,
+          id: `${time.replace(/ /g, "_")}_${createdAt}_0${
+            morningBookingTimesFromDb.length + 1
+          }`,
+          createdAt: createdAt,
+        }
+      );
+      console.log("morning booking time created");
+      setUpdatedTime((prev) => !prev);
+      window.location.reload();
     } catch (err) {
-      console.log(err.message);
+      console.error("Error creating morning time: ", err);
     } finally {
       setLoader(false);
     }
@@ -321,10 +414,7 @@ const AppContextProvider = ({ children }) => {
 
     try {
       await createMorningBookingTimeDocument(morningTime, formattedDate);
-      await getMorningBookingTime();
-      added = false;
       setLoader(false);
-      window.location.reload();
     } catch (error) {
       setLoader(false);
       console.log(error.message);
@@ -336,32 +426,39 @@ const AppContextProvider = ({ children }) => {
   //function to save noon booking time doc on sign up
   //function to save noon booking time doc on sign up
 
-  const createNoonBookingTimeDocument = async (time, createdAt) => {
-    try {
-      const docRef = await addDoc(collection(db, "noonBookingTimes"), {
-        time: time,
-        id: noonBookingTimesFromDb.length + 1,
-        hover: false,
-        createdAt: createdAt,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      added = true;
-    } catch (err) {
-      console.error("Error adding document: ", err);
-    }
-  };
-
   //to save booking time from db
-  const [noonBookingTimesFromDb, setnoonBookingTimesFromDb] = useState(
+  const [noonBookingTimesFromDb, setNoonBookingTimesFromDb] = useState(
     JSON.parse(localStorage.getItem("noonTimes")) || []
   );
 
+  //to get noon booking timesaved in db
   useEffect(() => {
-    getNoonBookingTime();
-  }, [added]);
+    const getNoonBookingTime = async () => {
+      setLoader(true);
 
-  //to get users saved in db
-  const getNoonBookingTime = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "noonBookingTimes"));
+        let times = [];
+        querySnapshot.forEach((doc) => {
+          times.push(doc.data());
+        });
+        let arranged = times?.sort(function (a, b) {
+          return a.id.slice(-2) - b.id.slice(-2);
+        });
+        times.length > 0 &&
+          localStorage.setItem("noonTimes", JSON.stringify(arranged));
+        times.length > 0 && setNoonBookingTimesFromDb(arranged);
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setLoader(false);
+      }
+    };
+    getNoonBookingTime();
+  }, [updatedTime]);
+
+  //to send created notes to db
+  const createNoonBookingTimeDocument = async (time, createdAt) => {
     setLoader(true);
 
     try {
@@ -370,9 +467,29 @@ const AppContextProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         times.push(doc.data());
       });
-      localStorage.setItem("noonTimes", JSON.stringify(times));
+      times.length > 0 &&
+        localStorage.setItem("noonTimes", JSON.stringify(times));
+      await setDoc(
+        doc(
+          db,
+          "noonBookingTimes",
+          `${time.replace(/ /g, "_")}_${createdAt}_0${
+            noonBookingTimesFromDb.length + 1
+          }`
+        ),
+        {
+          time: time,
+          id: `${time.replace(/ /g, "_")}_${createdAt}_0${
+            noonBookingTimesFromDb.length + 1
+          }`,
+          createdAt: createdAt,
+        }
+      );
+      console.log("noon booking time created");
+      setUpdatedTime((prev) => !prev);
+      window.location.reload();
     } catch (err) {
-      console.log(err.message);
+      console.error("Error creating noon time: ", err);
     } finally {
       setLoader(false);
     }
@@ -396,13 +513,198 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
-  //  //to delete  from db
-  //  const deleteDocument = async (userName, id, title) => {
-  //   await deleteDoc(
-  //     doc(db, "notes", `${userName}_${id}_${title.replace(/ /g, "_")}`)
-  //   );
-  //   console.log("note deleted");
-  // };
+  //to delete time from db
+  const deleteMorningTimeDoc = async (id) => {
+    try {
+      await deleteDoc(doc(db, "morningBookingTimes", id));
+      console.log("morning time deleted");
+    } catch (err) {
+      console.log("error deleting morning time: ", err);
+    }
+  };
+
+  //to delete morning time
+  function handleDeleteMorningTime(id) {
+    deleteMorningTimeDoc(id);
+    setUpdatedTime((prev) => !prev);
+  }
+
+  //to delete time from db
+  const deleteNoonTimeDoc = async (id) => {
+    try {
+      await deleteDoc(doc(db, "noonBookingTimes", id));
+      console.log("Noon time deleted");
+    } catch (err) {
+      console.log("error deleting Noon time: ", err);
+    }
+  };
+
+  //to delete time
+  function handleDeleteNoonTime(id) {
+    deleteNoonTimeDoc(id);
+    setUpdatedTime((prev) => !prev);
+  }
+
+  //to get number of users
+  const [allUsers, setAllUsers] = useState([]);
+  useEffect(() => {
+    async function getUsers() {
+      setLoader(true);
+
+      try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        let users = [];
+        querySnapshot.forEach((doc) => {
+          users.push(doc.data());
+        });
+        setAllUsers(users);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoader(false);
+      }
+    }
+    getUsers();
+  }, []);
+
+  //to save nprice form input
+  const [priceForm, setPriceForm] = useState({
+    price: "",
+  });
+
+  //to save noon time form input
+  function handlePriceChange(event) {
+    const { id, value } = event.target;
+    setPriceForm((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  //to save price from db
+  const [priceFromDb, setpriceFromDb] = useState(
+    JSON.parse(localStorage.getItem("price")) || []
+  );
+
+  //to get noon booking timesaved in db
+  useEffect(() => {
+    const getPrice = async () => {
+      setLoader(true);
+
+      try {
+        const querySnapshot = await getDocs(collection(db, "pricing"));
+        let price = [];
+        querySnapshot.forEach((doc) => {
+          price.push(doc.data());
+        });
+
+        price.length > 0 &&
+          localStorage.setItem("price", JSON.stringify(price));
+        price.length > 0 && setpriceFromDb(price);
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setLoader(false);
+      }
+    };
+    getPrice();
+  }, [updatedTime]);
+
+  //to send changed time to db
+  const createPriceDocument = async (price) => {
+    setLoader(true);
+
+    try {
+      await setDoc(doc(db, "pricing", "price"), {
+        price: price,
+      });
+      console.log("price changed");
+      setUpdatedTime((prev) => !prev);
+    } catch (err) {
+      console.error("Error changing ", err);
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  //to handle price form data submit to firebase
+  const handlePriceSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+
+    try {
+      await deleteDoc(doc(db, "pricing", "price"));
+      await createPriceDocument(priceForm.price);
+      setLoader(false);
+      window.location.reload();
+    } catch (error) {
+      setLoader(false);
+      console.log(error.message);
+    }
+  };
+
+  //admin login logic  //admin login logic  //admin login logic
+  //admin login logic  //admin login logic  //admin login logic
+  //admin login logic  //admin login logic  //admin login logic
+  //96C0Zb&6rkh!
+
+  //to save nprice form input
+  const [adminLoginData, setAdminLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  //to save noon time form input
+  function handleAdminChange(event) {
+    const { id, value } = event.target;
+    setAdminLoginData((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  const [admin, setAdmin] = useState(
+    JSON.parse(localStorage.getItem("admin")) || {}
+  );
+  const [trackAdmin, setTrackAdmin] = useState(false);
+  useEffect(() => {
+    setAdmin(JSON.parse(localStorage.getItem("admin")));
+  }, [trackAdmin]);
+
+  const loginAdmin = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    try {
+      const docRef = doc(db, "users", "admin1cx@gmail.com");
+      const docSnap = await getDoc(docRef);
+      let adminData = docSnap.data();
+      if (
+        adminLoginData.email === adminData.email &&
+        adminLoginData.password === adminData.lastname
+      ) {
+        localStorage.setItem("admin", JSON.stringify(adminData));
+        setAdmin(adminData);
+        navigate("/admin");
+        setTrackAdmin((prev) => !prev);
+      } else if (
+        adminLoginData.email === "" ||
+        adminLoginData.password === ""
+      ) {
+        setErrorMessage("email & password required!");
+      } else {
+        setErrorMessage("Invalid admin details");
+      }
+    } catch (err) {
+      err.message === "Failed to get document because the client is offline." &&
+        setErrorMessage("Bad network connection");
+    } finally {
+      setLoader(false);
+    }
+  };
 
   return (
     <AppContext.Provider
@@ -432,7 +734,17 @@ const AppContextProvider = ({ children }) => {
         morningBookingTimesFromDb,
         noonBookingTimesFromDb,
         handleNoonBookingTimeSubmit,
-        noonBookingTimesFromDb,
+        handleDeleteMorningTime,
+        handleDeleteNoonTime,
+        allUsers,
+        handlePriceChange,
+        handlePriceSubmit,
+        priceFromDb,
+        admin,
+        loginAdmin,
+        handleAdminChange,
+        handleResetpswChange,
+        forgotpswSubmit,
       }}
     >
       {children}

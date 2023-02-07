@@ -1,4 +1,6 @@
 import ActiveBooking from "../components/ActiveBooking";
+import ClientMorningTimeBtn from "../components/ClientMorningTimeBtn";
+import ClientNoonTimeBtn from "../components/ClientNoonTimeBtn";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import RideHistory from "../components/RideHistory";
@@ -6,7 +8,12 @@ import { useAppContext } from "../contexts/AppContext";
 import ScrollToTop from "../ScrollToTop";
 
 const BookRides = () => {
-  const { currentUserFromDb } = useAppContext();
+  const {
+    currentUserFromDb,
+    morningBookingTimesFromDb,
+    noonBookingTimesFromDb,
+    priceFromDb,
+  } = useAppContext();
   return (
     <>
       <Header />
@@ -24,7 +31,9 @@ const BookRides = () => {
             <section className="w-full border-b border-zinc-300 pb-4 text-white flex">
               <div className="w-2/3 mr-auto">
                 <h2 className="text-[1.5rem] font-bold">
-                  Hello {currentUserFromDb.firstname}
+                  Hello{" "}
+                  {currentUserFromDb.firstname?.charAt(0).toUpperCase() +
+                    currentUserFromDb.firstname?.slice(1)}
                 </h2>
                 <p className="text-[0.9rem] md:text-[1.1rem] font-medium">
                   Welcome to your dashboard. You can book rides & view ride
@@ -49,70 +58,49 @@ const BookRides = () => {
               <div className="w-full block md:flex">
                 <div className="w-full md:w-1/2 md:p-4 p-0">
                   <div className="w-full min-h-[200px] bg-white rounded-lg p-4">
+                    <div className=" mt-1 flex gap-1 items-center mb-3">
+                      <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                        <img
+                          alt=""
+                          src="/images/icons8-information-64.png"
+                          className="w-4 h-4"
+                        />
+                      </div>
+                      <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
+                        Click on an available time to book a ride
+                      </p>
+                    </div>
                     <h2 className="pb-1 border-b border-b-slate-400/80">
                       From Oke-odo - Morning Rides
                     </h2>
-                    <div className="my-4 w-full flex gap-2 flex-wrap">
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        6:55AM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        7:35AM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        8:15AM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        8:55AM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        9:35AM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        10:15AM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        10:55AM
-                      </button>
+                    <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
+                      {morningBookingTimesFromDb.map((item, index) => {
+                        return <ClientMorningTimeBtn key={index} item={item} />;
+                      })}
                     </div>
                   </div>
                 </div>
                 <div className="w-full md:w-1/2 md:p-4 p-0 mt-5 md:mt-0">
                   <div className="w-full min-h-[200px] bg-white rounded-lg p-4">
+                    <div className=" mt-1 flex gap-1 items-center mb-3">
+                      <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                        <img
+                          alt=""
+                          src="/images/icons8-information-64.png"
+                          className="w-4 h-4"
+                        />
+                      </div>
+                      <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
+                        Click on an available time to book a ride
+                      </p>
+                    </div>
                     <h2 className="pb-1 border-b border-b-slate-400/80">
                       From School Park - Afternoon Rides
                     </h2>
-                    <div className="my-4 w-full flex gap-2 flex-wrap">
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        1:55PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        2:35PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        3:15PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        3:55PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        4:35PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        5:15PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        5:55PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        6:35PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        7:15PM
-                      </button>
-                      <button className="px-3 py-1 bg-blue-300  hover:bg-blue-500 hover:text-white rounded-sm text-[0.85rem] transition-all duration-300">
-                        7:55PM
-                      </button>
+                    <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
+                      {noonBookingTimesFromDb.map((item, index) => {
+                        return <ClientNoonTimeBtn key={index} item={item} />;
+                      })}
                     </div>
                   </div>
                 </div>
@@ -126,7 +114,13 @@ const BookRides = () => {
           </h2>
           <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg p-4 relative">
             {/* each active booking */}
-            <ActiveBooking />
+            <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+              <img alt="" src="/images/empty.png" className="w-20 h-20 mb-8" />
+              <p className="text-slate-400">
+                Your active booking will show here...
+              </p>
+            </div>
+            {/* <ActiveBooking /> */}
             <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
               PS: You can only have one active booking at a time
             </p>
@@ -138,9 +132,13 @@ const BookRides = () => {
           </h2>
           <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center">
             {/* each ride history */}
-            <RideHistory />
-            <RideHistory />
-            <RideHistory />
+            <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+              <img alt="" src="/images/empty.png" className="w-20 h-20 mb-8" />
+              <p className="text-slate-400">No booking history yet...</p>
+            </div>
+            {/* <RideHistory priceFromDb={priceFromDb} />
+            <RideHistory priceFromDb={priceFromDb} />
+            <RideHistory priceFromDb={priceFromDb} /> */}
             <button className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
               Load more
             </button>
