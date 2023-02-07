@@ -127,8 +127,9 @@ const Login = () => {
           </div>
           <div className="w-[45%] h-full bg-reg1 bg-cover bg-no-repeat opacity-70 hidden lg:block"></div>
         </div>
+
         {forgotpsw && (
-          <div className="w-full min-h-screen bg-slate-600/90 fixed left-0 top-0 z-[100] flex items-center">
+          <div className="w-full px-4 min-h-screen bg-slate-600/90 fixed left-0 top-0 z-[100] flex items-center">
             <div
               onClick={handleForgotPsw}
               className="p-2 rounded-full bg-white mb-8 absolute top-8 right-8 cursor-pointer"
