@@ -15,7 +15,7 @@ const Summary = () => {
   return (
     <>
       <Header />
-      <section className="w-full min-h-screen py-28 md:py-40 bg-gradient-to-b from-zinc-500/70 to-blue-400/10 text-slate-700">
+      <section className="w-full min-h-screen py-40 bg-gradient-to-b from-zinc-500/70 to-blue-400/10 text-slate-700">
         <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
           <img
             alt=""

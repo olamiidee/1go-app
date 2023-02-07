@@ -1527,6 +1527,11 @@ video {
   padding-bottom: 7rem;
 }
 
+.py-40 {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
 .pt-\[80px\] {
   padding-top: 80px;
 }
@@ -1593,6 +1598,10 @@ video {
 
 .pt-36 {
   padding-top: 9rem;
+}
+
+.pt-32 {
+  padding-top: 8rem;
 }
 
 .text-left {
