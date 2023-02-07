@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, db } from "../firebase/firebase-config";
 import {
@@ -61,6 +62,23 @@ const AppContextProvider = ({ children }) => {
     setErrorMessage("");
     const { id, value } = event.target;
     setLoginForm((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  //to save login form input
+  const [resetpswForm, setResetpswForm] = useState({
+    email: "",
+  });
+
+  //to handle form input change chnage
+  function handleResetpswChange(event) {
+    setErrorMessage("");
+    const { id, value } = event.target;
+    setResetpswForm((prevState) => {
       return {
         ...prevState,
         [id]: value,
@@ -124,9 +142,29 @@ const AppContextProvider = ({ children }) => {
         regForm.phone,
         formattedDate
       );
+      window.location.reload();
     } catch (error) {
       setLoader(false);
       console.log(error.message);
+    }
+  };
+
+  const forgotpswSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+
+    if (resetpswForm.email) {
+      try {
+        await sendPasswordResetEmail(auth, resetpswForm.email);
+        alert("Password reset link sent successfully");
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoader(false);
+      }
+    } else {
+      alert("Type in your email");
+      setLoader(false);
     }
   };
 
@@ -148,6 +186,7 @@ const AppContextProvider = ({ children }) => {
       );
       setLoader(false);
       navigate("/book-ride");
+      window.location.reload();
     } catch (error) {
       setLoader(false);
       console.log(error.message);
@@ -704,6 +743,8 @@ const AppContextProvider = ({ children }) => {
         admin,
         loginAdmin,
         handleAdminChange,
+        handleResetpswChange,
+        forgotpswSubmit,
       }}
     >
       {children}
