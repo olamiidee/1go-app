@@ -3,8 +3,46 @@ import Header from "../components/Header";
 import ScrollToTop from "../ScrollToTop";
 import { Link, useParams } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
+import { usePaystackPayment } from "react-paystack";
 
 const Summary = () => {
+  // paystack integration
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: "user@example.com", //their maol
+    amount: 50000, //amount is in Kobo
+    publicKey: "pk_test_f4369369537d94d981fb84a72c675ecf04e12d2e",
+  };
+  const onSuccess = (transaction) => {
+    // Implementation for whatever you want to do with reference and after success call.
+    const reference = transaction.reference;
+    console.log(reference);
+    const message = "Payment Complete! Reference: " + reference;
+    alert(message);
+  };
+  const onClose = () => {
+    // implementation for whatever you want to do when the Paystack dialog closed.
+    console.log("closed");
+    alert("Transaction was not completed, window closed.");
+  };
+
+  const PaystackHook = () => {
+    const initializePayment = usePaystackPayment(config);
+    return (
+      <div>
+        <button
+          type="submit"
+          className="w-full md:w-[fit-content] px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
+          onClick={() => {
+            initializePayment(onSuccess, onClose);
+          }}
+        >
+          Proceed to payment
+        </button>
+      </div>
+    );
+  };
+
   const { morningBookingTimesFromDb, noonBookingTimesFromDb, priceFromDb } =
     useAppContext();
   let allTimes = [...morningBookingTimesFromDb, ...noonBookingTimesFromDb];
@@ -109,9 +147,7 @@ const Summary = () => {
             <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
               PS: Prices may vary based on demand
             </p>
-            <button className="w-full md:w-[fit-content] px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
-              Proceed to payment
-            </button>
+            <PaystackHook />
           </div>
         </div>
       </section>
