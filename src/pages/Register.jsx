@@ -18,7 +18,7 @@ const Register = () => {
           {/* texts */}
           <div className="w-full h-fit px-4 py-12 lg:px-14">
             <div className="text-start">
-              <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
+              <h1 className="text-[2rem] md:text-[2.5rem] text-black">
                 Register
               </h1>
               <p className="font-light">
@@ -127,7 +127,7 @@ const Register = () => {
           {/* image */}
           <div className="h-full rounded-r-xl hidden lg:block">
             <img
-              src="/images/reg1.jpg"
+              src="/images/registerbg.jpg"
               className="h-full opacity-70 rounded-r-xl object-fit"
             />
           </div>
