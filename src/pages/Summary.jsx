@@ -102,7 +102,7 @@ const Summary = () => {
                   />
                   <p>Price: </p>
                 </div>
-                <p className="font-bold">NGN 100</p>
+                <p className="font-bold">NGN {priceFromDb[0]?.price}</p>
               </div>
             </div>
 

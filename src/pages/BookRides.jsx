@@ -32,8 +32,8 @@ const BookRides = () => {
               <div className="w-2/3 mr-auto">
                 <h2 className="text-[1.5rem] font-bold">
                   Hello{" "}
-                  {currentUserFromDb.firstname.charAt(0).toUpperCase() +
-                    currentUserFromDb.firstname.slice(1)}
+                  {currentUserFromDb.firstname?.charAt(0).toUpperCase() +
+                    currentUserFromDb.firstname?.slice(1)}
                 </h2>
                 <p className="text-[0.9rem] md:text-[1.1rem] font-medium">
                   Welcome to your dashboard. You can book rides & view ride
