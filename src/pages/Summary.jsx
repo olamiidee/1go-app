@@ -46,7 +46,7 @@ const Summary = () => {
                   Time: <strong>{eachTime?.time}</strong>
                 </p>
               </div>
-              <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+              {/* <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
                 <img
                   alt=""
                   src="/images/icons8-qr-code-48.png"
@@ -55,7 +55,7 @@ const Summary = () => {
                 <p>
                   Booking Code: <strong>8441</strong>
                 </p>
-              </div>
+              </div> */}
               <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md mr-auto">
                 <img
                   alt=""
@@ -82,7 +82,7 @@ const Summary = () => {
                 </div>
                 <p className="font-bold">7:55AM</p>
               </div>
-              <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+              {/* <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
                 <div className="mr-auto flex items-center">
                   <img
                     alt=""
@@ -92,7 +92,7 @@ const Summary = () => {
                   <p>Booking Code: </p>
                 </div>
                 <p className="font-bold">8441</p>
-              </div>
+              </div> */}
               <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
                 <div className="mr-auto flex items-center">
                   <img
