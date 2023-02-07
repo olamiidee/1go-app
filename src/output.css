@@ -633,6 +633,10 @@ video {
   bottom: -1px;
 }
 
+.right-8 {
+  right: 2rem;
+}
+
 .z-50 {
   z-index: 50;
 }
@@ -2224,6 +2228,10 @@ input[type="number"] {
   .md\:w-\[fit-content\] {
     width: -moz-fit-content;
     width: fit-content;
+  }
+
+  .md\:w-\[400px\] {
+    width: 400px;
   }
 
   .md\:flex-nowrap {
