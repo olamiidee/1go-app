@@ -87,7 +87,7 @@
   .copy--div {
     width: 100%;
     display: flex;
-    margin-top: 20px;
+    align-items: center;
   }
   .copy--div > ul {
     list-style: none;
@@ -142,7 +142,7 @@
     .copy--div {
       width: 100%;
       display: block;
-      margin-top: 20px;
+      margin-top: 0px;
     }
     .logo--div > ul {
       list-style: none;

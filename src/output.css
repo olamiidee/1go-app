@@ -841,17 +841,17 @@ video {
   height: 50%;
 }
 
-.h-\[fit-content\] {
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
 .h-screen {
   height: 100vh;
 }
 
 .h-4 {
   height: 1rem;
+}
+
+.h-\[fit-content\] {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-\[80vh\] {
@@ -1914,7 +1914,7 @@ video {
 .copy--div {
   width: 100%;
   display: flex;
-  margin-top: 20px;
+  align-items: center;
 }
 
 .copy--div > ul {
@@ -1978,7 +1978,7 @@ video {
   .copy--div {
     width: 100%;
     display: block;
-    margin-top: 20px;
+    margin-top: 0px;
   }
 
   .logo--div > ul {
