@@ -860,6 +860,13 @@ video {
   height: 1rem;
 }
 
+.h-\[650px\] {
+  height: 650px;
+}
+
+.h-\[600px\] {
+  height: 600px;
+ }
 .h-\[80vh\] {
   height: 80vh;
 }
@@ -990,6 +997,13 @@ video {
   width: 40%;
 }
 
+.w-\[93\%\] {
+  width: 93%;
+}
+
+.w-\[96\%\] {
+  width: 96%;
+}
 .w-\[45\%\] {
   width: 45%;
 }
@@ -1393,6 +1407,14 @@ video {
   background-color: rgb(51 65 85 / 0.7);
 }
 
+.bg-white\/60 {
+  background-color: rgb(255 255 255 / 0.6);
+}
+
+.bg-white\/50 {
+  background-color: rgb(255 255 255 / 0.5);
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -1477,6 +1499,14 @@ video {
 
 .p-1 {
   padding: 0.25rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-3 {
@@ -1574,6 +1604,16 @@ video {
   padding-right: 1.25rem;
 }
 
+.px-\[2\%\] {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
@@ -1648,6 +1688,9 @@ video {
   padding-bottom: 80px;
 }
 
+.pt-10 {
+  padding-top: 2.5rem;
+}
 .pt-2 {
   padding-top: 0.5rem;
 }
@@ -1824,10 +1867,6 @@ video {
 
 .underline {
   text-decoration-line: underline;
-}
-
-.opacity-70 {
-  opacity: 0.7;
 }
 
 .shadow-xl {
@@ -2208,6 +2247,29 @@ input[type="number"] {
     padding-left: 10.5%;
     padding-right: 10.5%;
   }
+  .sm\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .sm\:py-\[100px\] {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .sm\:py-\[150px\] {
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
+
+  .sm\:px-\[10\.4\%\] {
+    padding-left: 10.4%;
+    padding-right: 10.4%;
+  }
+
+  .sm\:pt-\[100px\] {
+    padding-top: 100px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -2217,11 +2279,6 @@ input[type="number"] {
 
   .md\:left-\[10\.5\%\] {
     left: 10.5%;
-  }
-
-  .md\:my-\[150px\] {
-    margin-top: 150px;
-    margin-bottom: 150px;
   }
 
   .md\:mt-0 {
@@ -2342,6 +2399,16 @@ input[type="number"] {
     padding-bottom: 0.75rem;
   }
 
+  .md\:py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .md\:px-\[3\%\] {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
   .md\:pt-\[60px\] {
     padding-top: 60px;
   }
@@ -2409,6 +2476,10 @@ input[type="number"] {
   .md\:text-\[1\.23rem\] {
     font-size: 1.23rem;
   }
+
+  .md\:text-\[1\.75rem\] {
+    font-size: 1.75rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -2466,6 +2537,10 @@ input[type="number"] {
     padding-right: 2.5rem;
   }
 
+  .lg\:px-\[8\%\] {
+    padding-left: 8%;
+    padding-right: 8%;
+   }
   .lg\:px-14 {
     padding-left: 3.5rem;
     padding-right: 3.5rem;
@@ -2479,6 +2554,9 @@ input[type="number"] {
     font-size: 3.5rem;
   }
 
+  .lg\:text-\[3rem\] {
+    font-size: 3rem;
+  }
   .lg\:shadow-xl {
     --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
       0 8px 10px -6px rgb(0 0 0 / 0.1);
