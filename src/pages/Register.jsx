@@ -13,12 +13,22 @@ const Register = () => {
     <>
       {loader && <Loader />}
       <Header />
-      <section className="w-full h-full">
-        <div className="w-[95%] lg:w-[80%] mx-auto lg:h-full bg-white lg:grid grid-cols-2  mt-[80px] md:my-[150px] lg:rounded-xl lg:shadow-xl">
+      <section className="w-full min-h-screen bg-blue-50 px-[2%] pt-[100px] sm:py-[170px] sm:px-[10.4%] relative flex justify-center items-center">
+        <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-800 flex gap-2 items-center">
+          <img
+            alt=""
+            src="/images/icons8-info-black-64.png"
+            className="w-4 h-4"
+          />
+          <p className="underline">Contact us</p>
+        </div>
+        <div
+          className={`  w-[96%] md:w-full mx-auto h-[800px] bg-white md:flex justify-between items-center rounded-lg transition-all duration-300`}
+        >
           {/* texts */}
-          <div className="w-full h-fit px-4 py-12 lg:px-14">
+          <div className="w-full px-4 pt-10 md:py-12 md:w-1/2 md:px-[3%] lg:px-[8%]">
             <div className="text-start">
-              <h1 className="text-[2rem] md:text-[2.5rem] text-black">
+              <h1 className="text-[2rem] lg:text-[3rem] md:text-[1.75rem] font-bold text-black">
                 Register
               </h1>
               <p className="font-light">
@@ -125,14 +135,25 @@ const Register = () => {
             </form>
           </div>
           {/* image */}
-          <div className="h-full rounded-r-xl hidden lg:block">
+          <div className="w-1/2 h-full bg-reg2 bg-cover bg-no-repeat hidden md:block rounded-r-lg p-5 relative">
+            <div className="w-[93%] p-6 rounded-lg bg-white/70 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black">
+              <p className="text-[1.2rem]">
+                "My name is salaam olanrewaju.. Thank you so much 1go.. You have
+                made my going to school stress free.. I can't imagine having to
+                queue or go through stress for bus, thank you very much"
+              </p>
+              <p className="text-[2rem] font-bold mt-6">salaam olanrewaju</p>
+            </div>
+          </div>
+          {/* <div className="h-full rounded-r-xl hidden lg:block">
             <img
               src="/images/registerbg.jpg"
               className="h-full opacity-70 rounded-r-xl object-fit"
             />
-          </div>
+          </div> */}
         </div>
       </section>
+
       <Footer />
       <ScrollToTop />
     </>
