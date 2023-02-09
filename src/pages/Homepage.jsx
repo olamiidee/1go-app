@@ -114,11 +114,11 @@ const Homepage = () => {
         </section>
 
         {/* Testimonial */}
-        <section className="w-full pb-[80px]">
+        <section className="w-full pb-[100px]">
           <h2 className="text-[1.65rem] md:text-[3rem] font-bold text-center">
             Testimonial from our users
           </h2>
-          <p className="font-light text-center text-[1rem] md:pb-24 w-[90%] mx-auto">
+          <p className="font-light text-center text-[1rem] md:pb-16 w-[90%] mx-auto">
             We are here to stay, see what our users have to say about our rides.
           </p>
           <Testimonials />

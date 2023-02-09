@@ -13,11 +13,12 @@ const Register = () => {
     <>
       {loader && <Loader />}
       <Header />
-      <section className="w-full min-h-screen">
-        <div className="w-full h-full bg-white flex flex-col justify-center items-center mt-[80px]">
-          <div className="px-6 py-12 w-full">
-            <div className="text-center">
-              <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
+      <section className="w-full h-full">
+        <div className="w-[95%] lg:w-[80%] mx-auto lg:h-full bg-white lg:grid grid-cols-2  mt-[80px] md:my-[150px] lg:rounded-xl lg:shadow-xl">
+          {/* texts */}
+          <div className="w-full h-fit px-4 py-12 lg:px-14">
+            <div className="text-start">
+              <h1 className="text-[2rem] md:text-[2.5rem] text-black">
                 Register
               </h1>
               <p className="font-light">
@@ -30,7 +31,7 @@ const Register = () => {
             </div>
             {/* register form */}
             <form>
-              <div className="font-light space-y-4 mt-8 py-6 w-full rounded-lg sm:px-8 sm:w-[90%] lg:w-[45%] sm:bg-[#EFF6FF] mx-auto">
+              <div className="font-light space-y-4 mt-6 pb-6 w-full h-full rounded-lg sm:mt-4">
                 {/* first name */}
                 <div>
                   <label htmlFor="firstname">First name</label>
@@ -102,7 +103,7 @@ const Register = () => {
                 <div>
                   <button
                     onClick={register}
-                    className="text-white bg-blue-500 reg-input border-transparent mt-4 hover:opacity-80"
+                    className="text-white bg-blue-500 reg-input border-transparent mt-8 hover:opacity-80"
                   >
                     Submit
                   </button>
@@ -122,6 +123,13 @@ const Register = () => {
                 </div>
               </div>
             </form>
+          </div>
+          {/* image */}
+          <div className="h-full rounded-r-xl hidden lg:block">
+            <img
+              src="/images/registerbg.jpg"
+              className="h-full opacity-70 rounded-r-xl object-fit"
+            />
           </div>
         </div>
       </section>
