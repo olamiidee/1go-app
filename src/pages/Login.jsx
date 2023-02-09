@@ -29,11 +29,27 @@ const Login = () => {
       {loader && <Loader />}
 
       <Header />
-      <section className="w-full h-full">
-        <div className="w-[95%] lg:w-[80%] mx-auto lg:h-[100vh] bg-white lg:flex justify-between items-center mt-[80px] md:my-[150px] lg:rounded-xl lg:shadow-xl">
-          <div className="w-full px-4 pt-12 lg:w-1/2 lg:px-14">
+      <section
+        className={` ${
+          userNotLoggedIn
+            ? "pt-[100px] sm:py-[200px]"
+            : "pt-[100px] sm:py-[150px]"
+        }w-full min-h-screen bg-blue-50 px-[2%] sm:px-[10.4%] relative flex justify-center items-center`}
+      >
+        <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-800 flex gap-2 items-center">
+          <img
+            alt=""
+            src="/images/icons8-info-black-64.png"
+            className="w-4 h-4"
+          />
+          <p className="underline">Contact us</p>
+        </div>
+        <div
+          className={`w-[96%] md:w-full mx-auto h-[600px] bg-white md:flex justify-between items-center rounded-lg transition-all duration-300`}
+        >
+          <div className="w-full px-4 pt-10 md:py-12 md:w-1/2 md:px-[3%] lg:px-[8%]">
             <div className="text-start">
-              <h1 className="text-[2rem] md:text-[2.5rem] text-black">
+              <h1 className="text-[2rem] lg:text-[3rem] md:text-[1.75rem] font-bold text-black">
                 Welcome back
               </h1>
               <p className="text-slate-500 font-light">
@@ -121,7 +137,16 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div className="w-1/2 rounded-r-xl h-full bg-reg1 bg-cover bg-no-repeat opacity-70 hidden lg:block"></div>
+          {/* image half */}
+          <div className="w-1/2 h-full bg-reg1 bg-cover bg-no-repeat hidden md:block rounded-r-lg p-5 relative">
+            <div className="w-[93%] p-6 rounded-lg bg-white/50 absolute bottom-4 left-[50%] translate-x-[-50%] text-black">
+              <p className="text-[1.2rem]">
+                "1go ride has been a life saver It reduces the stress of queuing
+                for long Its also fast and reliable"
+              </p>
+              <p className="text-[2rem] font-bold mt-6">Raji Olamide</p>
+            </div>
+          </div>
         </div>
 
         {forgotpsw && (
