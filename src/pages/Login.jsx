@@ -29,15 +29,15 @@ const Login = () => {
       {loader && <Loader />}
 
       <Header />
-      <section className="w-full min-h-screen relative">
+      <section className="w-full min-h-screen bg-blue-50 px-[2%] sm:py-[150px] sm:px-[10.4%] relative flex justify-center items-center">
         <div
           className={` ${
             userNotLoggedIn && "pt-[100px] md:pt-[50px]"
-          } w-[95%] mx-auto min-h-screen md:h-[100vh] bg-white md:flex justify-between items-center md:my-[150px] transition-all duration-300`}
+          } w-[96%] md:w-full mx-auto h-[600px] bg-white md:flex justify-between items-center rounded-lg transition-all duration-300`}
         >
-          <div className="w-full px-4 pt-36 md:pt-12 md:py-0 md:w-1/2 md:px-28">
+          <div className="w-full px-4 pt-10 md:py-12 md:w-1/2 md:px-[3%] lg:px-[8%]">
             <div className="text-start">
-              <h1 className="text-[2rem] md:text-[3rem] font-bold text-black">
+              <h1 className="text-[2rem] lg:text-[3rem] md:text-[1.75rem] font-bold text-black">
                 Welcome back
               </h1>
               <p className="text-slate-500 font-light">
@@ -125,7 +125,16 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div className="w-[45%] h-full bg-reg1 bg-cover bg-no-repeat opacity-70 hidden lg:block"></div>
+          {/* image half */}
+          <div className="w-1/2 h-full bg-reg1 bg-cover bg-no-repeat hidden md:block rounded-r-lg p-5 relative">
+            <div className="w-[93%] p-6 rounded-lg bg-white/50 absolute bottom-4 left-[50%] translate-x-[-50%] text-black">
+              <p className="text-[1.2rem]">
+                "1go ride has been a life saver It reduces the stress of queuing
+                for long Its also fast and reliable"
+              </p>
+              <p className="text-[2rem] font-bold mt-6">Raji Olamide</p>
+            </div>
+          </div>
         </div>
 
         {forgotpsw && (
