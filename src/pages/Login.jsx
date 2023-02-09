@@ -29,11 +29,23 @@ const Login = () => {
       {loader && <Loader />}
 
       <Header />
-      <section className="w-full min-h-screen bg-blue-50 px-[2%] sm:py-[150px] sm:px-[10.4%] relative flex justify-center items-center">
+      <section
+        className={` ${
+          userNotLoggedIn
+            ? "pt-[100px] sm:py-[200px]"
+            : "pt-[100px] sm:py-[150px]"
+        }w-full min-h-screen bg-blue-50 px-[2%] sm:px-[10.4%] relative flex justify-center items-center`}
+      >
+        <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-800 flex gap-2 items-center">
+          <img
+            alt=""
+            src="/images/icons8-info-black-64.png"
+            className="w-4 h-4"
+          />
+          <p className="underline">Contact us</p>
+        </div>
         <div
-          className={` ${
-            userNotLoggedIn && "pt-[100px] md:pt-[50px]"
-          } w-[96%] md:w-full mx-auto h-[600px] bg-white md:flex justify-between items-center rounded-lg transition-all duration-300`}
+          className={`w-[96%] md:w-full mx-auto h-[600px] bg-white md:flex justify-between items-center rounded-lg transition-all duration-300`}
         >
           <div className="w-full px-4 pt-10 md:py-12 md:w-1/2 md:px-[3%] lg:px-[8%]">
             <div className="text-start">
