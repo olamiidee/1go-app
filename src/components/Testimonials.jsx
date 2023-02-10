@@ -25,7 +25,10 @@ function Testimonials() {
         >
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[0].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -36,7 +39,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[1].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -47,7 +53,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[2].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -59,7 +68,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[3].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -70,7 +82,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[0].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -81,7 +96,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[4].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -92,11 +110,28 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[5].content}</p>
                 <p className="font-semibold pt-3 capitalize">
                   {Testimonial[5].name}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[6].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[6].name}
                 </p>
               </div>
             </div>
@@ -121,7 +156,10 @@ function Testimonials() {
         >
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[0].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -132,7 +170,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[1].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -143,7 +184,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[2].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -154,7 +198,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[3].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -165,7 +212,10 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[4].content}</p>
                 <p className="font-semibold pt-3 capitalize">
@@ -176,11 +226,28 @@ function Testimonials() {
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
                 <p className="font-light">{Testimonial[5].content}</p>
                 <p className="font-semibold pt-3 capitalize">
                   {Testimonial[5].name}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[6].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[6].name}
                 </p>
               </div>
             </div>
