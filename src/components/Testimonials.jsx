@@ -53,6 +53,7 @@ function Testimonials() {
                 <p className="font-semibold pt-3 capitalize">
                   {Testimonial[2].name}
                 </p>
+                <img src="" />
               </div>
             </div>
           </SwiperSlide>
