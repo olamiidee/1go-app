@@ -9,7 +9,7 @@ const Summary = () => {
   // paystack integration
   const config = {
     reference: new Date().getTime().toString(),
-    email: "user@example.com", //their maol
+    email: "user@example.com", //their mail
     amount: 20000, //amount is in Kobo
     publicKey: "pk_test_f4369369537d94d981fb84a72c675ecf04e12d2e",
   };
@@ -19,6 +19,7 @@ const Summary = () => {
     console.log(reference);
     const message = "Payment Complete! Reference: " + reference;
     alert(message);
+    console.log(transaction);
   };
   const onClose = () => {
     // implementation for whatever you want to do when the Paystack dialog closed.
