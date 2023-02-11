@@ -10,7 +10,7 @@ const Summary = () => {
   const config = {
     reference: new Date().getTime().toString(),
     email: "user@example.com", //their maol
-    amount: 50000, //amount is in Kobo
+    amount: 20000, //amount is in Kobo
     publicKey: "pk_test_f4369369537d94d981fb84a72c675ecf04e12d2e",
   };
   const onSuccess = (transaction) => {

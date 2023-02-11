@@ -761,6 +761,7 @@ video {
   margin-top: 2.5rem;
 }
 
+
 .mt-\[80px\] {
   margin-top: 80px;
 }
@@ -849,17 +850,17 @@ video {
   height: 50%;
 }
 
-.h-\[fit-content\] {
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
 .h-screen {
   height: 100vh;
 }
 
 .h-4 {
   height: 1rem;
+}
+
+.h-\[fit-content\] {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-\[80vh\] {
@@ -870,9 +871,14 @@ video {
   height: 600px;
 }
 
+
+.h-\[800px\] {
+  height: 800px;
+
 .h-fit {
   height: -moz-fit-content;
   height: fit-content;
+
 }
 
 .h-\[650px\] {
@@ -1012,9 +1018,11 @@ video {
   width: 93%;
 }
 
-.w-\[40\%\] {
-  width: 40%;
+.w-\[93\%\] {
+  width: 93%;
 }
+
+.w-\[40\%\] {
 
 .w-\[95\%\] {
   width: 95%;
@@ -1032,10 +1040,6 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1837,14 +1841,24 @@ video {
   color: rgb(100 116 139 / var(--tw-text-opacity));
 }
 
+.text-slate-800 {
+  --tw-text-opacity: 1;
+  color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+
 .text-slate-800 {
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
+
 }
 
 .underline {
@@ -1989,7 +2003,7 @@ video {
 .copy--div {
   width: 100%;
   display: flex;
-  margin-top: 20px;
+  align-items: center;
 }
 
 .copy--div > ul {
@@ -2053,7 +2067,7 @@ video {
   .copy--div {
     width: 100%;
     display: block;
-    margin-top: 20px;
+    margin-top: 0px;
   }
 
   .logo--div > ul {
@@ -2086,7 +2100,7 @@ video {
 
 .swiper {
   width: 85%;
-  height: 100%;
+  height: 180px;
 }
 
 .swiper-slide {
@@ -2225,6 +2239,12 @@ input[type="number"] {
     padding-right: 10.5%;
   }
 
+
+  .sm\:py-\[200px\] {
+    padding-top: 200px;
+    padding-bottom: 200px;
+  }
+
   .sm\:py-\[150px\] {
     padding-top: 150px;
     padding-bottom: 150px;
@@ -2240,6 +2260,7 @@ input[type="number"] {
     padding-bottom: 170px;
   }
 
+
   .sm\:py-\[200px\] {
     padding-top: 200px;
     padding-bottom: 200px;
@@ -2253,11 +2274,6 @@ input[type="number"] {
 
   .md\:left-\[10\.5\%\] {
     left: 10.5%;
-  }
-
-  .md\:my-\[150px\] {
-    margin-top: 150px;
-    margin-bottom: 150px;
   }
 
   .md\:mt-0 {
@@ -2466,6 +2482,8 @@ input[type="number"] {
     display: block;
   }
 
+
+
   .lg\:grid {
     display: grid;
   }
@@ -2473,6 +2491,7 @@ input[type="number"] {
   .lg\:hidden {
     display: none;
   }
+
 
   .lg\:h-full {
     height: 100%;
@@ -2484,10 +2503,6 @@ input[type="number"] {
 
   .lg\:gap-8 {
     gap: 2rem;
-  }
-
-  .lg\:rounded-xl {
-    border-radius: 0.75rem;
   }
 
   .lg\:bg-center {
@@ -2512,6 +2527,7 @@ input[type="number"] {
   .lg\:px-14 {
     padding-left: 3.5rem;
     padding-right: 3.5rem;
+
   }
 
   .lg\:pt-\[15\%\] {
@@ -2524,11 +2540,13 @@ input[type="number"] {
 
   .lg\:text-\[3rem\] {
     font-size: 3rem;
+
   }
 
   .lg\:shadow-xl {
     --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
   }
 }

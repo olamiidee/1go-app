@@ -15,9 +15,9 @@ export default function Footer() {
   return (
     <footer>
       <div className="footer">
-        <div className="logo--div">
+        <div className="logo--div flex">
           <h1 className="font-bold text-[2rem]">1go </h1>
-          <div className="logo--cont flex space-x-3">
+          <div className="logo--cont flex items-center space-x-3">
             {/* telephone */}
             <div className="cursor-pointer hover:translate-y-[6px] transition-all duration-300">
               <a

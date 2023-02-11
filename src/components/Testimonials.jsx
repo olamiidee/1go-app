@@ -4,7 +4,7 @@ import "swiper/css";
 // import "swiper/css/pagination";
 import "../input.css";
 import { Autoplay, Pagination } from "swiper";
-import TestimonialProfile from "./TestimonialProfile";
+import Testimonial from "./TestimonialData";
 
 function Testimonials() {
   return (
@@ -25,58 +25,121 @@ function Testimonials() {
         >
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
-                <p className="font-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-                  et, omnis est cumque quaerat obcaecati illum modi saepe
-                  officiis atque, nesciunt
+                <p className="font-light">{Testimonial[0].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[0].name}
                 </p>
-                <p className="font-semibold pt-3 capitalize">My Name</p>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>ll</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
-                <p className="font-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-                  et, omnis est cumque quaerat obcaecati illum modi saepe
-                  officiis atque, nesciunt
+                <p className="font-light">{Testimonial[1].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[1].name}
                 </p>
-                <p className="font-semibold pt-3 capitalize">My Name</p>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
-                <p className="font-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-                  et, omnis est cumque quaerat obcaecati illum modi saepe
-                  officiis atque, nesciunt
+                <p className="font-light">{Testimonial[2].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[2].name}
                 </p>
-                <p className="font-semibold pt-3 capitalize">My Name</p>
+                <img src="" />
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>mm</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
-                <p className="font-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-                  et, omnis est cumque quaerat obcaecati illum modi saepe
-                  officiis atque, nesciunt
+                <p className="font-light">{Testimonial[3].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[3].name}
                 </p>
-                <p className="font-semibold pt-3 capitalize">My Name</p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[0].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[0].name}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[4].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[4].name}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[5].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[5].name}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[6].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[6].name}
+                </p>
               </div>
             </div>
           </SwiperSlide>
         </Swiper>
       </div>
+
+      {/* mobile */}
       <div className="mt-14 md:mt-0 lg:hidden">
         <Swiper
           slidesPerView={1}
@@ -93,53 +156,99 @@ function Testimonials() {
         >
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
-                <p className="font-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-                  et, omnis est cumque quaerat obcaecati illum modi saepe
-                  officiis atque, nesciunt
+                <p className="font-light">{Testimonial[0].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[0].name}
                 </p>
-                <p className="font-semibold pt-3 capitalize">My Name</p>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>kk</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
-                <p className="font-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-                  et, omnis est cumque quaerat obcaecati illum modi saepe
-                  officiis atque, nesciunt
+                <p className="font-light">{Testimonial[1].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[1].name}
                 </p>
-                <p className="font-semibold pt-3 capitalize">My Name</p>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div>ll</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
-                <p className="font-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-                  et, omnis est cumque quaerat obcaecati illum modi saepe
-                  officiis atque, nesciunt
+                <p className="font-light">{Testimonial[2].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[2].name}
                 </p>
-                <p className="font-semibold pt-3 capitalize">My Name</p>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex justify-between p-4 space-x-6">
-              <div className="h-[fit-content] rounded-full">hh</div>
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
               <div className="flex flex-col items-start text-left">
-                <p className="font-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-                  et, omnis est cumque quaerat obcaecati illum modi saepe
-                  officiis atque, nesciunt
+                <p className="font-light">{Testimonial[3].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[3].name}
                 </p>
-                <p className="font-semibold pt-3 capitalize">My Name</p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[4].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[4].name}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[5].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[5].name}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex justify-between p-4 space-x-6">
+              <img
+                src="./images/icon8-user.png"
+                className="w-[30px] h-[30px]"
+              />
+              <div className="flex flex-col items-start text-left">
+                <p className="font-light">{Testimonial[6].content}</p>
+                <p className="font-semibold pt-3 capitalize">
+                  {Testimonial[6].name}
+                </p>
               </div>
             </div>
           </SwiperSlide>
