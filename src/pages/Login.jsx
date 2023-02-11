@@ -30,11 +30,7 @@ const Login = () => {
 
       <Header />
       <section
-        className={` ${
-          userNotLoggedIn
-            ? "pt-[100px] sm:py-[200px]"
-            : "pt-[100px] sm:py-[150px]"
-        }w-full min-h-screen bg-blue-50 px-[2%] sm:px-[10.4%] relative flex justify-center items-center`}
+        className={` pt-[100px] sm:py-[200px] w-full min-h-screen bg-blue-50 px-[2%] sm:px-[10.4%] relative flex justify-center items-center`}
       >
         <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-800 flex gap-2 items-center">
           <img
