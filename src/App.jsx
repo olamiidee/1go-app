@@ -14,7 +14,7 @@ import BookingTimes from "./admin/BookingTimes";
 import AdminLogin from "./admin/AdminLogin";
 
 function App() {
-  const { user, admin } = useAppContext();
+  const { user, admin, activeRidesFromDb } = useAppContext();
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
@@ -27,7 +27,11 @@ function App() {
       {user && (
         <>
           <Route path="/book-ride" element={<BookRides />} />
-          <Route path="/book-ride/summary/:id" element={<Summary />} />
+          {!activeRidesFromDb?.length > 0 ? (
+            <Route path="/book-ride/summary/:id" element={<Summary />} />
+          ) : (
+            <Route path="/book-ride" element={<BookRides />} />
+          )}
         </>
       )}
 

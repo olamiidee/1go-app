@@ -62,7 +62,7 @@ const BookRides = () => {
             </section>
 
             {/* if ride is active show this tab at the top */}
-            {activeRidesFromDb.length > 0 && (
+            {activeRidesFromDb?.length > 0 && (
               <section className="w-full mt-10">
                 <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
                   Active booking
@@ -92,19 +92,28 @@ const BookRides = () => {
                     </div>
                   )}
                   {/* <ActiveBooking /> */}
-                  <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
-                    PS: You can only have one active booking at a time
-                  </p>
+                  <div className=" flex gap-1 items-center absolute bottom-4">
+                    <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-information-64.png"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
+                      You can have only one active ride at once
+                    </p>
+                  </div>
                 </div>
               </section>
             )}
             {/* if ride is active show this tab at the top */}
 
             {/* if ride is not active show booking times at the top */}
-            {!activeRidesFromDb.length > 0 && (
+            {!activeRidesFromDb?.length > 0 && (
               <section className="w-full border-b border-zinc-300 pb-16 pt-12">
                 <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-white">
-                  Available booking times
+                  Booking times
                 </h1>
                 <div className="w-[fit-content] text-[1.1rem] font-medium text-white text-center mb-3 flex items-center gap-3 mx-auto">
                   <p> Click on a time to book now at</p>{" "}
@@ -171,7 +180,7 @@ const BookRides = () => {
         </section>
 
         {/* if ride is not active show this box at bottom */}
-        {!activeRidesFromDb.length > 0 && (
+        {!activeRidesFromDb?.length > 0 && (
           <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
             <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
               Active booking
@@ -189,7 +198,7 @@ const BookRides = () => {
                 </p>
               </div>
               {/* <ActiveBooking /> */}
-              <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
+              <p className="text-[0.75rem] text-slate-600 absolute bottom-4 py-1 px-3 rounded-full bg-blue-400/30">
                 PS: You can only have one active booking at a time
               </p>
             </div>
@@ -204,7 +213,7 @@ const BookRides = () => {
           <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center">
             {/* each ride history */}
 
-            {rideHistoryFromDb.length > 0 ? (
+            {rideHistoryFromDb?.length > 0 ? (
               rideHistoryFromDb?.map((item, index) => {
                 return (
                   <RideHistory

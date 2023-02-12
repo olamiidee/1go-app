@@ -1,6 +1,6 @@
 import { useAppContext } from "../contexts/AppContext";
 
-const ActiveBooking = ({ activeRidesFromDb }) => {
+const ActiveBooking = ({ item }) => {
   const { markCompleted } = useAppContext();
 
   return (
@@ -13,7 +13,7 @@ const ActiveBooking = ({ activeRidesFromDb }) => {
             className="w-6 h-6 mr-1"
           />
           <p>
-            Time: <strong>{activeRidesFromDb[0]?.time}</strong>
+            Time: <strong>{item?.time}</strong>
           </p>
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
@@ -23,7 +23,7 @@ const ActiveBooking = ({ activeRidesFromDb }) => {
             className="w-6 h-6 mr-1"
           />
           <p>
-            Booking Code: <strong>{activeRidesFromDb[0]?.bookingCode}</strong>
+            Booking Code: <strong>{item?.bookingCode}</strong>
           </p>
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md mr-auto">
@@ -33,7 +33,7 @@ const ActiveBooking = ({ activeRidesFromDb }) => {
             className="w-6 h-6 mr-1"
           />
           <p>
-            Price: <strong>NGN {activeRidesFromDb[0]?.price}</strong>
+            Price: <strong>NGN {item?.price}</strong>
           </p>
         </div>
         <div
@@ -61,7 +61,7 @@ const ActiveBooking = ({ activeRidesFromDb }) => {
             />
             <p>Time: </p>
           </div>
-          <p className="font-bold">{activeRidesFromDb[0]?.time}</p>
+          <p className="font-bold">{item?.time}</p>
         </div>
         <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
           <div className="mr-auto flex items-center">
@@ -72,7 +72,7 @@ const ActiveBooking = ({ activeRidesFromDb }) => {
             />
             <p>Booking Code: </p>
           </div>
-          <p className="font-bold">{activeRidesFromDb[0]?.bookingCode}</p>
+          <p className="font-bold">{item?.bookingCode}</p>
         </div>
         <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
           <div className="mr-auto flex items-center">
@@ -83,7 +83,7 @@ const ActiveBooking = ({ activeRidesFromDb }) => {
             />
             <p>Price: </p>
           </div>
-          <p className="font-bold">NGN {activeRidesFromDb[0]?.price} </p>
+          <p className="font-bold">NGN {item?.price} </p>
         </div>
 
         <div

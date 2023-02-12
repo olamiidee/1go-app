@@ -4,7 +4,7 @@ import RideHistory from "../components/RideHistory";
 import { useAppContext } from "../contexts/AppContext";
 
 const AdminDashboard = () => {
-  const { allUsers } = useAppContext();
+  const { allUsers, allRides, ridesToday } = useAppContext();
   return (
     <div className="w-full">
       <Sidebar />
@@ -42,11 +42,13 @@ const AdminDashboard = () => {
                 <h3 className="text-[0.9rem] md:text-[1.2rem]">
                   Total bookings
                 </h3>
-                <h3 className="font-bold text-[1.5rem]">0</h3>
+                <h3 className="font-bold text-[1.5rem]">{allRides?.length}</h3>
               </div>
               <div className="border-l border-sky-500 pl-3">
                 <h3 className="text-[0.9rem] md:text-[1.2rem]">Total today</h3>
-                <h3 className="font-bold text-[1.5rem]">0</h3>
+                <h3 className="font-bold text-[1.5rem]">
+                  {ridesToday?.length}
+                </h3>
               </div>
             </div>
           </div>
@@ -55,17 +57,22 @@ const AdminDashboard = () => {
           <h3 className="text-[1.1rem] font-medium pb-2 mb-4 border-b border-slate-300">
             Booking history today
           </h3>
-          <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
-            <img alt="" src="/images/empty.png" className="w-20 h-20 mb-8" />
-            <p className="text-slate-400">No booking history yet...</p>
-          </div>
-          {/* <RideHistory />
-          <RideHistory />
-          <RideHistory />
-          <RideHistory />
-          <RideHistory /> */}
+
+          {ridesToday ? (
+            ridesToday?.map((item, index) => {
+              return <RideHistory item={item} index={index} />;
+            })
+          ) : (
+            <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+              <img alt="" src="/images/empty.png" className="w-20 h-20 mb-8" />
+              <p className="text-slate-400">No booking history yet...</p>
+            </div>
+          )}
           <div className="w-full text-center">
-            <button className="px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
+            <button
+              className="px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3 disabled:opacity-75"
+              disabled
+            >
               Load nore
             </button>
           </div>

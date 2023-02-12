@@ -32,23 +32,23 @@ const RideHistory = ({ item }) => {
 
       {/* mobile ui */}
 
-      <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.9rem] md:text-[1rem] rounded-md flex md:hidden flex-wrap md:flex-nowrap gap-3 items-center">
-        <div className="">
+      <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.75rem] md:text-[1rem] rounded-md flex md:hidden flex-wrap md:flex-nowrap items-center">
+        <div className="mr-2">
           <img
             alt=""
             src="/images/icons8-checkmark-64.png"
-            className="w-8 h-8 mr-1"
+            className="w-6 h-6"
           />
         </div>
-        <div className="px-3 md:p-2 border-x-2 border-slate-400/50 md:mr-4">
+        <div className=" px-2 md:p-2 border-x-2 border-slate-400/50 md:mr-4">
           <div>Time:</div>
           <div>{item?.time}</div>
         </div>
-        <div className="px-3 md:p-2 border-r-2 border-slate-400/50 md:mr-4">
+        <div className="px-2 md:p-2 border-r-2 border-slate-400/50">
           <div>Code:</div>
           <div>{item?.bookingCode}</div>
         </div>
-        <div className="px-3 md:p-2 md:mr-4">
+        <div className="pl-2">
           <div>Price:</div>
           <div>NGN {item?.price}</div>
         </div>

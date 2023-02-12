@@ -1,7 +1,7 @@
 import { useAppContext } from "../contexts/AppContext";
 
 const BookSuccessModal = () => {
-  const { cloaseSuccessModal } = useAppContext();
+  const { cloaseSuccessModal, activeRidesFromDb } = useAppContext();
   return (
     <div className="w-full h-[100vh] fixed top-0 left-0 bg-black/90 flex justify-center items-center z-[100]">
       <div className="w-full text-[1.2rem] md:text-[2rem] font-medium p-[25px] md:py-[20px] rounded-2xl flex justify-center items-center">

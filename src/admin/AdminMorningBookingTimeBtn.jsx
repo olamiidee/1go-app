@@ -1,6 +1,6 @@
 const AdminMorningBookingTimeBtn = ({ item, handleDeleteMorningTime }) => {
   return (
-    <div className="px-3 py-1 bg-blue-300 rounded-md relative flex items-center">
+    <div className="px-3 py-1 bg-blue-300 rounded-md relative flex items-center mb-5">
       <div
         onClick={() => handleDeleteMorningTime(item.id)}
         className="absolute top-[-10px] right-[-10px] w-6 h-6 rounded-full flex items-center justify-center bg-white border hover:border-blue-600 border-blue-400 hover:bg-blue-300 cursor-pointer"
@@ -9,6 +9,9 @@ const AdminMorningBookingTimeBtn = ({ item, handleDeleteMorningTime }) => {
       </div>
       <div className="text-[0.85rem] transition-all duration-300">
         {item?.time}
+      </div>
+      <div className="text-[0.75rem] border border-blue-400 rounded-md px-3 absolute bottom-[-23px] font-medium">
+        {item.slots}
       </div>
     </div>
   );

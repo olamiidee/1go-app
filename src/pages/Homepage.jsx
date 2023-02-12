@@ -122,6 +122,7 @@ const Homepage = () => {
             We are here to stay, see what our users have to say about our rides.
           </p>
           <Testimonials />
+          {/* <p className="text-[0.75rem]">Swipe..</p> */}
         </section>
 
         {/* Contact form */}

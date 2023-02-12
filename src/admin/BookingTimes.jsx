@@ -79,7 +79,7 @@ const BookingTimes = () => {
             </button>
           </div>
           {openMorningEdit && (
-            <div className="w-full h-[77%] bg-blue-50 absolute bottom-0 left-0">
+            <div className="w-full h-full sm:h-[77%] bg-blue-50 absolute bottom-0 left-0 rounded-lg">
               <img
                 alt=""
                 src="/images/icons8-close-30.png"
@@ -90,13 +90,13 @@ const BookingTimes = () => {
                 <h2 className="pb-4 text-center font-medium">
                   Add booking time
                 </h2>
-                <form className="flex gap-4">
+                <form className="flex gap-2 sm:gap-4">
                   <input
                     type="number"
                     id="morningHour"
                     onChange={handleMorningChange}
                     placeholder="7"
-                    className="bg-blue-50 w-16 p-3 border-2 border-blue-400 rounded-md outline-none"
+                    className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none"
                     required
                   />
                   <p className="font-bold text-[2rem]">:</p>
@@ -105,7 +105,7 @@ const BookingTimes = () => {
                     id="morningMinute"
                     onChange={handleMorningChange}
                     placeholder="15"
-                    className="bg-blue-50 w-16 p-3 border-2 border-blue-400 rounded-md outline-none"
+                    className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none"
                     required
                   />
                   <div className="relative">
@@ -114,13 +114,24 @@ const BookingTimes = () => {
                       placeholder="AM"
                       onChange={handleMorningChange}
                       value={morningForm.morningAmpm}
-                      className="bg-blue-50 w-16 p-3 border-2 border-blue-400 rounded-md outline-none"
+                      className="bg-blue-50 w-12 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none h-full"
                     />
                     <div className="absolute top-0 w-full h-full bg-blue-400/20"></div>
                   </div>
+                  <div>
+                    <input
+                      type="number"
+                      id="slots"
+                      onChange={handleMorningChange}
+                      placeholder="14"
+                      className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      required
+                    />
+                    <p>Slots</p>
+                  </div>
                   <button
                     onClick={handleMorningBookingTimeSubmit}
-                    className="py-3 px-8 bg-blue-400 rounded-md text-white hover:bg-blue-500"
+                    className="h-[fit-content] py-3 px-5 sm:px-8 bg-blue-400 rounded-md text-white hover:bg-blue-500"
                   >
                     Add
                   </button>
@@ -159,7 +170,7 @@ const BookingTimes = () => {
             </button>
           </div>
           {openNoonEdit && (
-            <div className="w-full h-[77%] bg-blue-50 absolute bottom-0 left-0">
+            <div className="w-full h-full sm:h-[77%] bg-blue-50 absolute bottom-0 left-0 rounded-lg">
               <img
                 alt=""
                 src="/images/icons8-close-30.png"
@@ -170,13 +181,13 @@ const BookingTimes = () => {
                 <h2 className="pb-4 text-center font-medium">
                   Add booking time
                 </h2>
-                <form className="flex gap-4">
+                <form className="flex gap-2 sm:gap-4">
                   <input
                     type="number"
                     id="noonHour"
                     onChange={handlenoonChange}
                     placeholder="7"
-                    className="bg-blue-50 w-16 p-3 border-2 border-blue-400 rounded-md outline-none"
+                    className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none"
                     required
                   />
                   <p className="font-bold text-[2rem]">:</p>
@@ -185,7 +196,7 @@ const BookingTimes = () => {
                     id="noonMinute"
                     onChange={handlenoonChange}
                     placeholder="15"
-                    className="bg-blue-50 w-16 p-3 border-2 border-blue-400 rounded-md outline-none"
+                    className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none"
                     required
                   />
                   <div className="relative">
@@ -194,13 +205,24 @@ const BookingTimes = () => {
                       placeholder="PM"
                       value={noonForm.noonAmpm}
                       onChange={handlenoonChange}
-                      className="bg-blue-50 w-16 p-3 border-2 border-blue-400 rounded-md outline-none"
+                      className="bg-blue-50 w-12 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none h-full"
                     />
                     <div className="absolute top-0 w-full h-full bg-blue-400/20"></div>
                   </div>
+                  <div>
+                    <input
+                      type="number"
+                      id="slots"
+                      onChange={handlenoonChange}
+                      placeholder="14"
+                      className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      required
+                    />
+                    <p>Slots</p>
+                  </div>
                   <button
                     onClick={handleNoonBookingTimeSubmit}
-                    className="py-3 px-8 bg-blue-400 rounded-md text-white hover:bg-blue-500"
+                    className="h-[fit-content] py-3 px-5 sm:px-8 bg-blue-400 rounded-md text-white hover:bg-blue-500"
                   >
                     Add
                   </button>
