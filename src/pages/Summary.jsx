@@ -28,7 +28,7 @@ const Summary = () => {
     reference: new Date().getTime().toString(),
     email: `${currentUserFromDb.email}`, //their mail
     amount: `${priceFromDb[0].price}00`, //amount is in Kobo
-    publicKey: "pk_test_f4369369537d94d981fb84a72c675ecf04e12d2e",
+    publicKey: `${import.meta.env.VITE_PAYSTACK_PUBLIC_KEY}`,
   };
 
   //to init paystack
