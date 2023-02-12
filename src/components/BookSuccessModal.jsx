@@ -17,10 +17,7 @@ const BookSuccessModal = () => {
             src="/images/icons8-checkmark-64.png"
             className="w-16 sm:w-20 h-16 sm:h-20 mr-1"
           />
-          <p>
-            Ride booked successfully! Vehicle will arrive at selected time:{" "}
-            {activeRidesFromDb?.time}
-          </p>
+          <p>Ride booked successfully!</p>
         </div>
       </div>
     </div>

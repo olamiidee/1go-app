@@ -4,6 +4,15 @@ import ScrollToTop from "../ScrollToTop";
 import { Link, useParams } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import { usePaystackPayment } from "react-paystack";
+import {
+  collection,
+  query,
+  where,
+  updateDoc,
+  doc,
+  getDoc,
+} from "firebase/firestore";
+import { db } from "../firebase/firebase-config";
 
 const Summary = () => {
   const {
@@ -16,6 +25,8 @@ const Summary = () => {
     navigate,
     createRideDoc,
     formattedDate,
+    setLoader,
+    createdAt,
   } = useAppContext();
 
   let allTimes = [...morningBookingTimesFromDb, ...noonBookingTimesFromDb];
@@ -23,11 +34,51 @@ const Summary = () => {
   const { id } = useParams();
   const eachTime = allTimes.filter((item) => item.id === id)[0];
 
+  //to update slots   //to update slots   //to update slots
+  //to update slots   //to update slots   //to update slots
+  const morningTimeRef = morningBookingTimesFromDb.filter(
+    (item) => item.time === eachTime.time
+  )[0];
+  const noonTimeRef = noonBookingTimesFromDb.filter(
+    (item) => item.time === eachTime.time
+  )[0];
+
+  //to reduce slot count by 1
+  async function updateSlotsCount() {
+    setLoader(true);
+    try {
+      if (morningTimeRef) {
+        const timeQuery = doc(
+          db,
+          "morningBookingTimes",
+          `${morningTimeRef.id}`
+        );
+        const docSnap = await getDoc(timeQuery);
+        let timeData = docSnap.data();
+        await updateDoc(timeQuery, {
+          slots: timeData?.slots - 1,
+        });
+      }
+      if (noonTimeRef) {
+        const timeQuery = doc(db, "noonBookingTimes", `${noonTimeRef.id}`);
+        const docSnap = await getDoc(timeQuery);
+        let timeData = docSnap.data();
+        await updateDoc(timeQuery, {
+          slots: timeData?.slots - 1,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoader(false);
+    }
+  }
+
   // paystack integration
   const paystackConfig = {
     reference: new Date().getTime().toString(),
-    email: `${currentUserFromDb.email}`, //their mail
-    amount: `${priceFromDb[0].price}00`, //amount is in Kobo
+    email: `${currentUserFromDb?.email}`, //their mail
+    amount: `${priceFromDb[0]?.price}00`, //amount is in Kobo
     publicKey: `${import.meta.env.VITE_PAYSTACK_TEST_KEY}`,
   };
 
@@ -45,6 +96,7 @@ const Summary = () => {
       transaction.reference,
       formattedDate
     );
+    updateSlotsCount();
     navigate("/book-ride");
   };
   const onClose = () => {

@@ -104,9 +104,6 @@ const BookRides = () => {
                       You can have only one active ride at once
                     </p>
                   </div>
-                  {/* <p className="text-[0.75rem] text-slate-600 absolute bottom-4 py-1 px-3 rounded-full bg-blue-400/30">
-                    PS: You can only have one active booking at a time
-                  </p> */}
                 </div>
               </section>
             )}
@@ -116,7 +113,7 @@ const BookRides = () => {
             {!activeRidesFromDb?.length > 0 && (
               <section className="w-full border-b border-zinc-300 pb-16 pt-12">
                 <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-white">
-                  Available booking times
+                  Booking times
                 </h1>
                 <div className="w-[fit-content] text-[1.1rem] font-medium text-white text-center mb-3 flex items-center gap-3 mx-auto">
                   <p> Click on a time to book now at</p>{" "}
