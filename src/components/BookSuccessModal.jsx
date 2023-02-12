@@ -1,7 +1,7 @@
 import { useAppContext } from "../contexts/AppContext";
 
 const BookSuccessModal = () => {
-  const { cloaseSuccessModal } = useAppContext();
+  const { cloaseSuccessModal, activeRidesFromDb } = useAppContext();
   return (
     <div className="w-full h-[100vh] fixed top-0 left-0 bg-black/90 flex justify-center items-center z-[100]">
       <div className="w-full text-[1.2rem] md:text-[2rem] font-medium p-[25px] md:py-[20px] rounded-2xl flex justify-center items-center">
@@ -17,7 +17,10 @@ const BookSuccessModal = () => {
             src="/images/icons8-checkmark-64.png"
             className="w-16 sm:w-20 h-16 sm:h-20 mr-1"
           />
-          <p>Ride booked successfully!</p>
+          <p>
+            Ride booked successfully! Vehicle will arrive at selected time:{" "}
+            {activeRidesFromDb?.time}
+          </p>
         </div>
       </div>
     </div>

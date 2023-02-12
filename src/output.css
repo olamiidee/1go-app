@@ -741,6 +741,10 @@ video {
   margin-right: 25px;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 .mt-14 {
   margin-top: 3.5rem;
 }
@@ -755,10 +759,6 @@ video {
 
 .mt-5 {
   margin-top: 1.25rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .block {
@@ -843,11 +843,6 @@ video {
 
 .h-\[65px\] {
   height: 65px;
-}
-
-.h-\[fit-content\] {
-  height: -moz-fit-content;
-  height: fit-content;
 }
 
 .h-screen {
@@ -1403,6 +1398,14 @@ video {
   background-color: rgb(255 255 255 / 0.7);
 }
 
+.bg-blue-400\/40 {
+  background-color: rgb(96 165 250 / 0.4);
+}
+
+.bg-blue-400\/30 {
+  background-color: rgb(96 165 250 / 0.3);
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -1638,6 +1641,10 @@ video {
   padding-top: 100px;
 }
 
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
 .pt-3 {
   padding-top: 0.75rem;
 }
@@ -1684,10 +1691,6 @@ video {
 
 .pb-6 {
   padding-bottom: 1.5rem;
-}
-
-.pl-2 {
-  padding-left: 0.5rem;
 }
 
 .text-left {
@@ -1746,12 +1749,12 @@ video {
   font-size: 0.95rem;
 }
 
-.text-\[3rem\] {
-  font-size: 3rem;
-}
-
 .text-\[0\.75rem\] {
   font-size: 0.75rem;
+}
+
+.text-\[3rem\] {
+  font-size: 3rem;
 }
 
 .text-sm {
@@ -1839,6 +1842,30 @@ video {
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity));
+}
+
+.text-blue-700 {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
+.text-blue-400\/50 {
+  color: rgb(96 165 250 / 0.5);
+}
+
+.text-slate-600 {
+  --tw-text-opacity: 1;
+  color: rgb(71 85 105 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -2080,7 +2107,7 @@ video {
 
 .swiper {
   width: 85%;
-  height: 180px;
+  min-height: 180px;
 }
 
 .swiper-slide {
@@ -2089,7 +2116,9 @@ video {
   background: #fff;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  border-radius: 10px;
+  border: 1px solid #60a5fa;
 }
 
 /* target the active bullet */

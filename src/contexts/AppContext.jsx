@@ -204,11 +204,20 @@ const AppContextProvider = ({ children }) => {
   };
 
   //to log out users
-  const logout = () => {
-    signOut(auth).then(() => {
-      navigate("/");
-    });
-    localStorage.removeItem("userDetails");
+  const logout = async () => {
+    setLoader(true);
+    try {
+      localStorage.removeItem("userDetails");
+      localStorage.removeItem("activeRide");
+      localStorage.removeItem("rideHistory");
+      signOut(auth).then(() => {
+        navigate("/");
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoader(false);
+    }
   };
 
   //to show and hide password
@@ -735,7 +744,7 @@ const AppContextProvider = ({ children }) => {
           time: time,
           price: price,
           paymentRef: paymentRef,
-          active: true,
+          active: `true_${email}`,
           createdAt: createdAt,
           bookingCode: bookingCode,
         }
@@ -753,7 +762,7 @@ const AppContextProvider = ({ children }) => {
           time: time,
           price: price,
           paymentRef: paymentRef,
-          active: false,
+          active: `false_${email}`,
           createdAt: createdAt,
           bookingCode: bookingCode,
         }
@@ -769,6 +778,10 @@ const AppContextProvider = ({ children }) => {
   const [activeRidesFromDb, setActiveRidesFromDb] = useState(
     JSON.parse(localStorage.getItem("activeRide")) || []
   );
+  useEffect(() => {
+    setActiveRidesFromDb(JSON.parse(localStorage.getItem("activeRide")));
+  }, [currentUserFromDb]);
+
   //to get user's active ride saved in db
   useEffect(() => {
     if (user) {
@@ -776,7 +789,7 @@ const AppContextProvider = ({ children }) => {
         setLoader(true);
         const userQuery = query(
           collection(db, "activeRide"),
-          where("email", "==", user?.email) && where("active", "==", true)
+          where("active", "==", `true_${currentUserFromDb?.email}`)
         );
         try {
           const querySnapshot = await getDocs(userQuery);
@@ -787,11 +800,9 @@ const AppContextProvider = ({ children }) => {
           ride.length > 0 &&
             localStorage.setItem("activeRide", JSON.stringify(ride));
           ride.length > 0 && setActiveRidesFromDb(ride);
-
-          // setLoader(false);
+          // setActiveRideChange((prev) => !prev);
         } catch (err) {
           console.log(err.message);
-          // setLoader(false);
         } finally {
           setLoader(false);
           setTakingLong(false);
@@ -799,12 +810,16 @@ const AppContextProvider = ({ children }) => {
       };
       getActiveRides();
     }
-  }, [activeRideChange]);
+  }, [currentUserFromDb]);
 
   //to get and store ride history
   const [rideHistoryFromDb, setRideHistoryFromDb] = useState(
     JSON.parse(localStorage.getItem("rideHistory")) || []
   );
+  useEffect(() => {
+    setRideHistoryFromDb(JSON.parse(localStorage.getItem("rideHistory")));
+  }, [currentUserFromDb]);
+
   //to get user's active ride saved in db
   useEffect(() => {
     if (user) {
@@ -812,7 +827,7 @@ const AppContextProvider = ({ children }) => {
         setLoader(true);
         const userQuery = query(
           collection(db, "rideHistory"),
-          where("email", "==", user?.email) && where("active", "==", false)
+          where("active", "==", `false_${currentUserFromDb?.email}`)
         );
         try {
           const querySnapshot = await getDocs(userQuery);
@@ -823,18 +838,16 @@ const AppContextProvider = ({ children }) => {
           ride.length > 0 &&
             localStorage.setItem("rideHistory", JSON.stringify(ride));
           ride.length > 0 && setRideHistoryFromDb(ride);
-
-          // setLoader(false);
+          // setActiveRideChange((prev) => !prev);
         } catch (err) {
           console.log(err.message);
-          // setLoader(false);
         } finally {
           setLoader(false);
         }
       };
       getRidesHistory();
     }
-  }, [activeRideChange]);
+  }, [currentUserFromDb]);
 
   const [bookingSuccess, setBookingSuccess] = useState(false);
   function cloaseSuccessModal() {
