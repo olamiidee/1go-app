@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   createUserWithEmailAndPassword,
@@ -22,6 +22,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
+import { usePaystackPayment } from "react-paystack";
 
 export const AppContext = createContext();
 
@@ -191,7 +192,9 @@ const AppContextProvider = ({ children }) => {
       setLoader(false);
       console.log(error.message);
       if (error.message === "Firebase: Error (auth/user-not-found).") {
-        setErrorMessage("Invalid login details");
+        setErrorMessage("Email address does not exist");
+      } else if (error.message === "Firebase: Error (auth/wrong-password).") {
+        setErrorMessage("Invalid login credentials");
       } else if (
         error.message === "Firebase: Error (auth/network-request-failed)."
       ) {
@@ -240,6 +243,10 @@ const AppContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("userDetails")) || {}
   );
 
+  useEffect(() => {
+    setCurrentUserFromDb(JSON.parse(localStorage.getItem("userDetails")));
+  }, [user]);
+
   const [takingLong, setTakingLong] = useState(false);
 
   //to get users saved in db
@@ -261,12 +268,12 @@ const AppContextProvider = ({ children }) => {
             me = doc.data();
           });
           me && localStorage.setItem("userDetails", JSON.stringify(me));
-          // me && setCurrentUserFromDb(me);
+          me && setCurrentUserFromDb(me);
 
-          setLoader(false);
+          // setLoader(false);
         } catch (err) {
           console.log(err.message);
-          setLoader(false);
+          // setLoader(false);
         } finally {
           setLoader(false);
           setTakingLong(false);
@@ -706,6 +713,154 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
+  //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
+  //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
+  //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
+
+  //function to create active rides doc
+  let bookingCode = Math.random().toString(10).slice(2, 8);
+
+  const createRideDoc = async (email, time, price, paymentRef, createdAt) => {
+    try {
+      await setDoc(
+        doc(
+          db,
+          "activeRide",
+          `${email}_${time.replace(/ /g, "")}_${paymentRef}`
+        ),
+        {
+          id: `${email}_${time.replace(/ /g, "")}_${paymentRef}`,
+          email: email,
+          time: time,
+          price: price,
+          paymentRef: paymentRef,
+          active: true,
+          createdAt: createdAt,
+          bookingCode: bookingCode,
+        }
+      );
+      //to simultenousely create ride history
+      await setDoc(
+        doc(
+          db,
+          "rideHistory",
+          `${email}_${time.replace(/ /g, "")}_${paymentRef}`
+        ),
+        {
+          id: `${email}_${time.replace(/ /g, "")}_${paymentRef}`,
+          email: email,
+          time: time,
+          price: price,
+          paymentRef: paymentRef,
+          active: false,
+          createdAt: createdAt,
+          bookingCode: bookingCode,
+        }
+      );
+    } catch (err) {
+      console.error("Error adding document: ", err);
+    }
+  };
+
+  const [activeRideChange, setActiveRideChange] = useState(false);
+
+  //to get and store active rides
+  const [activeRidesFromDb, setActiveRidesFromDb] = useState(
+    JSON.parse(localStorage.getItem("activeRide")) || []
+  );
+  //to get user's active ride saved in db
+  useEffect(() => {
+    if (user) {
+      const getActiveRides = async () => {
+        setLoader(true);
+        const userQuery = query(
+          collection(db, "activeRide"),
+          where("email", "==", user?.email) && where("active", "==", true)
+        );
+        try {
+          const querySnapshot = await getDocs(userQuery);
+          let ride = [];
+          querySnapshot.forEach((doc) => {
+            ride.push(doc.data());
+          });
+          ride.length > 0 &&
+            localStorage.setItem("activeRide", JSON.stringify(ride));
+          ride.length > 0 && setActiveRidesFromDb(ride);
+
+          // setLoader(false);
+        } catch (err) {
+          console.log(err.message);
+          // setLoader(false);
+        } finally {
+          setLoader(false);
+          setTakingLong(false);
+        }
+      };
+      getActiveRides();
+    }
+  }, [activeRideChange]);
+
+  //to get and store ride history
+  const [rideHistoryFromDb, setRideHistoryFromDb] = useState(
+    JSON.parse(localStorage.getItem("rideHistory")) || []
+  );
+  //to get user's active ride saved in db
+  useEffect(() => {
+    if (user) {
+      const getRidesHistory = async () => {
+        setLoader(true);
+        const userQuery = query(
+          collection(db, "rideHistory"),
+          where("email", "==", user?.email) && where("active", "==", false)
+        );
+        try {
+          const querySnapshot = await getDocs(userQuery);
+          let ride = [];
+          querySnapshot.forEach((doc) => {
+            ride.push(doc.data());
+          });
+          ride.length > 0 &&
+            localStorage.setItem("rideHistory", JSON.stringify(ride));
+          ride.length > 0 && setRideHistoryFromDb(ride);
+
+          // setLoader(false);
+        } catch (err) {
+          console.log(err.message);
+          // setLoader(false);
+        } finally {
+          setLoader(false);
+        }
+      };
+      getRidesHistory();
+    }
+  }, [activeRideChange]);
+
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  function cloaseSuccessModal() {
+    setBookingSuccess(false);
+  }
+
+  const clearActiveRideDoc = async (id) => {
+    try {
+      await deleteDoc(doc(db, "activeRide", id));
+      console.log("Active ride cleared");
+    } catch (err) {
+      console.log("error clearing active booking: ", err);
+    }
+  };
+
+  function markCompleted() {
+    let mark = "Mark ride as completed?";
+
+    if (confirm(mark) == true) {
+      localStorage.removeItem("activeRide");
+      clearActiveRideDoc(activeRidesFromDb[0].id);
+      window.location.reload();
+      setActiveRideChange((prev) => !prev);
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -745,6 +900,16 @@ const AppContextProvider = ({ children }) => {
         handleAdminChange,
         handleResetpswChange,
         forgotpswSubmit,
+        bookingSuccess,
+        cloaseSuccessModal,
+        setBookingSuccess,
+        setActiveRideChange,
+        navigate,
+        createRideDoc,
+        formattedDate,
+        activeRidesFromDb,
+        markCompleted,
+        rideHistoryFromDb,
       }}
     >
       {children}
