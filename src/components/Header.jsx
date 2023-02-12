@@ -113,7 +113,16 @@ const Header = () => {
                 onMouseOver={toggleLogoutOn}
                 className={`cursor-pointer px-2 py-1 rounded-md flex items-center gap-2 border-2 border-blue-500 hover:bg-blue-500/50 hover:translate-y-[6px] transition-all duration-300 relative`}
               >
-                <p>{currentUserFromDb.firstname}</p>
+                <div>
+                  {currentUserFromDb ? (
+                    currentUserFromDb?.firstname
+                  ) : (
+                    <div className="w-[25px] h-[25px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate">
+                      {/* <div className="w-1/3 h-full bg-white"></div> */}
+                      <div className="w-1/2 h-1/2 bg-slate-600/90 rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
+                    </div>
+                  )}
+                </div>
                 <img
                   alt=""
                   src="/images/icons8-user-64.png"
@@ -201,7 +210,7 @@ const Header = () => {
                     className="w-6 h-6"
                   />
 
-                  <p>{currentUserFromDb.firstname}</p>
+                  <p>{currentUserFromDb?.firstname}</p>
                 </li>
               )}
               <li className="my-4">

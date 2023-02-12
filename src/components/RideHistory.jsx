@@ -1,24 +1,23 @@
 import { useAppContext } from "../contexts/AppContext";
 
-const RideHistory = ({}) => {
-  const { priceFromDb } = useAppContext();
+const RideHistory = ({ item }) => {
+  // const { priceFromDb } = useAppContext();
   return (
     <>
       <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.9rem] md:text-[1rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap">
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md md:mr-4">
           <p>
-            Time: <strong>7:55AM</strong>
+            Time: <strong>{item?.time}</strong>
           </p>
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md md:mr-4">
           <p>
-            Booking Code: <strong>8441</strong>
+            Booking Code: <strong>{item?.bookingCode}</strong>
           </p>
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md mr-auto">
           <p>
-            Price:{" "}
-            <strong>NGN {priceFromDb ? priceFromDb[0]?.price : "00"}</strong>
+            Price: <strong>NGN {item?.price}</strong>
           </p>
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md">
@@ -27,7 +26,7 @@ const RideHistory = ({}) => {
             src="/images/icons8-checkmark-64.png"
             className="w-6 h-6 mr-1"
           />
-          <p>Trip Completed</p>
+          <p>Booking successful</p>
         </div>
       </div>
 
@@ -43,15 +42,15 @@ const RideHistory = ({}) => {
         </div>
         <div className="px-3 md:p-2 border-x-2 border-slate-400/50 md:mr-4">
           <div>Time:</div>
-          <div>7:55AM</div>
+          <div>{item?.time}</div>
         </div>
         <div className="px-3 md:p-2 border-r-2 border-slate-400/50 md:mr-4">
           <div>Code:</div>
-          <div>8441</div>
+          <div>{item?.bookingCode}</div>
         </div>
         <div className="px-3 md:p-2 md:mr-4">
           <div>Price:</div>
-          <div>NGN {priceFromDb ? priceFromDb[0]?.price : "00"}</div>
+          <div>NGN {item?.price}</div>
         </div>
       </div>
     </>

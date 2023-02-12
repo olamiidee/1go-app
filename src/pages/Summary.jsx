@@ -6,28 +6,52 @@ import { useAppContext } from "../contexts/AppContext";
 import { usePaystackPayment } from "react-paystack";
 
 const Summary = () => {
+  const {
+    morningBookingTimesFromDb,
+    noonBookingTimesFromDb,
+    priceFromDb,
+    currentUserFromDb,
+    setActiveRideChange,
+    setBookingSuccess,
+    navigate,
+    createRideDoc,
+    formattedDate,
+  } = useAppContext();
+
+  let allTimes = [...morningBookingTimesFromDb, ...noonBookingTimesFromDb];
+
+  const { id } = useParams();
+  const eachTime = allTimes.filter((item) => item.id === id)[0];
+
   // paystack integration
-  const config = {
+  const paystackConfig = {
     reference: new Date().getTime().toString(),
-    email: "user@example.com", //their maol
-    amount: 50000, //amount is in Kobo
+    email: `${currentUserFromDb.email}`, //their mail
+    amount: `${priceFromDb[0].price}00`, //amount is in Kobo
     publicKey: "pk_test_f4369369537d94d981fb84a72c675ecf04e12d2e",
   };
+
+  //to init paystack
+  const initializePayment = usePaystackPayment(paystackConfig);
+
+  //paystack functions
   const onSuccess = (transaction) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    const reference = transaction.reference;
-    console.log(reference);
-    const message = "Payment Complete! Reference: " + reference;
-    alert(message);
+    setBookingSuccess(true);
+    setActiveRideChange((prev) => !prev);
+    createRideDoc(
+      currentUserFromDb.email,
+      eachTime.time,
+      priceFromDb[0].price,
+      transaction.reference,
+      formattedDate
+    );
+    navigate("/book-ride");
   };
   const onClose = () => {
-    // implementation for whatever you want to do when the Paystack dialog closed.
-    console.log("closed");
     alert("Transaction was not completed, window closed.");
   };
 
   const PaystackHook = () => {
-    const initializePayment = usePaystackPayment(config);
     return (
       <div>
         <button
@@ -42,13 +66,6 @@ const Summary = () => {
       </div>
     );
   };
-
-  const { morningBookingTimesFromDb, noonBookingTimesFromDb, priceFromDb } =
-    useAppContext();
-  let allTimes = [...morningBookingTimesFromDb, ...noonBookingTimesFromDb];
-
-  const { id } = useParams();
-  const eachTime = allTimes.filter((item) => item.id === id)[0];
 
   return (
     <>
