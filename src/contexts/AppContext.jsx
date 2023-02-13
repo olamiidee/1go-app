@@ -740,12 +740,132 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  //to save contact us form data
+  const [contactUsData, setContactUsData] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  //to save noon time form input
+  function handleContactUsChange(event) {
+    setErrorMessage("");
+    setSent(false);
+    const { id, value } = event.target;
+    setContactUsData((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  }
+
+  const createContactUsDoc = async (
+    fname,
+    lname,
+    email,
+    phone,
+    message,
+    createdAt
+  ) => {
+    try {
+      await setDoc(
+        doc(
+          db,
+          "contactUs",
+          `${email}_${createdAt}_00${messageFromDb?.length + 1}`
+        ),
+        {
+          id: `${email}_${createdAt}`,
+          fname: fname,
+          lname: lname,
+          email: email,
+          phone: phone,
+          message: message,
+          createdAt: createdAt,
+        }
+      );
+    } catch (err) {
+      console.error("Error adding document: ", err);
+    }
+  };
+
+  const [sendingContact, setSendingContact] = useState(false);
+  const [sent, setSent] = useState(false);
+  async function handleSubmitContactUs(e) {
+    e.preventDefault();
+    if (contactUsData.email && contactUsData.message) {
+      setSendingContact(true);
+
+      try {
+        await createContactUsDoc(
+          contactUsData?.fname,
+          contactUsData?.lname,
+          contactUsData?.email,
+          contactUsData?.phone,
+          contactUsData?.message,
+          formattedDate
+        );
+        setSent(true);
+        setContactUsData({
+          fname: "",
+          lname: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setSendingContact(false);
+      }
+    } else {
+      setErrorMessage("Please fill all fields");
+    }
+  }
+
+  //to save price from db
+  const [messageFromDb, setMessageFromDb] = useState(
+    JSON.parse(localStorage.getItem("contactUs")) || []
+  );
+
+  //to get contact us messages saved in db
+  useEffect(() => {
+    if (admin) {
+      const getMessage = async () => {
+        setLoader(true);
+
+        try {
+          const querySnapshot = await getDocs(collection(db, "contactUs"));
+          let message = [];
+          querySnapshot.forEach((doc) => {
+            message.push(doc.data());
+          });
+          let arranged = message?.sort(function (a, b) {
+            return a.id.slice(-3) - b.id.slice(-3);
+          });
+
+          message.length > 0 &&
+            localStorage.setItem("message", JSON.stringify(arranged));
+          message.length > 0 && setMessageFromDb(arranged);
+        } catch (err) {
+          console.log(err.message);
+        } finally {
+          setLoader(false);
+        }
+      };
+      getMessage();
+    }
+  }, [updatedTime, currentPage]);
+
   //admin login logic  //admin login logic  //admin login logic
   //admin login logic  //admin login logic  //admin login logic
   //admin login logic  //admin login logic  //admin login logic
   //96C0Zb&6rkh!
 
-  //to save nprice form input
+  //to save admin login form input
   const [adminLoginData, setAdminLoginData] = useState({
     email: "",
     password: "",
@@ -1011,6 +1131,12 @@ const AppContextProvider = ({ children }) => {
         rideHistoryFromDb,
         allRides,
         ridesToday,
+        handleContactUsChange,
+        handleSubmitContactUs,
+        sendingContact,
+        sent,
+        contactUsData,
+        messageFromDb,
       }}
     >
       {children}
