@@ -383,7 +383,7 @@ const AppContextProvider = ({ children }) => {
       }
     };
     getMorningBookingTime();
-  }, [updatedTime, activeRideChange]);
+  }, [updatedTime, activeRideChange, currentPage]);
 
   //to send created notes to db
   const createMorningBookingTimeDocument = async (time, createdAt, slots) => {
@@ -479,7 +479,7 @@ const AppContextProvider = ({ children }) => {
       }
     };
     getNoonBookingTime();
-  }, [updatedTime, activeRideChange]);
+  }, [updatedTime, activeRideChange, currentPage]);
 
   //to send created notes to db
   const createNoonBookingTimeDocument = async (time, createdAt, slots) => {
@@ -610,7 +610,7 @@ const AppContextProvider = ({ children }) => {
       }
     }
     getUsers();
-  }, []);
+  }, [currentPage]);
 
   //to get total number of rides
   const [allRides, setAllRides] = useState([]);
@@ -632,7 +632,7 @@ const AppContextProvider = ({ children }) => {
       }
     }
     getAllRides();
-  }, []);
+  }, [currentPage]);
 
   //to get number of rides today
   const [ridesToday, setridesToday] = useState([]);
@@ -660,7 +660,7 @@ const AppContextProvider = ({ children }) => {
       };
       getRidesToday();
     }
-  }, [currentUserFromDb]);
+  }, [currentUserFromDb, currentPage]);
 
   //to save nprice form input
   const [priceForm, setPriceForm] = useState({
@@ -705,7 +705,7 @@ const AppContextProvider = ({ children }) => {
       }
     };
     getPrice();
-  }, [updatedTime]);
+  }, [updatedTime, currentPage]);
 
   //to send changed time to db
   const createPriceDocument = async (price) => {
@@ -818,6 +818,7 @@ const AppContextProvider = ({ children }) => {
         });
       } catch (err) {
         console.log(err);
+        setErrorMessage("Error sending message");
       } finally {
         setSendingContact(false);
       }
@@ -1006,7 +1007,7 @@ const AppContextProvider = ({ children }) => {
       };
       getActiveRides();
     }
-  }, [currentUserFromDb, activeRideChange]);
+  }, [currentUserFromDb, activeRideChange, currentPage]);
 
   //to get and store ride history
   const [rideHistoryFromDb, setRideHistoryFromDb] = useState(
@@ -1042,7 +1043,7 @@ const AppContextProvider = ({ children }) => {
       };
       getRidesHistory();
     }
-  }, [currentUserFromDb, activeRideChange]);
+  }, [currentUserFromDb, activeRideChange, currentPage]);
 
   const [bookingSuccess, setBookingSuccess] = useState(false);
   function cloaseSuccessModal() {
