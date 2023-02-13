@@ -140,11 +140,18 @@ const BookRides = () => {
                         From Oke-odo - Morning Rides
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
-                        {morningBookingTimesFromDb.map((item, index) => {
-                          return (
-                            <ClientMorningTimeBtn key={index} item={item} />
-                          );
-                        })}
+                        {morningBookingTimesFromDb ? (
+                          morningBookingTimesFromDb.map((item, index) => {
+                            return (
+                              <ClientMorningTimeBtn key={index} item={item} />
+                            );
+                          })
+                        ) : (
+                          <div className="w-[35px] h-[35px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate">
+                            {/* <div className="w-1/3 h-full bg-white"></div> */}
+                            <div className="w-1/2 h-1/2 bg-slate-600/90 rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -166,9 +173,18 @@ const BookRides = () => {
                         From School Park - Afternoon Rides
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
-                        {noonBookingTimesFromDb.map((item, index) => {
-                          return <ClientNoonTimeBtn key={index} item={item} />;
-                        })}
+                        {noonBookingTimesFromDb ? (
+                          noonBookingTimesFromDb.map((item, index) => {
+                            return (
+                              <ClientNoonTimeBtn key={index} item={item} />
+                            );
+                          })
+                        ) : (
+                          <div className="w-[35px] h-[35px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate">
+                            {/* <div className="w-1/3 h-full bg-white"></div> */}
+                            <div className="w-1/2 h-1/2 bg-slate-600/90 rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
