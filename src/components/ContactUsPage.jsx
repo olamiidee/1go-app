@@ -12,8 +12,8 @@ function ContactUs() {
     contactUsData,
   } = useAppContext();
   return (
-    <div className="overlay bg-[#020d18]/80 h-full w-full block lg:flex items-center justify-between text-[1rem] lg:px-[50px] py-[80px]">
-      <div className="w-[90%] mx-auto lg:w-[50%] text-center text-slate-100">
+    <div className="h-full w-full block lg:flex items-center justify-between text-[1rem] lg:px-[50px] py-[80px]">
+      <div className="w-full mx-auto lg:w-[50%] text-center text-slate-100">
         <h2 className="text-[2.5rem] font-bold">Get in Touch</h2>
         <p className="text-[1.2rem] md:text-[1.4rem]">
           Contact us and we will get back to you soon
@@ -23,7 +23,7 @@ function ContactUs() {
         </div>
       </div>
       {/* Form */}
-      <div className="w-full lg:w-1/2 px-8">
+      <div className="w-full lg:w-1/2 px-4">
         <form className="space-y-6 font-light">
           <div className="flex space-x-4">
             <input
