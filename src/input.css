@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+textarea {
+  resize: none;
+}
+
 @layer components {
   .reg-input,
   .login-input {
