@@ -1,4 +1,4 @@
-import ContactUs from "../components/ContactUs";
+import ContactUsPage from "../components/ContactUsPage";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ScrollToTop from "../ScrollToTop";
@@ -7,12 +7,9 @@ const Contact = () => {
   return (
     <>
       <Header />
-      <section className="w-full min-h-screen">
-        <div className="overlay w-full h-[80vh] bg-sky-100 flex justify-center items-center">
-          <h1 className="text-[3rem] font-bold text-black">Contact page</h1>
-        </div>
-        <div>
-          <ContactUs />
+      <section className="w-full h-full overlay bg-[#020d18]/90">
+        <div className="flex justify-center items-center pt-[100px] px-[4%]">
+          <ContactUsPage />
         </div>
       </section>
       <Footer />
