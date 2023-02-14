@@ -140,7 +140,7 @@ const BookRides = () => {
                         From Oke-odo - Morning Rides
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
-                        {morningBookingTimesFromDb ? (
+                        {morningBookingTimesFromDb?.length > 0 ? (
                           morningBookingTimesFromDb.map((item, index) => {
                             return (
                               <ClientMorningTimeBtn key={index} item={item} />
@@ -173,7 +173,7 @@ const BookRides = () => {
                         From School Park - Afternoon Rides
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
-                        {noonBookingTimesFromDb ? (
+                        {noonBookingTimesFromDb?.length > 0 ? (
                           noonBookingTimesFromDb.map((item, index) => {
                             return (
                               <ClientNoonTimeBtn key={index} item={item} />
