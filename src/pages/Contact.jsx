@@ -7,7 +7,7 @@ const Contact = () => {
   return (
     <>
       <Header />
-      <section className="w-full h-full overlay bg-[#020d18]/90">
+      <section className="w-full min-h-screen overlay bg-[#020d18]/90">
         <div className="flex justify-center items-center pt-[100px] px-[4%]">
           <ContactUsPage />
         </div>
