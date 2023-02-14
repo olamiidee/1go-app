@@ -1490,10 +1490,6 @@ video {
   --tw-gradient-to: rgb(96 165 250 / 0.1);
 }
 
-.to-black {
-  --tw-gradient-to: #000;
-}
-
 .bg-cover {
   background-size: cover;
 }
