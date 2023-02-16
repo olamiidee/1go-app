@@ -8,7 +8,7 @@ const Contact = () => {
     <>
       <Header />
       <section className="w-full min-h-screen overlay bg-[#020d18]/90">
-        <div className="flex justify-center items-center pt-[100px] px-[4%]">
+        <div className="flex justify-center items-center pt-[100px] px-[5%] sm:px-[10.5%]">
           <ContactUsPage />
         </div>
       </section>

@@ -12,7 +12,7 @@ function ContactUs() {
     contactUsData,
   } = useAppContext();
   return (
-    <div className="h-full w-full block lg:flex items-center justify-between text-[1rem] lg:px-[50px] py-[80px]">
+    <div className="h-full w-full block lg:flex items-center justify-between text-[1rem] py-[80px]">
       <div className="w-full mx-auto lg:w-[50%] text-center text-slate-100">
         <h2 className="text-[2.5rem] font-bold">Get in Touch</h2>
         <p className="text-[1.2rem] md:text-[1.4rem]">
@@ -23,7 +23,7 @@ function ContactUs() {
         </div>
       </div>
       {/* Form */}
-      <div className="w-full lg:w-1/2 px-4">
+      <div className="w-full lg:w-1/2 px-4 sm:px-0">
         <form className="space-y-6 font-light">
           <div className="flex space-x-4">
             <input

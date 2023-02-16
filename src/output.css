@@ -641,6 +641,14 @@ video {
   right: 2rem;
 }
 
+.top-10 {
+  top: 2.5rem;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
 .z-50 {
   z-index: 50;
 }
@@ -858,8 +866,8 @@ video {
   height: 65px;
 }
 
-.h-screen {
-  height: 100vh;
+.h-\[300px\] {
+  height: 300px;
 }
 
 .h-4 {
@@ -876,6 +884,14 @@ video {
 
 .h-\[800px\] {
   height: 800px;
+}
+
+.h-\[400px\] {
+  height: 400px;
+}
+
+.h-\[350px\] {
+  height: 350px;
 }
 
 .min-h-screen {
@@ -1383,11 +1399,6 @@ video {
   background-color: rgb(148 163 184 / 0.1);
 }
 
-.bg-sky-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(224 242 254 / var(--tw-bg-opacity));
-}
-
 .bg-slate-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
@@ -1434,8 +1445,21 @@ video {
   background-color: rgb(255 255 255 / 0.7);
 }
 
+.bg-white\/20 {
+  background-color: rgb(255 255 255 / 0.2);
+}
+
+.bg-\[\#e2e8f0\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
+.bg-aboutbg {
+  background-image: url('/images/about.jpg');
 }
 
 .bg-reg1 {
@@ -1653,6 +1677,11 @@ video {
   padding-bottom: 10rem;
 }
 
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .pt-\[80px\] {
   padding-top: 80px;
 }
@@ -1737,6 +1766,14 @@ video {
   padding-bottom: 1.5rem;
 }
 
+.pt-40 {
+  padding-top: 10rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1801,6 +1838,10 @@ video {
   font-size: 3rem;
 }
 
+.text-\[\.9rem\] {
+  font-size: .9rem;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1808,6 +1849,10 @@ video {
 
 .text-\[1\.65rem\] {
   font-size: 1.65rem;
+}
+
+.text-\[1\.3rem\] {
+  font-size: 1.3rem;
 }
 
 .font-bold {
@@ -1891,6 +1936,11 @@ video {
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-blue-700 {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -2260,6 +2310,10 @@ input[type="number"] {
 }
 
 @media (min-width: 640px) {
+  .sm\:top-10 {
+    top: 2.5rem;
+  }
+
   .sm\:mt-4 {
     margin-top: 1rem;
   }
@@ -2270,6 +2324,10 @@ input[type="number"] {
 
   .sm\:h-20 {
     height: 5rem;
+  }
+
+  .sm\:h-\[400px\] {
+    height: 400px;
   }
 
   .sm\:min-h-\[105vh\] {
@@ -2339,8 +2397,31 @@ input[type="number"] {
     padding-bottom: 170px;
   }
 
+  .sm\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .sm\:py-28 {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+
+  .sm\:py-24 {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
   .sm\:text-\[1\.3rem\] {
     font-size: 1.3rem;
+  }
+
+  .sm\:text-\[1\.1rem\] {
+    font-size: 1.1rem;
+  }
+
+  .sm\:text-\[1rem\] {
+    font-size: 1rem;
   }
 }
 
