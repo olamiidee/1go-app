@@ -115,9 +115,9 @@ const BookRides = () => {
                 <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-white">
                   Booking times
                 </h1>
-                <div className="w-[fit-content] text-[1.1rem] font-medium text-white text-center mb-3 flex items-center gap-3 mx-auto">
+                <div className="w-[fit-content] text-[.9rem] sm:text-[1.1rem] font-medium text-white text-center mb-3 flex items-center gap-3 mx-auto">
                   <p> Click on a time to book now at</p>{" "}
-                  <p className="bg-blue-400 px-2 py-[2px] rounded-lg">
+                  <p className="bg-blue-400 px-2 py-[2px] rounded-lg text-[0.9rem] sm:text-[1rem]">
                     NGN {priceFromDb[0]?.price}
                   </p>
                 </div>
