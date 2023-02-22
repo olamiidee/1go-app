@@ -9,6 +9,8 @@ const Loader = () => {
           {/* <div className="w-1/3 h-full bg-white"></div> */}
           <div className="w-1/2 h-1/2 bg-slate-600/90 rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
         </div>
+        <h1 className="sm:text-[1.4rem] text-white">Loading...</h1>
+
         {takingLong && (
           <p className="text-[0.95rem] text-red-300">
             Poor network connection..
