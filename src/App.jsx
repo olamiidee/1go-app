@@ -1,53 +1,61 @@
 import { Routes, Route } from "react-router-dom";
 import "./output.css";
-import About from "./pages/About";
-import BookRides from "./pages/BookRides";
 import Homepage from "./pages/Homepage";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Contact from "./pages/Contact";
 import { useAppContext } from "./contexts/AppContext";
-import PageNotFound from "./pages/PageNotFound";
-import Summary from "./pages/Summary";
-import AdminDashboard from "./admin/AdminDashboard";
-import BookingTimes from "./admin/BookingTimes";
-import AdminLogin from "./admin/AdminLogin";
+import { lazy, Suspense } from "react";
+import Loader from "./components/Loader";
+
+// const Homepage = lazy(() => {
+//   import("./pages/Homepage");
+// });
+const About = lazy(() => import("./pages/About"));
+const BookRides = lazy(() => import("./pages/BookRides"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const Contact = lazy(() => import("./pages/Contact"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const Summary = lazy(() => import("./pages/Summary"));
+const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
+const BookingTimes = lazy(() => import("./admin/BookingTimes"));
+const AdminLogin = lazy(() => import("./admin/AdminLogin"));
 
 function App() {
   const { user, admin, activeRidesFromDb } = useAppContext();
   return (
-    <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      {/* dashboard controlled access */}
-      {user && (
-        <>
-          <Route path="/book-ride" element={<BookRides />} />
-          {!activeRidesFromDb?.length > 0 ? (
-            <Route path="/book-ride/summary/:id" element={<Summary />} />
-          ) : (
+        {/* dashboard controlled access */}
+        {user && (
+          <>
             <Route path="/book-ride" element={<BookRides />} />
-          )}
-        </>
-      )}
+            {!activeRidesFromDb?.length > 0 ? (
+              <Route path="/book-ride/summary/:id" element={<Summary />} />
+            ) : (
+              <Route path="/book-ride" element={<BookRides />} />
+            )}
+          </>
+        )}
 
-      {/* admin access */}
-      <Route
-        path="/admin"
-        element={admin ? <AdminDashboard /> : <AdminLogin />}
-      />
-      <Route
-        path="/admin/booking-times"
-        element={admin ? <BookingTimes /> : <AdminLogin />}
-      />
+        {/* admin access */}
+        <Route
+          path="/admin"
+          element={admin ? <AdminDashboard /> : <AdminLogin />}
+        />
+        <Route
+          path="/admin/booking-times"
+          element={admin ? <BookingTimes /> : <AdminLogin />}
+        />
 
-      {/* page not found */}
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+        {/* page not found */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </Suspense>
   );
 }
 
