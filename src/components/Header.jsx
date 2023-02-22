@@ -33,6 +33,8 @@ const Header = () => {
         className={`${
           scrollPosition > 224
             ? "sm:w-full md:w-full top-0 bg-[#252525]/80 lg:px-[15%]"
+            : currentPage === "/login" || currentPage === "/register"
+            ? "sm:w-[80%] top-8 rounded-md bg-[#252525]/50 lg:px-10"
             : "sm:w-[80%] top-8 rounded-md bg-white/20 lg:px-10"
         } px-12 py-4 fixed left-[50%] translate-x-[-50%] border-b border-slate-600 md:flex items-center z-[50] hidden transition-all duration-500`}
       >
@@ -159,7 +161,11 @@ const Header = () => {
       {/* mobile header */}
       <div
         className={` ${
-          scrollPosition > 224 ? "top-0 bg-[#252525]/70 " : "top-6 bg-white/20 "
+          scrollPosition > 224
+            ? "top-0 bg-[#252525]/70 "
+            : currentPage === "/login" || currentPage === "/register"
+            ? "top-6 bg-[#252525]/50"
+            : "top-6 bg-white/20 "
         } md:hidden w-full h-[65px] px-6 fixed left-0 z-[100] border-b-[0px] border-b-[#47a3b3] flex justify-between items-center shadow-md transition-all duration-500`}
       >
         <Link to="/" className="mr-auto">
