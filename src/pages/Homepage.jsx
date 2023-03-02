@@ -63,8 +63,8 @@ const Homepage = () => {
                   </p>
                 </div>
                 <div>
-                  <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
-                    From Oke-odo - Morning Rides
+                  <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.75rem] md:text-[1rem]">
+                    From Outside school - Going to school park
                   </h2>
                   <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
                     {morningBookingTimesFromDb?.length > 0 ? (
@@ -82,8 +82,8 @@ const Homepage = () => {
 
                 {/* afternoon rides */}
                 <div className="mt-5 md:mt-8">
-                  <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
-                    From School Park - Afternoon Rides
+                  <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.75rem] md:text-[1rem]">
+                    From Inside school - Going off-campus
                   </h2>
                   <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
                     {noonBookingTimesFromDb?.length > 0 ? (

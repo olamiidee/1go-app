@@ -314,6 +314,7 @@ const AppContextProvider = ({ children }) => {
     morningMinute: "",
     morningAmpm: "AM",
     slots: "",
+    price: "",
   });
 
   //to save morning time form input
@@ -333,6 +334,7 @@ const AppContextProvider = ({ children }) => {
     noonMinute: "",
     noonAmpm: "PM",
     slots: "",
+    price: "",
   });
 
   //to save noon time form input
@@ -386,7 +388,12 @@ const AppContextProvider = ({ children }) => {
   }, [updatedTime, activeRideChange, currentPage]);
 
   //to send created notes to db
-  const createMorningBookingTimeDocument = async (time, createdAt, slots) => {
+  const createMorningBookingTimeDocument = async (
+    time,
+    createdAt,
+    slots,
+    price
+  ) => {
     setLoader(true);
 
     try {
@@ -414,6 +421,8 @@ const AppContextProvider = ({ children }) => {
           }`,
           createdAt: createdAt,
           slots: slots,
+          price: price,
+          from: "outside",
         }
       );
       console.log("morning booking time created");
@@ -436,7 +445,8 @@ const AppContextProvider = ({ children }) => {
       await createMorningBookingTimeDocument(
         morningTime,
         formattedDate,
-        morningForm.slots
+        morningForm.slots,
+        morningForm.price
       );
       setLoader(false);
     } catch (error) {
@@ -482,7 +492,12 @@ const AppContextProvider = ({ children }) => {
   }, [updatedTime, activeRideChange, currentPage]);
 
   //to send created notes to db
-  const createNoonBookingTimeDocument = async (time, createdAt, slots) => {
+  const createNoonBookingTimeDocument = async (
+    time,
+    createdAt,
+    slots,
+    price
+  ) => {
     setLoader(true);
 
     try {
@@ -508,6 +523,8 @@ const AppContextProvider = ({ children }) => {
           }`,
           createdAt: createdAt,
           slots: slots,
+          price: price,
+          from: "inside",
         }
       );
       console.log("noon booking time created");
@@ -530,7 +547,8 @@ const AppContextProvider = ({ children }) => {
       await createNoonBookingTimeDocument(
         noonTime,
         formattedDate,
-        noonForm.slots
+        noonForm.slots,
+        noonForm.price
       );
       await getNoonBookingTime();
       added = false;
@@ -683,7 +701,7 @@ const AppContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("price")) || []
   );
 
-  //to get noon booking timesaved in db
+  //to get price saved in db
   useEffect(() => {
     const getPrice = async () => {
       setLoader(true);
@@ -930,7 +948,15 @@ const AppContextProvider = ({ children }) => {
   //function to create active rides doc
   let bookingCode = Math.random().toString(10).slice(2, 8);
 
-  const createRideDoc = async (email, time, price, paymentRef, createdAt) => {
+  const createRideDoc = async (
+    email,
+    time,
+    price,
+    paymentRef,
+    createdAt,
+    terminal,
+    seats
+  ) => {
     try {
       await setDoc(
         doc(
@@ -947,6 +973,8 @@ const AppContextProvider = ({ children }) => {
           active: `true_${email}`,
           createdAt: createdAt,
           bookingCode: bookingCode,
+          terminal: terminal,
+          seats: seats,
         }
       );
       //to simultenousely create ride history
@@ -967,6 +995,7 @@ const AppContextProvider = ({ children }) => {
           bookingCode: bookingCode,
         }
       );
+      setBookingSuccess(true);
     } catch (err) {
       console.error("Error adding document: ", err);
     }
@@ -1008,6 +1037,15 @@ const AppContextProvider = ({ children }) => {
       getActiveRides();
     }
   }, [currentUserFromDb, activeRideChange, currentPage]);
+
+  // var time = new Date();
+  // console.log(
+  //   time.toLocaleString("en-US", {
+  //     hour: "numeric",
+  //     minute: "numeric",
+  //     hour12: true,
+  //   })
+  // );
 
   //to get and store ride history
   const [rideHistoryFromDb, setRideHistoryFromDb] = useState(
