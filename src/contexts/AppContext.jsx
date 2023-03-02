@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import moment from "moment";
 
 import {
   createUserWithEmailAndPassword,
@@ -1038,14 +1039,42 @@ const AppContextProvider = ({ children }) => {
     }
   }, [currentUserFromDb, activeRideChange, currentPage]);
 
-  // var time = new Date();
-  // console.log(
-  //   time.toLocaleString("en-US", {
-  //     hour: "numeric",
-  //     minute: "numeric",
-  //     hour12: true,
-  //   })
-  // );
+  const [checkTime, setCheckTime] = useState(false);
+  setInterval(() => {
+    setCheckTime((prev) => !prev);
+  }, 60000);
+
+  //to clear completed active rides
+  useEffect(() => {
+    if (activeRidesFromDb?.length > 0) {
+      let t = new Date();
+      let time = t.toLocaleString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: false,
+      });
+      let activeTime = activeRidesFromDb[0]?.time;
+
+      var compareTime = moment(activeTime, "hh:mm A")
+        .add(20, "minutes")
+        .format("LT");
+
+      let currentTimeRef = time.replace(/:/g, "");
+      let compareTimeRef = moment(compareTime, ["h:mm A"])
+        .format("HH:mm")
+        .replace(/:/g, "");
+
+      async function clearActiveRides() {
+        if (Number(currentTimeRef) >= Number(compareTimeRef)) {
+          localStorage.removeItem("activeRide");
+          await clearActiveRideDoc(activeRidesFromDb[0].id);
+          setActiveRideChange((prev) => !prev);
+          window.location.reload();
+        }
+      }
+      clearActiveRides();
+    }
+  }, [activeRideChange, currentPage, checkTime]);
 
   //to get and store ride history
   const [rideHistoryFromDb, setRideHistoryFromDb] = useState(

@@ -236,7 +236,7 @@ const BookingTimes = () => {
                     <input
                       type="number"
                       id="price"
-                      onChange={handleMorningChange}
+                      onChange={handlenoonChange}
                       placeholder="200"
                       className="bg-blue-50 w-16 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
                       required
