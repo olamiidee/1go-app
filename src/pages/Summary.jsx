@@ -13,6 +13,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
+import { useState } from "react";
 
 const Summary = () => {
   const {
@@ -33,13 +34,14 @@ const Summary = () => {
 
   const { id } = useParams();
   const eachTime = allTimes.filter((item) => item.id === id)[0];
+  // console.log(eachTime);
 
   //to update slots   //to update slots   //to update slots
   //to update slots   //to update slots   //to update slots
-  const morningTimeRef = morningBookingTimesFromDb.filter(
+  const morningTimeRef = morningBookingTimesFromDb?.filter(
     (item) => item.time === eachTime.time
   )[0];
-  const noonTimeRef = noonBookingTimesFromDb.filter(
+  const noonTimeRef = noonBookingTimesFromDb?.filter(
     (item) => item.time === eachTime.time
   )[0];
 
@@ -56,7 +58,7 @@ const Summary = () => {
         const docSnap = await getDoc(timeQuery);
         let timeData = docSnap.data();
         await updateDoc(timeQuery, {
-          slots: timeData?.slots - 1,
+          slots: Number(timeData?.slots) - Number(detailsForm?.seats),
         });
       }
       if (noonTimeRef) {
@@ -64,7 +66,7 @@ const Summary = () => {
         const docSnap = await getDoc(timeQuery);
         let timeData = docSnap.data();
         await updateDoc(timeQuery, {
-          slots: timeData?.slots - 1,
+          slots: Number(timeData?.slots) - Number(detailsForm?.seats),
         });
       }
     } catch (err) {
@@ -78,8 +80,8 @@ const Summary = () => {
   const paystackConfig = {
     reference: new Date().getTime().toString(),
     email: `${currentUserFromDb?.email}`, //their mail
-    amount: `${priceFromDb[0]?.price}00`, //amount is in Kobo
-    publicKey: "pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1",
+    amount: `${eachTime?.price}00`, //amount is in Kobo
+    publicKey: "pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1", //pk_test_e56146887f0492a4016277927d6b67d19843cb32 //pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1
   };
 
   //to init paystack
@@ -87,14 +89,16 @@ const Summary = () => {
 
   //paystack functions
   const onSuccess = (transaction) => {
-    setBookingSuccess(true);
+    // setBookingSuccess(true);
     setActiveRideChange((prev) => !prev);
     createRideDoc(
       currentUserFromDb.email,
       eachTime.time,
-      priceFromDb[0].price,
+      eachTime.price,
       transaction.reference,
-      formattedDate
+      formattedDate,
+      detailsForm.terminal,
+      detailsForm.seats
     );
     updateSlotsCount();
     navigate("/book-ride");
@@ -119,6 +123,52 @@ const Summary = () => {
     );
   };
 
+  //to control booking and summary sub-pages
+  const [summaryPage, setSummaryPage] = useState(false);
+  function gotoSummary() {
+    setSummaryPage(true);
+  }
+  function gotoDetails() {
+    setSummaryPage(false);
+  }
+
+  //to control details form
+  const [detailsForm, setDetailsForm] = useState({
+    terminal: "",
+    seats: "",
+  });
+  function handleChange(event) {
+    setDetailsError("");
+    const { id, value } = event.target;
+    setDetailsForm((prev) => {
+      return {
+        ...prev,
+        [id]: value,
+      };
+    });
+  }
+  // console.log(Number(detailsForm.seats));
+  // console.log(Number(eachTime?.slots));
+
+  //to proceed to summary
+  const [detailsError, setDetailsError] = useState("");
+
+  function proceedToSummary(e) {
+    e.preventDefault();
+    if (
+      detailsForm.terminal &&
+      detailsForm.seats &&
+      detailsForm.seats <= eachTime.slots
+    ) {
+      gotoSummary();
+    } else if (!detailsForm.terminal || !detailsForm.seats) {
+      setDetailsError("Please fill all fields");
+    } else if (Number(detailsForm?.seats) > Number(eachTime?.slots)) {
+      setDetailsError("Number of seats cannot be more than available seats");
+    } else {
+      gotoSummary();
+    }
+  }
   return (
     <>
       <Header />
@@ -137,87 +187,248 @@ const Summary = () => {
               Back to dashboard
             </div>
           </Link> */}
-          <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
-            Summary
-          </h2>
-          <div className="w-full min-h-[340px] md:min-h-[260px] bg-white rounded-b-lg p-4 relative">
-            {/* each active booking */}
-            <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap">
-              <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                <img
-                  alt=""
-                  src="/images/icons8-time-30.png"
-                  className="w-6 h-6 mr-1"
-                />
-                <p>
-                  Time: <strong>{eachTime?.time}</strong>
-                </p>
-              </div>
-              {/* <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                <img
-                  alt=""
-                  src="/images/icons8-qr-code-48.png"
-                  className="w-6 h-6 mr-1"
-                />
-                <p>
-                  Booking Code: <strong>8441</strong>
-                </p>
-              </div> */}
-              <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md mr-auto">
-                <img
-                  alt=""
-                  src="/images/icons8-cost-58.png"
-                  className="w-6 h-6 mr-1"
-                />
-                <p>
-                  Price: <strong>NGN {priceFromDb[0]?.price}</strong>
-                </p>
-              </div>
-            </div>
-
-            {/* mobile ui */}
-
-            <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md flex md:hidden flex-wrap md:flex-nowrap">
-              <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                <div className="mr-auto flex items-center">
+          <div className="flex">
+            <h2
+              onClick={gotoDetails}
+              className={` ${
+                !summaryPage ? "bg-white text-black" : "bg-white/30 text-white"
+              } text-[.9rem] md:text-[1.2rem] font-medium w-[fit-content] py-2 px-5 rounded-t-lg`}
+            >
+              Set details
+            </h2>
+            <h2
+              onClick={proceedToSummary}
+              className={` ${
+                summaryPage ? "bg-white text-black" : "bg-white/30 text-white"
+              } text-[.9rem] md:text-[1.2rem] font-medium w-[fit-content] py-2 px-5 rounded-t-lg`}
+            >
+              Summary
+            </h2>
+          </div>
+          {/* the details page */}
+          {!summaryPage && (
+            <div className="w-full min-h-[340px] md:min-h-[260px] bg-white rounded-b-lg rounded-tr-lg p-4 relative">
+              <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap">
+                <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
                   <img
                     alt=""
                     src="/images/icons8-time-30.png"
                     className="w-6 h-6 mr-1"
                   />
-                  <p>Time: </p>
+                  <p>
+                    Time: <strong>{eachTime?.time}</strong>
+                  </p>
                 </div>
-                <p className="font-bold">{eachTime?.time}</p>
-              </div>
-              {/* <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                <div className="mr-auto flex items-center">
+                <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
                   <img
                     alt=""
-                    src="/images/icons8-qr-code-48.png"
+                    src="/images/icons8-calendar-50.png"
                     className="w-6 h-6 mr-1"
                   />
-                  <p>Booking Code: </p>
+                  <p>
+                    Date: <strong>{formattedDate}</strong>
+                  </p>
                 </div>
-                <p className="font-bold">8441</p>
-              </div> */}
-              <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                <div className="mr-auto flex items-center">
+                <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md mr-auto">
                   <img
                     alt=""
                     src="/images/icons8-cost-58.png"
                     className="w-6 h-6 mr-1"
                   />
-                  <p>Price: </p>
+                  <p>
+                    Price: <strong>NGN {eachTime?.price}</strong>
+                  </p>
                 </div>
-                <p className="font-bold">NGN {priceFromDb[0]?.price}</p>
               </div>
-            </div>
 
-            <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
-              PS: Prices may vary based on demand
-            </p>
-            <PaystackHook />
-          </div>
+              {/* mobile ui */}
+
+              <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md flex md:hidden flex-wrap md:flex-nowrap">
+                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <div className="mr-auto flex items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-time-30.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>Time: </p>
+                  </div>
+                  <p className="font-bold">{eachTime?.time}</p>
+                </div>
+                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <div className="mr-auto flex items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-calendar-50.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>Date: </p>
+                  </div>
+                  <p className="font-bold">{formattedDate}</p>
+                </div>
+                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <div className="mr-auto flex items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-cost-58.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>Price: </p>
+                  </div>
+                  <p className="font-bold">NGN {eachTime?.price}</p>
+                </div>
+              </div>
+
+              <form className="max-w-[400px]">
+                <label htmlFor="terminal" className="font-bold text-[1.1rem]">
+                  Choose a Pick-up terminal{" "}
+                  <span className="text-red-600">*</span>
+                </label>{" "}
+                <br />
+                <select
+                  id="terminal"
+                  onChange={handleChange}
+                  defaultValue={"DEFAULT"}
+                  className="w-full bg-blue-400/10 mt-2 py-1 px-3 mb-4 rounded-md cursor-pointer outline-none border border-blue-400/50"
+                >
+                  <option value="DEFAULT" disabled hidden>
+                    Select terminal
+                  </option>
+                  {eachTime.from === "inside" ? (
+                    <option value="School park">School park</option>
+                  ) : (
+                    <>
+                      <option value="Terminus">Terminus</option>
+                      <option value="Mark">Mark</option>
+                      <option value="Ilesanmi">Ilesanmi</option>
+                      <option value="Sanrab">Sanrab</option>
+                      <option value="Chapel">Chapel</option>
+                      <option value="Okeodo">Okeodo</option>
+                      <option value="Stella maris">Stella maris</option>
+                    </>
+                  )}
+                </select>
+                <label htmlFor="terminal" className="font-bold text-[1.1rem]">
+                  Select number of seats <span className="text-red-600">*</span>
+                </label>
+                <br />
+                <p className="text-[.8rem] text-blue-400">
+                  Number of available seats:{" "}
+                  <span className="font-bold">{eachTime.slots}</span>
+                </p>
+                <input
+                  id="seats"
+                  type="number"
+                  onChange={handleChange}
+                  value={detailsForm.seats}
+                  className="w-full bg-blue-400/10 mt-2 py-1 px-3 mb-4 rounded-md outline-none border border-blue-400/50"
+                />
+                {detailsError !== "" && (
+                  <div className="w-full flex gap-4 items-center py-3 px-10 my-2 bg-red-400/20 text-[0.85rem] rounded-lg border border-red-400">
+                    <p>{detailsError}</p>
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  className="w-full md:w-[fit-content] px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
+                  onClick={proceedToSummary}
+                >
+                  Proceed
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* the summary page */}
+          {summaryPage && (
+            <div className="w-full min-h-[430px] md:min-h-[350px] bg-white rounded-b-lg rounded-tr-lg p-4 relative">
+              {/* each active booking */}
+              <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap">
+                <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <img
+                    alt=""
+                    src="/images/icons8-time-30.png"
+                    className="w-6 h-6 mr-1"
+                  />
+                  <p>
+                    Time: <strong>{eachTime?.time}</strong>
+                  </p>
+                </div>
+                <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <img
+                    alt=""
+                    src="/images/icons8-calendar-50.png"
+                    className="w-6 h-6 mr-1"
+                  />
+                  <p>
+                    Date: <strong>{formattedDate}</strong>
+                  </p>
+                </div>
+                <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md mr-auto">
+                  <img
+                    alt=""
+                    src="/images/icons8-cost-58.png"
+                    className="w-6 h-6 mr-1"
+                  />
+                  <p>
+                    Price: <strong>NGN {eachTime?.price}</strong>
+                  </p>
+                </div>
+              </div>
+
+              {/* mobile ui */}
+
+              <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md flex md:hidden flex-wrap md:flex-nowrap">
+                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <div className="mr-auto flex items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-time-30.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>Time: </p>
+                  </div>
+                  <p className="font-bold">{eachTime?.time}</p>
+                </div>
+                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <div className="mr-auto flex items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-calendar-50.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>Date: </p>
+                  </div>
+                  <p className="font-bold">{formattedDate}</p>
+                </div>
+                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <div className="mr-auto flex items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-cost-58.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>Price: </p>
+                  </div>
+                  <p className="font-bold">NGN {eachTime?.price}</p>
+                </div>
+              </div>
+
+              <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md flex flex-wrap gap-2 border sm:border-none border-blue-400/50">
+                <p>Pick-up Terminal:</p>
+                <p className="font-bold"> {detailsForm?.terminal}</p>
+              </div>
+              <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md flex flex-wrap gap-2 border sm:border-none border-blue-400/50">
+                <p>Number of seats:</p>
+                <p className="font-bold"> {detailsForm?.seats}</p>
+              </div>
+
+              <p className="text-[0.75rem] text-slate-500 absolute bottom-4 p-1 bg-blue-400/10">
+                PS: Prices may vary based on demand
+              </p>
+              <PaystackHook />
+            </div>
+          )}
         </div>
       </section>
       <Footer />

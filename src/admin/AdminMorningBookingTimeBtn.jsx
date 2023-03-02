@@ -10,8 +10,11 @@ const AdminMorningBookingTimeBtn = ({ item, handleDeleteMorningTime }) => {
       <div className="text-[0.85rem] transition-all duration-300">
         {item?.time}
       </div>
-      <div className="text-[0.75rem] border border-blue-400 rounded-md px-3 absolute bottom-[-23px] font-medium">
-        {item.slots}
+      <div className="text-[0.75rem] border border-blue-400 rounded-md px-3 absolute bottom-[-23px] left-[50%] translate-x-[-50%] font-medium flex gap-1">
+        <p>{item.slots}</p>
+        <p className="text-blue-400 border-l border-blue-400 pl-1">
+          #{item.price}
+        </p>
       </div>
     </div>
   );

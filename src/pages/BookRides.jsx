@@ -92,7 +92,7 @@ const BookRides = () => {
                     </div>
                   )}
                   {/* <ActiveBooking /> */}
-                  <div className=" flex gap-1 items-center absolute bottom-4">
+                  {/* <div className=" flex gap-1 items-center absolute bottom-4">
                     <div className="bg-blue-400 rounded-full flex justify-center items-center">
                       <img
                         alt=""
@@ -103,7 +103,7 @@ const BookRides = () => {
                     <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
                       You can have only one active ride at once
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </section>
             )}
@@ -116,10 +116,10 @@ const BookRides = () => {
                   Booking times
                 </h1>
                 <div className="w-[fit-content] text-[.9rem] sm:text-[1.1rem] font-medium text-white text-center mb-3 flex items-center gap-3 mx-auto">
-                  <p> Click on a time to book now at</p>{" "}
-                  <p className="bg-blue-400 px-2 py-[2px] rounded-lg text-[0.9rem] sm:text-[1rem]">
+                  <p> Click on an available time to book now</p>
+                  {/* <p className="bg-blue-400 px-2 py-[2px] rounded-lg text-[0.9rem] sm:text-[1rem]">
                     NGN {priceFromDb[0]?.price}
-                  </p>
+                  </p> */}
                 </div>
                 <div className="w-full block md:flex">
                   <div className="w-full md:w-1/2 md:p-4 p-0">
@@ -136,8 +136,8 @@ const BookRides = () => {
                           Click on an available time to book a ride
                         </p>
                       </div>
-                      <h2 className="pb-1 border-b border-b-slate-400/80">
-                        From Oke-odo - Morning Rides
+                      <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
+                        From Outside school - Going to school park
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
                         {morningBookingTimesFromDb?.length > 0 ? (
@@ -169,8 +169,8 @@ const BookRides = () => {
                           Click on an available time to book a ride
                         </p>
                       </div>
-                      <h2 className="pb-1 border-b border-b-slate-400/80">
-                        From School Park - Afternoon Rides
+                      <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
+                        From Inside school - Going off-campus
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
                         {noonBookingTimesFromDb?.length > 0 ? (

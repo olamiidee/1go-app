@@ -53,7 +53,8 @@ const BookingTimes = () => {
         <h1 className="w-full font-bold text-[1.75rem]">Booking times</h1>
         <div className="w-full min-h-[200px] bg-white p-4 mt-8 rounded-lg shadow-xl shadow-slate-300/30 border border-sky-500 relative">
           <h2 className="pb-1 border-b border-b-slate-400/80">
-            Manage booking times <strong>(From Oke-odo - Morning Rides)</strong>
+            Manage booking times{" "}
+            <strong>( From Outside school - Going to school park)</strong>
           </h2>
           <div className="my-4 w-full flex gap-4 flex-wrap">
             {morningBookingTimesFromDb &&
@@ -90,7 +91,7 @@ const BookingTimes = () => {
                 <h2 className="pb-4 text-center font-medium">
                   Add booking time
                 </h2>
-                <form className="flex gap-2 sm:gap-4">
+                <form className="flex gap-2 sm:gap-4 flex-wrap">
                   <input
                     type="number"
                     id="morningHour"
@@ -118,16 +119,27 @@ const BookingTimes = () => {
                     />
                     <div className="absolute top-0 w-full h-full bg-blue-400/20"></div>
                   </div>
-                  <div>
+                  <div className="text-center">
                     <input
                       type="number"
                       id="slots"
                       onChange={handleMorningChange}
                       placeholder="14"
-                      className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      className="bg-blue-50 w-12 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
                       required
                     />
                     <p>Slots</p>
+                  </div>
+                  <div className="text-center">
+                    <input
+                      type="number"
+                      id="price"
+                      onChange={handleMorningChange}
+                      placeholder="200"
+                      className="bg-blue-50 w-16 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      required
+                    />
+                    <p>Price</p>
                   </div>
                   <button
                     onClick={handleMorningBookingTimeSubmit}
@@ -144,7 +156,7 @@ const BookingTimes = () => {
         <div className="w-full min-h-[200px] bg-white p-4 mt-8 rounded-lg shadow-xl shadow-slate-300/30 border border-sky-500 relative">
           <h2 className="pb-1 border-b border-b-slate-400/80">
             Manage booking times{" "}
-            <strong>( From School Park - Afternoon Rides )</strong>
+            <strong>( From Inside school - Going off-campus )</strong>
           </h2>
           <div className="my-4 w-full flex gap-4 flex-wrap">
             {noonBookingTimesFromDb &&
@@ -181,7 +193,7 @@ const BookingTimes = () => {
                 <h2 className="pb-4 text-center font-medium">
                   Add booking time
                 </h2>
-                <form className="flex gap-2 sm:gap-4">
+                <form className="flex gap-2 sm:gap-4 flex-wrap">
                   <input
                     type="number"
                     id="noonHour"
@@ -209,16 +221,27 @@ const BookingTimes = () => {
                     />
                     <div className="absolute top-0 w-full h-full bg-blue-400/20"></div>
                   </div>
-                  <div>
+                  <div className="text-center">
                     <input
                       type="number"
                       id="slots"
                       onChange={handlenoonChange}
                       placeholder="14"
-                      className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      className="bg-blue-50 w-12 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
                       required
                     />
                     <p>Slots</p>
+                  </div>
+                  <div className="text-center">
+                    <input
+                      type="number"
+                      id="price"
+                      onChange={handleMorningChange}
+                      placeholder="200"
+                      className="bg-blue-50 w-16 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      required
+                    />
+                    <p>Price</p>
                   </div>
                   <button
                     onClick={handleNoonBookingTimeSubmit}
@@ -232,7 +255,7 @@ const BookingTimes = () => {
           )}
         </div>
 
-        <h1 className="w-full font-bold text-[1.75rem] mt-12">Price</h1>
+        {/* <h1 className="w-full font-bold text-[1.75rem] mt-12">Price</h1>
         <div className="w-full min-h-[200px] bg-white p-4 mt-8 rounded-lg shadow-xl shadow-slate-300/30 border border-sky-500 relative">
           <h2 className="pb-1 border-b border-b-slate-400/80">Edit price</h2>
           <div className="my-4 w-full flex gap-4 flex-wrap">
@@ -276,7 +299,7 @@ const BookingTimes = () => {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
       <ScrollToTop />
     </div>
