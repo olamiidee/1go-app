@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ActiveBooking from "../components/ActiveBooking";
 import BookSuccessModal from "../components/BookSuccessModal";
 import ClientMorningTimeBtn from "../components/ClientMorningTimeBtn";
@@ -39,14 +40,16 @@ const BookRides = () => {
       <section className="w-full min-h-screen pb-32 bg-slate-100 text-slate-700">
         <section className="w-full bg-reg1 bg-cover bg-right lg:bg-center bg-no-repeat">
           <section className="w-full bg-gradient-to-b from-zinc-900/70 to-zinc-700/40 py-[150px] px-[5%] sm:px-[10.5%]">
-            <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
-              <img
-                alt=""
-                src="/images/icons8-information-64.png"
-                className="w-4 h-4"
-              />
-              <p className="underline">Contact us</p>
-            </div>
+            <Link to="/contact">
+              <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
+                <img
+                  alt=""
+                  src="/images/icons8-information-64.png"
+                  className="w-4 h-4"
+                />
+                <p className="underline">Contact us</p>
+              </div>
+            </Link>
             <section className="w-full border-b border-zinc-300 pb-4 text-white flex">
               <div className="w-2/3 mr-auto">
                 <h2 className="text-[1.5rem] font-bold flex gap-2 items-center">
@@ -78,9 +81,14 @@ const BookRides = () => {
             {/* if ride is active show this tab at the top */}
             {active && activeRidesFromDb?.length > 0 && (
               <section className="w-full mt-10 text-center sm:text-start">
-                <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px]">
-                  Active bookings
-                </h2>
+                <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
+                  <h2>Active bookings</h2>
+                  {activeRidesFromDb?.length > 0 && (
+                    <div className="w-4 h-4 p-[10px] text-[.85rem] flex justify-center items-center border-2 border-blue-400/50 rounded-full">
+                      {activeRidesFromDb?.length}
+                    </div>
+                  )}
+                </div>
                 <div className="w-full min-h-[300px] md:min-h-[200px] bg-white border-none rounded-b-lg rounded-tr-lg p-4 relative">
                   {/* each active booking */}
                   {activeRidesFromDb.length > 0 ? (
@@ -224,9 +232,14 @@ const BookRides = () => {
         {/* if ride is not active show this box at bottom */}
         {!active && (
           <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
-            <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px]">
-              Active bookings
-            </h2>
+            <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
+              <h2>Active bookings</h2>
+              {activeRidesFromDb?.length > 0 && (
+                <div className="w-4 h-4 p-[10px] text-[.85rem] flex justify-center items-center border-2 border-blue-400/50 rounded-full">
+                  {activeRidesFromDb?.length}
+                </div>
+              )}
+            </div>
             <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg rounded-tr-lg p-4 relative">
               {/* each active booking */}
               {activeRidesFromDb?.length > 0 ? (
@@ -269,9 +282,14 @@ const BookRides = () => {
         {/* if ride is not active show this box at bottom */}
 
         <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
-          <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px]">
-            Ride history
-          </h2>
+          <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
+            <h2>Active bookings</h2>
+            {rideHistoryFromDb?.length > 0 && (
+              <div className="w-4 h-4 p-[10px] text-[.85rem] flex justify-center items-center border-2 border-slate-400/50 rounded-full">
+                {rideHistoryFromDb?.length}
+              </div>
+            )}
+          </div>
           <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center transition-all duration-300">
             {/* each ride history */}
 

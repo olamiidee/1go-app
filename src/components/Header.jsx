@@ -202,7 +202,7 @@ const Header = () => {
               onClick={hideDropdown}
               className="w-[35%] h-full float-left bg-transparent"
             ></div>
-            <ul className="slide float-right w-[65%] h-full bg-black/80 px-[30px] text-[1rem] text-white pt-[100px] uppercase">
+            <ul className="slide float-right w-[65%] h-full bg-black/80 px-[30px] text-[1rem] text-white pt-[100px] uppercase slide">
               {user && (
                 <li
                   onMouseOver={toggleLogoutOn}
