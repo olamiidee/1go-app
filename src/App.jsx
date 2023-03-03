@@ -20,7 +20,7 @@ const BookingTimes = lazy(() => import("./admin/BookingTimes"));
 const AdminLogin = lazy(() => import("./admin/AdminLogin"));
 
 function App() {
-  const { user, admin, activeRidesFromDb } = useAppContext();
+  const { user, admin, activeRidesFromDb, loader } = useAppContext();
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
@@ -31,15 +31,13 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* dashboard controlled access */}
-        {user && (
+        {user ? (
           <>
             <Route path="/book-ride" element={<BookRides />} />
-            {!activeRidesFromDb?.length > 0 ? (
-              <Route path="/book-ride/summary/:id" element={<Summary />} />
-            ) : (
-              <Route path="/book-ride" element={<BookRides />} />
-            )}
+            <Route path="/book-ride/summary/:id" element={<Summary />} />
           </>
+        ) : (
+          <Route path="/login" element={<Login />} />
         )}
 
         {/* admin access */}

@@ -1680,6 +1680,16 @@ video {
   padding-bottom: 10rem;
 }
 
+.py-\[1px\] {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.py-\[21px\] {
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
+
 .pt-\[80px\] {
   padding-top: 80px;
 }
@@ -2409,6 +2419,10 @@ input[type="number"] {
     padding-bottom: 170px;
   }
 
+  .sm\:text-start {
+    text-align: start;
+  }
+
   .sm\:text-\[1\.3rem\] {
     font-size: 1.3rem;
   }
@@ -2433,6 +2447,11 @@ input[type="number"] {
 
   .md\:left-\[10\.5\%\] {
     left: 10.5%;
+  }
+
+  .md\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 
   .md\:mt-0 {
