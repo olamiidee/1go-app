@@ -1288,6 +1288,14 @@ video {
   border-color: rgb(212 212 216 / var(--tw-border-opacity));
 }
 
+.border-slate-400\/30 {
+  border-color: rgb(148 163 184 / 0.3);
+}
+
+.border-slate-400\/20 {
+  border-color: rgb(148 163 184 / 0.2);
+}
+
 .border-b-slate-400\/80 {
   border-bottom-color: rgb(148 163 184 / 0.8);
 }
