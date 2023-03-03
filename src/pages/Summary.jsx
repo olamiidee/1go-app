@@ -195,7 +195,7 @@ const Summary = () => {
               onClick={gotoDetails}
               className={` ${
                 !summaryPage ? "bg-white text-black" : "bg-white/30 text-white"
-              } text-[.9rem] md:text-[1.2rem] font-medium w-[fit-content] py-2 px-5 rounded-t-lg`}
+              } text-[.9rem] md:text-[1.2rem] font-medium w-[fit-content] py-2 px-5 rounded-t-lg border-none relative bottom-[-2px]`}
             >
               Set details
             </h2>
@@ -203,7 +203,7 @@ const Summary = () => {
               onClick={proceedToSummary}
               className={` ${
                 summaryPage ? "bg-white text-black" : "bg-white/30 text-white"
-              } text-[.9rem] md:text-[1.2rem] font-medium w-[fit-content] py-2 px-5 rounded-t-lg`}
+              } text-[.9rem] md:text-[1.2rem] font-medium w-[fit-content] py-2 px-5 rounded-t-lg border-none relative bottom-[-2px]`}
             >
               Summary
             </h2>

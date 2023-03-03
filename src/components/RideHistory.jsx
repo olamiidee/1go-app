@@ -4,7 +4,7 @@ const RideHistory = ({ item }) => {
   // const { priceFromDb } = useAppContext();
   return (
     <>
-      <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.9rem] md:text-[1rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap">
+      <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.85rem] md:text-[0.7rem] lg:text-[.9rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap">
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md md:mr-4">
           <p>
             Date: <strong>{item?.createdAt}</strong>
@@ -31,7 +31,7 @@ const RideHistory = ({ item }) => {
             src="/images/icons8-checkmark-64.png"
             className="w-6 h-6 mr-1"
           />
-          <p>Booking successful</p>
+          <p>Successful</p>
         </div>
       </div>
 

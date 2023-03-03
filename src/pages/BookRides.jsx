@@ -5,6 +5,7 @@ import ClientMorningTimeBtn from "../components/ClientMorningTimeBtn";
 import ClientNoonTimeBtn from "../components/ClientNoonTimeBtn";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Loader from "../components/Loader";
 import RideHistory from "../components/RideHistory";
 import { useAppContext } from "../contexts/AppContext";
 import ScrollToTop from "../ScrollToTop";
@@ -21,10 +22,18 @@ const BookRides = () => {
     formattedDate,
     toggleActive,
     active,
+    loader,
   } = useAppContext();
+
+  let firstFive = rideHistoryFromDb?.slice(0, 5);
+  const [displayAll, setDisplayAll] = useState(false);
+  function showAll() {
+    setDisplayAll((prev) => !prev);
+  }
 
   return (
     <>
+      {loader && <Loader />}
       <Header />
       {bookingSuccess && <BookSuccessModal />}
       <section className="w-full min-h-screen pb-32 bg-slate-100 text-slate-700">
@@ -69,10 +78,10 @@ const BookRides = () => {
             {/* if ride is active show this tab at the top */}
             {active && activeRidesFromDb?.length > 0 && (
               <section className="w-full mt-10 text-center sm:text-start">
-                <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
+                <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px]">
                   Active bookings
                 </h2>
-                <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg p-4 relative">
+                <div className="w-full min-h-[300px] md:min-h-[200px] bg-white border-none rounded-b-lg rounded-tr-lg p-4 relative">
                   {/* each active booking */}
                   {activeRidesFromDb.length > 0 ? (
                     activeRidesFromDb?.map((item, index) => {
@@ -103,6 +112,18 @@ const BookRides = () => {
                   >
                     Book another ride
                   </button>
+                  <div className=" mt-4 flex gap-1 items-center mb-3">
+                    <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-information-64.png"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <p className="text-[0.65rem] bg-blue-400/30 px-2 py-[1px] rounded-full text-start">
+                      Active rides will be cleared 20 mins after booking
+                    </p>
+                  </div>
                 </div>
               </section>
             )}
@@ -203,10 +224,10 @@ const BookRides = () => {
         {/* if ride is not active show this box at bottom */}
         {!active && (
           <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
-            <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
+            <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px]">
               Active bookings
             </h2>
-            <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg p-4 relative">
+            <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg rounded-tr-lg p-4 relative">
               {/* each active booking */}
               {activeRidesFromDb?.length > 0 ? (
                 activeRidesFromDb?.map((item, index) => {
@@ -230,30 +251,41 @@ const BookRides = () => {
                   </p>
                 </div>
               )}
-              {/* <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
-                <img
-                  alt=""
-                  src="/images/empty.png"
-                  className="w-20 h-20 mb-8"
-                />
-                <p className="text-slate-400">
-                  Your active booking will show here...
+              <div className=" mt-4 flex gap-1 items-center mb-3">
+                <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                  <img
+                    alt=""
+                    src="/images/icons8-information-64.png"
+                    className="w-4 h-4"
+                  />
+                </div>
+                <p className="text-[0.65rem] bg-blue-400/30 px-2 py-[1px] rounded-full text-start">
+                  Active rides will be cleared 20 mins after booking
                 </p>
-              </div> */}
-              {/* <ActiveBooking /> */}
+              </div>
             </div>
           </section>
         )}
         {/* if ride is not active show this box at bottom */}
 
         <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
-          <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
+          <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px]">
             Ride history
           </h2>
-          <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center">
+          <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center transition-all duration-300">
             {/* each ride history */}
 
-            {rideHistoryFromDb?.length > 0 ? (
+            {rideHistoryFromDb?.length > 0 && !displayAll ? (
+              firstFive?.map((item, index) => {
+                return (
+                  <RideHistory
+                    key={index}
+                    item={item}
+                    rideHistoryFromDb={rideHistoryFromDb}
+                  />
+                );
+              })
+            ) : rideHistoryFromDb?.length > 0 && displayAll ? (
               rideHistoryFromDb?.map((item, index) => {
                 return (
                   <RideHistory
@@ -276,9 +308,14 @@ const BookRides = () => {
             {/* <RideHistory priceFromDb={priceFromDb} />
             <RideHistory priceFromDb={priceFromDb} />
             <RideHistory priceFromDb={priceFromDb} /> */}
-            <button className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3">
-              Load more
-            </button>
+            {rideHistoryFromDb?.length > 5 && (
+              <button
+                onClick={showAll}
+                className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
+              >
+                {displayAll ? "Show less" : "Show more"}
+              </button>
+            )}
           </div>
         </section>
       </section>
