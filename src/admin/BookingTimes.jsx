@@ -21,8 +21,6 @@ const BookingTimes = () => {
     handleDeleteMorningTime,
     handleDeleteNoonTime,
     handlePriceChange,
-    handlePriceSubmit,
-    priceFromDb,
   } = useAppContext();
 
   //to open morning edit time modal
@@ -110,14 +108,29 @@ const BookingTimes = () => {
                     required
                   />
                   <div className="relative">
-                    <input
+                    {/* <input
                       type="text"
                       placeholder="AM"
                       onChange={handleMorningChange}
                       value={morningForm.morningAmpm}
                       className="bg-blue-50 w-12 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none h-full"
-                    />
-                    <div className="absolute top-0 w-full h-full bg-blue-400/20"></div>
+                    /> */}
+                    <div className="text-center">
+                      <select
+                        id="morningAmpm"
+                        onChange={handleMorningChange}
+                        defaultValue={"DEFAULT"}
+                        className="bg-blue-50 w-12 sm:w-[70px] py-1 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      >
+                        <option value="DEFAULT" disabled hidden>
+                          AM
+                        </option>
+
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                      </select>
+                      <p>AM/PM</p>
+                    </div>
                   </div>
                   <div className="text-center">
                     <input
@@ -136,7 +149,7 @@ const BookingTimes = () => {
                       id="price"
                       onChange={handleMorningChange}
                       placeholder="200"
-                      className="bg-blue-50 w-16 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      className="bg-blue-50 w-14 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
                       required
                     />
                     <p>Price</p>
@@ -211,15 +224,21 @@ const BookingTimes = () => {
                     className="bg-blue-50 w-10 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none"
                     required
                   />
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="PM"
-                      value={noonForm.noonAmpm}
+                  <div className="text-center">
+                    <select
+                      id="morningAmpm"
                       onChange={handlenoonChange}
-                      className="bg-blue-50 w-12 sm:w-16 px-[6px] sm:p-3 border-2 border-blue-400 rounded-md outline-none h-full"
-                    />
-                    <div className="absolute top-0 w-full h-full bg-blue-400/20"></div>
+                      defaultValue={"DEFAULT"}
+                      className="bg-blue-50 w-12 sm:w-[70px] py-1 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                    >
+                      <option value="DEFAULT" disabled hidden>
+                        PM
+                      </option>
+
+                      <option value="AM">AM</option>
+                      <option value="PM">PM</option>
+                    </select>
+                    <p>AM/PM</p>
                   </div>
                   <div className="text-center">
                     <input
@@ -238,7 +257,7 @@ const BookingTimes = () => {
                       id="price"
                       onChange={handlenoonChange}
                       placeholder="200"
-                      className="bg-blue-50 w-16 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
+                      className="bg-blue-50 w-14 sm:w-16 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
                       required
                     />
                     <p>Price</p>

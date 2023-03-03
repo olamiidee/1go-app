@@ -315,7 +315,7 @@ const AppContextProvider = ({ children }) => {
   const [morningForm, setMorningForm] = useState({
     morningHour: "",
     morningMinute: "",
-    morningAmpm: "AM",
+    morningAmpm: "",
     slots: "",
     price: "",
   });
@@ -335,7 +335,7 @@ const AppContextProvider = ({ children }) => {
   const [noonForm, setNoonForm] = useState({
     noonHour: "",
     noonMinute: "",
-    noonAmpm: "PM",
+    noonAmpm: "",
     slots: "",
     price: "",
   });
@@ -672,7 +672,10 @@ const AppContextProvider = ({ children }) => {
           querySnapshot.forEach((doc) => {
             ride.push(doc.data());
           });
-          setridesToday(ride);
+          let arranged = ride?.sort(function (a, b) {
+            return b?.id.slice(-3) - a?.id.slice(-3);
+          });
+          setridesToday(arranged);
         } catch (err) {
           console.log(err.message);
         } finally {
@@ -684,82 +687,82 @@ const AppContextProvider = ({ children }) => {
   }, [currentUserFromDb, currentPage]);
 
   //to save nprice form input
-  const [priceForm, setPriceForm] = useState({
-    price: "",
-  });
+  // const [priceForm, setPriceForm] = useState({
+  //   price: "",
+  // });
 
-  //to save noon time form input
-  function handlePriceChange(event) {
-    const { id, value } = event.target;
-    setPriceForm((prevState) => {
-      return {
-        ...prevState,
-        [id]: value,
-      };
-    });
-  }
+  // //to save noon time form input
+  // function handlePriceChange(event) {
+  //   const { id, value } = event.target;
+  //   setPriceForm((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       [id]: value,
+  //     };
+  //   });
+  // }
 
-  //to save price from db
-  const [priceFromDb, setpriceFromDb] = useState(
-    JSON.parse(localStorage.getItem("price")) || []
-  );
+  // //to save price from db
+  // const [priceFromDb, setpriceFromDb] = useState(
+  //   JSON.parse(localStorage.getItem("price")) || []
+  // );
 
-  //to get price saved in db
-  useEffect(() => {
-    const getPrice = async () => {
-      setLoader(true);
+  // //to get price saved in db
+  // useEffect(() => {
+  //   const getPrice = async () => {
+  //     setLoader(true);
 
-      try {
-        const querySnapshot = await getDocs(collection(db, "pricing"));
-        let price = [];
-        querySnapshot.forEach((doc) => {
-          price.push(doc.data());
-        });
+  //     try {
+  //       const querySnapshot = await getDocs(collection(db, "pricing"));
+  //       let price = [];
+  //       querySnapshot.forEach((doc) => {
+  //         price.push(doc.data());
+  //       });
 
-        price.length > 0 &&
-          localStorage.setItem("price", JSON.stringify(price));
-        price.length > 0 && setpriceFromDb(price);
-      } catch (err) {
-        console.log(err.message);
-      } finally {
-        setLoader(false);
-      }
-    };
-    getPrice();
-  }, [updatedTime, currentPage]);
+  //       price.length > 0 &&
+  //         localStorage.setItem("price", JSON.stringify(price));
+  //       price.length > 0 && setpriceFromDb(price);
+  //     } catch (err) {
+  //       console.log(err.message);
+  //     } finally {
+  //       setLoader(false);
+  //     }
+  //   };
+  //   getPrice();
+  // }, [updatedTime, currentPage]);
 
   //to send changed time to db
-  const createPriceDocument = async (price) => {
-    setLoader(true);
+  // const createPriceDocument = async (price) => {
+  //   setLoader(true);
 
-    try {
-      await setDoc(doc(db, "pricing", "price"), {
-        price: price,
-      });
-      console.log("price changed");
-      setUpdatedTime((prev) => !prev);
-    } catch (err) {
-      console.error("Error changing ", err);
-    } finally {
-      setLoader(false);
-    }
-  };
+  //   try {
+  //     await setDoc(doc(db, "pricing", "price"), {
+  //       price: price,
+  //     });
+  //     console.log("price changed");
+  //     setUpdatedTime((prev) => !prev);
+  //   } catch (err) {
+  //     console.error("Error changing ", err);
+  //   } finally {
+  //     setLoader(false);
+  //   }
+  // };
 
-  //to handle price form data submit to firebase
-  const handlePriceSubmit = async (e) => {
-    e.preventDefault();
-    setLoader(true);
+  // //to handle price form data submit to firebase
+  // const handlePriceSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoader(true);
 
-    try {
-      await deleteDoc(doc(db, "pricing", "price"));
-      await createPriceDocument(priceForm.price);
-      setLoader(false);
-      window.location.reload();
-    } catch (error) {
-      setLoader(false);
-      console.log(error.message);
-    }
-  };
+  //   try {
+  //     await deleteDoc(doc(db, "pricing", "price"));
+  //     await createPriceDocument(priceForm.price);
+  //     setLoader(false);
+  //     window.location.reload();
+  //   } catch (error) {
+  //     setLoader(false);
+  //     console.log(error.message);
+  //   }
+  // };
 
   //to save contact us form data
   const [contactUsData, setContactUsData] = useState({
@@ -973,6 +976,7 @@ const AppContextProvider = ({ children }) => {
       localStorage.setItem("active", JSON.stringify(active));
     }
   }, [checkTime]);
+
   function toggleActive() {
     setActive(false);
     localStorage.setItem("active", JSON.stringify(active));
@@ -1107,11 +1111,9 @@ const AppContextProvider = ({ children }) => {
           let compareTimeRef = moment(compareTime, ["h:mm A"])
             .format("HH:mm")
             .replace(/:/g, "");
-          console.log(currentTimeRef, compareTimeRef);
 
           if (Number(currentTimeRef) >= Number(compareTimeRef)) {
             async function clearActiveRides() {
-              console.log("cleared!", currentTimeRef, compareTimeRef);
               await clearActiveRideDoc(item.id);
               let newArr = activeRidesFromDb.filter(
                 (item) => item.time !== activeTime
@@ -1245,9 +1247,6 @@ const AppContextProvider = ({ children }) => {
         handleDeleteMorningTime,
         handleDeleteNoonTime,
         allUsers,
-        handlePriceChange,
-        handlePriceSubmit,
-        priceFromDb,
         admin,
         loginAdmin,
         handleAdminChange,

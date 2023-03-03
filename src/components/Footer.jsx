@@ -31,7 +31,7 @@ export default function Footer() {
             {/* whatsapp */}
             <div className="cursor-pointer hover:translate-y-[6px] transition-all duration-300">
               <a
-                href="https://wa.me/+2349125921624"
+                href="https://wa.me/+2349135921624"
                 target="_blank"
                 className="flex items-center justify-between space-x-2 "
               >
@@ -84,7 +84,7 @@ export default function Footer() {
                 className="w-[30px] h-[30px] cursor-pointer hover:translate-y-[6px] transition-all duration-300"
               />
             </a>
-            <a href="https://wa.me/+2349125921624" target="_blank">
+            <a href="https://wa.me/+2349135921624" target="_blank">
               <img
                 alt=""
                 src={whatsapp}

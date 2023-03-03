@@ -16,7 +16,6 @@ const BookRides = () => {
     currentUserFromDb,
     morningBookingTimesFromDb,
     noonBookingTimesFromDb,
-    priceFromDb,
     bookingSuccess,
     activeRidesFromDb,
     rideHistoryFromDb,

@@ -3,11 +3,14 @@ import ScrollToTop from "../ScrollToTop";
 import RideHistory from "../components/RideHistory";
 import { useAppContext } from "../contexts/AppContext";
 import ContactMessage from "../components/ContactMessage";
+import Loader from "../components/Loader";
 
 const AdminDashboard = () => {
-  const { allUsers, allRides, ridesToday, messageFromDb } = useAppContext();
+  const { allUsers, allRides, ridesToday, messageFromDb, loader } =
+    useAppContext();
   return (
     <div className="w-full">
+      {loader && <Loader />}
       <Sidebar />
       <div
         className={`w-full md:w-[80%] min-h-screen mb-16 float-right bg-sky-50 pt-[80px] md:pt-[60px] px-3 md:px-12 transition-all duration-500 text-slate-700`}
