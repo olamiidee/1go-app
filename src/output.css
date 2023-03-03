@@ -637,6 +637,10 @@ video {
   left: 1rem;
 }
 
+.bottom-\[-2px\] {
+  bottom: -2px;
+}
+
 .bottom-4 {
   bottom: 1rem;
 }
@@ -1201,6 +1205,10 @@ video {
   border-right-width: 2px;
 }
 
+.border-none {
+  border-style: none;
+}
+
 .border-sky-500 {
   --tw-border-opacity: 1;
   border-color: rgb(14 165 233 / var(--tw-border-opacity));
@@ -1423,10 +1431,6 @@ video {
 
 .bg-white\/40 {
   background-color: rgb(255 255 255 / 0.4);
-}
-
-.bg-blue-400\/50 {
-  background-color: rgb(96 165 250 / 0.5);
 }
 
 .bg-blue-400\/30 {
@@ -1665,6 +1669,11 @@ video {
   padding-right: 5%;
 }
 
+.py-\[1px\] {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 .py-\[2px\] {
   padding-top: 2px;
   padding-bottom: 2px;
@@ -1678,16 +1687,6 @@ video {
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
-}
-
-.py-\[1px\] {
-  padding-top: 1px;
-  padding-bottom: 1px;
-}
-
-.py-\[21px\] {
-  padding-top: 21px;
-  padding-bottom: 21px;
 }
 
 .pt-\[80px\] {
@@ -1850,6 +1849,14 @@ video {
   font-size: 0.95rem;
 }
 
+.text-\[0\.65rem\] {
+  font-size: 0.65rem;
+}
+
+.text-\[\.8rem\] {
+  font-size: .8rem;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1857,10 +1864,6 @@ video {
 
 .text-\[1\.65rem\] {
   font-size: 1.65rem;
-}
-
-.text-\[\.8rem\] {
-  font-size: .8rem;
 }
 
 .font-bold {
@@ -1929,11 +1932,6 @@ video {
 .text-slate-200 {
   --tw-text-opacity: 1;
   color: rgb(226 232 240 / var(--tw-text-opacity));
-}
-
-.text-slate-600 {
-  --tw-text-opacity: 1;
-  color: rgb(71 85 105 / var(--tw-text-opacity));
 }
 
 .text-slate-800 {
@@ -2466,6 +2464,10 @@ input[type="number"] {
     margin-top: 2rem;
   }
 
+  .md\:mr-\[2px\] {
+    margin-right: 2px;
+  }
+
   .md\:block {
     display: block;
   }
@@ -2543,12 +2545,20 @@ input[type="number"] {
     gap: 1rem;
   }
 
+  .md\:whitespace-pre-line {
+    white-space: pre-line;
+  }
+
   .md\:p-2 {
     padding: 0.5rem;
   }
 
   .md\:p-4 {
     padding: 1rem;
+  }
+
+  .md\:p-1 {
+    padding: 0.25rem;
   }
 
   .md\:px-12 {
@@ -2606,16 +2616,16 @@ input[type="number"] {
     padding-bottom: 4rem;
   }
 
+  .md\:text-center {
+    text-align: center;
+  }
+
   .md\:text-\[1\.2rem\] {
     font-size: 1.2rem;
   }
 
   .md\:text-\[3rem\] {
     font-size: 3rem;
-  }
-
-  .md\:text-\[\.9rem\] {
-    font-size: .9rem;
   }
 
   .md\:text-\[1rem\] {
@@ -2646,6 +2656,10 @@ input[type="number"] {
     font-size: 1.5rem;
   }
 
+  .md\:text-\[\.9rem\] {
+    font-size: .9rem;
+  }
+
   .md\:text-\[1\.23rem\] {
     font-size: 1.23rem;
   }
@@ -2653,9 +2667,17 @@ input[type="number"] {
   .md\:text-\[1\.75rem\] {
     font-size: 1.75rem;
   }
+
+  .md\:text-\[0\.7rem\] {
+    font-size: 0.7rem;
+  }
 }
 
 @media (min-width: 1024px) {
+  .lg\:mr-1 {
+    margin-right: 0.25rem;
+  }
+
   .lg\:block {
     display: block;
   }
@@ -2684,6 +2706,10 @@ input[type="number"] {
     background-position: center;
   }
 
+  .lg\:p-2 {
+    padding: 0.5rem;
+  }
+
   .lg\:px-\[50px\] {
     padding-left: 50px;
     padding-right: 50px;
@@ -2706,6 +2732,10 @@ input[type="number"] {
 
   .lg\:pt-\[15\%\] {
     padding-top: 15%;
+  }
+
+  .lg\:text-\[\.9rem\] {
+    font-size: .9rem;
   }
 
   .lg\:text-\[3\.5rem\] {
