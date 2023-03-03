@@ -226,7 +226,7 @@ const BookingTimes = () => {
                   />
                   <div className="text-center">
                     <select
-                      id="morningAmpm"
+                      id="noonAmpm"
                       onChange={handlenoonChange}
                       defaultValue={"DEFAULT"}
                       className="bg-blue-50 w-12 sm:w-[70px] py-1 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
