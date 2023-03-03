@@ -37,7 +37,7 @@ const RideHistory = ({ item }) => {
 
       {/* mobile ui */}
 
-      <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.75rem] md:text-[1rem] rounded-md flex md:hidden flex-wrap md:flex-nowrap items-center">
+      <div className="w-full px-3 py-2 mb-4 bg-slate-400/10 border-2 border-slate-400/20 text-[0.75rem] md:text-[1rem] rounded-md flex md:hidden flex-wrap md:flex-nowrap items-center">
         {/* <div className="mr-2">
           <img
             alt=""
