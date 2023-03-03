@@ -4,10 +4,8 @@ const ClientNoonTimeBtn = ({ item }) => {
   const { user, activeRidesFromDb, navigate } = useAppContext();
 
   function link() {
-    if (user && !activeRidesFromDb?.length > 0) {
+    if (user) {
       navigate(`/book-ride/summary/${item.id}`);
-    } else if (user && activeRidesFromDb?.length > 0) {
-      navigate("/book-ride");
     } else {
       navigate("/login");
     }

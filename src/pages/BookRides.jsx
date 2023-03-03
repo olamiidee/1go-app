@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ActiveBooking from "../components/ActiveBooking";
 import BookSuccessModal from "../components/BookSuccessModal";
 import ClientMorningTimeBtn from "../components/ClientMorningTimeBtn";
@@ -17,7 +18,11 @@ const BookRides = () => {
     bookingSuccess,
     activeRidesFromDb,
     rideHistoryFromDb,
+    formattedDate,
+    toggleActive,
+    active,
   } = useAppContext();
+
   return (
     <>
       <Header />
@@ -62,14 +67,14 @@ const BookRides = () => {
             </section>
 
             {/* if ride is active show this tab at the top */}
-            {activeRidesFromDb?.length > 0 && (
-              <section className="w-full mt-10">
+            {active && activeRidesFromDb?.length > 0 && (
+              <section className="w-full mt-10 text-center sm:text-start">
                 <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
-                  Active booking
+                  Active bookings
                 </h2>
                 <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg p-4 relative">
                   {/* each active booking */}
-                  {activeRidesFromDb ? (
+                  {activeRidesFromDb.length > 0 ? (
                     activeRidesFromDb?.map((item, index) => {
                       return (
                         <ActiveBooking
@@ -91,26 +96,20 @@ const BookRides = () => {
                       </p>
                     </div>
                   )}
-                  {/* <ActiveBooking /> */}
-                  {/* <div className=" flex gap-1 items-center absolute bottom-4">
-                    <div className="bg-blue-400 rounded-full flex justify-center items-center">
-                      <img
-                        alt=""
-                        src="/images/icons8-information-64.png"
-                        className="w-4 h-4"
-                      />
-                    </div>
-                    <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
-                      You can have only one active ride at once
-                    </p>
-                  </div> */}
+
+                  <button
+                    onClick={toggleActive}
+                    className="mx-auto md:mx-0 px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
+                  >
+                    Book another ride
+                  </button>
                 </div>
               </section>
             )}
             {/* if ride is active show this tab at the top */}
 
             {/* if ride is not active show booking times at the top */}
-            {!activeRidesFromDb?.length > 0 && (
+            {(!active || activeRidesFromDb?.length === 0) && (
               <section className="w-full border-b border-zinc-300 pb-16 pt-12">
                 <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-white">
                   Booking times
@@ -132,10 +131,13 @@ const BookRides = () => {
                             className="w-4 h-4"
                           />
                         </div>
-                        <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
+                        <p className="text-[0.75rem] bg-blue-400/30 px-2 py-[1px] rounded-full">
                           Click on an available time to book a ride
                         </p>
                       </div>
+                      <p className="font-medium text-[.8rem] md:text-[.9rem]">
+                        Today: {formattedDate}
+                      </p>
                       <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
                         From Outside school - Going to school park
                       </h2>
@@ -165,16 +167,19 @@ const BookRides = () => {
                             className="w-4 h-4"
                           />
                         </div>
-                        <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
+                        <p className="text-[0.75rem] bg-blue-400/30 px-2 py-[1px] rounded-full">
                           Click on an available time to book a ride
                         </p>
                       </div>
+                      <p className="font-medium text-[.8rem] md:text-[.9rem]">
+                        Today: {formattedDate}
+                      </p>
                       <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
                         From Inside school - Going off-campus
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
                         {noonBookingTimesFromDb?.length > 0 ? (
-                          noonBookingTimesFromDb.map((item, index) => {
+                          noonBookingTimesFromDb?.map((item, index) => {
                             return (
                               <ClientNoonTimeBtn key={index} item={item} />
                             );
@@ -196,14 +201,36 @@ const BookRides = () => {
         </section>
 
         {/* if ride is not active show this box at bottom */}
-        {!activeRidesFromDb?.length > 0 && (
+        {!active && (
           <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
             <h2 className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg">
-              Active booking
+              Active bookings
             </h2>
             <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg p-4 relative">
               {/* each active booking */}
-              <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+              {activeRidesFromDb?.length > 0 ? (
+                activeRidesFromDb?.map((item, index) => {
+                  return (
+                    <ActiveBooking
+                      key={index}
+                      item={item}
+                      activeRidesFromDb={activeRidesFromDb}
+                    />
+                  );
+                })
+              ) : (
+                <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+                  <img
+                    alt=""
+                    src="/images/empty.png"
+                    className="w-20 h-20 mb-8"
+                  />
+                  <p className="text-slate-400">
+                    Your active booking will show here...
+                  </p>
+                </div>
+              )}
+              {/* <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
                 <img
                   alt=""
                   src="/images/empty.png"
@@ -212,11 +239,8 @@ const BookRides = () => {
                 <p className="text-slate-400">
                   Your active booking will show here...
                 </p>
-              </div>
+              </div> */}
               {/* <ActiveBooking /> */}
-              <p className="text-[0.75rem] text-slate-600 absolute bottom-4 py-1 px-3 rounded-full bg-blue-400/30">
-                PS: You can only have one active booking at a time
-              </p>
             </div>
           </section>
         )}

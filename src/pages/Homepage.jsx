@@ -11,8 +11,12 @@ import ClientNoonTimeBtn from "../components/ClientNoonTimeBtn";
 import Loader from "../components/Loader";
 
 const Homepage = () => {
-  const { accessDashboard, morningBookingTimesFromDb, noonBookingTimesFromDb } =
-    useAppContext();
+  const {
+    accessDashboard,
+    morningBookingTimesFromDb,
+    noonBookingTimesFromDb,
+    formattedDate,
+  } = useAppContext();
   return (
     <>
       <Header />
@@ -47,7 +51,10 @@ const Homepage = () => {
             </div>
             <div className="w-full md:w-[40%] mt-8 md:mt-0">
               <div className="bg-white/30 px-4 py-1 md:py-3 w-[fit-content] rounded-t-md text-[0.85rem] md:text-[1rem]">
-                Booking Times Today
+                Booking Times Today:{" "}
+                <span className="font-bold first-section-text">
+                  {formattedDate}
+                </span>
               </div>
               <div className="w-full h-[fit-content] bg-white rounded-md px-3 py-2 md:py-3 text-slate-700">
                 <div className=" mt-1 flex gap-1 items-center mb-3">
@@ -58,7 +65,7 @@ const Homepage = () => {
                       className="w-4 h-4"
                     />
                   </div>
-                  <p className="text-[0.75rem] bg-blue-400/50 px-2 py-[2px] rounded-full">
+                  <p className="text-[0.75rem] bg-blue-400/30 px-2 py-[1px] rounded-full">
                     Click on an available time to book a ride
                   </p>
                 </div>

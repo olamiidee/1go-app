@@ -14,12 +14,13 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import { useState } from "react";
+import Loader from "../components/Loader";
 
 const Summary = () => {
   const {
     morningBookingTimesFromDb,
     noonBookingTimesFromDb,
-    priceFromDb,
+    loader,
     currentUserFromDb,
     setActiveRideChange,
     setBookingSuccess,
@@ -81,7 +82,7 @@ const Summary = () => {
     reference: new Date().getTime().toString(),
     email: `${currentUserFromDb?.email}`, //their mail
     amount: `${eachTime?.price}00`, //amount is in Kobo
-    publicKey: "pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1", //pk_test_e56146887f0492a4016277927d6b67d19843cb32 //pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1
+    publicKey: "pk_test_e56146887f0492a4016277927d6b67d19843cb32", //pk_test_e56146887f0492a4016277927d6b67d19843cb32 //pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1
   };
 
   //to init paystack
@@ -90,6 +91,7 @@ const Summary = () => {
   //paystack functions
   const onSuccess = (transaction) => {
     // setBookingSuccess(true);
+    setLoader(true);
     setActiveRideChange((prev) => !prev);
     createRideDoc(
       currentUserFromDb.email,
@@ -171,6 +173,7 @@ const Summary = () => {
   }
   return (
     <>
+      {loader && <Loader />}
       <Header />
       <section className="w-full min-h-screen py-40 bg-gradient-to-b from-zinc-500/70 to-blue-400/10 text-slate-700">
         <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
