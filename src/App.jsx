@@ -18,6 +18,7 @@ const Summary = lazy(() => import("./pages/Summary"));
 const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
 const BookingTimes = lazy(() => import("./admin/BookingTimes"));
 const AdminLogin = lazy(() => import("./admin/AdminLogin"));
+const BusRiders = lazy(() => import("./bus riders/BusRiders"));
 
 function App() {
   const { user, admin, activeRidesFromDb, loader } = useAppContext();
@@ -49,6 +50,9 @@ function App() {
           path="/admin/booking-times"
           element={admin ? <BookingTimes /> : <AdminLogin />}
         />
+
+        {/* Bus riders page */}
+        <Route path="/bus-riders" element={<BusRiders />} />
 
         {/* page not found */}
         <Route path="*" element={<PageNotFound />} />
