@@ -52,7 +52,7 @@ function App() {
         />
 
         {/* Bus riders page */}
-        <Route path="/bus-riders" element={<BusRiders />} />
+        <Route path="/riders" element={<BusRiders />} />
 
         {/* page not found */}
         <Route path="*" element={<PageNotFound />} />
