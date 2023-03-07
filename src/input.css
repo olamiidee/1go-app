@@ -27,6 +27,19 @@ textarea {
       transform: translateX(0px);
     }
   }
+  .slide-up {
+    animation: slide-up 0.5s ease-out;
+  }
+  @keyframes slide-up {
+    0% {
+      /* opacity: 0; */
+      transform: translateY(200px);
+    }
+    100% {
+      /* opacity: 1; */
+      transform: translateY(0px);
+    }
+  }
   .rotate {
     animation: rotation 0.8s infinite linear;
   }
@@ -66,6 +79,7 @@ textarea {
       transform: scale(1, 1);
     }
   }
+
   .first-section-text {
     text-shadow: 1px 1px #000000;
   }
@@ -191,6 +205,7 @@ textarea {
 }
 
 .swiper-slide {
+  height: 210px;
   text-align: center;
   font-size: 16px;
   background: #fff;

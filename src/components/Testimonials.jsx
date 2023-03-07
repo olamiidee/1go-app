@@ -14,7 +14,7 @@ function Testimonials() {
           slidesPerView={2}
           spaceBetween={30}
           autoplay={{
-            delay: 3500,
+            delay: 7500,
             disableOnInteraction: false,
           }}
           pagination={{
@@ -145,7 +145,7 @@ function Testimonials() {
           slidesPerView={1}
           spaceBetween={30}
           autoplay={{
-            delay: 3500,
+            delay: 7500,
             disableOnInteraction: false,
           }}
           pagination={{

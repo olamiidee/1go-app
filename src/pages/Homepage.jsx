@@ -49,7 +49,7 @@ const Homepage = () => {
                 Book Now
               </button>
             </div>
-            <div className="w-full md:w-[40%] mt-8 md:mt-0">
+            <div className="w-full md:w-[40%] mt-8 md:mt-0 z-50">
               <div className="bg-white/30 px-4 py-1 md:py-3 w-[fit-content] rounded-t-md text-[0.85rem] md:text-[1rem]">
                 Booking Times Today:{" "}
                 <span className="font-bold first-section-text">
