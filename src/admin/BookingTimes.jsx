@@ -78,7 +78,7 @@ const BookingTimes = () => {
             </button>
           </div>
           {openMorningEdit && (
-            <div className="w-full h-full sm:h-[77%] bg-blue-50 absolute bottom-0 left-0 rounded-lg">
+            <div className="w-full h-full sm:h-[77%] bg-blue-50 absolute bottom-0 left-0 rounded-lg slide-up">
               <img
                 alt=""
                 src="/images/icons8-close-30.png"
@@ -195,7 +195,7 @@ const BookingTimes = () => {
             </button>
           </div>
           {openNoonEdit && (
-            <div className="w-full h-full sm:h-[77%] bg-blue-50 absolute bottom-0 left-0 rounded-lg">
+            <div className="w-full h-full sm:h-[77%] bg-blue-50 absolute bottom-0 left-0 rounded-lg slide-up">
               <img
                 alt=""
                 src="/images/icons8-close-30.png"

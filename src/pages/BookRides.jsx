@@ -31,6 +31,7 @@ const BookRides = () => {
     setDisplayAll((prev) => !prev);
   }
 
+  console.log(active);
   return (
     <>
       {loader && <Loader />}
@@ -229,7 +230,7 @@ const BookRides = () => {
         </section>
 
         {/* if ride is not active show this box at bottom */}
-        {!active && (
+        {(!active || activeRidesFromDb?.length === 0) && (
           <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
             <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
               <h2>Active bookings</h2>
@@ -282,7 +283,7 @@ const BookRides = () => {
 
         <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
           <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
-            <h2>Active bookings</h2>
+            <h2>Ride History</h2>
             {rideHistoryFromDb?.length > 0 && (
               <div className="w-4 h-4 p-[10px] text-[.85rem] flex justify-center items-center border-2 border-slate-400/50 rounded-full">
                 {rideHistoryFromDb?.length}

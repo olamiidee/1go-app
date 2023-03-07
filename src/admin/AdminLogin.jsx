@@ -16,15 +16,17 @@ const AdminLogin = () => {
     <div className="w-full">
       {loader && <Loader />}
       <div
-        className={`w-full min-h-screen bg-sky-50 pt-[80px] md:pt-[60px] px-3 md:px-12 transition-all duration-500 text-slate-700`}
+        className={`w-full min-h-screen bg-sky-50 pt-[120px] md:pt-[150px] px-3 md:px-12 transition-all duration-500 text-slate-700`}
       >
-        <form className="w-full md:w-1/2 mx-auto ">
+        <form className="w-full md:w-[550px] mx-auto rounded-md">
           <h1 className="text-[2rem] md:text-[3rem] font-bold text-black text-center">
             Welcome Admin
           </h1>
           <div className="font-light space-y-4 py-12 w-full rounded-lg sm:mt-4 mx-auto">
             <div>
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" className="font-medium">
+                Email
+              </label>
               <input
                 className={`login-input ${
                   errorMessage && "border border-red-400"
@@ -37,7 +39,9 @@ const AdminLogin = () => {
             </div>
 
             <div>
-              <label htmlFor="firstname">Password</label>
+              <label htmlFor="firstname" className="font-medium">
+                Password
+              </label>
               <div className="w-full relative">
                 <input
                   className={`login-input ${

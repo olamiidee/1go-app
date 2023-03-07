@@ -36,14 +36,14 @@ const Header = () => {
             : currentPage === "/login" || currentPage === "/register"
             ? "sm:w-[80%] top-8 rounded-md bg-[#252525]/50 lg:px-10"
             : "sm:w-[80%] top-8 rounded-md bg-white/20 lg:px-10"
-        } px-12 py-4 fixed left-[50%] translate-x-[-50%] border-b border-slate-600 md:flex items-center z-[50] hidden transition-all duration-500`}
+        } px-12 py-4 fixed left-[50%] translate-x-[-50%] border-b border-slate-600 md:flex items-center z-[999] hidden transition-all duration-500`}
       >
         {userNotLoggedIn && currentPage === "/login" && (
-          <div className="w-[fit-content] scale flex gap-4 items-center py-4 px-10 bg-blue-200 rounded-lg border border-blue-400 absolute top-24 left-0">
+          <div className="w-[fit-content] text-[.9rem] scale flex gap-4 items-center py-3 px-10 bg-blue-100 rounded-lg border border-blue-400 absolute top-20 left-0">
             <img
               alt=""
               src="/images/icons8-info-black-64.png"
-              className="w-10 h-10 mr-1"
+              className="w-8 h-8 mr-1"
             />
             <p>
               Login or register to book rides. <br /> It will only take a
@@ -166,7 +166,7 @@ const Header = () => {
             : currentPage === "/login" || currentPage === "/register"
             ? "top-6 bg-[#252525]/50"
             : "top-6 bg-white/20 "
-        } md:hidden w-full h-[65px] px-6 fixed left-0 z-[100] border-b-[0px] border-b-[#47a3b3] flex justify-between items-center shadow-md transition-all duration-500`}
+        } md:hidden w-full h-[65px] px-6 fixed left-0 z-[999] border-b-[0px] border-b-[#47a3b3] flex justify-between items-center shadow-md transition-all duration-500`}
       >
         <Link to="/" className="mr-auto">
           <img alt="" src="/images/logo.png" className="w-10 h-10" />
