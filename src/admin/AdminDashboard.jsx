@@ -4,10 +4,28 @@ import RideHistory from "../components/RideHistory";
 import { useAppContext } from "../contexts/AppContext";
 import ContactMessage from "../components/ContactMessage";
 import Loader from "../components/Loader";
+import { useState } from "react";
 
 const AdminDashboard = () => {
   const { allUsers, allRides, ridesToday, messageFromDb, loader } =
     useAppContext();
+
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchField, setSearchField] = useState("");
+
+  const toggleSearch = () => {
+    setSearchOpen((prev) => !prev);
+    setSearchField("");
+  };
+
+  const filteredItems = ridesToday.filter((item) => {
+    return item.time.includes(searchField);
+  });
+
+  const handleChange = (event) => {
+    setSearchField(event.target.value);
+  };
+
   return (
     <div className="w-full">
       {loader && <Loader />}
@@ -57,29 +75,86 @@ const AdminDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="p-3 bg-white rounded-lg shadow-xl shadow-slate-300/30 border border-sky-500 mt-8">
-          <h3 className="text-[1.1rem] font-medium pb-2 mb-4 border-b border-slate-300">
-            Booking history today
-          </h3>
-
-          {ridesToday.length > 0 ? (
-            ridesToday?.map((item, index) => {
-              return <RideHistory item={item} index={index} />;
-            })
-          ) : (
-            <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
-              <img alt="" src="/images/empty.png" className="w-20 h-20 mb-8" />
-              <p className="text-slate-400">No booking history today yet...</p>
+        <div className="p-3 bg-white rounded-lg shadow-xl shadow-slate-300/30 border border-sky-500 mt-8 transition-all duration-300">
+          <div className="w-full flex border-b border-slate-300 pb-2 mb-4">
+            <h3 className="text-[1.1rem] font-medium mr-auto">
+              Booking history today
+            </h3>
+            <div className="flex gap-3 flex-col-reverse items-end sm:flex-row">
+              {searchOpen && (
+                <form className="slide">
+                  <input
+                    type="text"
+                    className="w-[100px] sm:w-[150px] bg-blue-100 p-[6px] text-[.9rem] outline-none border border-blue-400 rounded-md"
+                    placeholder="Search Time"
+                    onChange={handleChange}
+                    value={searchField}
+                  />
+                </form>
+              )}
+              <div
+                onClick={toggleSearch}
+                className="w-fit h-fit p-1 rounded-full bg-blue-100 cursor-pointer"
+              >
+                <img
+                  alt=""
+                  src="/images/icons8-search-64.png"
+                  className="w-6 h-6"
+                />
+              </div>
             </div>
-          )}
-          <div className="w-full text-center">
+          </div>
+
+          {!searchField &&
+            (ridesToday.length > 0 ? (
+              ridesToday?.map((item, index) => {
+                return <RideHistory item={item} index={index} key={index} />;
+              })
+            ) : (
+              <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+                <img
+                  alt=""
+                  src="/images/empty.png"
+                  className="w-20 h-20 mb-8"
+                />
+                <p className="text-slate-400">
+                  No booking history today yet...
+                </p>
+              </div>
+            ))}
+
+          {searchField &&
+            (filteredItems.length > 0 ? (
+              filteredItems?.map((item, index) => {
+                return (
+                  <div key={index} className="w-full">
+                    <h2 className="w-fit mx-auto mb-4 border-b border-slate-300">
+                      Search results for "{searchField}"
+                    </h2>
+                    <RideHistory item={item} />
+                  </div>
+                );
+              })
+            ) : (
+              <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+                <img
+                  alt=""
+                  src="/images/empty.png"
+                  className="w-20 h-20 mb-8"
+                />
+                <p className="text-slate-400">
+                  "{searchField}" yielded no results...
+                </p>
+              </div>
+            ))}
+          {/* <div className="w-full text-center">
             <button
               className="px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3 disabled:opacity-75"
               disabled
             >
               Load nore
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className="p-3 bg-white rounded-lg shadow-xl shadow-slate-300/30 border border-sky-500 mt-12">

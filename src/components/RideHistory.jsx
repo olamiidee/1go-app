@@ -4,7 +4,7 @@ const RideHistory = ({ item }) => {
   // const { priceFromDb } = useAppContext();
   return (
     <>
-      <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.85rem] md:text-[0.7rem] lg:text-[.9rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap transition-all duration-300 scale">
+      <div className="w-full p-3 mb-4 bg-slate-400/10 text-[0.85rem] md:text-[0.7rem] lg:text-[.9rem] rounded-md hidden md:flex flex-wrap md:flex-nowrap transition-all duration-300">
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md md:mr-4">
           <p>
             Date: <strong>{item?.createdAt}</strong>
