@@ -31,6 +31,8 @@ const AppContextProvider = ({ children }) => {
   const location = useLocation();
   let currentPage = location.pathname;
 
+  const [checkTime, setCheckTime] = useState(true);
+
   //to save reg form input
   const [regForm, setRegForm] = useState({
     firstname: "",
@@ -615,7 +617,7 @@ const AppContextProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   useEffect(() => {
     async function getUsers() {
-      setLoader(true);
+      // setLoader(true);
 
       try {
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -626,18 +628,16 @@ const AppContextProvider = ({ children }) => {
         setAllUsers(users);
       } catch (err) {
         console.log(err);
-      } finally {
-        setLoader(false);
       }
     }
     getUsers();
-  }, [currentPage]);
+  }, [checkTime]);
 
   //to get total number of rides
   const [allRides, setAllRides] = useState([]);
   useEffect(() => {
     async function getAllRides() {
-      setLoader(true);
+      // setLoader(true);
 
       try {
         const querySnapshot = await getDocs(collection(db, "rideHistory"));
@@ -648,12 +648,10 @@ const AppContextProvider = ({ children }) => {
         setAllRides(rides);
       } catch (err) {
         console.log(err);
-      } finally {
-        setLoader(false);
       }
     }
     getAllRides();
-  }, [currentPage]);
+  }, [checkTime]);
 
   //to get number of rides today
   const [ridesToday, setridesToday] = useState([]);
@@ -661,7 +659,7 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
       const getRidesToday = async () => {
-        setLoader(true);
+        // setLoader(true);
         const userQuery = query(
           collection(db, "rideHistory"),
           where("createdAt", "==", `${formattedDate}`)
@@ -678,13 +676,11 @@ const AppContextProvider = ({ children }) => {
           setridesToday(arranged);
         } catch (err) {
           console.log(err.message);
-        } finally {
-          setLoader(false);
         }
       };
       getRidesToday();
     }
-  }, [currentUserFromDb, currentPage]);
+  }, [checkTime]);
 
   //to save nprice form input
   // const [priceForm, setPriceForm] = useState({
@@ -860,7 +856,7 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     if (admin) {
       const getMessage = async () => {
-        setLoader(true);
+        // setLoader(true);
 
         try {
           const querySnapshot = await getDocs(collection(db, "contactUs"));
@@ -877,13 +873,11 @@ const AppContextProvider = ({ children }) => {
           message.length > 0 && setMessageFromDb(arranged);
         } catch (err) {
           console.log(err.message);
-        } finally {
-          setLoader(false);
         }
       };
       getMessage();
     }
-  }, [updatedTime, currentPage]);
+  }, [checkTime]);
 
   //admin login logic  //admin login logic  //admin login logic
   //admin login logic  //admin login logic  //admin login logic
@@ -950,7 +944,6 @@ const AppContextProvider = ({ children }) => {
   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
-  const [checkTime, setCheckTime] = useState(true);
 
   //to get and store active rides
   const [activeRidesFromDb, setActiveRidesFromDb] = useState([]);
