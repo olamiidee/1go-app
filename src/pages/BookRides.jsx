@@ -31,7 +31,7 @@ const BookRides = () => {
     setDisplayAll((prev) => !prev);
   }
 
-  console.log(active);
+  // console.log(active);
   return (
     <>
       {loader && <Loader />}

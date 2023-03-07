@@ -682,84 +682,6 @@ const AppContextProvider = ({ children }) => {
     }
   }, [checkTime]);
 
-  //to save nprice form input
-  // const [priceForm, setPriceForm] = useState({
-  //   price: "",
-  // });
-
-  // //to save noon time form input
-  // function handlePriceChange(event) {
-  //   const { id, value } = event.target;
-  //   setPriceForm((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       [id]: value,
-  //     };
-  //   });
-  // }
-
-  // //to save price from db
-  // const [priceFromDb, setpriceFromDb] = useState(
-  //   JSON.parse(localStorage.getItem("price")) || []
-  // );
-
-  // //to get price saved in db
-  // useEffect(() => {
-  //   const getPrice = async () => {
-  //     setLoader(true);
-
-  //     try {
-  //       const querySnapshot = await getDocs(collection(db, "pricing"));
-  //       let price = [];
-  //       querySnapshot.forEach((doc) => {
-  //         price.push(doc.data());
-  //       });
-
-  //       price.length > 0 &&
-  //         localStorage.setItem("price", JSON.stringify(price));
-  //       price.length > 0 && setpriceFromDb(price);
-  //     } catch (err) {
-  //       console.log(err.message);
-  //     } finally {
-  //       setLoader(false);
-  //     }
-  //   };
-  //   getPrice();
-  // }, [updatedTime, currentPage]);
-
-  //to send changed time to db
-  // const createPriceDocument = async (price) => {
-  //   setLoader(true);
-
-  //   try {
-  //     await setDoc(doc(db, "pricing", "price"), {
-  //       price: price,
-  //     });
-  //     console.log("price changed");
-  //     setUpdatedTime((prev) => !prev);
-  //   } catch (err) {
-  //     console.error("Error changing ", err);
-  //   } finally {
-  //     setLoader(false);
-  //   }
-  // };
-
-  // //to handle price form data submit to firebase
-  // const handlePriceSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoader(true);
-
-  //   try {
-  //     await deleteDoc(doc(db, "pricing", "price"));
-  //     await createPriceDocument(priceForm.price);
-  //     setLoader(false);
-  //     window.location.reload();
-  //   } catch (error) {
-  //     setLoader(false);
-  //     console.log(error.message);
-  //   }
-  // };
-
   //to save contact us form data
   const [contactUsData, setContactUsData] = useState({
     fname: "",
@@ -955,13 +877,11 @@ const AppContextProvider = ({ children }) => {
     }
   }, [currentUserFromDb, activeRideChange, checkTime]);
 
-  // console.log(activeRidesFromDb);
-
   const [active, setActive] = useState(
     JSON.parse(localStorage.getItem("active")) || false
   );
   useEffect(() => {
-    if (activeRidesFromDb?.length > 0 || activeRidesFromDb) {
+    if (activeRidesFromDb?.length > 0) {
       setActive(true);
       localStorage.setItem("active", JSON.stringify(active));
     } else {
