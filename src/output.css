@@ -677,6 +677,58 @@ video {
   z-index: 200;
 }
 
+.z-\[9999\] {
+  z-index: 9999;
+}
+
+.z-\[150\] {
+  z-index: 150;
+}
+
+.z-\[120\] {
+  z-index: 120;
+}
+
+.z-40 {
+  z-index: 40;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.z-30 {
+  z-index: 30;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
+.z-\[40\] {
+  z-index: 40;
+}
+
+.z-\[1\] {
+  z-index: 1;
+}
+
+.z-\[10\] {
+  z-index: 10;
+}
+
+.z-\[20\] {
+  z-index: 20;
+}
+
+.z-\[5\] {
+  z-index: 5;
+}
+
 .float-right {
   float: right;
 }
@@ -685,14 +737,14 @@ video {
   float: left;
 }
 
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .my-4 {
@@ -723,10 +775,6 @@ video {
 
 .mr-auto {
   margin-right: auto;
-}
-
-.mr-3 {
-  margin-right: 0.75rem;
 }
 
 .mb-8 {
@@ -815,6 +863,11 @@ video {
 
 .h-10 {
   height: 2.5rem;
+}
+
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-6 {
@@ -918,9 +971,12 @@ video {
   height: 800px;
 }
 
-.h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
+.h-screen {
+  height: 100vh;
+}
+
+.h-\[200px\] {
+  height: 200px;
 }
 
 .min-h-screen {
@@ -955,8 +1011,13 @@ video {
   width: 2.5rem;
 }
 
-.w-\[150px\] {
-  width: 150px;
+.w-\[100px\] {
+  width: 100px;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .w-6 {
@@ -1005,11 +1066,6 @@ video {
 
 .w-\[70\%\] {
   width: 70%;
-}
-
-.w-fit {
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .w-\[fit-content\] {
@@ -1065,8 +1121,8 @@ video {
   width: 93%;
 }
 
-.w-\[100px\] {
-  width: 100px;
+.w-\[150px\] {
+  width: 150px;
 }
 
 .max-w-\[400px\] {
@@ -1123,12 +1179,12 @@ video {
   gap: 1rem;
 }
 
-.gap-1 {
-  gap: 0.25rem;
-}
-
 .gap-3 {
   gap: 0.75rem;
+}
+
+.gap-1 {
+  gap: 0.25rem;
 }
 
 .gap-2 {
@@ -1533,6 +1589,10 @@ video {
   background-color: rgb(255 255 255 / 0.7);
 }
 
+.bg-black\/60 {
+  background-color: rgb(0 0 0 / 0.6);
+}
+
 .bg-bus {
   background-image: url('/images/bus.jpg');
 }
@@ -1890,6 +1950,10 @@ video {
   padding-bottom: 1.5rem;
 }
 
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2072,8 +2136,24 @@ video {
   text-decoration-line: underline;
 }
 
+.opacity-\[0\.5\] {
+  opacity: 0.5;
+}
+
 .opacity-70 {
   opacity: 0.7;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+.opacity-40 {
+  opacity: 0.4;
 }
 
 .shadow-xl {
@@ -2453,6 +2533,11 @@ input[type="number"] {
   background-color: rgb(59 130 246 / 0.5);
 }
 
+.hover\:bg-blue-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2517,6 +2602,10 @@ input[type="number"] {
     min-height: 105vh;
   }
 
+  .sm\:w-\[150px\] {
+    width: 150px;
+  }
+
   .sm\:w-16 {
     width: 4rem;
   }
@@ -2541,8 +2630,8 @@ input[type="number"] {
     width: 80%;
   }
 
-  .sm\:w-\[150px\] {
-    width: 150px;
+  .sm\:w-\[500px\] {
+    width: 500px;
   }
 
   .sm\:max-w-\[550px\] {
