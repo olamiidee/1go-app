@@ -49,7 +49,7 @@ const Homepage = () => {
                 Book Now
               </button>
             </div>
-            <div className="w-full md:w-[40%] mt-8 md:mt-0 z-50">
+            <div className="w-full md:w-[40%] mt-8 md:mt-0 z-[5]">
               <div className="bg-white/30 px-4 py-1 md:py-3 w-[fit-content] rounded-t-md text-[0.85rem] md:text-[1rem]">
                 Booking Times Today:{" "}
                 <span className="font-bold first-section-text">
@@ -109,7 +109,7 @@ const Homepage = () => {
             </div>
           </div>
           <svg
-            className="w-full absolute bottom-[-1px] left-0 z-[0] hidden md:block"
+            className="w-full absolute bottom-[-1px] left-0 z-0 hidden md:block"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
           >
@@ -122,7 +122,7 @@ const Homepage = () => {
 
           {/* mobile wave */}
           <svg
-            className="w-full absolute bottom-[-1px] left-0 z-[0] block md:hidden"
+            className="w-full absolute bottom-[-1px] left-0 z-0 block md:hidden"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
           >
