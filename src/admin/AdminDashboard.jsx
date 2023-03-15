@@ -5,6 +5,7 @@ import { useAppContext } from "../contexts/AppContext";
 import ContactMessage from "../components/ContactMessage";
 import Loader from "../components/Loader";
 import { useState } from "react";
+import RideHistoryAdmin from "../components/RideHistoryAdmin";
 
 const AdminDashboard = () => {
   const { allUsers, allRides, ridesToday, messageFromDb, loader } =
@@ -108,7 +109,9 @@ const AdminDashboard = () => {
           {!searchField &&
             (ridesToday.length > 0 ? (
               ridesToday?.map((item, index) => {
-                return <RideHistory item={item} index={index} key={index} />;
+                return (
+                  <RideHistoryAdmin item={item} index={index} key={index} />
+                );
               })
             ) : (
               <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
@@ -123,30 +126,33 @@ const AdminDashboard = () => {
               </div>
             ))}
 
-          {searchField &&
-            (filteredItems.length > 0 ? (
-              filteredItems?.map((item, index) => {
-                return (
-                  <div key={index} className="w-full">
-                    <h2 className="w-fit mx-auto mb-4 border-b border-slate-300">
-                      Search results for "{searchField}"
-                    </h2>
-                    <RideHistory item={item} />
-                  </div>
-                );
-              })
-            ) : (
-              <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
-                <img
-                  alt=""
-                  src="/images/empty.png"
-                  className="w-20 h-20 mb-8"
-                />
-                <p className="text-slate-400">
-                  "{searchField}" yielded no results...
-                </p>
-              </div>
-            ))}
+          {searchField && (
+            <>
+              <h2 className="w-fit mx-auto mb-4 border-b border-slate-300">
+                Search results for "{searchField}"
+              </h2>
+              {filteredItems.length > 0 ? (
+                filteredItems?.map((item, index) => {
+                  return (
+                    <div key={index} className="w-full">
+                      <RideHistoryAdmin item={item} />
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+                  <img
+                    alt=""
+                    src="/images/empty.png"
+                    className="w-20 h-20 mb-8"
+                  />
+                  <p className="text-slate-400">
+                    "{searchField}" yielded no results...
+                  </p>
+                </div>
+              )}
+            </>
+          )}
           {/* <div className="w-full text-center">
             <button
               className="px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3 disabled:opacity-75"

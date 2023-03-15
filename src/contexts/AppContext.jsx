@@ -877,6 +877,8 @@ const AppContextProvider = ({ children }) => {
     }
   }, [currentUserFromDb, activeRideChange, checkTime]);
 
+  console.log(activeRidesFromDb);
+
   const [active, setActive] = useState(
     JSON.parse(localStorage.getItem("active")) || false
   );
@@ -953,6 +955,8 @@ const AppContextProvider = ({ children }) => {
           active: `false_${email}`,
           createdAt: createdAt,
           bookingCode: bookingCode,
+          terminal: terminal,
+          seats: seats,
         }
       );
       setBookingSuccess(true);
@@ -1059,13 +1063,15 @@ const AppContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("rideHistory")) || []
   );
 
+  // console.log(rideHistoryFromDb);
+
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("rideHistory")) !== null) {
       setRideHistoryFromDb(JSON.parse(localStorage.getItem("rideHistory")));
     } else {
       setRideHistoryFromDb([]);
     }
-  }, [currentUserFromDb, activeRideChange, checkTime]);
+  }, [currentUserFromDb, activeRideChange, active]);
 
   //to get user's active ride saved in db
   useEffect(() => {
