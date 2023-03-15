@@ -22,7 +22,14 @@ const RideHistory = ({ item }) => {
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md mr-auto">
           <p>
-            Price: <strong>NGN {item?.price}</strong>
+            Price:{" "}
+            {item?.price !== "free" ? (
+              <strong>NGN {item?.price}</strong>
+            ) : (
+              <strong className="uppercase font-bold text-green-500">
+                {item?.price}
+              </strong>
+            )}
           </p>
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-slate-400/50 rounded-md">
@@ -59,7 +66,13 @@ const RideHistory = ({ item }) => {
         </div>
         <div className="pl-2">
           <div>Price:</div>
-          <div>NGN {item?.price}</div>
+          {item?.price !== "free" ? (
+            <div>NGN {item?.price}</div>
+          ) : (
+            <div className="uppercase font-bold text-green-500">
+              {item?.price}
+            </div>
+          )}
         </div>
       </div>
     </>

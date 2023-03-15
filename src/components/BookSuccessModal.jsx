@@ -18,8 +18,8 @@ const BookSuccessModal = () => {
             className="w-16 sm:w-20 h-16 sm:h-20 mr-1"
           />
           <p className="text-center">
-            Your ride is successful kindly proceed to your terminal as your bus
-            would leave the pick-up terminal by the time booked!
+            Successful booking! Please proceed promptly to your designated
+            terminal, as your bus will depart at the scheduled time.
           </p>
         </div>
       </div>

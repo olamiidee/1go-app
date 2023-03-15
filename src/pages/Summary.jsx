@@ -525,7 +525,7 @@ const Summary = () => {
       <Footer />
       <ScrollToTop />
       {freeRideBanner && (
-        <div className="w-full bg-white px-2 md:px-5 py-[6px] md:py-3 fixed bottom-0 left-0 flex items-center">
+        <div className="w-full bg-white px-2 md:px-5 py-[6px] md:py-3 fixed bottom-0 left-0 flex items-center z-10">
           <div className="flex items-center gap-2 md:gap-4 mr-auto">
             <img
               alt=""
@@ -539,7 +539,7 @@ const Summary = () => {
           </div>
           <div
             onClick={cancelBookFreeRide}
-            className="w-8 h-7 bg-white flex items-center justify-center rounded-lg border border-slate-700 cursor-pointer"
+            className="w-8 h-7 bg-white flex items-center justify-center rounded-full border border-blue-500 cursor-pointer"
           >
             <img alt="" src="/images/icons8-close-30.png" className="w-3 h-3" />
           </div>

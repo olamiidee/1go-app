@@ -1058,9 +1058,14 @@ const AppContextProvider = ({ children }) => {
   const [rideHistoryFromDb, setRideHistoryFromDb] = useState(
     JSON.parse(localStorage.getItem("rideHistory")) || []
   );
+
   useEffect(() => {
-    setRideHistoryFromDb(JSON.parse(localStorage.getItem("rideHistory")));
-  }, [currentUserFromDb, activeRideChange]);
+    if (JSON.parse(localStorage.getItem("rideHistory")) !== null) {
+      setRideHistoryFromDb(JSON.parse(localStorage.getItem("rideHistory")));
+    } else {
+      setRideHistoryFromDb([]);
+    }
+  }, [currentUserFromDb, activeRideChange, checkTime]);
 
   //to get user's active ride saved in db
   useEffect(() => {
@@ -1135,11 +1140,14 @@ const AppContextProvider = ({ children }) => {
       setTimeout(() => {
         setFreeRideMod(true);
       }, 3000);
-      setTimeout(() => {
-        setFreeRideMod(false);
-      }, 12000);
+      // setTimeout(() => {
+      //   setFreeRideMod(false);
+      // }, 12000);
     }
   }, []);
+  function cancelFreeRideMod() {
+    setFreeRideMod(false);
+  }
 
   const [freeRideBanner, setFreeRideBanner] = useState(false);
   useEffect(() => {
@@ -1219,6 +1227,7 @@ const AppContextProvider = ({ children }) => {
         bookFreeRide,
         cancelBookFreeRide,
         freeRideBanner,
+        cancelFreeRideMod,
       }}
     >
       {children}
