@@ -29,6 +29,10 @@ const Summary = () => {
     formattedDate,
     setLoader,
     createdAt,
+    ridesToday,
+    freeRideBanner,
+    cancelBookFreeRide,
+    bookFreeRide,
   } = useAppContext();
 
   let allTimes = [...morningBookingTimesFromDb, ...noonBookingTimesFromDb];
@@ -110,7 +114,6 @@ const Summary = () => {
 
   //paystack functions
   const onSuccess = (transaction) => {
-    // setBookingSuccess(true);
     setLoader(true);
     setActiveRideChange((prev) => !prev);
     createRideDoc(
@@ -129,6 +132,22 @@ const Summary = () => {
     alert("Transaction was not completed, window closed.");
   };
 
+  const freeRideSucceed = (free) => {
+    setLoader(true);
+    setActiveRideChange((prev) => !prev);
+    createRideDoc(
+      currentUserFromDb.email,
+      eachTime.time,
+      eachTime.price,
+      free,
+      formattedDate,
+      detailsForm.terminal,
+      detailsForm.seats
+    );
+    updateSlotsCount();
+    navigate("/book-ride");
+  };
+
   const PaystackHook = () => {
     return (
       <div>
@@ -136,10 +155,12 @@ const Summary = () => {
           type="submit"
           className="w-full md:w-[fit-content] px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
           onClick={() => {
-            initializePayment(onSuccess, onClose);
+            ridesToday > 200
+              ? initializePayment(onSuccess, onClose)
+              : freeRideSucceed("free");
           }}
         >
-          Proceed to payment
+          {ridesToday > 200 ? "Proceed to payment" : "Book for free"}
         </button>
       </div>
     );
@@ -243,15 +264,21 @@ const Summary = () => {
                     src="/images/icons8-cost-58.png"
                     className="w-6 h-6 mr-1"
                   />
-                  <p>
-                    Price:{" "}
-                    <strong>
-                      NGN{" "}
-                      {detailsForm?.seats
-                        ? eachTime?.price * detailsForm?.seats
-                        : eachTime?.price}
-                    </strong>
-                  </p>
+                  {ridesToday.length > 200 ? (
+                    <p>
+                      Price:{" "}
+                      <strong>
+                        NGN{" "}
+                        {detailsForm?.seats
+                          ? eachTime?.price * detailsForm?.seats
+                          : eachTime?.price}
+                      </strong>
+                    </p>
+                  ) : (
+                    <p>
+                      Price: <strong className="text-green-500">FREE</strong>
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -280,22 +307,36 @@ const Summary = () => {
                   </div>
                   <p className="font-bold">{formattedDate}</p>
                 </div>
-                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                  <div className="mr-auto flex items-center">
-                    <img
-                      alt=""
-                      src="/images/icons8-cost-58.png"
-                      className="w-6 h-6 mr-1"
-                    />
-                    <p>Price: </p>
+                {ridesToday > 200 ? (
+                  <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                    <div className="mr-auto flex items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-cost-58.png"
+                        className="w-6 h-6 mr-1"
+                      />
+                      <p>Price: </p>
+                    </div>
+                    <p className="font-bold">
+                      NGN
+                      {detailsForm?.seats
+                        ? eachTime?.price * detailsForm?.seats
+                        : eachTime?.price}
+                    </p>
                   </div>
-                  <p className="font-bold">
-                    NGN
-                    {detailsForm?.seats
-                      ? eachTime?.price * detailsForm?.seats
-                      : eachTime?.price}
-                  </p>
-                </div>
+                ) : (
+                  <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                    <div className="mr-auto flex items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-cost-58.png"
+                        className="w-6 h-6 mr-1"
+                      />
+                      <p>Price: </p>
+                    </div>
+                    <p className="font-bold text-green-500">FREE</p>
+                  </div>
+                )}
               </div>
 
               <form className="max-w-[400px]">
@@ -389,15 +430,21 @@ const Summary = () => {
                     src="/images/icons8-cost-58.png"
                     className="w-6 h-6 mr-1"
                   />
-                  <p>
-                    Price:{" "}
-                    <strong>
-                      NGN{" "}
-                      {detailsForm?.seats
-                        ? eachTime?.price * detailsForm?.seats
-                        : eachTime?.price}
-                    </strong>
-                  </p>
+                  {ridesToday.length > 200 ? (
+                    <p>
+                      Price:{" "}
+                      <strong>
+                        NGN{" "}
+                        {detailsForm?.seats
+                          ? eachTime?.price * detailsForm?.seats
+                          : eachTime?.price}
+                      </strong>
+                    </p>
+                  ) : (
+                    <p>
+                      Price: <strong className="text-green-500">FREE</strong>
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -426,22 +473,36 @@ const Summary = () => {
                   </div>
                   <p className="font-bold">{formattedDate}</p>
                 </div>
-                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                  <div className="mr-auto flex items-center">
-                    <img
-                      alt=""
-                      src="/images/icons8-cost-58.png"
-                      className="w-6 h-6 mr-1"
-                    />
-                    <p>Price: </p>
+                {ridesToday > 200 ? (
+                  <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                    <div className="mr-auto flex items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-cost-58.png"
+                        className="w-6 h-6 mr-1"
+                      />
+                      <p>Price: </p>
+                    </div>
+                    <p className="font-bold">
+                      NGN
+                      {detailsForm?.seats
+                        ? eachTime?.price * detailsForm?.seats
+                        : eachTime?.price}
+                    </p>
                   </div>
-                  <p className="font-bold">
-                    NGN
-                    {detailsForm?.seats
-                      ? eachTime?.price * detailsForm?.seats
-                      : eachTime?.price}
-                  </p>
-                </div>
+                ) : (
+                  <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                    <div className="mr-auto flex items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-cost-58.png"
+                        className="w-6 h-6 mr-1"
+                      />
+                      <p>Price: </p>
+                    </div>
+                    <p className="font-bold text-green-500">FREE</p>
+                  </div>
+                )}
               </div>
 
               <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md flex flex-wrap gap-2 border sm:border-none border-blue-400/50">
@@ -463,6 +524,41 @@ const Summary = () => {
       </section>
       <Footer />
       <ScrollToTop />
+      {freeRideBanner && (
+        <div className="w-full bg-white px-2 md:px-5 py-[6px] md:py-3 fixed bottom-0 left-0 flex items-center">
+          <div className="flex items-center gap-2 md:gap-4 mr-auto">
+            <img
+              alt=""
+              src="/images/icons8-discount-50.png"
+              className="w-8 h-8 md:w-12 md:h-12"
+            />
+            <p className="text-[.75rem] md:text-[1rem]">
+              Limited time offer: Free rides today for first 200 users! Book
+              now!
+            </p>
+          </div>
+          <div
+            onClick={cancelBookFreeRide}
+            className="w-8 h-7 bg-white flex items-center justify-center rounded-lg border border-slate-700 cursor-pointer"
+          >
+            <img alt="" src="/images/icons8-close-30.png" className="w-3 h-3" />
+          </div>
+          {/* <div className="md:flex gap-3 hidden">
+            <button
+              onClick={cancelBookFreeRide}
+              className="h-fit text-sm text-blue-500 text-[.75rem] bg-blue-500/20 px-6 py-1 md:py-2 uppercase hover:bg-blue-400 hover:text-white border-blue-500 border-2 rounded-md transition-all duration-300"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={bookFreeRide}
+              className="h-fit text-sm text-white text-[.75rem] bg-blue-500 px-6 py-1 md:py-2 uppercase hover:bg-blue-400 border-blue-500 border-2 rounded-md transition-all duration-300"
+            >
+              Book now
+            </button>
+          </div> */}
+        </div>
+      )}
     </>
   );
 };

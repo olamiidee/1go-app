@@ -924,8 +924,8 @@ const AppContextProvider = ({ children }) => {
           }`,
           email: email,
           time: time,
-          price: price,
-          paymentRef: paymentRef,
+          price: ridesToday > 200 ? price : "free",
+          paymentRef: ridesToday > 200 ? paymentRef : "free",
           active: `true_${email}`,
           createdAt: createdAt,
           bookingCode: bookingCode,
@@ -948,8 +948,8 @@ const AppContextProvider = ({ children }) => {
           }`,
           email: email,
           time: time,
-          price: price,
-          paymentRef: paymentRef,
+          price: ridesToday > 200 ? price : "free",
+          paymentRef: ridesToday > 200 ? paymentRef : "free",
           active: `false_${email}`,
           createdAt: createdAt,
           bookingCode: bookingCode,
@@ -1128,6 +1128,36 @@ const AppContextProvider = ({ children }) => {
   }
   // console.log(activeRidesFromDb[0].id);
 
+  //to display free ride modal
+  const [freeRideMod, setFreeRideMod] = useState(false);
+  useEffect(() => {
+    if (!loader && ridesToday < 200 && activeRidesFromDb.length < 1) {
+      setTimeout(() => {
+        setFreeRideMod(true);
+      }, 3000);
+      setTimeout(() => {
+        setFreeRideMod(false);
+      }, 12000);
+    }
+  }, []);
+
+  const [freeRideBanner, setFreeRideBanner] = useState(false);
+  useEffect(() => {
+    if (!loader && !freeRideMod && ridesToday < 200) {
+      setTimeout(() => {
+        setFreeRideBanner(true);
+      }, 3000);
+    }
+  }, []);
+
+  function bookFreeRide() {
+    setFreeRideMod(false);
+    navigate("/book-ride");
+  }
+
+  function cancelBookFreeRide() {
+    setFreeRideBanner(false);
+  }
   return (
     <AppContext.Provider
       value={{
@@ -1185,6 +1215,10 @@ const AppContextProvider = ({ children }) => {
         messageFromDb,
         active,
         toggleActive,
+        freeRideMod,
+        bookFreeRide,
+        cancelBookFreeRide,
+        freeRideBanner,
       }}
     >
       {children}

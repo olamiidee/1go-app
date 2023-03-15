@@ -16,10 +16,38 @@ const Homepage = () => {
     morningBookingTimesFromDb,
     noonBookingTimesFromDb,
     formattedDate,
+    freeRideMod,
+    bookFreeRide,
+    cancelBookFreeRide,
+    freeRideBanner,
   } = useAppContext();
   return (
     <>
       <Header />
+
+      {freeRideMod && (
+        <div className="w-full h-screen text-center p-4 flex justify-center items-center bg-black/90 fixed top-0 left-0 z-[999] scale">
+          <div className="w-full sm:w-[500px] h-fit bg-white px-5 pt-10 pb-5 border border-blue-400 rounded-lg relative">
+            <img
+              alt=""
+              src="/images/icons8-discount-50.png"
+              className="w-20 h-20 absolute top-[-40px] left-[50%] translate-x-[-50%]"
+            />
+            <h1 className="text-[1.4rem] font-bold mb-3">Get free rides!</h1>
+            <div>
+              Limited time offer: Free rides today for first 200 users! Book
+              now!
+            </div>
+            <button
+              onClick={bookFreeRide}
+              className="text-sm text-white text-[.85rem] bg-blue-500 px-10 py-2 mt-8 uppercase hover:bg-blue-400 border-blue-500 border-2 rounded-md transition-all duration-300"
+            >
+              Book now
+            </button>
+          </div>
+        </div>
+      )}
+
       <main className="w-full bg-slate-200">
         <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-home bg-cover bg-right lg:bg-center bg-no-repeat relative">
           <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex text-white px-[5%] sm:px-[10.5%] pt-[130px] md:pt-[200px] lg:pt-[15%] pb-40">
@@ -153,6 +181,41 @@ const Homepage = () => {
       </main>
       <Footer />
       <ScrollToTop />
+      {freeRideBanner && (
+        <div className="w-full bg-white px-2 md:px-5 py-[6px] md:py-3 fixed bottom-0 left-0 flex items-center">
+          <div className="flex items-center gap-2 md:gap-4 mr-auto">
+            <img
+              alt=""
+              src="/images/icons8-discount-50.png"
+              className="w-8 h-8 md:w-12 md:h-12"
+            />
+            <p className="text-[.75rem] md:text-[1rem]">
+              Limited time offer: Free rides today for first 200 users! Book
+              now!
+            </p>
+          </div>
+          <div
+            onClick={cancelBookFreeRide}
+            className="w-8 h-7 bg-white flex items-center justify-center rounded-lg border border-slate-700 cursor-pointer"
+          >
+            <img alt="" src="/images/icons8-close-30.png" className="w-3 h-3" />
+          </div>
+          {/* <div className="md:flex gap-3 hidden">
+            <button
+              onClick={cancelBookFreeRide}
+              className="h-fit text-sm text-blue-500 text-[.75rem] bg-blue-500/20 px-6 py-1 md:py-2 uppercase hover:bg-blue-400 hover:text-white border-blue-500 border-2 rounded-md transition-all duration-300"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={bookFreeRide}
+              className="h-fit text-sm text-white text-[.75rem] bg-blue-500 px-6 py-1 md:py-2 uppercase hover:bg-blue-400 border-blue-500 border-2 rounded-md transition-all duration-300"
+            >
+              Book now
+            </button>
+          </div> */}
+        </div>
+      )}
     </>
   );
 };
