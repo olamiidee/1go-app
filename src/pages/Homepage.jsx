@@ -20,6 +20,7 @@ const Homepage = () => {
     bookFreeRide,
     cancelBookFreeRide,
     freeRideBanner,
+    cancelFreeRideMod,
   } = useAppContext();
   return (
     <>
@@ -38,12 +39,26 @@ const Homepage = () => {
               Limited time offer: Free rides today for first 200 users! Book
               now!
             </div>
-            <button
+            <div className="flex justify-center gap-3 mt-4">
+              <button
+                onClick={cancelFreeRideMod}
+                className="h-fit text-sm text-blue-500 text-[.75rem] bg-blue-500/20 px-8 py-1 md:py-2 uppercase hover:bg-blue-400 hover:text-white border-blue-500 border-2 rounded-md transition-all duration-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={bookFreeRide}
+                className="h-fit text-sm text-white text-[.75rem] bg-blue-500 px-6 py-1 md:py-2 uppercase hover:bg-blue-400 border-blue-500 border-2 rounded-md transition-all duration-300"
+              >
+                Book now
+              </button>
+            </div>
+            {/* <button
               onClick={bookFreeRide}
               className="text-sm text-white text-[.85rem] bg-blue-500 px-10 py-2 mt-8 uppercase hover:bg-blue-400 border-blue-500 border-2 rounded-md transition-all duration-300"
             >
               Book now
-            </button>
+            </button> */}
           </div>
         </div>
       )}
@@ -94,7 +109,7 @@ const Homepage = () => {
                     />
                   </div>
                   <p className="text-[0.75rem] bg-blue-400/30 px-2 py-[1px] rounded-full">
-                    Click on an available time to book a ride
+                    Book a ride by selecting an available time
                   </p>
                 </div>
                 <div>
@@ -182,7 +197,7 @@ const Homepage = () => {
       <Footer />
       <ScrollToTop />
       {freeRideBanner && (
-        <div className="w-full bg-white px-2 md:px-5 py-[6px] md:py-3 fixed bottom-0 left-0 flex items-center">
+        <div className="w-full bg-white px-2 md:px-5 py-[6px] md:py-3 fixed bottom-0 left-0 flex items-center z-10">
           <div className="flex items-center gap-2 md:gap-4 mr-auto">
             <img
               alt=""
@@ -196,7 +211,7 @@ const Homepage = () => {
           </div>
           <div
             onClick={cancelBookFreeRide}
-            className="w-8 h-7 bg-white flex items-center justify-center rounded-lg border border-slate-700 cursor-pointer"
+            className="w-8 h-7 bg-white flex items-center justify-center rounded-full border border-blue-500 cursor-pointer"
           >
             <img alt="" src="/images/icons8-close-30.png" className="w-3 h-3" />
           </div>
