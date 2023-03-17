@@ -324,6 +324,7 @@ const AppContextProvider = ({ children }) => {
 
   //to save morning time form input
   function handleMorningChange(event) {
+    setFieldsRequired("");
     const { id, value } = event.target;
     setMorningForm((prevState) => {
       return {
@@ -344,6 +345,7 @@ const AppContextProvider = ({ children }) => {
 
   //to save noon time form input
   function handlenoonChange(event) {
+    setFieldsRequired("");
     const { id, value } = event.target;
     setNoonForm((prevState) => {
       return {
@@ -441,22 +443,33 @@ const AppContextProvider = ({ children }) => {
   };
 
   //to handle booking time form data submit to firebase
+  const [fieldsRequired, setFieldsRequired] = useState("");
   const handleMorningBookingTimeSubmit = async (e) => {
     e.preventDefault();
-    let morningTime = `${morningForm.morningHour}:${morningForm.morningMinute} ${morningForm.morningAmpm}`;
-    setLoader(true);
+    if (
+      morningForm.morningHour &&
+      morningForm.morningMinute &&
+      morningForm.morningAmpm &&
+      morningForm.slots &&
+      morningForm.price
+    ) {
+      let morningTime = `${morningForm.morningHour}:${morningForm.morningMinute} ${morningForm.morningAmpm}`;
+      setLoader(true);
 
-    try {
-      await createMorningBookingTimeDocument(
-        morningTime,
-        formattedDate,
-        morningForm.slots,
-        morningForm.price
-      );
-      setLoader(false);
-    } catch (error) {
-      setLoader(false);
-      console.log(error.message);
+      try {
+        await createMorningBookingTimeDocument(
+          morningTime,
+          formattedDate,
+          morningForm.slots,
+          morningForm.price
+        );
+        setLoader(false);
+      } catch (error) {
+        setLoader(false);
+        console.log(error.message);
+      }
+    } else {
+      setFieldsRequired("Please fill all fields!");
     }
   };
 
@@ -545,23 +558,34 @@ const AppContextProvider = ({ children }) => {
   //to handle booking time form data submit to firebase
   const handleNoonBookingTimeSubmit = async (e) => {
     e.preventDefault();
-    let noonTime = `${noonForm.noonHour}:${noonForm.noonMinute} ${noonForm.noonAmpm}`;
-    setLoader(true);
 
-    try {
-      await createNoonBookingTimeDocument(
-        noonTime,
-        formattedDate,
-        noonForm.slots,
-        noonForm.price
-      );
-      await getNoonBookingTime();
-      added = false;
-      setLoader(false);
-      window.location.reload();
-    } catch (error) {
-      setLoader(false);
-      console.log(error.message);
+    if (
+      noonForm.noonHour &&
+      noonForm.noonMinute &&
+      noonForm.noonAmpm &&
+      noonForm.slots &&
+      noonForm.price
+    ) {
+      let noonTime = `${noonForm.noonHour}:${noonForm.noonMinute} ${noonForm.noonAmpm}`;
+      setLoader(true);
+
+      try {
+        await createNoonBookingTimeDocument(
+          noonTime,
+          formattedDate,
+          noonForm.slots,
+          noonForm.price
+        );
+        await getNoonBookingTime();
+        added = false;
+        setLoader(false);
+        window.location.reload();
+      } catch (error) {
+        setLoader(false);
+        console.log(error.message);
+      }
+    } else {
+      setFieldsRequired("Please fill all fields!");
     }
   };
 
@@ -877,7 +901,7 @@ const AppContextProvider = ({ children }) => {
     }
   }, [currentUserFromDb, activeRideChange, checkTime]);
 
-  console.log(activeRidesFromDb);
+  // console.log(activeRidesFromDb);
 
   const [active, setActive] = useState(
     JSON.parse(localStorage.getItem("active")) || false
@@ -969,7 +993,6 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
-  //to get user's active ride saved in db
   useEffect(() => {
     if (user) {
       const getActiveRides = async () => {
@@ -987,9 +1010,8 @@ const AppContextProvider = ({ children }) => {
           let arranged = ride?.sort(function (a, b) {
             return a?.id.slice(-3) - b?.id.slice(-3);
           });
-          ride.length > 0 &&
-            localStorage.setItem("activeRide", JSON.stringify(arranged));
-          ride.length > 0 && setActiveRidesFromDb(arranged);
+          localStorage.setItem("activeRide", JSON.stringify(arranged));
+          setActiveRidesFromDb(arranged);
         } catch (err) {
           console.log(err.message);
         } finally {
@@ -999,12 +1021,12 @@ const AppContextProvider = ({ children }) => {
       };
       getActiveRides();
     }
-  }, [currentUserFromDb, activeRideChange, currentPage]);
+  }, [currentUserFromDb, activeRideChange]);
 
   useEffect(() => {
     const timerId = setInterval(() => {
       setCheckTime((prev) => !prev);
-    }, 60000);
+    }, 20000);
 
     return () => clearInterval(timerId);
   }, []);
@@ -1021,13 +1043,15 @@ const AppContextProvider = ({ children }) => {
           });
           let activeTime = item.time;
           var compareTime = moment(activeTime, "hh:mm A")
-            .add(10, "minutes")
+            .add(20, "minutes")
             .format("LT");
 
           let currentTimeRef = time.replace(/:/g, "");
           let compareTimeRef = moment(compareTime, ["h:mm A"])
             .format("HH:mm")
             .replace(/:/g, "");
+
+          console.log(currentTimeRef, "---", compareTimeRef);
 
           if (Number(currentTimeRef) >= Number(compareTimeRef)) {
             async function clearActiveRides() {
@@ -1091,9 +1115,8 @@ const AppContextProvider = ({ children }) => {
           let arranged = ride?.sort(function (a, b) {
             return b?.id.slice(-3) - a?.id.slice(-3);
           });
-          ride.length > 0 &&
-            localStorage.setItem("rideHistory", JSON.stringify(arranged));
-          ride.length > 0 && setRideHistoryFromDb(arranged);
+          localStorage.setItem("rideHistory", JSON.stringify(arranged));
+          setRideHistoryFromDb(arranged);
         } catch (err) {
           console.log(err.message);
         } finally {
@@ -1102,11 +1125,12 @@ const AppContextProvider = ({ children }) => {
       };
       getRidesHistory();
     }
-  }, [currentUserFromDb, activeRideChange, currentPage]);
+  }, [currentUserFromDb, activeRideChange]);
 
   const [bookingSuccess, setBookingSuccess] = useState(false);
   function cloaseSuccessModal() {
     setBookingSuccess(false);
+    navigate("/book-ride");
     // setActiveRideChange((prev) => !prev);
   }
 
@@ -1234,6 +1258,7 @@ const AppContextProvider = ({ children }) => {
         cancelBookFreeRide,
         freeRideBanner,
         cancelFreeRideMod,
+        fieldsRequired,
       }}
     >
       {children}

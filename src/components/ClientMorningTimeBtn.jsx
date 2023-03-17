@@ -11,22 +11,22 @@ const ClientMorningTimeBtn = ({ item }) => {
     minute: "numeric",
     hour12: false,
   });
-  let activeTime = item.time;
-  var compareTime = moment(activeTime, "hh:mm A").format("LT");
+  let activeTimeN = item.time;
+  var compareTimeN = moment(activeTimeN, "hh:mm A").format("LT");
 
-  let compareTimeRef = moment(compareTime, ["h:mm A"])
+  let compareTimeNRef = moment(compareTimeN, ["h:mm A"])
     .format("HH:mm")
     .replace(/:/g, "");
-  let currentTimeRef = time.replace(/:/g, "");
-  // console.log(currentTimeRef, compareTimeRef);
+  let currentTimeNRef = time.replace(/:/g, "");
+  // console.log(currentTimeNRef, compareTimeNRef);
 
   const [bookedOut, setBookedOut] = useState(false);
   const [timePassed, setTimePassed] = useState(false);
 
   function link() {
-    if (user && item.slots > 0 && currentTimeRef < compareTimeRef) {
+    if (user && item.slots > 0 && currentTimeNRef < compareTimeNRef) {
       navigate(`/book-ride/summary/${item.id}`);
-    } else if (user && item.slots > 0 && currentTimeRef > compareTimeRef) {
+    } else if (user && item.slots > 0 && currentTimeNRef > compareTimeNRef) {
       setTimePassed(true);
     } else if (user && item.slots < 1) {
       setBookedOut(true);
@@ -45,7 +45,7 @@ const ClientMorningTimeBtn = ({ item }) => {
         <button
           onClick={link}
           className={`${
-            item.slots < 1 || currentTimeRef > compareTimeRef
+            item.slots < 1 || currentTimeNRef > compareTimeNRef
               ? "opacity-40"
               : "opacity-100"
           } px-3 py-1 bg-blue-300 hover:bg-blue-500 border border-slate-500 hover:text-white rounded-md text-[0.8rem] md:text-[0.85rem] transition-all duration-300`}

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Loader from "../components/Loader";
 import AdminMorningBookingTimeBtn from "./AdminMorningBookingTimeBtn";
 import AdminNoonBookingTimeBtn from "./AdminNoonBookingTimeBtn";
+import moment from "moment";
 // import { useAdminContext } from "../contexts/AdminContext";
 
 const BookingTimes = () => {
@@ -21,6 +22,7 @@ const BookingTimes = () => {
     handleDeleteMorningTime,
     handleDeleteNoonTime,
     handlePriceChange,
+    fieldsRequired,
   } = useAppContext();
 
   //to open morning edit time modal
@@ -41,6 +43,18 @@ const BookingTimes = () => {
     setOpenPriceEdit((prev) => !prev);
   }
 
+  let sortedArrMorn = morningBookingTimesFromDb.slice().sort((a, b) => {
+    const timeA = moment(a.time, ["h:mm A"]).format("HH:mm");
+    const timeB = moment(b.time, ["h:mm A"]).format("HH:mm");
+    return Number(timeA.replace(/:/g, "")) - Number(timeB.replace(/:/g, ""));
+  });
+
+  let sortedArrNoon = noonBookingTimesFromDb.slice().sort((a, b) => {
+    const timeA = moment(a.time, ["h:mm A"]).format("HH:mm");
+    const timeB = moment(b.time, ["h:mm A"]).format("HH:mm");
+    return Number(timeA.replace(/:/g, "")) - Number(timeB.replace(/:/g, ""));
+  });
+
   return (
     <div className="w-full">
       {loader && <Loader />}
@@ -56,7 +70,7 @@ const BookingTimes = () => {
           </h2>
           <div className="my-4 w-full flex gap-4 flex-wrap">
             {morningBookingTimesFromDb &&
-              morningBookingTimesFromDb?.map((item, index) => {
+              sortedArrMorn?.map((item, index) => {
                 return (
                   <AdminMorningBookingTimeBtn
                     key={index}
@@ -123,7 +137,7 @@ const BookingTimes = () => {
                         className="bg-blue-50 w-12 sm:w-[70px] py-1 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
                       >
                         <option value="DEFAULT" disabled hidden>
-                          AM
+                          - -
                         </option>
 
                         <option value="AM">AM</option>
@@ -160,6 +174,11 @@ const BookingTimes = () => {
                   >
                     Add
                   </button>
+                  {fieldsRequired && (
+                    <div className="w-full p-1 text-[.75rem] rounded-md border border-red-400 bg-red-400/30">
+                      {fieldsRequired}
+                    </div>
+                  )}
                 </form>
               </div>
             </div>
@@ -173,7 +192,7 @@ const BookingTimes = () => {
           </h2>
           <div className="my-4 w-full flex gap-4 flex-wrap">
             {noonBookingTimesFromDb &&
-              noonBookingTimesFromDb?.map((item, index) => {
+              sortedArrNoon?.map((item, index) => {
                 return (
                   <AdminNoonBookingTimeBtn
                     key={index}
@@ -232,7 +251,7 @@ const BookingTimes = () => {
                       className="bg-blue-50 w-12 sm:w-[70px] py-1 px-[6px] sm:px-3 border-2 border-blue-400 rounded-md outline-none"
                     >
                       <option value="DEFAULT" disabled hidden>
-                        PM
+                        - -
                       </option>
 
                       <option value="AM">AM</option>
@@ -268,6 +287,11 @@ const BookingTimes = () => {
                   >
                     Add
                   </button>
+                  {fieldsRequired && (
+                    <div className="w-full p-1 text-[.75rem] rounded-md border border-red-400 bg-red-400/30">
+                      {fieldsRequired}
+                    </div>
+                  )}
                 </form>
               </div>
             </div>

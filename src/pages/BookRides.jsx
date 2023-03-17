@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ActiveBooking from "../components/ActiveBooking";
@@ -37,12 +38,23 @@ const BookRides = () => {
     setDisplayAll((prev) => !prev);
   }
 
+  let sortedArrMorn = morningBookingTimesFromDb.slice().sort((a, b) => {
+    const timeA = moment(a.time, ["h:mm A"]).format("HH:mm");
+    const timeB = moment(b.time, ["h:mm A"]).format("HH:mm");
+    return Number(timeA.replace(/:/g, "")) - Number(timeB.replace(/:/g, ""));
+  });
+
+  let sortedArrNoon = noonBookingTimesFromDb.slice().sort((a, b) => {
+    const timeA = moment(a.time, ["h:mm A"]).format("HH:mm");
+    const timeB = moment(b.time, ["h:mm A"]).format("HH:mm");
+    return Number(timeA.replace(/:/g, "")) - Number(timeB.replace(/:/g, ""));
+  });
+
   // console.log(active);
   return (
     <>
       {loader && <Loader />}
       <Header />
-      {bookingSuccess && <BookSuccessModal />}
 
       {freeRideMod && (
         <div className="w-full h-screen text-center p-4 flex justify-center items-center bg-black/90 fixed top-0 left-0 z-[999] scale">
@@ -216,7 +228,7 @@ const BookRides = () => {
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
                         {morningBookingTimesFromDb?.length > 0 ? (
-                          morningBookingTimesFromDb.map((item, index) => {
+                          sortedArrMorn.map((item, index) => {
                             return (
                               <ClientMorningTimeBtn key={index} item={item} />
                             );
@@ -252,7 +264,7 @@ const BookRides = () => {
                       </h2>
                       <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
                         {noonBookingTimesFromDb?.length > 0 ? (
-                          noonBookingTimesFromDb?.map((item, index) => {
+                          sortedArrNoon?.map((item, index) => {
                             return (
                               <ClientNoonTimeBtn key={index} item={item} />
                             );
