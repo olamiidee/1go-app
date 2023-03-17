@@ -15,6 +15,7 @@ import {
 import { db } from "../firebase/firebase-config";
 import { useState } from "react";
 import Loader from "../components/Loader";
+import BookSuccessModal from "../components/BookSuccessModal";
 
 const Summary = () => {
   const {
@@ -33,6 +34,7 @@ const Summary = () => {
     freeRideBanner,
     cancelBookFreeRide,
     bookFreeRide,
+    bookingSuccess,
   } = useAppContext();
 
   let allTimes = [...morningBookingTimesFromDb, ...noonBookingTimesFromDb];
@@ -42,6 +44,7 @@ const Summary = () => {
   // console.log(eachTime);
 
   //to control details form
+  const [detailsError, setDetailsError] = useState("");
   const [detailsForm, setDetailsForm] = useState({
     terminal: "",
     seats: "",
@@ -126,7 +129,7 @@ const Summary = () => {
       detailsForm.seats
     );
     updateSlotsCount();
-    navigate("/book-ride");
+    // navigate("/book-ride");
   };
   const onClose = () => {
     alert("Transaction was not completed, window closed.");
@@ -145,7 +148,7 @@ const Summary = () => {
       detailsForm.seats
     );
     updateSlotsCount();
-    navigate("/book-ride");
+    // navigate("/book-ride");
   };
 
   const PaystackHook = () => {
@@ -179,7 +182,6 @@ const Summary = () => {
   // console.log(Number(eachTime?.slots));
 
   //to proceed to summary
-  const [detailsError, setDetailsError] = useState("");
 
   function proceedToSummary(e) {
     e.preventDefault();
@@ -199,8 +201,12 @@ const Summary = () => {
   }
   return (
     <>
-      {loader && <Loader />}
       <Header />
+      {loader && <Loader />}
+      {bookingSuccess && (
+        <BookSuccessModal eachTime={eachTime} detailsForm={detailsForm} />
+      )}
+
       <section className="w-full min-h-screen py-40 bg-gradient-to-b from-zinc-500/70 to-blue-400/10 text-slate-700">
         <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
           <img
