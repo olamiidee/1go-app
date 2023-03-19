@@ -1082,35 +1082,33 @@ const AppContextProvider = ({ children }) => {
     }
   }, [checkTime]);
 
-  //to clear all active rides at the end of the day
+  //to clear all active rides at the end of the day!!!!!
   useEffect(() => {
-    if (user) {
-      activeRidesFromDb?.map((item) => {
-        if (formattedDate !== item?.createdAt) {
-          async function clearActiveRides() {
-            await clearActiveRideDoc(item.id);
-            let newArr = activeRidesFromDb.filter(
-              (item) => item.createdAt === formattedDate
-            );
-            let arranged = newArr?.sort(function (a, b) {
-              return a?.id.slice(-3) - b?.id.slice(-3);
-            });
-            localStorage.setItem("activeRide", JSON.stringify(arranged));
-            setActiveRidesFromDb(arranged);
-            setActiveRideChange((prev) => !prev);
-            if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
-              setActive(true);
-              localStorage.setItem("active", JSON.stringify(active));
-            } else {
-              setActive(false);
-              localStorage.setItem("active", JSON.stringify(active));
-            }
-            window.location.reload();
+    activeRidesFromDb?.map((item) => {
+      if (user && formattedDate !== item?.createdAt) {
+        async function clearActiveRides() {
+          await clearActiveRideDoc(item.id);
+          let newArr = activeRidesFromDb.filter(
+            (item) => item.createdAt === formattedDate
+          );
+          let arranged = newArr?.sort(function (a, b) {
+            return a?.id.slice(-3) - b?.id.slice(-3);
+          });
+          localStorage.setItem("activeRide", JSON.stringify(arranged));
+          setActiveRidesFromDb(arranged);
+          setActiveRideChange((prev) => !prev);
+          if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
+            setActive(true);
+            localStorage.setItem("active", JSON.stringify(active));
+          } else {
+            setActive(false);
+            localStorage.setItem("active", JSON.stringify(active));
           }
-          clearActiveRides();
+          window.location.reload();
         }
-      });
-    }
+        clearActiveRides();
+      }
+    });
   }, [currentPage, checkTime]);
 
   //to get and store ride history
