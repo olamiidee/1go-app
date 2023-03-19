@@ -1082,6 +1082,37 @@ const AppContextProvider = ({ children }) => {
     }
   }, [checkTime]);
 
+  //to clear all active rides at the end of the day
+  useEffect(() => {
+    if (user) {
+      activeRidesFromDb?.map((item) => {
+        if (formattedDate !== item?.createdAt) {
+          async function clearActiveRides() {
+            await clearActiveRideDoc(item.id);
+            let newArr = activeRidesFromDb.filter(
+              (item) => item.createdAt === formattedDate
+            );
+            let arranged = newArr?.sort(function (a, b) {
+              return a?.id.slice(-3) - b?.id.slice(-3);
+            });
+            localStorage.setItem("activeRide", JSON.stringify(arranged));
+            setActiveRidesFromDb(arranged);
+            setActiveRideChange((prev) => !prev);
+            if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
+              setActive(true);
+              localStorage.setItem("active", JSON.stringify(active));
+            } else {
+              setActive(false);
+              localStorage.setItem("active", JSON.stringify(active));
+            }
+            window.location.reload();
+          }
+          clearActiveRides();
+        }
+      });
+    }
+  }, [currentPage, checkTime]);
+
   //to get and store ride history
   const [rideHistoryFromDb, setRideHistoryFromDb] = useState(
     JSON.parse(localStorage.getItem("rideHistory")) || []
@@ -1101,7 +1132,7 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
       const getRidesHistory = async () => {
-        setLoader(true);
+        // setLoader(true);
         const userQuery = query(
           collection(db, "rideHistory"),
           where("active", "==", `false_${currentUserFromDb?.email}`)
@@ -1119,13 +1150,11 @@ const AppContextProvider = ({ children }) => {
           setRideHistoryFromDb(arranged);
         } catch (err) {
           console.log(err.message);
-        } finally {
-          setLoader(false);
         }
       };
       getRidesHistory();
     }
-  }, [currentUserFromDb, activeRideChange]);
+  }, [currentUserFromDb, activeRideChange, checkTime]);
 
   const [bookingSuccess, setBookingSuccess] = useState(false);
   function cloaseSuccessModal() {
