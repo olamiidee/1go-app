@@ -62,10 +62,10 @@ const BookingTimes = () => {
       <div
         className={`w-full md:w-[80%] min-h-screen pb-24 float-right bg-sky-50 pt-[80px] md:pt-[60px] px-3 md:px-12 transition-all duration-500 text-slate-700`}
       >
-        <h1 className="w-full font-bold text-[1.75rem]">Booking times</h1>
+        <h1 className="w-full font-bold text-[1.75rem]">Departure times</h1>
         <div className="w-full min-h-[200px] bg-white p-4 mt-8 rounded-lg shadow-xl shadow-slate-300/30 border border-sky-500 relative">
           <h2 className="pb-1 border-b border-b-slate-400/80">
-            Manage booking times{" "}
+            Manage departure times{" "}
             <strong>( From Outside school - Going to school park)</strong>
           </h2>
           <div className="my-4 w-full flex gap-4 flex-wrap">
@@ -187,7 +187,7 @@ const BookingTimes = () => {
 
         <div className="w-full min-h-[200px] bg-white p-4 mt-8 rounded-lg shadow-xl shadow-slate-300/30 border border-sky-500 relative">
           <h2 className="pb-1 border-b border-b-slate-400/80">
-            Manage booking times{" "}
+            Manage departure times{" "}
             <strong>( From Inside school - Going off-campus )</strong>
           </h2>
           <div className="my-4 w-full flex gap-4 flex-wrap">

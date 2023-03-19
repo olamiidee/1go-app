@@ -193,11 +193,11 @@ const BookRides = () => {
             )}
             {/* if ride is active show this tab at the top */}
 
-            {/* if ride is not active show booking times at the top */}
+            {/* if ride is not active show Departure times at the top */}
             {(!active || activeRidesFromDb?.length === 0) && (
               <section className="w-full border-b border-zinc-300 pb-16 pt-12">
                 <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-white">
-                  Booking times
+                  Departure times
                 </h1>
                 <div className="w-[fit-content] text-[.9rem] sm:text-[1.1rem] font-medium text-white text-center mb-3 flex items-center gap-3 mx-auto">
                   <p> Click on an available time to book now</p>
@@ -281,7 +281,7 @@ const BookRides = () => {
                 </div>
               </section>
             )}
-            {/* if ride is not active show booking times at the top */}
+            {/* if ride is not active show Departure times at the top */}
           </section>
         </section>
 

@@ -52,7 +52,7 @@ const Sidebar = () => {
                   : "bg-gray-200 border-gray-200"
               } hover:bg-sky-50 hover:border-sky-600 border rounded-r-2xl`}
             >
-              Booking Times
+              Departure Times
             </li>
           </Link>
           <li
@@ -101,7 +101,7 @@ const Sidebar = () => {
                     : "bg-gray-200 border-gray-200"
                 } hover:bg-sky-50 hover:border-slate-600 border rounded-r-2xl`}
               >
-                Booking times
+                Departure times
               </li>
             </Link>
             <li
