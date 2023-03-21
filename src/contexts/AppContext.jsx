@@ -214,6 +214,7 @@ const AppContextProvider = ({ children }) => {
       localStorage.removeItem("activeRide");
       localStorage.removeItem("rideHistory");
       localStorage.removeItem("active");
+      localStorage.removeItem("freeRideCount");
 
       signOut(auth).then(() => {
         navigate("/");
@@ -744,7 +745,7 @@ const AppContextProvider = ({ children }) => {
           `${email}_${createdAt}_00${messageFromDb?.length + 1}`
         ),
         {
-          id: `${email}_${createdAt}`,
+          id: `${email}_${createdAt}_00${messageFromDb?.length + 1}`,
           fname: fname,
           lname: lname,
           email: email,
@@ -925,6 +926,7 @@ const AppContextProvider = ({ children }) => {
   //function to create active rides doc
   let bookingCode = Math.random().toString(10).slice(2, 8);
 
+  // console.log(formattedDate);
   const createRideDoc = async (
     email,
     time,
@@ -936,6 +938,17 @@ const AppContextProvider = ({ children }) => {
   ) => {
     setLoader(true);
     try {
+      const freeRideQuery = doc(db, "freeRidesCounter", "countToday");
+      const docSnap = await getDoc(freeRideQuery);
+      let countData = docSnap.data();
+      await updateDoc(freeRideQuery, {
+        date:
+          countData?.date === formattedDate ? countData?.date : formattedDate,
+        count:
+          countData?.date === formattedDate
+            ? Number(countData?.count) + Number(seats)
+            : 0,
+      });
       await setDoc(
         doc(
           db,
@@ -992,6 +1005,26 @@ const AppContextProvider = ({ children }) => {
       setLoader(false);
     }
   };
+
+  //to count free rides
+  const [freeRideCount, setFreeRideCount] = useState(
+    JSON.parse(localStorage.getItem("freeRideCount")) || ""
+  );
+  useEffect(() => {
+    const getFreeRidesCount = async () => {
+      try {
+        const freeRideQuery = doc(db, "freeRidesCounter", "countToday");
+        const docSnap = await getDoc(freeRideQuery);
+        let countData = docSnap.data();
+        localStorage.setItem("freeRideCount", JSON.stringify(countData));
+        setFreeRideCount(countData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFreeRidesCount();
+  }, [currentUserFromDb, activeRideChange]);
+  // console.log(freeRideCount);
 
   useEffect(() => {
     if (user) {
@@ -1170,36 +1203,37 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
-  async function markCompleted() {
-    setLoader(true);
+  // async function markCompleted() {
+  //   setLoader(true);
 
-    try {
-      let mark = "Mark ride as completed?";
+  //   try {
+  //     let mark = "Mark ride as completed?";
 
-      if (confirm(mark) == true) {
-        localStorage.removeItem("activeRide");
-        await clearActiveRideDoc(activeRidesFromDb[0].id);
-        window.location.reload();
-        setActiveRideChange((prev) => !prev);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoader(false);
-    }
-  }
+  //     if (confirm(mark) == true) {
+  //       localStorage.removeItem("activeRide");
+  //       await clearActiveRideDoc(activeRidesFromDb[0].id);
+  //       window.location.reload();
+  //       setActiveRideChange((prev) => !prev);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   } finally {
+  //     setLoader(false);
+  //   }
+  // }
   // console.log(activeRidesFromDb[0].id);
 
   //to display free ride modal
   const [freeRideMod, setFreeRideMod] = useState(false);
   useEffect(() => {
-    if (!loader && ridesToday < 200 && activeRidesFromDb.length < 1) {
+    if (
+      !loader &&
+      Number(freeRideCount?.count) <= 200 &&
+      activeRidesFromDb.length < 1
+    ) {
       setTimeout(() => {
         setFreeRideMod(true);
       }, 3000);
-      // setTimeout(() => {
-      //   setFreeRideMod(false);
-      // }, 12000);
     }
   }, []);
   function cancelFreeRideMod() {
@@ -1208,7 +1242,7 @@ const AppContextProvider = ({ children }) => {
 
   const [freeRideBanner, setFreeRideBanner] = useState(false);
   useEffect(() => {
-    if (!loader && !freeRideMod && ridesToday < 200) {
+    if (!loader && Number(freeRideCount?.count) <= 200) {
       setTimeout(() => {
         setFreeRideBanner(true);
       }, 3000);
@@ -1223,6 +1257,7 @@ const AppContextProvider = ({ children }) => {
   function cancelBookFreeRide() {
     setFreeRideBanner(false);
   }
+
   return (
     <AppContext.Provider
       value={{
@@ -1268,7 +1303,6 @@ const AppContextProvider = ({ children }) => {
         createRideDoc,
         formattedDate,
         activeRidesFromDb,
-        markCompleted,
         rideHistoryFromDb,
         allRides,
         ridesToday,
@@ -1286,6 +1320,7 @@ const AppContextProvider = ({ children }) => {
         freeRideBanner,
         cancelFreeRideMod,
         fieldsRequired,
+        freeRideCount,
       }}
     >
       {children}
