@@ -1,5 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
+import { useRef } from "react";
+import html2canvas from "html2canvas";
 
 const RideDetails = () => {
   const { rideHistoryFromDb } = useAppContext();
@@ -7,8 +9,26 @@ const RideDetails = () => {
   const { id } = useParams();
   const ride = rideHistoryFromDb.filter((item) => item.id === id)[0];
   //   console.log(ride);
+
+  const pageRef = useRef(null);
+
+  const handleScreenshotClick = () => {
+    html2canvas(pageRef.current).then((canvas) => {
+      canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = "screenshot.png";
+        link.href = url;
+        link.click();
+      });
+    });
+  };
+
   return (
-    <div className="w-full h-[100vh] py-16 px-4 md:px-8 bg-blue-50 flex justify-center">
+    <div
+      ref={pageRef}
+      className="w-full h-[100vh] py-16 px-4 md:px-8 bg-blue-50 flex justify-center"
+    >
       <div className="w-full text-[.9rem] text-slate-600 md:text-[1.2rem] rounded-2xl flex justify-center">
         <div className="w-full sm:max-w-[550px] sm:h-fit scale flex flex-col gap-2 items-center bg-blue-50 sm:p-8 sm:shadow-md rounded-lg relative">
           <div className="px-3 pb-3 pt-12 rounded-md bg-blue-300/10">
@@ -100,7 +120,7 @@ const RideDetails = () => {
               </button>
             </Link>
             <button
-              type="submit"
+              onClick={handleScreenshotClick}
               className="w-1/2 px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
             >
               Download
