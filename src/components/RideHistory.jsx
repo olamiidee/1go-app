@@ -1,7 +1,7 @@
 import { useAppContext } from "../contexts/AppContext";
 
 const RideHistory = ({ item }) => {
-  const { navigate } = useAppContext();
+  const { navigate, formattedDate } = useAppContext();
   function link() {
     navigate(`/ride-history/${item.id}`);
   }
@@ -14,7 +14,10 @@ const RideHistory = ({ item }) => {
       >
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
           <p>
-            Date: <strong>{item?.createdAt}</strong>
+            Date:{" "}
+            <strong>
+              {item?.createdAt === formattedDate ? "Today" : item?.createdAt}
+            </strong>
           </p>
         </div>
         <div className="flex items-center px-2 py-1 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
@@ -74,15 +77,17 @@ const RideHistory = ({ item }) => {
         </div> */}
         <div className="text-start pr-2 md:p-2 md:mr-4">
           <div>Date:</div>
-          <div>{item?.createdAt}</div>
+          <div className="font-medium">
+            {item?.createdAt === formattedDate ? "Today" : item?.createdAt}
+          </div>
         </div>
         <div className=" px-2 md:p-2 border-x-2 border-blue-400/50 md:mr-4">
           <div>Time:</div>
-          <div>{item?.time}</div>
+          <div className="font-medium">{item?.time}</div>
         </div>
         <div className="px-2 md:p-2 border-r-2 border-blue-400/50">
           <div>Code:</div>
-          <div>{item?.bookingCode}</div>
+          <div className="font-medium">{item?.bookingCode}</div>
         </div>
         <div className="pl-2">
           <div>Price:</div>

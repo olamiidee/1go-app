@@ -144,7 +144,7 @@ const BookRides = () => {
                     </div>
                   )}
                 </div>
-                <div className="w-full min-h-[200px] bg-white rounded-b-lg rounded-tr-lg p-4 flex flex-col items-center transition-all duration-300 relative">
+                <div className="w-full min-h-[200px] bg-white rounded-b-lg rounded-tr-lg px-4 py-6 flex flex-col items-center transition-all duration-300 relative">
                   {/* each ride history */}
 
                   {rideHistoryFromDb?.length > 0 && !displayAll ? (
