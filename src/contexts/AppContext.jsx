@@ -393,7 +393,7 @@ const AppContextProvider = ({ children }) => {
       }
     };
     getMorningBookingTime();
-  }, [updatedTime, activeRideChange, currentPage]);
+  }, [updatedTime, activeRideChange]);
 
   //to send created notes to db
   const createMorningBookingTimeDocument = async (
@@ -508,7 +508,7 @@ const AppContextProvider = ({ children }) => {
       }
     };
     getNoonBookingTime();
-  }, [updatedTime, activeRideChange, currentPage]);
+  }, [updatedTime, activeRideChange]);
 
   //to send created notes to db
   const createNoonBookingTimeDocument = async (
@@ -656,7 +656,7 @@ const AppContextProvider = ({ children }) => {
       }
     }
     getUsers();
-  }, [checkTime]);
+  }, []);
 
   //to get total number of rides
   const [allRides, setAllRides] = useState([]);
@@ -676,7 +676,7 @@ const AppContextProvider = ({ children }) => {
       }
     }
     getAllRides();
-  }, [checkTime]);
+  }, []);
 
   //to get number of rides today
   const [ridesToday, setridesToday] = useState([]);
@@ -705,7 +705,7 @@ const AppContextProvider = ({ children }) => {
       };
       getRidesToday();
     }
-  }, [checkTime]);
+  }, []);
 
   //to save contact us form data
   const [contactUsData, setContactUsData] = useState({
@@ -824,7 +824,7 @@ const AppContextProvider = ({ children }) => {
       };
       getMessage();
     }
-  }, [checkTime]);
+  }, []);
 
   //admin login logic  //admin login logic  //admin login logic
   //admin login logic  //admin login logic  //admin login logic
@@ -893,14 +893,14 @@ const AppContextProvider = ({ children }) => {
   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
 
   //to get and store active rides
-  const [activeRidesFromDb, setActiveRidesFromDb] = useState([]);
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("activeRide")) !== null) {
-      setActiveRidesFromDb(JSON.parse(localStorage.getItem("activeRide")));
-    } else {
-      setActiveRidesFromDb([]);
-    }
-  }, [currentUserFromDb, activeRideChange, checkTime]);
+  // const [activeRidesFromDb, setActiveRidesFromDb] = useState([]);
+  // useEffect(() => {
+  //   if (JSON.parse(localStorage.getItem("activeRide")) !== null) {
+  //     setActiveRidesFromDb(JSON.parse(localStorage.getItem("activeRide")));
+  //   } else {
+  //     setActiveRidesFromDb([]);
+  //   }
+  // }, [currentUserFromDb, activeRideChange, checkTime]);
 
   // console.log(activeRidesFromDb);
 
@@ -908,14 +908,14 @@ const AppContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("active")) || false
   );
   useEffect(() => {
-    if (activeRidesFromDb?.length > 0) {
+    if (rideHistoryFromDb[0]?.createdAt === formattedDate) {
       setActive(true);
-      localStorage.setItem("active", JSON.stringify(active));
+      localStorage.setItem("active", JSON.stringify(true));
     } else {
       setActive(false);
-      localStorage.setItem("active", JSON.stringify(active));
+      localStorage.setItem("active", JSON.stringify(false));
     }
-  }, [checkTime]);
+  }, []);
 
   function toggleActive() {
     setActive(false);
@@ -947,31 +947,8 @@ const AppContextProvider = ({ children }) => {
         count:
           countData?.date === formattedDate
             ? Number(countData?.count) + Number(seats)
-            : 0,
+            : Number(seats),
       });
-      await setDoc(
-        doc(
-          db,
-          "activeRide",
-          `${email}_${time.replace(/ /g, "")}_${paymentRef}_00${
-            activeRidesFromDb ? activeRidesFromDb?.length + 1 : 1
-          }`
-        ),
-        {
-          id: `${email}_${time.replace(/ /g, "")}_${paymentRef}_00${
-            activeRidesFromDb ? activeRidesFromDb?.length + 1 : 1
-          }`,
-          email: email,
-          time: time,
-          price: ridesToday > 200 ? price : "free",
-          paymentRef: ridesToday > 200 ? paymentRef : "free",
-          active: `true_${email}`,
-          createdAt: createdAt,
-          bookingCode: bookingCode,
-          terminal: terminal,
-          seats: seats,
-        }
-      );
       //to simultenousely create ride history
       await setDoc(
         doc(
@@ -996,9 +973,25 @@ const AppContextProvider = ({ children }) => {
           seats: seats,
         }
       );
-      setBookingSuccess(true);
+      const userQuery = query(
+        collection(db, "rideHistory"),
+        where("active", "==", `false_${currentUserFromDb?.email}`)
+      );
+
+      const querySnapshot = await getDocs(userQuery);
+      let ride = [];
+      querySnapshot.forEach((doc) => {
+        ride.push(doc.data());
+      });
+      let arranged = ride?.sort(function (a, b) {
+        return b?.id.slice(-3) - a?.id.slice(-3);
+      });
+      localStorage.setItem("rideHistory", JSON.stringify(arranged));
+      setRideHistoryFromDb(arranged);
+      // setBookingSuccess(true);
       setActive(true);
       localStorage.setItem("active", JSON.stringify(active));
+      navigate("/booking-success");
     } catch (err) {
       console.error("Error adding document: ", err);
     } finally {
@@ -1026,123 +1019,123 @@ const AppContextProvider = ({ children }) => {
   }, [currentUserFromDb, activeRideChange]);
   // console.log(freeRideCount);
 
-  useEffect(() => {
-    if (user) {
-      const getActiveRides = async () => {
-        setLoader(true);
-        const userQuery = query(
-          collection(db, "activeRide"),
-          where("active", "==", `true_${currentUserFromDb?.email}`)
-        );
-        try {
-          const querySnapshot = await getDocs(userQuery);
-          let ride = [];
-          querySnapshot.forEach((doc) => {
-            ride.push(doc.data());
-          });
-          let arranged = ride?.sort(function (a, b) {
-            return a?.id.slice(-3) - b?.id.slice(-3);
-          });
-          localStorage.setItem("activeRide", JSON.stringify(arranged));
-          setActiveRidesFromDb(arranged);
-        } catch (err) {
-          console.log(err.message);
-        } finally {
-          setLoader(false);
-          setTakingLong(false);
-        }
-      };
-      getActiveRides();
-    }
-  }, [currentUserFromDb, activeRideChange]);
+  // useEffect(() => {
+  //   if (user) {
+  //     const getActiveRides = async () => {
+  //       setLoader(true);
+  //       const userQuery = query(
+  //         collection(db, "activeRide"),
+  //         where("active", "==", `true_${currentUserFromDb?.email}`)
+  //       );
+  //       try {
+  //         const querySnapshot = await getDocs(userQuery);
+  //         let ride = [];
+  //         querySnapshot.forEach((doc) => {
+  //           ride.push(doc.data());
+  //         });
+  //         let arranged = ride?.sort(function (a, b) {
+  //           return a?.id.slice(-3) - b?.id.slice(-3);
+  //         });
+  //         localStorage.setItem("activeRide", JSON.stringify(arranged));
+  //         setActiveRidesFromDb(arranged);
+  //       } catch (err) {
+  //         console.log(err.message);
+  //       } finally {
+  //         setLoader(false);
+  //         setTakingLong(false);
+  //       }
+  //     };
+  //     getActiveRides();
+  //   }
+  // }, [currentUserFromDb, activeRideChange]);
 
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      setCheckTime((prev) => !prev);
-    }, 20000);
+  // useEffect(() => {
+  //   const timerId = setInterval(() => {
+  //     setCheckTime((prev) => !prev);
+  //   }, 20000);
 
-    return () => clearInterval(timerId);
-  }, []);
+  //   return () => clearInterval(timerId);
+  // }, []);
 
-  useEffect(() => {
-    if (activeRidesFromDb?.length > 0) {
-      function track(arr) {
-        arr.forEach((item) => {
-          let t = new Date();
-          let time = t.toLocaleString("en-US", {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: false,
-          });
-          let activeTime = item.time;
-          var compareTime = moment(activeTime, "hh:mm A")
-            .add(20, "minutes")
-            .format("LT");
+  // useEffect(() => {
+  //   if (activeRidesFromDb?.length > 0) {
+  //     function track(arr) {
+  //       arr.forEach((item) => {
+  //         let t = new Date();
+  //         let time = t.toLocaleString("en-US", {
+  //           hour: "numeric",
+  //           minute: "numeric",
+  //           hour12: false,
+  //         });
+  //         let activeTime = item.time;
+  //         var compareTime = moment(activeTime, "hh:mm A")
+  //           .add(20, "minutes")
+  //           .format("LT");
 
-          let currentTimeRef = time.replace(/:/g, "");
-          let compareTimeRef = moment(compareTime, ["h:mm A"])
-            .format("HH:mm")
-            .replace(/:/g, "");
+  //         let currentTimeRef = time.replace(/:/g, "");
+  //         let compareTimeRef = moment(compareTime, ["h:mm A"])
+  //           .format("HH:mm")
+  //           .replace(/:/g, "");
 
-          console.log(currentTimeRef, "---", compareTimeRef);
+  //         console.log(currentTimeRef, "---", compareTimeRef);
 
-          if (Number(currentTimeRef) >= Number(compareTimeRef)) {
-            async function clearActiveRides() {
-              await clearActiveRideDoc(item.id);
-              let newArr = activeRidesFromDb.filter(
-                (item) => item.time !== activeTime
-              );
-              let arranged = newArr?.sort(function (a, b) {
-                return a?.id.slice(-3) - b?.id.slice(-3);
-              });
-              localStorage.setItem("activeRide", JSON.stringify(arranged));
-              setActiveRidesFromDb(arranged);
-              setActiveRideChange((prev) => !prev);
-              if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
-                setActive(true);
-                localStorage.setItem("active", JSON.stringify(active));
-              } else {
-                setActive(false);
-                localStorage.setItem("active", JSON.stringify(active));
-              }
-              window.location.reload();
-            }
-            clearActiveRides();
-          }
-        });
-      }
-      track(activeRidesFromDb);
-    }
-  }, [checkTime]);
+  //         if (Number(currentTimeRef) >= Number(compareTimeRef)) {
+  //           async function clearActiveRides() {
+  //             await clearActiveRideDoc(item.id);
+  //             let newArr = activeRidesFromDb.filter(
+  //               (item) => item.time !== activeTime
+  //             );
+  //             let arranged = newArr?.sort(function (a, b) {
+  //               return a?.id.slice(-3) - b?.id.slice(-3);
+  //             });
+  //             localStorage.setItem("activeRide", JSON.stringify(arranged));
+  //             setActiveRidesFromDb(arranged);
+  //             setActiveRideChange((prev) => !prev);
+  //             if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
+  //               setActive(true);
+  //               localStorage.setItem("active", JSON.stringify(active));
+  //             } else {
+  //               setActive(false);
+  //               localStorage.setItem("active", JSON.stringify(active));
+  //             }
+  //             window.location.reload();
+  //           }
+  //           clearActiveRides();
+  //         }
+  //       });
+  //     }
+  //     track(activeRidesFromDb);
+  //   }
+  // }, []);
 
   //to clear all active rides at the end of the day!!!!!
-  useEffect(() => {
-    activeRidesFromDb?.map((item) => {
-      if (user && formattedDate !== item?.createdAt) {
-        async function clearActiveRides() {
-          await clearActiveRideDoc(item.id);
-          let newArr = activeRidesFromDb.filter(
-            (item) => item.createdAt === formattedDate
-          );
-          let arranged = newArr?.sort(function (a, b) {
-            return a?.id.slice(-3) - b?.id.slice(-3);
-          });
-          localStorage.setItem("activeRide", JSON.stringify(arranged));
-          setActiveRidesFromDb(arranged);
-          setActiveRideChange((prev) => !prev);
-          if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
-            setActive(true);
-            localStorage.setItem("active", JSON.stringify(active));
-          } else {
-            setActive(false);
-            localStorage.setItem("active", JSON.stringify(active));
-          }
-          window.location.reload();
-        }
-        clearActiveRides();
-      }
-    });
-  }, [currentPage, checkTime]);
+  // useEffect(() => {
+  //   activeRidesFromDb?.map((item) => {
+  //     if (user && formattedDate !== item?.createdAt) {
+  //       async function clearActiveRides() {
+  //         await clearActiveRideDoc(item.id);
+  //         let newArr = activeRidesFromDb.filter(
+  //           (item) => item.createdAt === formattedDate
+  //         );
+  //         let arranged = newArr?.sort(function (a, b) {
+  //           return a?.id.slice(-3) - b?.id.slice(-3);
+  //         });
+  //         localStorage.setItem("activeRide", JSON.stringify(arranged));
+  //         setActiveRidesFromDb(arranged);
+  //         setActiveRideChange((prev) => !prev);
+  //         if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
+  //           setActive(true);
+  //           localStorage.setItem("active", JSON.stringify(active));
+  //         } else {
+  //           setActive(false);
+  //           localStorage.setItem("active", JSON.stringify(active));
+  //         }
+  //         window.location.reload();
+  //       }
+  //       clearActiveRides();
+  //     }
+  //   });
+  // }, [currentPage, checkTime]);
 
   //to get and store ride history
   const [rideHistoryFromDb, setRideHistoryFromDb] = useState(
@@ -1151,13 +1144,13 @@ const AppContextProvider = ({ children }) => {
 
   // console.log(rideHistoryFromDb);
 
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("rideHistory")) !== null) {
-      setRideHistoryFromDb(JSON.parse(localStorage.getItem("rideHistory")));
-    } else {
-      setRideHistoryFromDb([]);
-    }
-  }, [currentUserFromDb, activeRideChange, active]);
+  // useEffect(() => {
+  //   if (JSON.parse(localStorage.getItem("rideHistory")) !== null) {
+  //     setRideHistoryFromDb(JSON.parse(localStorage.getItem("rideHistory")));
+  //   } else {
+  //     setRideHistoryFromDb([]);
+  //   }
+  // }, [currentUserFromDb, activeRideChange, active]);
 
   //to get user's active ride saved in db
   useEffect(() => {
@@ -1185,7 +1178,7 @@ const AppContextProvider = ({ children }) => {
       };
       getRidesHistory();
     }
-  }, [currentUserFromDb, activeRideChange, checkTime]);
+  }, [currentUserFromDb, activeRideChange, active]);
 
   const [bookingSuccess, setBookingSuccess] = useState(false);
   function cloaseSuccessModal() {
@@ -1226,11 +1219,7 @@ const AppContextProvider = ({ children }) => {
   //to display free ride modal
   const [freeRideMod, setFreeRideMod] = useState(false);
   useEffect(() => {
-    if (
-      !loader &&
-      Number(freeRideCount?.count) <= 200 &&
-      activeRidesFromDb.length < 1
-    ) {
+    if (!loader && Number(freeRideCount?.count) < 200) {
       setTimeout(() => {
         setFreeRideMod(true);
       }, 3000);
@@ -1242,7 +1231,7 @@ const AppContextProvider = ({ children }) => {
 
   const [freeRideBanner, setFreeRideBanner] = useState(false);
   useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) <= 200) {
+    if (!loader && Number(freeRideCount?.count) < 200) {
       setTimeout(() => {
         setFreeRideBanner(true);
       }, 3000);
@@ -1302,7 +1291,6 @@ const AppContextProvider = ({ children }) => {
         navigate,
         createRideDoc,
         formattedDate,
-        activeRidesFromDb,
         rideHistoryFromDb,
         allRides,
         ridesToday,

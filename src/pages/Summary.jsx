@@ -159,12 +159,12 @@ const Summary = () => {
           type="submit"
           className="w-full md:w-[fit-content] px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
           onClick={() => {
-            freeRideCount?.count > 200
+            freeRideCount?.count >= 200
               ? initializePayment(onSuccess, onClose)
               : freeRideSucceed("free");
           }}
         >
-          {freeRideCount?.count > 200 ? "Proceed to payment" : "Book for free"}
+          {freeRideCount?.count >= 200 ? "Proceed to payment" : "Book for free"}
         </button>
       </div>
     );
@@ -204,9 +204,9 @@ const Summary = () => {
     <>
       <Header />
       {loader && <Loader />}
-      {bookingSuccess && (
+      {/* {bookingSuccess && (
         <BookSuccessModal eachTime={eachTime} detailsForm={detailsForm} />
-      )}
+      )} */}
 
       <section className="w-full min-h-screen py-40 bg-gradient-to-b from-zinc-500/70 to-blue-400/10 text-slate-700">
         <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">

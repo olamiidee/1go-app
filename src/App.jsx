@@ -19,9 +19,11 @@ const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
 const BookingTimes = lazy(() => import("./admin/BookingTimes"));
 const AdminLogin = lazy(() => import("./admin/AdminLogin"));
 const BusRiders = lazy(() => import("./bus riders/BusRiders"));
+const BookingSuccess = lazy(() => import("./pages/BokkingSuccess"));
+const RideDetails = lazy(() => import("./pages/RideDetails"));
 
 function App() {
-  const { user, admin, activeRidesFromDb, loader } = useAppContext();
+  const { user, admin } = useAppContext();
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
@@ -36,6 +38,8 @@ function App() {
           <>
             <Route path="/book-ride" element={<BookRides />} />
             <Route path="/book-ride/summary/:id" element={<Summary />} />
+            <Route path="/booking-success" element={<BookingSuccess />} />
+            <Route path="/ride-history/:id" element={<RideDetails />} />
           </>
         ) : (
           <Route path="/login" element={<Login />} />

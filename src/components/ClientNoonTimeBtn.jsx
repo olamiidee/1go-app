@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAppContext } from "../contexts/AppContext";
 
 const ClientNoonTimeBtn = ({ item }) => {
-  const { user, activeRidesFromDb, navigate } = useAppContext();
+  const { user } = useAppContext();
 
   let t = new Date();
   let time = t.toLocaleString("en-US", {

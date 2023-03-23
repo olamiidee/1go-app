@@ -18,7 +18,6 @@ const BookRides = () => {
     morningBookingTimesFromDb,
     noonBookingTimesFromDb,
     bookingSuccess,
-    activeRidesFromDb,
     rideHistoryFromDb,
     formattedDate,
     toggleActive,
@@ -135,7 +134,79 @@ const BookRides = () => {
             </section>
 
             {/* if ride is active show this tab at the top */}
-            {active && activeRidesFromDb?.length > 0 && (
+            {active && (
+              <section className="w-full mt-10 text-center sm:text-start">
+                <div className="text-[.9rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
+                  <h2>Successful bookings</h2>
+                  {rideHistoryFromDb?.length > 0 && (
+                    <div className="w-4 h-4 p-[10px] text-[.85rem] flex justify-center items-center border-2 border-slate-400/50 rounded-full">
+                      {rideHistoryFromDb?.length}
+                    </div>
+                  )}
+                </div>
+                <div className="w-full min-h-[200px] bg-white rounded-b-lg rounded-tr-lg p-4 flex flex-col items-center transition-all duration-300 relative">
+                  {/* each ride history */}
+
+                  {rideHistoryFromDb?.length > 0 && !displayAll ? (
+                    firstFive?.map((item, index) => {
+                      return (
+                        <RideHistory
+                          key={index}
+                          item={item}
+                          rideHistoryFromDb={rideHistoryFromDb}
+                        />
+                      );
+                    })
+                  ) : rideHistoryFromDb?.length > 0 && displayAll ? (
+                    rideHistoryFromDb?.map((item, index) => {
+                      return (
+                        <RideHistory
+                          key={index}
+                          item={item}
+                          rideHistoryFromDb={rideHistoryFromDb}
+                        />
+                      );
+                    })
+                  ) : (
+                    <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+                      <img
+                        alt=""
+                        src="/images/empty.png"
+                        className="w-20 h-20 mb-8"
+                      />
+                      <p className="text-slate-400">No bookings yet...</p>
+                    </div>
+                  )}
+                  {/* <RideHistory priceFromDb={priceFromDb} />
+            <RideHistory priceFromDb={priceFromDb} />
+            <RideHistory priceFromDb={priceFromDb} /> */}
+                  {rideHistoryFromDb?.length > 5 && (
+                    <button
+                      onClick={showAll}
+                      className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
+                    >
+                      {displayAll ? "Show less" : "Show more"}
+                    </button>
+                  )}
+                  <div className=" mt-1 flex gap-1 items-center absolute bottom-[8px] left-[10px]">
+                    <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-information-64.png"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <p className="text-[0.75rem] bg-blue-400/30 px-2 py-[1px] rounded-full">
+                      Click a booking for more details
+                    </p>
+                  </div>
+                </div>
+                <div className="w-full md:w-fit p-1 md:px-4 bg-transparent rounded-md mt-3 text-[0.85rem] text-white text-start font-mediun">
+                  Scroll down to book another ride
+                </div>
+              </section>
+            )}
+            {/* {active && activeRidesFromDb?.length > 0 && (
               <section className="w-full mt-10 text-center sm:text-start">
                 <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
                   <h2>Active bookings</h2>
@@ -146,7 +217,6 @@ const BookRides = () => {
                   )}
                 </div>
                 <div className="w-full min-h-[300px] md:min-h-[200px] bg-white border-none rounded-b-lg rounded-tr-lg p-4 relative">
-                  {/* each active booking */}
                   {activeRidesFromDb.length > 0 ? (
                     activeRidesFromDb?.map((item, index) => {
                       return (
@@ -190,11 +260,11 @@ const BookRides = () => {
                   </div>
                 </div>
               </section>
-            )}
+            )} */}
             {/* if ride is active show this tab at the top */}
 
             {/* if ride is not active show Departure times at the top */}
-            {(!active || activeRidesFromDb?.length === 0) && (
+            {!active && (
               <section className="w-full border-b border-zinc-300 pb-16 pt-12">
                 <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-white">
                   Departure times
@@ -286,7 +356,7 @@ const BookRides = () => {
         </section>
 
         {/* if ride is not active show this box at bottom */}
-        {(!active || activeRidesFromDb?.length === 0) && (
+        {/* {(!active || activeRidesFromDb?.length === 0) && (
           <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
             <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
               <h2>Active bookings</h2>
@@ -297,7 +367,6 @@ const BookRides = () => {
               )}
             </div>
             <div className="w-full min-h-[300px] md:min-h-[200px] bg-white rounded-b-lg rounded-tr-lg p-4 relative">
-              {/* each active booking */}
               {activeRidesFromDb?.length > 0 ? (
                 activeRidesFromDb?.map((item, index) => {
                   return (
@@ -334,64 +403,150 @@ const BookRides = () => {
               </div>
             </div>
           </section>
-        )}
+        )} */}
         {/* if ride is not active show this box at bottom */}
 
-        <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
-          <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
-            <h2>Ride History</h2>
-            {rideHistoryFromDb?.length > 0 && (
-              <div className="w-4 h-4 p-[10px] text-[.85rem] flex justify-center items-center border-2 border-slate-400/50 rounded-full">
-                {rideHistoryFromDb?.length}
-              </div>
-            )}
-          </div>
-          <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center transition-all duration-300">
-            {/* each ride history */}
+        {!active && (
+          <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
+            <div className="text-[1rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
+              <h2>Successful bookings</h2>
+              {rideHistoryFromDb?.length > 0 && (
+                <div className="w-4 h-4 p-[10px] text-[.85rem] flex justify-center items-center border-2 border-slate-400/50 rounded-full">
+                  {rideHistoryFromDb?.length}
+                </div>
+              )}
+            </div>
+            <div className="w-full min-h-[200px] bg-white rounded-b-lg p-4 flex flex-col items-center transition-all duration-300">
+              {/* each ride history */}
 
-            {rideHistoryFromDb?.length > 0 && !displayAll ? (
-              firstFive?.map((item, index) => {
-                return (
-                  <RideHistory
-                    key={index}
-                    item={item}
-                    rideHistoryFromDb={rideHistoryFromDb}
+              {rideHistoryFromDb?.length > 0 && !displayAll ? (
+                firstFive?.map((item, index) => {
+                  return (
+                    <RideHistory
+                      key={index}
+                      item={item}
+                      rideHistoryFromDb={rideHistoryFromDb}
+                    />
+                  );
+                })
+              ) : rideHistoryFromDb?.length > 0 && displayAll ? (
+                rideHistoryFromDb?.map((item, index) => {
+                  return (
+                    <RideHistory
+                      key={index}
+                      item={item}
+                      rideHistoryFromDb={rideHistoryFromDb}
+                    />
+                  );
+                })
+              ) : (
+                <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
+                  <img
+                    alt=""
+                    src="/images/empty.png"
+                    className="w-20 h-20 mb-8"
                   />
-                );
-              })
-            ) : rideHistoryFromDb?.length > 0 && displayAll ? (
-              rideHistoryFromDb?.map((item, index) => {
-                return (
-                  <RideHistory
-                    key={index}
-                    item={item}
-                    rideHistoryFromDb={rideHistoryFromDb}
-                  />
-                );
-              })
-            ) : (
-              <div className="w-full py-12 bg-sky-50 flex flex-col items-center">
-                <img
-                  alt=""
-                  src="/images/empty.png"
-                  className="w-20 h-20 mb-8"
-                />
-                <p className="text-slate-400">No booking history yet...</p>
-              </div>
-            )}
-            {/* <RideHistory priceFromDb={priceFromDb} />
+                  <p className="text-slate-400">No bookings yet...</p>
+                </div>
+              )}
+              {/* <RideHistory priceFromDb={priceFromDb} />
             <RideHistory priceFromDb={priceFromDb} />
             <RideHistory priceFromDb={priceFromDb} /> */}
-            {rideHistoryFromDb?.length > 5 && (
-              <button
-                onClick={showAll}
-                className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
-              >
-                {displayAll ? "Show less" : "Show more"}
-              </button>
-            )}
-          </div>
-        </section>
+              {rideHistoryFromDb?.length > 5 && (
+                <button
+                  onClick={showAll}
+                  className=" px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
+                >
+                  {displayAll ? "Show less" : "Show more"}
+                </button>
+              )}
+            </div>
+          </section>
+        )}
+
+        {active && (
+          <section className="w-full mt-10 px-[5%] sm:px-[10.5%]">
+            <h1 className="text-[1.5rem] md:text-[2rem] font-medium text-center text-slate-700">
+              Departure times
+            </h1>
+            <div className="w-[fit-content] text-[.9rem] sm:text-[1.1rem] font-medium text-slate-700 text-center mb-3 flex items-center gap-3 mx-auto">
+              <p> Click on an available time to book now</p>
+              {/* <p className="bg-blue-400 px-2 py-[2px] rounded-lg text-[0.9rem] sm:text-[1rem]">
+                    NGN {priceFromDb[0]?.price}
+                  </p> */}
+            </div>
+            <div className="w-full block md:flex">
+              <div className="w-full md:w-1/2 md:p-4 p-0">
+                <div className="w-full min-h-[200px] bg-white rounded-lg p-4">
+                  <div className=" mt-1 flex gap-1 items-center mb-3">
+                    <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-information-64.png"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <p className="text-[0.75rem] bg-blue-400/30 px-2 py-[1px] rounded-full">
+                      Click on an available time to book a ride
+                    </p>
+                  </div>
+                  <p className="font-medium text-[.8rem] md:text-[.9rem]">
+                    Today: {formattedDate}
+                  </p>
+                  <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
+                    From Outside school - Going to school park
+                  </h2>
+                  <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
+                    {morningBookingTimesFromDb?.length > 0 ? (
+                      sortedArrMorn.map((item, index) => {
+                        return <ClientMorningTimeBtn key={index} item={item} />;
+                      })
+                    ) : (
+                      <div className="w-[35px] h-[35px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate mx-auto">
+                        {/* <div className="w-1/3 h-full bg-white"></div> */}
+                        <div className="w-1/2 h-1/2 bg-white rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="w-full md:w-1/2 md:p-4 p-0 mt-5 md:mt-0">
+                <div className="w-full min-h-[200px] bg-white rounded-lg p-4">
+                  <div className=" mt-1 flex gap-1 items-center mb-3">
+                    <div className="bg-blue-400 rounded-full flex justify-center items-center">
+                      <img
+                        alt=""
+                        src="/images/icons8-information-64.png"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <p className="text-[0.75rem] bg-blue-400/30 px-2 py-[1px] rounded-full">
+                      Click on an available time to book a ride
+                    </p>
+                  </div>
+                  <p className="font-medium text-[.8rem] md:text-[.9rem]">
+                    Today: {formattedDate}
+                  </p>
+                  <h2 className="pb-1 border-b border-b-slate-400/80 text-[0.85rem] md:text-[1rem]">
+                    From Inside school - Going off-campus
+                  </h2>
+                  <div className="my-4 w-full flex gap-3 md:gap-4 flex-wrap">
+                    {noonBookingTimesFromDb?.length > 0 ? (
+                      sortedArrNoon?.map((item, index) => {
+                        return <ClientNoonTimeBtn key={index} item={item} />;
+                      })
+                    ) : (
+                      <div className="w-[35px] h-[35px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate mx-auto">
+                        {/* <div className="w-1/3 h-full bg-white"></div> */}
+                        <div className="w-1/2 h-1/2 bg-white rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
       </section>
       <Footer />
       <ScrollToTop />
