@@ -1187,14 +1187,14 @@ const AppContextProvider = ({ children }) => {
     // setActiveRideChange((prev) => !prev);
   }
 
-  const clearActiveRideDoc = async (id) => {
-    try {
-      await deleteDoc(doc(db, "activeRide", id));
-      console.log("Active ride cleared");
-    } catch (err) {
-      console.log("error clearing active booking: ", err);
-    }
-  };
+  // const clearActiveRideDoc = async (id) => {
+  //   try {
+  //     await deleteDoc(doc(db, "activeRide", id));
+  //     console.log("Active ride cleared");
+  //   } catch (err) {
+  //     console.log("error clearing active booking: ", err);
+  //   }
+  // };
 
   // async function markCompleted() {
   //   setLoader(true);

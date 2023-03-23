@@ -139,7 +139,7 @@ const BookRides = () => {
                 <div className="text-[.9rem] md:text-[1.5rem] font-medium w-[fit-content] bg-white py-2 px-5 rounded-t-lg border-none relative bottom-[-2px] flex items-center gap-2">
                   <h2>Successful bookings</h2>
                   {rideHistoryFromDb?.length > 0 && (
-                    <div className="w-4 h-4 p-[10px] text-[.85rem] flex justify-center items-center border-2 border-slate-400/50 rounded-full">
+                    <div className="w-4 h-4 p-[7px] text-[.75rem] flex justify-center items-center border-2 border-blue-400/60 bg-blue-400/80 text-white rounded-full">
                       {rideHistoryFromDb?.length}
                     </div>
                   )}
@@ -202,7 +202,7 @@ const BookRides = () => {
                   </div>
                 </div>
                 <div className="w-full md:w-fit p-1 md:px-4 bg-transparent rounded-md mt-3 text-[0.85rem] text-white text-start font-mediun">
-                  Scroll down to book another ride
+                  Scroll down to book another ride.
                 </div>
               </section>
             )}
