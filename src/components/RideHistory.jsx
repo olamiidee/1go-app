@@ -72,7 +72,7 @@ const RideHistory = ({ item }) => {
             className="w-6 h-6"
           />
         </div> */}
-        <div className=" pr-2 md:p-2 md:mr-4">
+        <div className="text-start pr-2 md:p-2 md:mr-4">
           <div>Date:</div>
           <div>{item?.createdAt}</div>
         </div>
