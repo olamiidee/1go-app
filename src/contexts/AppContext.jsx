@@ -46,6 +46,7 @@ const AppContextProvider = ({ children }) => {
 
   //to handle form input change chnage
   function handleRegChange(event) {
+    setErrorMessage("");
     const { id, value } = event.target;
     setRegForm((prevState) => {
       return {
@@ -148,8 +149,12 @@ const AppContextProvider = ({ children }) => {
       );
       window.location.reload();
     } catch (error) {
-      setLoader(false);
+      if (error.message === "Firebase: Error (auth/network-request-failed).") {
+        setErrorMessage("Bad network connection");
+      }
       console.log(error.message);
+    } finally {
+      setLoader(false);
     }
   };
 
