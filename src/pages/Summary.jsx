@@ -540,7 +540,7 @@ const Summary = () => {
               className="w-8 h-8 md:w-12 md:h-12"
             />
             <p className="text-[.75rem] md:text-[1rem]">
-              Limited time offer: Free rides today for first 200 users! Book
+              Limited time offer: Free rides today for first 100 users! Book
               now!
             </p>
           </div>
