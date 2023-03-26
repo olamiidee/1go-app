@@ -1224,7 +1224,7 @@ const AppContextProvider = ({ children }) => {
   //to display free ride modal
   const [freeRideMod, setFreeRideMod] = useState(false);
   useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) < 200) {
+    if (!loader && Number(freeRideCount?.count) <= 100) {
       setTimeout(() => {
         setFreeRideMod(true);
       }, 3000);
@@ -1236,7 +1236,7 @@ const AppContextProvider = ({ children }) => {
 
   const [freeRideBanner, setFreeRideBanner] = useState(false);
   useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) < 200) {
+    if (!loader && Number(freeRideCount?.count) <= 100) {
       setTimeout(() => {
         setFreeRideBanner(true);
       }, 3000);
