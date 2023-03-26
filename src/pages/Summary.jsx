@@ -159,12 +159,12 @@ const Summary = () => {
           type="submit"
           className="w-full md:w-[fit-content] px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
           onClick={() => {
-            freeRideCount?.count >= 200
+            freeRideCount?.count > 100
               ? initializePayment(onSuccess, onClose)
               : freeRideSucceed("free");
           }}
         >
-          {freeRideCount?.count >= 200 ? "Proceed to payment" : "Book for free"}
+          {freeRideCount?.count > 100 ? "Proceed to payment" : "Book for free"}
         </button>
       </div>
     );
@@ -314,7 +314,7 @@ const Summary = () => {
                   </div>
                   <p className="font-bold">{formattedDate}</p>
                 </div>
-                {freeRideCount?.count > 200 ? (
+                {freeRideCount?.count > 100 ? (
                   <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
                     <div className="mr-auto flex items-center">
                       <img
@@ -480,7 +480,7 @@ const Summary = () => {
                   </div>
                   <p className="font-bold">{formattedDate}</p>
                 </div>
-                {freeRideCount?.count > 200 ? (
+                {freeRideCount?.count > 100 ? (
                   <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
                     <div className="mr-auto flex items-center">
                       <img

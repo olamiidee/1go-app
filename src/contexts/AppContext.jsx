@@ -46,6 +46,7 @@ const AppContextProvider = ({ children }) => {
 
   //to handle form input change chnage
   function handleRegChange(event) {
+    setErrorMessage("");
     const { id, value } = event.target;
     setRegForm((prevState) => {
       return {
@@ -148,8 +149,12 @@ const AppContextProvider = ({ children }) => {
       );
       window.location.reload();
     } catch (error) {
-      setLoader(false);
+      if (error.message === "Firebase: Error (auth/network-request-failed).") {
+        setErrorMessage("Bad network connection");
+      }
       console.log(error.message);
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -1219,7 +1224,7 @@ const AppContextProvider = ({ children }) => {
   //to display free ride modal
   const [freeRideMod, setFreeRideMod] = useState(false);
   useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) < 200) {
+    if (!loader && Number(freeRideCount?.count) <= 100) {
       setTimeout(() => {
         setFreeRideMod(true);
       }, 3000);
@@ -1231,7 +1236,7 @@ const AppContextProvider = ({ children }) => {
 
   const [freeRideBanner, setFreeRideBanner] = useState(false);
   useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) < 200) {
+    if (!loader && Number(freeRideCount?.count) <= 100) {
       setTimeout(() => {
         setFreeRideBanner(true);
       }, 3000);

@@ -6,8 +6,14 @@ import { useAppContext } from "../contexts/AppContext";
 import ScrollToTop from "../ScrollToTop";
 
 const Register = () => {
-  const { handleRegChange, loader, register, showPassword, togglePassword } =
-    useAppContext();
+  const {
+    handleRegChange,
+    loader,
+    register,
+    showPassword,
+    togglePassword,
+    errorMessage,
+  } = useAppContext();
 
   return (
     <>
@@ -26,7 +32,7 @@ const Register = () => {
           className={`  w-[96%] md:w-full mx-auto h-[800px] bg-white md:flex justify-between items-center rounded-lg transition-all duration-300`}
         >
           {/* texts */}
-          <div className="w-full px-4 pt-10 md:py-12 md:w-1/2 md:px-[3%] lg:px-[8%]">
+          <div className="w-full px-4 py-10 md:py-12 md:w-1/2 md:px-[3%] lg:px-[8%]">
             <div className="text-start">
               <h1 className="text-[2rem] lg:text-[3rem] md:text-[1.75rem] font-bold text-black">
                 Register
@@ -109,6 +115,17 @@ const Register = () => {
                     />
                   </div>
                 </div>
+
+                {errorMessage && (
+                  <div className="w-full flex gap-4 items-center py-3 px-10 my-2 bg-red-400/20 text-[0.85rem] rounded-lg border border-red-400">
+                    <img
+                      alt=""
+                      src="/images/icons8-medium-risk-50.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>{errorMessage}</p>
+                  </div>
+                )}
 
                 <div>
                   <button
