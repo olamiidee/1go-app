@@ -49,8 +49,7 @@ const Homepage = () => {
             />
             <h1 className="text-[1.4rem] font-bold mb-3">Get free rides!</h1>
             <div>
-              Limited time offer: Free rides today for first 100 users! Book
-              now!
+              Limited time offer: Free rides today for first 50 users! Book now!
             </div>
             <div className="flex justify-center gap-3 mt-4">
               <button
@@ -77,8 +76,8 @@ const Homepage = () => {
       )}
 
       <main className="w-full bg-slate-200">
-        <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-home bg-cover bg-right lg:bg-center bg-no-repeat relative">
-          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-zinc-700/40 block md:flex text-white px-[5%] sm:px-[10.5%] pt-[130px] md:pt-[200px] lg:pt-[15%] pb-40">
+        <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-unilorin bg-cover bg-bottom lg:bg-bottom bg-no-repeat relative">
+          <div className="overlay w-full h-[fit-content] sm:min-h-[105vh] bg-black/30 block md:flex text-white px-[5%] sm:px-[10.5%] pt-[130px] md:pt-[200px] lg:pt-[15%] pb-40">
             <Link to="/contact">
               <div className="absolute top-0 md:top-1 left-4 md:left-[10.5%] text-[0.9rem] text-slate-200 flex gap-2 items-center">
                 <img
@@ -218,8 +217,7 @@ const Homepage = () => {
               className="w-8 h-8 md:w-12 md:h-12"
             />
             <p className="text-[.75rem] md:text-[1rem]">
-              Limited time offer: Free rides today for first 100 users! Book
-              now!
+              Limited time offer: Free rides today for first 50 users! Book now!
             </p>
           </div>
           <div

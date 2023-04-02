@@ -1224,24 +1224,24 @@ const AppContextProvider = ({ children }) => {
   //to display free ride modal
   const [freeRideMod, setFreeRideMod] = useState(false);
   useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) <= 100) {
+    if (!loader && Number(freeRideCount?.count) <= 50) {
       setTimeout(() => {
         setFreeRideMod(true);
       }, 3000);
     }
-  }, []);
+  }, [freeRideCount]);
   function cancelFreeRideMod() {
     setFreeRideMod(false);
   }
 
   const [freeRideBanner, setFreeRideBanner] = useState(false);
   useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) <= 100) {
+    if (!loader && Number(freeRideCount?.count) <= 50) {
       setTimeout(() => {
         setFreeRideBanner(true);
       }, 3000);
     }
-  }, []);
+  }, [freeRideCount]);
 
   function bookFreeRide() {
     setFreeRideMod(false);
