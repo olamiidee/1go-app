@@ -65,8 +65,7 @@ const BookRides = () => {
             />
             <h1 className="text-[1.4rem] font-bold mb-3">Get free rides!</h1>
             <div>
-              Limited time offer: Free rides today for first 100 users! Book
-              now!
+              Limited time offer: Free rides today for first 50 users! Book now!
             </div>
             <div className="flex justify-center gap-3 mt-4">
               <button
@@ -559,8 +558,7 @@ const BookRides = () => {
               className="w-8 h-8 md:w-12 md:h-12"
             />
             <p className="text-[.75rem] md:text-[1rem]">
-              Limited time offer: Free rides today for first 100 users! Book
-              now!
+              Limited time offer: Free rides today for first 50 users! Book now!
             </p>
           </div>
           <div

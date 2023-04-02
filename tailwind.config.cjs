@@ -6,6 +6,7 @@ module.exports = {
       backgroundImage: {
         reg1: "url('/images/reg1.jpg')",
         home: "url('/images/home.jpg')",
+        unilorin: "url('/images/unilorin.png')",
         contactBg: "url('/images/repeat2.jpg')",
         reg2: "url('/images/registerbg.jpg')",
         aboutbg: "url('/images/about.jpg')",
