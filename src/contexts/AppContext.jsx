@@ -493,7 +493,6 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const getNoonBookingTime = async () => {
       setLoader(true);
-      console.log("summary reload");
 
       try {
         const querySnapshot = await getDocs(collection(db, "noonBookingTimes"));
