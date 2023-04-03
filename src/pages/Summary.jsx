@@ -159,12 +159,10 @@ const Summary = () => {
           type="submit"
           className="w-full md:w-[fit-content] px-10 py-2 bg-blue-400 hover:bg-blue-400/70 border border-blue-400 text-white rounded-md my-3"
           onClick={() => {
-            freeRideCount?.count > 50
-              ? initializePayment(onSuccess, onClose)
-              : freeRideSucceed("free");
+            initializePayment(onSuccess, onClose);
           }}
         >
-          {freeRideCount?.count > 50 ? "Proceed to payment" : "Book for free"}
+          Proceed to payment
         </button>
       </div>
     );
@@ -271,21 +269,21 @@ const Summary = () => {
                     src="/images/icons8-cost-58.png"
                     className="w-6 h-6 mr-1"
                   />
-                  {ridesToday.length > 200 ? (
-                    <p>
-                      Price:{" "}
-                      <strong>
-                        NGN{" "}
-                        {detailsForm?.seats
-                          ? eachTime?.price * detailsForm?.seats
-                          : eachTime?.price}
-                      </strong>
-                    </p>
-                  ) : (
-                    <p>
-                      Price: <strong className="text-green-500">FREE</strong>
-                    </p>
-                  )}
+                  {/* {ridesToday.length > 200 ? ( */}
+                  <p>
+                    Price:{" "}
+                    <strong>
+                      NGN{" "}
+                      {detailsForm?.seats
+                        ? eachTime?.price * detailsForm?.seats
+                        : eachTime?.price}
+                    </strong>
+                  </p>
+                  {/* // ) : (
+                  //   <p>
+                  //     Price: <strong className="text-green-500">FREE</strong>
+                  //   </p>
+                  // )} */}
                 </div>
               </div>
 
@@ -314,36 +312,35 @@ const Summary = () => {
                   </div>
                   <p className="font-bold">{formattedDate}</p>
                 </div>
-                {freeRideCount?.count > 50 ? (
-                  <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                    <div className="mr-auto flex items-center">
-                      <img
-                        alt=""
-                        src="/images/icons8-cost-58.png"
-                        className="w-6 h-6 mr-1"
-                      />
-                      <p>Price: </p>
-                    </div>
-                    <p className="font-bold">
-                      NGN
-                      {detailsForm?.seats
-                        ? eachTime?.price * detailsForm?.seats
-                        : eachTime?.price}
-                    </p>
+                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <div className="mr-auto flex items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-cost-58.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>Price: </p>
                   </div>
-                ) : (
-                  <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                    <div className="mr-auto flex items-center">
-                      <img
-                        alt=""
-                        src="/images/icons8-cost-58.png"
-                        className="w-6 h-6 mr-1"
-                      />
-                      <p>Price: </p>
-                    </div>
-                    <p className="font-bold text-green-500">FREE</p>
-                  </div>
-                )}
+                  <p className="font-bold">
+                    NGN
+                    {detailsForm?.seats
+                      ? eachTime?.price * detailsForm?.seats
+                      : eachTime?.price}
+                  </p>
+                </div>
+                {/* // ) : (
+                //   <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                //     <div className="mr-auto flex items-center">
+                //       <img
+                //         alt=""
+                //         src="/images/icons8-cost-58.png"
+                //         className="w-6 h-6 mr-1"
+                //       />
+                //       <p>Price: </p>
+                //     </div>
+                //     <p className="font-bold text-green-500">FREE</p>
+                //   </div>
+                // )} */}
               </div>
 
               <form className="max-w-[400px]">
@@ -437,21 +434,21 @@ const Summary = () => {
                     src="/images/icons8-cost-58.png"
                     className="w-6 h-6 mr-1"
                   />
-                  {ridesToday.length > 200 ? (
-                    <p>
-                      Price:{" "}
-                      <strong>
-                        NGN{" "}
-                        {detailsForm?.seats
-                          ? eachTime?.price * detailsForm?.seats
-                          : eachTime?.price}
-                      </strong>
-                    </p>
-                  ) : (
-                    <p>
-                      Price: <strong className="text-green-500">FREE</strong>
-                    </p>
-                  )}
+                  {/* {ridesToday.length > 200 ? ( */}
+                  <p>
+                    Price:{" "}
+                    <strong>
+                      NGN{" "}
+                      {detailsForm?.seats
+                        ? eachTime?.price * detailsForm?.seats
+                        : eachTime?.price}
+                    </strong>
+                  </p>
+                  {/* // ) : (
+                  //   <p>
+                  //     Price: <strong className="text-green-500">FREE</strong>
+                  //   </p>
+                  // )} */}
                 </div>
               </div>
 
@@ -480,36 +477,35 @@ const Summary = () => {
                   </div>
                   <p className="font-bold">{formattedDate}</p>
                 </div>
-                {freeRideCount?.count > 50 ? (
-                  <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                    <div className="mr-auto flex items-center">
-                      <img
-                        alt=""
-                        src="/images/icons8-cost-58.png"
-                        className="w-6 h-6 mr-1"
-                      />
-                      <p>Price: </p>
-                    </div>
-                    <p className="font-bold">
-                      NGN
-                      {detailsForm?.seats
-                        ? eachTime?.price * detailsForm?.seats
-                        : eachTime?.price}
-                    </p>
+                <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                  <div className="mr-auto flex items-center">
+                    <img
+                      alt=""
+                      src="/images/icons8-cost-58.png"
+                      className="w-6 h-6 mr-1"
+                    />
+                    <p>Price: </p>
                   </div>
-                ) : (
-                  <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
-                    <div className="mr-auto flex items-center">
-                      <img
-                        alt=""
-                        src="/images/icons8-cost-58.png"
-                        className="w-6 h-6 mr-1"
-                      />
-                      <p>Price: </p>
-                    </div>
-                    <p className="font-bold text-green-500">FREE</p>
-                  </div>
-                )}
+                  <p className="font-bold">
+                    NGN
+                    {detailsForm?.seats
+                      ? eachTime?.price * detailsForm?.seats
+                      : eachTime?.price}
+                  </p>
+                </div>
+                {/* // ) : (
+                //   <div className="w-full flex items-center px-2 py-1 mb-2 md:p-2 border-2 border-blue-400/50 rounded-md md:mr-4">
+                //     <div className="mr-auto flex items-center">
+                //       <img
+                //         alt=""
+                //         src="/images/icons8-cost-58.png"
+                //         className="w-6 h-6 mr-1"
+                //       />
+                //       <p>Price: </p>
+                //     </div>
+                //     <p className="font-bold text-green-500">FREE</p>
+                //   </div>
+                // )} */}
               </div>
 
               <div className="w-full p-3 mb-4 bg-blue-400/10 text-[0.9rem] md:text-[1rem] rounded-md flex flex-wrap gap-2 border sm:border-none border-blue-400/50">
@@ -531,7 +527,7 @@ const Summary = () => {
       </section>
       <Footer />
       <ScrollToTop />
-      {freeRideBanner && (
+      {/* {freeRideBanner && (
         <div className="w-full bg-white px-2 md:px-5 py-[6px] md:py-3 fixed bottom-0 left-0 flex items-center z-10">
           <div className="flex items-center gap-2 md:gap-4 mr-auto">
             <img
@@ -563,8 +559,8 @@ const Summary = () => {
               Book now
             </button>
           </div> */}
-        </div>
-      )}
+      {/* </div>
+      // )} */}
     </>
   );
 };
