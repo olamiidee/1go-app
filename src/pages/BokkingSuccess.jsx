@@ -103,7 +103,7 @@ const BookingSuccess = ({ eachTime, detailsForm }) => {
             </div>
             <div className="w-full p-2 border-b border-slate-400/30 flex justify-between items-center">
               <p>Vehicle description:</p>
-              <p className="font-medium">A 14-Seater Sienna</p>
+              <p className="font-medium">A white 14-Seater Bus</p>
             </div>
             <div className="w-full p-2 flex flex-col justify-between items-start">
               <p className="font-medium">Terminal description:</p>
