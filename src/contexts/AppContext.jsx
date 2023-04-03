@@ -398,7 +398,7 @@ const AppContextProvider = ({ children }) => {
       }
     };
     getMorningBookingTime();
-  }, [updatedTime, activeRideChange]);
+  }, [updatedTime, activeRideChange, currentPage]);
 
   //to send created notes to db
   const createMorningBookingTimeDocument = async (
@@ -493,6 +493,7 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const getNoonBookingTime = async () => {
       setLoader(true);
+      console.log("summary reload");
 
       try {
         const querySnapshot = await getDocs(collection(db, "noonBookingTimes"));
@@ -513,7 +514,7 @@ const AppContextProvider = ({ children }) => {
       }
     };
     getNoonBookingTime();
-  }, [updatedTime, activeRideChange]);
+  }, [updatedTime, activeRideChange, currentPage]);
 
   //to send created notes to db
   const createNoonBookingTimeDocument = async (
@@ -969,8 +970,8 @@ const AppContextProvider = ({ children }) => {
           }`,
           email: email,
           time: time,
-          price: ridesToday > 200 ? price : "free",
-          paymentRef: ridesToday > 200 ? paymentRef : "free",
+          price: price,
+          paymentRef: paymentRef,
           active: `false_${email}`,
           createdAt: createdAt,
           bookingCode: bookingCode,

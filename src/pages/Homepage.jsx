@@ -39,7 +39,7 @@ const Homepage = () => {
     <>
       <Header />
 
-      {freeRideMod && (
+      {/* {freeRideMod && (
         <div className="w-full h-screen text-center p-4 flex justify-center items-center bg-black/90 fixed top-0 left-0 z-[999] scale">
           <div className="w-full sm:w-[500px] h-fit bg-white px-5 pt-10 pb-5 border border-blue-400 rounded-lg relative">
             <img
@@ -70,10 +70,10 @@ const Homepage = () => {
               className="text-sm text-white text-[.85rem] bg-blue-500 px-10 py-2 mt-8 uppercase hover:bg-blue-400 border-blue-500 border-2 rounded-md transition-all duration-300"
             >
               Book now
-            </button> */}
+            </button>
           </div>
         </div>
-      )}
+      )} */}
 
       <main className="w-full bg-slate-200">
         <section className="w-full h-[fit-content] sm:min-h-[105vh] bg-unilorin bg-cover bg-bottom lg:bg-bottom bg-no-repeat relative">
@@ -208,7 +208,7 @@ const Homepage = () => {
       </main>
       <Footer />
       <ScrollToTop />
-      {freeRideBanner && (
+      {/* {freeRideBanner && (
         <div className="w-full bg-white px-2 md:px-5 py-[6px] md:py-3 fixed bottom-0 left-0 flex items-center z-10">
           <div className="flex items-center gap-2 md:gap-4 mr-auto">
             <img
@@ -239,9 +239,9 @@ const Homepage = () => {
             >
               Book now
             </button>
-          </div> */}
+          </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };
