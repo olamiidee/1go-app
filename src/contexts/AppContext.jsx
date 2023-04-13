@@ -219,7 +219,7 @@ const AppContextProvider = ({ children }) => {
       localStorage.removeItem("activeRide");
       localStorage.removeItem("rideHistory");
       localStorage.removeItem("active");
-      localStorage.removeItem("freeRideCount");
+      // localStorage.removeItem("freeRideCount");
 
       signOut(auth).then(() => {
         navigate("/");
@@ -1005,23 +1005,23 @@ const AppContextProvider = ({ children }) => {
   };
 
   //to count free rides
-  const [freeRideCount, setFreeRideCount] = useState(
-    JSON.parse(localStorage.getItem("freeRideCount")) || ""
-  );
-  useEffect(() => {
-    const getFreeRidesCount = async () => {
-      try {
-        const freeRideQuery = doc(db, "freeRidesCounter", "countToday");
-        const docSnap = await getDoc(freeRideQuery);
-        let countData = docSnap.data();
-        localStorage.setItem("freeRideCount", JSON.stringify(countData));
-        setFreeRideCount(countData);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getFreeRidesCount();
-  }, [currentUserFromDb, activeRideChange]);
+  // const [freeRideCount, setFreeRideCount] = useState(
+  //   JSON.parse(localStorage.getItem("freeRideCount")) || ""
+  // );
+  // useEffect(() => {
+  //   const getFreeRidesCount = async () => {
+  //     try {
+  //       const freeRideQuery = doc(db, "freeRidesCounter", "countToday");
+  //       const docSnap = await getDoc(freeRideQuery);
+  //       let countData = docSnap.data();
+  //       localStorage.setItem("freeRideCount", JSON.stringify(countData));
+  //       setFreeRideCount(countData);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getFreeRidesCount();
+  // }, [currentUserFromDb, activeRideChange]);
   // console.log(freeRideCount);
 
   // useEffect(() => {
@@ -1222,26 +1222,26 @@ const AppContextProvider = ({ children }) => {
   // console.log(activeRidesFromDb[0].id);
 
   //to display free ride modal
-  const [freeRideMod, setFreeRideMod] = useState(false);
-  useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) <= 50) {
-      setTimeout(() => {
-        setFreeRideMod(true);
-      }, 3000);
-    }
-  }, [freeRideCount]);
-  function cancelFreeRideMod() {
-    setFreeRideMod(false);
-  }
+  // const [freeRideMod, setFreeRideMod] = useState(false);
+  // useEffect(() => {
+  //   if (!loader && Number(freeRideCount?.count) <= 50) {
+  //     setTimeout(() => {
+  //       setFreeRideMod(true);
+  //     }, 3000);
+  //   }
+  // }, [freeRideCount]);
+  // function cancelFreeRideMod() {
+  //   setFreeRideMod(false);
+  // }
 
-  const [freeRideBanner, setFreeRideBanner] = useState(false);
-  useEffect(() => {
-    if (!loader && Number(freeRideCount?.count) <= 50) {
-      setTimeout(() => {
-        setFreeRideBanner(true);
-      }, 3000);
-    }
-  }, [freeRideCount]);
+  // const [freeRideBanner, setFreeRideBanner] = useState(false);
+  // useEffect(() => {
+  //   if (!loader && Number(freeRideCount?.count) <= 50) {
+  //     setTimeout(() => {
+  //       setFreeRideBanner(true);
+  //     }, 3000);
+  //   }
+  // }, [freeRideCount]);
 
   function bookFreeRide() {
     setFreeRideMod(false);
@@ -1307,13 +1307,13 @@ const AppContextProvider = ({ children }) => {
         messageFromDb,
         active,
         toggleActive,
-        freeRideMod,
-        bookFreeRide,
-        cancelBookFreeRide,
-        freeRideBanner,
-        cancelFreeRideMod,
+        // freeRideMod,
+        // bookFreeRide,
+        // cancelBookFreeRide,
+        // freeRideBanner,
+        // cancelFreeRideMod,
         fieldsRequired,
-        freeRideCount,
+        // freeRideCount,
       }}
     >
       {children}
