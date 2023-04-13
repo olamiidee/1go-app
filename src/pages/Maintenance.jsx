@@ -1,4 +1,33 @@
+import { useEffect, useState } from "react";
+
 const Maintenance = () => {
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const targetDate = new Date("April 23, 2023");
+
+      // Calculate the time difference between today and the target date
+      const timeDiff = targetDate.getTime() - now.getTime();
+
+      // Calculate the remaining days, hours, minutes and seconds
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeDiff / 1000 / 60) % 60);
+      const seconds = Math.floor((timeDiff / 1000) % 60);
+
+      // Update the countdown timer
+      setCountdown({ days, hours, minutes, seconds });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="w-full h-screen p-0 md:py-[100px] flex items-center justify-center">
       <div class="w-full flex items-center justify-center h-screen md:h-[600px] py-12 px-5 bg-blue-500">
@@ -30,8 +59,36 @@ const Maintenance = () => {
             We’ll be back soon!
           </h1>
           <p class="text-center text-gray-100">
-            Sorry for the inconvenience. We’re performing some maintenance at
-            the moment. we’ll be back up shortly!
+            Testing of the 1go platform is over, official launch commences on{" "}
+            <strong>23rd April 2023!</strong>
+          </p>
+          <p class="mb-3 text-4xl font-bold text-center text-purple-100 mt-8 flex gap-3">
+            <p>
+              {" "}
+              0{countdown.days} :<br />
+              <span className="text-[.8rem] relative top-[-20px] left-[-10px]">
+                Days
+              </span>
+            </p>
+            <p>
+              {countdown.hours} :<br />
+              <span className="text-[.8rem] relative top-[-20px] left-[-10px]">
+                Hours
+              </span>
+            </p>
+            <p>
+              {countdown.minutes} :<br />
+              <span className="text-[.8rem] relative top-[-20px] left-[-8px]">
+                Mins
+              </span>
+            </p>
+            <p>
+              {countdown.seconds}
+              <br />
+              <span className="text-[.8rem] relative top-[-20px] left-[-6px]">
+                SEcs
+              </span>
+            </p>
           </p>
 
           <p className="text-white md:text-black absolute bottom-8">
