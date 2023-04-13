@@ -689,6 +689,30 @@ video {
   left: 1.25rem;
 }
 
+.top-\[-20px\] {
+  top: -20px;
+}
+
+.top-\[-100px\] {
+  top: -100px;
+}
+
+.top-\[-50px\] {
+  top: -50px;
+}
+
+.left-\[-10px\] {
+  left: -10px;
+}
+
+.left-\[-8px\] {
+  left: -8px;
+}
+
+.left-\[-6px\] {
+  left: -6px;
+}
+
 .z-50 {
   z-index: 50;
 }
@@ -2114,6 +2138,11 @@ video {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .font-bold {
