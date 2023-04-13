@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage";
 import { useAppContext } from "./contexts/AppContext";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
+import Maintenance from "./pages/Maintenance";
 
 // const Homepage = lazy(() => {
 //   import("./pages/Homepage");
@@ -27,19 +28,31 @@ function App() {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<About />} />
+        {/* <Route path="/" element={<Homepage />} /> */}
+        <Route path="/" element={<Maintenance />} />
+
+        <Route path="/about" element={<Maintenance />} />
+        <Route path="/contact" element={<Maintenance />} />
+        <Route path="/login" element={<Maintenance />} />
+        <Route path="/register" element={<Maintenance />} />
+
+        {/* <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register />} /> */}
 
         {/* dashboard controlled access */}
         {user ? (
           <>
-            <Route path="/book-ride" element={<BookRides />} />
+            <Route path="/book-ride" element={<Maintenance />} />
+            <Route path="/book-ride/summary/:id" element={<Maintenance />} />
+            <Route path="/booking-success" element={<Maintenance />} />
+            <Route path="/ride-history/:id" element={<Maintenance />} />
+
+            {/* <Route path="/book-ride" element={<BookRides />} />
             <Route path="/book-ride/summary/:id" element={<Summary />} />
             <Route path="/booking-success" element={<BookingSuccess />} />
-            <Route path="/ride-history/:id" element={<RideDetails />} />
+            <Route path="/ride-history/:id" element={<RideDetails />} /> */}
           </>
         ) : (
           <Route path="/login" element={<Login />} />
