@@ -11,7 +11,7 @@ const Maintenance = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
-      const targetDate = new Date("April 23, 2023");
+      const targetDate = new Date("June 19, 2023");
 
       // Calculate the time difference between today and the target date
       const timeDiff = targetDate.getTime() - now.getTime();
@@ -31,7 +31,7 @@ const Maintenance = () => {
   return (
     <div className="w-full h-screen p-0 md:py-[100px] flex items-center justify-center">
       <div class="w-full flex items-center justify-center h-screen md:h-[600px] py-12 px-5 bg-blue-500">
-        <div className="bg-white p-3 rounded-full absolute top-5 left-5 md:left-[50%] md:translate-x-[-50%]">
+        <div className="bg-white p-3 rounded-full absolute top-5 left-5 lg:left-[50%] lg:translate-x-[-50%]">
           <img
             alt=""
             src="/images/logo.png"
@@ -65,7 +65,7 @@ const Maintenance = () => {
           <p class="mb-3 text-4xl font-bold text-center text-purple-100 mt-8 flex gap-3">
             <p>
               {" "}
-              0{countdown.days} :<br />
+              {countdown.days} :<br />
               <span className="text-[.8rem] relative top-[-20px] left-[-10px]">
                 Days
               </span>
