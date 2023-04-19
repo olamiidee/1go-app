@@ -60,7 +60,7 @@ const Maintenance = () => {
           </h1>
           <p class="text-center text-gray-100">
             Testing of the 1go platform is over, official launch commences on{" "}
-            <strong>23rd April 2023!</strong>
+            <strong>19TH June 2023!</strong>
           </p>
           <p class="mb-3 text-4xl font-bold text-center text-purple-100 mt-8 flex gap-3">
             <p>
