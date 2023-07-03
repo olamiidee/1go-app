@@ -158,6 +158,51 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  //to handle reg form data submit to firebase
+  // const [registerSuccessData, setRegisterSuccessData] = useState(
+  //   JSON.parse(localStorage.getItem("loginDetails")) || {}
+  // );
+  // const [regError, setRegError] = useState(" ");
+
+  // const register = async () => {
+  //   setLoader (true);
+  //   try {
+  //   const form = new FormData ();
+  //   form.append("first_name", regForm.firstname) ;
+  //   form.append("last_name", regForm.lastname) ; 
+  //   form.append("email", regForm.email) 
+  //   form.append("phone", regForm.phone) ;
+  //   form.append("password", regForm.password);
+
+  //   const response = await fetch(
+  //     "https://onegoexploreapp.onrender/api/register",
+  //     {
+  //       method: "POST",
+  //       body: form,
+  //     } );
+  //     const data = await response?.json() ;
+
+  //     if (response?.ok) {
+  //       // console.log ("Registration successful");
+  //       localStorage.setItem("loginDetails", JSON.stringify(data));
+  //       setRegisterSuccessData(await data);
+  //       setRegisterSuccess(true);
+  //       setTimeout(() => {
+  //         setRegisterSucces(false);
+  //         navigate("/login");
+  //     }, 3000);
+  //   } else {
+  //     // console.log ("Registration failed");
+  //     setRegError(data?.message);
+  //   }
+  // } catch (error) {
+  //   console.error ("Error occurred during registration:", error);
+  // } finally {
+  //   setLoader (false);
+  // }};
+
+
+
   const forgotpswSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
