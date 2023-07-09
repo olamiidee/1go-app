@@ -30,7 +30,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         {/* <Route path="/" element={<Maintenance />} />
-
         <Route path="/about" element={<Maintenance />} />
         <Route path="/contact" element={<Maintenance />} />
         <Route path="/login" element={<Maintenance />} />

@@ -94,7 +94,7 @@ const Homepage = () => {
                 Beat The Queue!!
               </h1>
               <div className="pb-3 font-medium text-[0.95rem] md:text-[1.23rem] uppercase">
-                <p>Get easy rides for as low as -- NGN 50</p>
+                <p>Get easy rides for as low as NGN 50</p>
                 <p>From terminus to school park and vice versa</p>
               </div>
               <button
