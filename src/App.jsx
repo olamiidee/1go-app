@@ -24,7 +24,7 @@ const BookingSuccess = lazy(() => import("./pages/BokkingSuccess"));
 const RideDetails = lazy(() => import("./pages/RideDetails"));
 
 function App() {
-  const { user, admin } = useAppContext();
+  const { userDetails, admin } = useAppContext();
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
@@ -41,7 +41,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* dashboard controlled access */}
-        {user ? (
+        {userDetails?.auth_token ? (
           <>
             {/* <Route path="/book-ride" element={<Maintenance />} />
             <Route path="/book-ride/summary/:id" element={<Maintenance />} />

@@ -110,7 +110,7 @@ const Summary = () => {
         ? eachTime?.price * detailsForm?.seats
         : eachTime?.price
     }00`, //amount is in Kobo
-    publicKey: "pk_test_e56146887f0492a4016277927d6b67d19843cb32", //pk_test_e56146887f0492a4016277927d6b67d19843cb32 //pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1
+    publicKey: "pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1", //pk_test_e56146887f0492a4016277927d6b67d19843cb32 //pk_live_4ec101f882797185958e8fd5ef0fb5e3907622b1
   };
 
   //to init paystack

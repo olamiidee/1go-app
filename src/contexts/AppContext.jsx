@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
+import axios from "axios";
 
 import {
   createUserWithEmailAndPassword,
@@ -94,7 +95,7 @@ const AppContextProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
-  //function to create user doc on sign up
+  // function to create user doc on sign up
   const createUserDocument = async (
     firstname,
     lastname,
@@ -127,81 +128,61 @@ const AppContextProvider = ({ children }) => {
     })
     .replace(/ /g, "-");
 
-  //to handle reg form data submit to firebase
   const register = async (e) => {
     e.preventDefault();
-    setLoader(true);
-
     try {
-      await createUserWithEmailAndPassword(
-        auth,
-        regForm.email,
-        regForm.password
+      setLoader(true);
+
+      const response = await axios.post(
+        "https://onegoexploreapp.onrender.com/api/register",
+        regForm
       );
-      setLoader(false);
-      navigate("/book-ride");
-      await createUserDocument(
-        regForm.firstname,
-        regForm.lastname,
-        regForm.email,
-        regForm.phone,
-        formattedDate
-      );
-      window.location.reload();
-    } catch (error) {
-      if (error.message === "Firebase: Error (auth/network-request-failed).") {
-        setErrorMessage("Bad network connection");
+      console.log("Registration successful!", response.data);
+      if (response.data.response !== "This account already exist! Sign In") {
+        navigate("/login");
+      } else {
+        setErrorMessage("This account already exist! Sign In");
       }
-      console.log(error.message);
+
+      return response.data;
+    } catch (error) {
+      console.error("Registration failed!", error);
+      throw error;
     } finally {
       setLoader(false);
     }
   };
 
-  //to handle reg form data submit to firebase
-  // const [registerSuccessData, setRegisterSuccessData] = useState(
-  //   JSON.parse(localStorage.getItem("loginDetails")) || {}
-  // );
-  // const [regError, setRegError] = useState(" ");
+  // to handle reg form data submit to firebase
+  // const register = async (e) => {
+  //   e.preventDefault();
+  //   setLoader(true);
 
-  // const register = async () => {
-  //   setLoader (true);
   //   try {
-  //   const form = new FormData ();
-  //   form.append("first_name", regForm.firstname) ;
-  //   form.append("last_name", regForm.lastname) ; 
-  //   form.append("email", regForm.email) 
-  //   form.append("phone", regForm.phone) ;
-  //   form.append("password", regForm.password);
-
-  //   const response = await fetch(
-  //     "https://onegoexploreapp.onrender/api/register",
-  //     {
-  //       method: "POST",
-  //       body: form,
-  //     } );
-  //     const data = await response?.json() ;
-
-  //     if (response?.ok) {
-  //       // console.log ("Registration successful");
-  //       localStorage.setItem("loginDetails", JSON.stringify(data));
-  //       setRegisterSuccessData(await data);
-  //       setRegisterSuccess(true);
-  //       setTimeout(() => {
-  //         setRegisterSucces(false);
-  //         navigate("/login");
-  //     }, 3000);
-  //   } else {
-  //     // console.log ("Registration failed");
-  //     setRegError(data?.message);
+  //     await createUserWithEmailAndPassword(
+  //       auth,
+  //       regForm.email,
+  //       regForm.password
+  //     );
+  //     setLoader(false);
+  //     navigate("/book-ride");
+  //     await createUserDocument(
+  //       regForm.firstname,
+  //       regForm.lastname,
+  //       regForm.email,
+  //       regForm.phone,
+  //       formattedDate
+  //     );
+  //     window.location.reload();
+  //   } catch (error) {
+  //     if (error.message === "Firebase: Error (auth/network-request-failed).") {
+  //       setErrorMessage("Bad network connection");
+  //     }
+  //     console.log(error.message);
+  //   } finally {
+  //     setLoader(false);
   //   }
-  // } catch (error) {
-  //   console.error ("Error occurred during registration:", error);
-  // } finally {
-  //   setLoader (false);
-  // }};
-
-
+  // };
 
   const forgotpswSubmit = async (e) => {
     e.preventDefault();
@@ -227,34 +208,62 @@ const AppContextProvider = ({ children }) => {
     setErrorMessage("");
   }, [currentPage]);
 
-  //to log in users
+  const [userDetails, setUserDetails] = useState(
+    JSON.parse(localStorage.getItem("userDetails")) || {}
+  );
+
   const login = async (e) => {
     e.preventDefault();
-    setLoader(true);
-
     try {
-      await signInWithEmailAndPassword(
-        auth,
-        loginForm.email,
-        loginForm.password
+      setLoader(true);
+
+      const response = await axios.post(
+        "https://onegoexploreapp.onrender.com/api/login",
+        loginForm
       );
-      setLoader(false);
+      // console.log("Login successful!", response.data);
+      localStorage.setItem("userDetails", JSON.stringify(response.data));
+      setUserDetails(response.data);
       navigate("/book-ride");
-      window.location.reload();
+
+      return response.data;
     } catch (error) {
+      console.error("Login failed!", error);
+      setErrorMessage("Invalid login credential");
+      throw error;
+    } finally {
       setLoader(false);
-      console.log(error.message);
-      if (error.message === "Firebase: Error (auth/user-not-found).") {
-        setErrorMessage("Email address does not exist");
-      } else if (error.message === "Firebase: Error (auth/wrong-password).") {
-        setErrorMessage("Invalid login credentials");
-      } else if (
-        error.message === "Firebase: Error (auth/network-request-failed)."
-      ) {
-        setErrorMessage("Bad network connection");
-      }
     }
   };
+
+  //to log in users
+  // const login = async (e) => {
+  //   e.preventDefault();
+  //   setLoader(true);
+
+  //   try {
+  //     await signInWithEmailAndPassword(
+  //       auth,
+  //       loginForm.email,
+  //       loginForm.password
+  //     );
+  //     setLoader(false);
+  //     navigate("/book-ride");
+  //     window.location.reload();
+  //   } catch (error) {
+  //     setLoader(false);
+  //     console.log(error.message);
+  //     if (error.message === "Firebase: Error (auth/user-not-found).") {
+  //       setErrorMessage("Email address does not exist");
+  //     } else if (error.message === "Firebase: Error (auth/wrong-password).") {
+  //       setErrorMessage("Invalid login credentials");
+  //     } else if (
+  //       error.message === "Firebase: Error (auth/network-request-failed)."
+  //     ) {
+  //       setErrorMessage("Bad network connection");
+  //     }
+  //   }
+  // };
 
   //to log out users
   const logout = async () => {
@@ -264,7 +273,7 @@ const AppContextProvider = ({ children }) => {
       localStorage.removeItem("activeRide");
       localStorage.removeItem("rideHistory");
       localStorage.removeItem("active");
-      // localStorage.removeItem("freeRideCount");
+      setUserDetails({});
 
       signOut(auth).then(() => {
         navigate("/");
@@ -315,44 +324,44 @@ const AppContextProvider = ({ children }) => {
   const [takingLong, setTakingLong] = useState(false);
 
   //to get users saved in db
-  useEffect(() => {
-    if (user) {
-      const getUserDetails = async () => {
-        setLoader(true);
-        setTimeout(() => {
-          loader ? setTakingLong(true) : setTakingLong(false);
-        }, 5000);
-        const userQuery = query(
-          collection(db, "users"),
-          where("email", "==", user?.email)
-        );
-        try {
-          const querySnapshot = await getDocs(userQuery);
-          let me;
-          querySnapshot.forEach((doc) => {
-            me = doc.data();
-          });
-          me && localStorage.setItem("userDetails", JSON.stringify(me));
-          me && setCurrentUserFromDb(me);
+  // useEffect(() => {
+  //   if (user) {
+  //     const getUserDetails = async () => {
+  //       setLoader(true);
+  //       setTimeout(() => {
+  //         loader ? setTakingLong(true) : setTakingLong(false);
+  //       }, 5000);
+  //       const userQuery = query(
+  //         collection(db, "users"),
+  //         where("email", "==", user?.email)
+  //       );
+  //       try {
+  //         const querySnapshot = await getDocs(userQuery);
+  //         let me;
+  //         querySnapshot.forEach((doc) => {
+  //           me = doc.data();
+  //         });
+  //         me && localStorage.setItem("userDetails", JSON.stringify(me));
+  //         me && setCurrentUserFromDb(me);
 
-          // setLoader(false);
-        } catch (err) {
-          console.log(err.message);
-          // setLoader(false);
-        } finally {
-          setLoader(false);
-          setTakingLong(false);
-        }
-      };
-      getUserDetails();
-    }
-  }, [user]);
+  //         // setLoader(false);
+  //       } catch (err) {
+  //         console.log(err.message);
+  //         // setLoader(false);
+  //       } finally {
+  //         setLoader(false);
+  //         setTakingLong(false);
+  //       }
+  //     };
+  //     getUserDetails();
+  //   }
+  // }, [user]);
 
   //dashboard access
   const [userNotLoggedIn, setuserNotLoggedIn] = useState(false);
   function accessDashboard() {
     setuserNotLoggedIn(true);
-    if (user) {
+    if (userDetails?.auth_token) {
       navigate("/book-ride");
       setuserNotLoggedIn(false);
     } else {
@@ -417,7 +426,7 @@ const AppContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("morningTimes")) || []
   );
 
-  //to get users saved in db
+  //to get morning booking times
   useEffect(() => {
     const getMorningBookingTime = async () => {
       setLoader(true);
@@ -469,13 +478,13 @@ const AppContextProvider = ({ children }) => {
           db,
           "morningBookingTimes",
           `${time.replace(/ /g, "_")}_${createdAt}_0${
-            morningBookingTimesFromDb.length + 1
+            morningBookingTimesFromDb?.length + 1
           }`
         ),
         {
           time: time,
           id: `${time.replace(/ /g, "_")}_${createdAt}_0${
-            morningBookingTimesFromDb.length + 1
+            morningBookingTimesFromDb?.length + 1
           }`,
           createdAt: createdAt,
           slots: slots,
@@ -657,7 +666,7 @@ const AppContextProvider = ({ children }) => {
     if (confirm(mark) == true) {
       deleteMorningTimeDoc(id);
       setUpdatedTime((prev) => !prev);
-      if (morningBookingTimesFromDb.length === 1) {
+      if (morningBookingTimesFromDb?.length === 1) {
         localStorage.removeItem("morningTimes");
         window.location.reload();
       }
@@ -726,13 +735,13 @@ const AppContextProvider = ({ children }) => {
       }
     }
     getAllRides();
-  }, []);
+  }, [userDetails]);
 
   //to get number of rides today
   const [ridesToday, setridesToday] = useState([]);
 
   useEffect(() => {
-    if (user) {
+    if (userDetails?.auth_token) {
       const getRidesToday = async () => {
         // setLoader(true);
         const userQuery = query(
@@ -851,7 +860,7 @@ const AppContextProvider = ({ children }) => {
 
   //to get contact us messages saved in db
   useEffect(() => {
-    if (admin) {
+    if (userDetails?.id === "64ab0b80a43e25d96ded9000") {
       const getMessage = async () => {
         // setLoader(true);
 
@@ -909,10 +918,13 @@ const AppContextProvider = ({ children }) => {
   const loginAdmin = async (e) => {
     e.preventDefault();
     setLoader(true);
+
     try {
       const docRef = doc(db, "users", "admin1cx@gmail.com");
       const docSnap = await getDoc(docRef);
       let adminData = docSnap.data();
+      console.log("adminData", adminData);
+
       if (
         adminLoginData.email === adminData.email &&
         adminLoginData.password === adminData.lastname
@@ -943,14 +955,14 @@ const AppContextProvider = ({ children }) => {
   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment   //upon payment
 
   //to get and store active rides
-  // const [activeRidesFromDb, setActiveRidesFromDb] = useState([]);
-  // useEffect(() => {
-  //   if (JSON.parse(localStorage.getItem("activeRide")) !== null) {
-  //     setActiveRidesFromDb(JSON.parse(localStorage.getItem("activeRide")));
-  //   } else {
-  //     setActiveRidesFromDb([]);
-  //   }
-  // }, [currentUserFromDb, activeRideChange, checkTime]);
+  const [activeRidesFromDb, setActiveRidesFromDb] = useState([]);
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("activeRide")) !== null) {
+      setActiveRidesFromDb(JSON.parse(localStorage.getItem("activeRide")));
+    } else {
+      setActiveRidesFromDb([]);
+    }
+  }, [currentUserFromDb, activeRideChange, checkTime]);
 
   // console.log(activeRidesFromDb);
 
@@ -1025,7 +1037,7 @@ const AppContextProvider = ({ children }) => {
       );
       const userQuery = query(
         collection(db, "rideHistory"),
-        where("active", "==", `false_${currentUserFromDb?.email}`)
+        where("active", "==", `false_${userDetails?.email}`)
       );
 
       const querySnapshot = await getDocs(userQuery);
@@ -1066,126 +1078,126 @@ const AppContextProvider = ({ children }) => {
   //     }
   //   };
   //   getFreeRidesCount();
-  // }, [currentUserFromDb, activeRideChange]);
+  // }, [userDetails, activeRideChange]);
   // console.log(freeRideCount);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     const getActiveRides = async () => {
-  //       setLoader(true);
-  //       const userQuery = query(
-  //         collection(db, "activeRide"),
-  //         where("active", "==", `true_${currentUserFromDb?.email}`)
-  //       );
-  //       try {
-  //         const querySnapshot = await getDocs(userQuery);
-  //         let ride = [];
-  //         querySnapshot.forEach((doc) => {
-  //           ride.push(doc.data());
-  //         });
-  //         let arranged = ride?.sort(function (a, b) {
-  //           return a?.id.slice(-3) - b?.id.slice(-3);
-  //         });
-  //         localStorage.setItem("activeRide", JSON.stringify(arranged));
-  //         setActiveRidesFromDb(arranged);
-  //       } catch (err) {
-  //         console.log(err.message);
-  //       } finally {
-  //         setLoader(false);
-  //         setTakingLong(false);
-  //       }
-  //     };
-  //     getActiveRides();
-  //   }
-  // }, [currentUserFromDb, activeRideChange]);
+  useEffect(() => {
+    if (userDetails?.auth_token) {
+      const getActiveRides = async () => {
+        setLoader(true);
+        const userQuery = query(
+          collection(db, "activeRide"),
+          where("active", "==", `true_${userDetails?.email}`)
+        );
+        try {
+          const querySnapshot = await getDocs(userQuery);
+          let ride = [];
+          querySnapshot.forEach((doc) => {
+            ride.push(doc.data());
+          });
+          let arranged = ride?.sort(function (a, b) {
+            return a?.id.slice(-3) - b?.id.slice(-3);
+          });
+          localStorage.setItem("activeRide", JSON.stringify(arranged));
+          setActiveRidesFromDb(arranged);
+        } catch (err) {
+          console.log(err.message);
+        } finally {
+          setLoader(false);
+          setTakingLong(false);
+        }
+      };
+      getActiveRides();
+    }
+  }, [userDetails, activeRideChange]);
 
-  // useEffect(() => {
-  //   const timerId = setInterval(() => {
-  //     setCheckTime((prev) => !prev);
-  //   }, 20000);
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setCheckTime((prev) => !prev);
+    }, 20000);
 
-  //   return () => clearInterval(timerId);
-  // }, []);
+    return () => clearInterval(timerId);
+  }, []);
 
-  // useEffect(() => {
-  //   if (activeRidesFromDb?.length > 0) {
-  //     function track(arr) {
-  //       arr.forEach((item) => {
-  //         let t = new Date();
-  //         let time = t.toLocaleString("en-US", {
-  //           hour: "numeric",
-  //           minute: "numeric",
-  //           hour12: false,
-  //         });
-  //         let activeTime = item.time;
-  //         var compareTime = moment(activeTime, "hh:mm A")
-  //           .add(20, "minutes")
-  //           .format("LT");
+  useEffect(() => {
+    if (activeRidesFromDb?.length > 0) {
+      function track(arr) {
+        arr.forEach((item) => {
+          let t = new Date();
+          let time = t.toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: false,
+          });
+          let activeTime = item.time;
+          var compareTime = moment(activeTime, "hh:mm A")
+            .add(20, "minutes")
+            .format("LT");
 
-  //         let currentTimeRef = time.replace(/:/g, "");
-  //         let compareTimeRef = moment(compareTime, ["h:mm A"])
-  //           .format("HH:mm")
-  //           .replace(/:/g, "");
+          let currentTimeRef = time.replace(/:/g, "");
+          let compareTimeRef = moment(compareTime, ["h:mm A"])
+            .format("HH:mm")
+            .replace(/:/g, "");
 
-  //         console.log(currentTimeRef, "---", compareTimeRef);
+          console.log(currentTimeRef, "---", compareTimeRef);
 
-  //         if (Number(currentTimeRef) >= Number(compareTimeRef)) {
-  //           async function clearActiveRides() {
-  //             await clearActiveRideDoc(item.id);
-  //             let newArr = activeRidesFromDb.filter(
-  //               (item) => item.time !== activeTime
-  //             );
-  //             let arranged = newArr?.sort(function (a, b) {
-  //               return a?.id.slice(-3) - b?.id.slice(-3);
-  //             });
-  //             localStorage.setItem("activeRide", JSON.stringify(arranged));
-  //             setActiveRidesFromDb(arranged);
-  //             setActiveRideChange((prev) => !prev);
-  //             if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
-  //               setActive(true);
-  //               localStorage.setItem("active", JSON.stringify(active));
-  //             } else {
-  //               setActive(false);
-  //               localStorage.setItem("active", JSON.stringify(active));
-  //             }
-  //             window.location.reload();
-  //           }
-  //           clearActiveRides();
-  //         }
-  //       });
-  //     }
-  //     track(activeRidesFromDb);
-  //   }
-  // }, []);
+          if (Number(currentTimeRef) >= Number(compareTimeRef)) {
+            async function clearActiveRides() {
+              await clearActiveRideDoc(item.id);
+              let newArr = activeRidesFromDb.filter(
+                (item) => item.time !== activeTime
+              );
+              let arranged = newArr?.sort(function (a, b) {
+                return a?.id.slice(-3) - b?.id.slice(-3);
+              });
+              localStorage.setItem("activeRide", JSON.stringify(arranged));
+              setActiveRidesFromDb(arranged);
+              setActiveRideChange((prev) => !prev);
+              if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
+                setActive(true);
+                localStorage.setItem("active", JSON.stringify(active));
+              } else {
+                setActive(false);
+                localStorage.setItem("active", JSON.stringify(active));
+              }
+              window.location.reload();
+            }
+            clearActiveRides();
+          }
+        });
+      }
+      track(activeRidesFromDb);
+    }
+  }, []);
 
-  //to clear all active rides at the end of the day!!!!!
-  // useEffect(() => {
-  //   activeRidesFromDb?.map((item) => {
-  //     if (user && formattedDate !== item?.createdAt) {
-  //       async function clearActiveRides() {
-  //         await clearActiveRideDoc(item.id);
-  //         let newArr = activeRidesFromDb.filter(
-  //           (item) => item.createdAt === formattedDate
-  //         );
-  //         let arranged = newArr?.sort(function (a, b) {
-  //           return a?.id.slice(-3) - b?.id.slice(-3);
-  //         });
-  //         localStorage.setItem("activeRide", JSON.stringify(arranged));
-  //         setActiveRidesFromDb(arranged);
-  //         setActiveRideChange((prev) => !prev);
-  //         if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
-  //           setActive(true);
-  //           localStorage.setItem("active", JSON.stringify(active));
-  //         } else {
-  //           setActive(false);
-  //           localStorage.setItem("active", JSON.stringify(active));
-  //         }
-  //         window.location.reload();
-  //       }
-  //       clearActiveRides();
-  //     }
-  //   });
-  // }, [currentPage, checkTime]);
+  //to clear all active rides
+  useEffect(() => {
+    activeRidesFromDb?.map((item) => {
+      if (userDetails?.auth_token && formattedDate !== item?.createdAt) {
+        async function clearActiveRides() {
+          await clearActiveRideDoc(item.id);
+          let newArr = activeRidesFromDb.filter(
+            (item) => item.createdAt === formattedDate
+          );
+          let arranged = newArr?.sort(function (a, b) {
+            return a?.id.slice(-3) - b?.id.slice(-3);
+          });
+          localStorage.setItem("activeRide", JSON.stringify(arranged));
+          setActiveRidesFromDb(arranged);
+          setActiveRideChange((prev) => !prev);
+          if (activeRidesFromDb || activeRidesFromDb.lentgh > 0) {
+            setActive(true);
+            localStorage.setItem("active", JSON.stringify(active));
+          } else {
+            setActive(false);
+            localStorage.setItem("active", JSON.stringify(active));
+          }
+          window.location.reload();
+        }
+        clearActiveRides();
+      }
+    });
+  }, [currentPage, checkTime]);
 
   //to get and store ride history
   const [rideHistoryFromDb, setRideHistoryFromDb] = useState(
@@ -1194,22 +1206,22 @@ const AppContextProvider = ({ children }) => {
 
   // console.log(rideHistoryFromDb);
 
-  // useEffect(() => {
-  //   if (JSON.parse(localStorage.getItem("rideHistory")) !== null) {
-  //     setRideHistoryFromDb(JSON.parse(localStorage.getItem("rideHistory")));
-  //   } else {
-  //     setRideHistoryFromDb([]);
-  //   }
-  // }, [currentUserFromDb, activeRideChange, active]);
-
-  //to get user's active ride saved in db
   useEffect(() => {
-    if (user) {
+    if (JSON.parse(localStorage.getItem("rideHistory")) !== null) {
+      setRideHistoryFromDb(JSON.parse(localStorage.getItem("rideHistory")));
+    } else {
+      setRideHistoryFromDb([]);
+    }
+  }, [userDetails, activeRideChange, active]);
+
+  // to get user's active ride saved in db
+  useEffect(() => {
+    if (userDetails?.auth_token) {
       const getRidesHistory = async () => {
         // setLoader(true);
         const userQuery = query(
           collection(db, "rideHistory"),
-          where("active", "==", `false_${currentUserFromDb?.email}`)
+          where("active", "==", `false_${userDetails?.email}`)
         );
         try {
           const querySnapshot = await getDocs(userQuery);
@@ -1228,7 +1240,7 @@ const AppContextProvider = ({ children }) => {
       };
       getRidesHistory();
     }
-  }, [currentUserFromDb, activeRideChange, active]);
+  }, [userDetails, activeRideChange, active]);
 
   const [bookingSuccess, setBookingSuccess] = useState(false);
   function cloaseSuccessModal() {
@@ -1237,34 +1249,34 @@ const AppContextProvider = ({ children }) => {
     // setActiveRideChange((prev) => !prev);
   }
 
-  // const clearActiveRideDoc = async (id) => {
-  //   try {
-  //     await deleteDoc(doc(db, "activeRide", id));
-  //     console.log("Active ride cleared");
-  //   } catch (err) {
-  //     console.log("error clearing active booking: ", err);
-  //   }
-  // };
+  const clearActiveRideDoc = async (id) => {
+    try {
+      await deleteDoc(doc(db, "activeRide", id));
+      console.log("Active ride cleared");
+    } catch (err) {
+      console.log("error clearing active booking: ", err);
+    }
+  };
 
-  // async function markCompleted() {
-  //   setLoader(true);
+  async function markCompleted() {
+    setLoader(true);
 
-  //   try {
-  //     let mark = "Mark ride as completed?";
+    try {
+      let mark = "Mark ride as completed?";
 
-  //     if (confirm(mark) == true) {
-  //       localStorage.removeItem("activeRide");
-  //       await clearActiveRideDoc(activeRidesFromDb[0].id);
-  //       window.location.reload();
-  //       setActiveRideChange((prev) => !prev);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   } finally {
-  //     setLoader(false);
-  //   }
-  // }
-  // console.log(activeRidesFromDb[0].id);
+      if (confirm(mark) == true) {
+        localStorage.removeItem("activeRide");
+        await clearActiveRideDoc(activeRidesFromDb[0]?.id);
+        window.location.reload();
+        setActiveRideChange((prev) => !prev);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoader(false);
+    }
+  }
+  // console.log(activeRidesFromDb[0]?.id);
 
   //to display free ride modal
   // const [freeRideMod, setFreeRideMod] = useState(false);
@@ -1359,6 +1371,7 @@ const AppContextProvider = ({ children }) => {
         // cancelFreeRideMod,
         fieldsRequired,
         // freeRideCount,
+        userDetails,
       }}
     >
       {children}
