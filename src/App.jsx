@@ -24,35 +24,35 @@ const BookingSuccess = lazy(() => import("./pages/BokkingSuccess"));
 const RideDetails = lazy(() => import("./pages/RideDetails"));
 
 function App() {
-  const { user, admin } = useAppContext();
+  const { userDetails, admin } = useAppContext();
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-        {/* <Route path="/" element={<Homepage />} /> */}
-        <Route path="/" element={<Maintenance />} />
+        <Route path="/" element={<Homepage />} />
+        {/* <Route path="/" element={<Maintenance />} />
 
         <Route path="/about" element={<Maintenance />} />
         <Route path="/contact" element={<Maintenance />} />
         <Route path="/login" element={<Maintenance />} />
-        <Route path="/register" element={<Maintenance />} />
+        <Route path="/register" element={<Maintenance />} /> */}
 
-        {/* <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} /> */}
+        <Route path="/register" element={<Register />} />
 
         {/* dashboard controlled access */}
-        {user ? (
+        {userDetails?.auth_token ? (
           <>
-            <Route path="/book-ride" element={<Maintenance />} />
+            {/* <Route path="/book-ride" element={<Maintenance />} />
             <Route path="/book-ride/summary/:id" element={<Maintenance />} />
             <Route path="/booking-success" element={<Maintenance />} />
-            <Route path="/ride-history/:id" element={<Maintenance />} />
+            <Route path="/ride-history/:id" element={<Maintenance />} /> */}
 
-            {/* <Route path="/book-ride" element={<BookRides />} />
+            <Route path="/book-ride" element={<BookRides />} />
             <Route path="/book-ride/summary/:id" element={<Summary />} />
             <Route path="/booking-success" element={<BookingSuccess />} />
-            <Route path="/ride-history/:id" element={<RideDetails />} /> */}
+            <Route path="/ride-history/:id" element={<RideDetails />} />
           </>
         ) : (
           <Route path="/login" element={<Login />} />

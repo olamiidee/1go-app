@@ -29,6 +29,7 @@ const BookRides = () => {
     cancelBookFreeRide,
     freeRideBanner,
     cancelFreeRideMod,
+    userDetails,
   } = useAppContext();
 
   let firstFive = rideHistoryFromDb?.slice(0, 5);
@@ -108,9 +109,9 @@ const BookRides = () => {
               <div className="w-2/3 mr-auto">
                 <h2 className="text-[1.5rem] font-bold flex gap-2 items-center">
                   <p> Hello</p>{" "}
-                  {currentUserFromDb ? (
-                    currentUserFromDb?.firstname?.charAt(0).toUpperCase() +
-                    currentUserFromDb?.firstname?.slice(1)
+                  {userDetails?.first_name ? (
+                    userDetails?.first_name?.charAt(0).toUpperCase() +
+                    userDetails?.first_name?.slice(1)
                   ) : (
                     <div className="w-[25px] h-[25px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate">
                       {/* <div className="w-1/3 h-full bg-white"></div> */}

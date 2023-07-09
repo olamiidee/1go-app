@@ -134,10 +134,13 @@ const Homepage = () => {
                         return <ClientMorningTimeBtn key={index} item={item} />;
                       })
                     ) : (
-                      <div className="w-[35px] h-[35px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate mx-auto">
-                        {/* <div className="w-1/3 h-full bg-white"></div> */}
-                        <div className="w-1/2 h-1/2 bg-white rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
-                      </div>
+                      <>
+                        <p>No booking times yet</p>
+                        <div className="w-[35px] h-[35px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate mx-auto">
+                          {/* <div className="w-1/3 h-full bg-white"></div> */}
+                          <div className="w-1/2 h-1/2 bg-white rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>
@@ -153,10 +156,13 @@ const Homepage = () => {
                         return <ClientNoonTimeBtn key={index} item={item} />;
                       })
                     ) : (
-                      <div className="w-[35px] h-[35px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate mx-auto">
-                        {/* <div className="w-1/3 h-full bg-white"></div> */}
-                        <div className="w-1/2 h-1/2 bg-white rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
-                      </div>
+                      <>
+                        <p>No booking times yet</p>
+                        <div className="w-[35px] h-[35px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate mx-auto">
+                          {/* <div className="w-1/3 h-full bg-white"></div> */}
+                          <div className="w-1/2 h-1/2 bg-white rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>

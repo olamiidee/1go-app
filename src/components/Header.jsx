@@ -7,6 +7,7 @@ const Header = () => {
   const { currentPage, scrollPosition } = useHeaderContext();
   const {
     user,
+    userDetails,
     logout,
     toggleLogoutOn,
     toggleLogoutOff,
@@ -89,7 +90,7 @@ const Header = () => {
             >
               Contact
             </Link>
-            {!user && (
+            {!userDetails?.auth_token && (
               <Link
                 to="/login"
                 className={`cursor-pointer px-2 py-1 ${
@@ -99,7 +100,7 @@ const Header = () => {
                 Login
               </Link>
             )}
-            {!user && (
+            {!userDetails?.auth_token && (
               <Link
                 to="/register"
                 className={`cursor-pointer px-2 py-1 ${
@@ -110,14 +111,14 @@ const Header = () => {
               </Link>
             )}
 
-            {user && (
+            {userDetails?.auth_token && (
               <div
                 onMouseOver={toggleLogoutOn}
                 className={`cursor-pointer px-2 py-1 rounded-md flex items-center gap-2 border-2 border-blue-500 hover:bg-blue-500/50 hover:translate-y-[6px] transition-all duration-300 relative`}
               >
                 <div>
-                  {currentUserFromDb ? (
-                    currentUserFromDb?.firstname
+                  {userDetails?.first_name ? (
+                    userDetails
                   ) : (
                     <div className="w-[25px] h-[25px] bg-gradient-to-b from-blue-500 to-white rounded-full relative rotate">
                       {/* <div className="w-1/3 h-full bg-white"></div> */}
